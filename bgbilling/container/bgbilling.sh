@@ -2,12 +2,10 @@
 
 export BGBILLING_HOME=/bgbilling
 
-service mysql start
-
 if [ -f $BGBILLING_HOME/dump.sql ]
 then
   echo -ne Seeding database...
-  mysql --default-character-set=utf8 < $BGBILLING_HOME/dump.sql
+  mysql --host=mysql --default-character-set=utf8 < $BGBILLING_HOME/dump.sql
   rm -f $BGBILLING_HOME/dump.sql
   echo done
 fi

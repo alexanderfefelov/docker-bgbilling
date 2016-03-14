@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 
-RUN apt-get install --yes mysql-server mysql-client
+RUN apt-get install --yes mysql-client
 
 ENV BGBILLING_VERSION 7.0_1007
 ENV BGBILLING_HOME /bgbilling
