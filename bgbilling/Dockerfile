@@ -6,15 +6,6 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-server mysql-client
 
-ENV ACTIVEMQ_VERSION 5.13.1
-ENV ACTIVEMQ_HOME /activemq
-RUN wget -q http://www.eu.apache.org/dist/activemq/$ACTIVEMQ_VERSION/apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz -O - | tar xfz - \
-  && mv apache-activemq-$ACTIVEMQ_VERSION $ACTIVEMQ_HOME \
-  && rm -f apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz \
-  && ln -s $ACTIVEMQ_HOME/bin/activemq /etc/init.d/activemq \
-  && update-rc.d activemq defaults
-VOLUME $ACTIVEMQ_HOME
-
 ENV BGBILLING_VERSION 7.0_1007
 ENV BGBILLING_HOME /bgbilling
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERSION.zip \
@@ -41,6 +32,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && mv inet_7.0_624.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_7.0_175.zip \
   && mv rscm_7.0_175.zip $BGBILLING_HOME/install
+ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
 ADD container/bgbilling.sh /
 VOLUME $BGBILLING_HOME

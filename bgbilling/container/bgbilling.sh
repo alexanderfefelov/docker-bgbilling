@@ -2,7 +2,6 @@
 
 export BGBILLING_HOME=/bgbilling
 
-service activemq start
 service mysql start
 
 if [ -f $BGBILLING_HOME/dump.sql ]
