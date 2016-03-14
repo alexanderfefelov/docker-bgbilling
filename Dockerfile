@@ -33,7 +33,14 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
   && wget -q https://bgbilling.ru/test_license/6.0/lic.properties \
-  && mv lic.properties $BGBILLING_HOME/data
+  && mv lic.properties $BGBILLING_HOME/data \
+  && mkdir --parents $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/npay_7.0_189.zip \
+  && mv npay_7.0_189.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/inet_7.0_624.zip \
+  && mv inet_7.0_624.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_7.0_175.zip \
+  && mv rscm_7.0_175.zip $BGBILLING_HOME/install
 ADD container/setenv.sh $BGBILLING_HOME/
 ADD container/bgbilling.sh /
 VOLUME $BGBILLING_HOME
