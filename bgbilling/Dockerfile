@@ -37,4 +37,6 @@ ADD container/setenv.sh $BGBILLING_HOME/
 ADD container/bgbilling.sh /
 VOLUME $BGBILLING_HOME
 
+EXPOSE 8080
+
 CMD /bgbilling.sh && tail -F $BGBILLING_HOME/log/server.log
