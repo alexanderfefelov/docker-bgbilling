@@ -9,5 +9,5 @@ docker run --name bginetaccess --detach \
   --link mysql:mysql \
   --link activemq:activemq \
   --publish 1812:1812/udp \
-  --publish 10067:10067/udp \
+  --publish 67:10067/udp \
   alexanderfefelov/docker-bginetaccess
