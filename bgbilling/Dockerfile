@@ -28,6 +28,8 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && mkdir --parents $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/npay_7.0_189.zip \
   && mv npay_7.0_189.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/card_7.0_33.zip \
+  && mv card_7.0_33.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/inet_7.0_624.zip \
   && mv inet_7.0_624.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_7.0_175.zip \
