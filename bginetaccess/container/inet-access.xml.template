@@ -7,13 +7,13 @@
 
 	<!-- Параметры подключения к БД -->
 	<param name="db.driver" value="com.mysql.jdbc.Driver"/>
-	<param name="db.url" value="jdbc:mysql://mysql/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000"/>
+	<param name="db.url" value="jdbc:mysql://localhost/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000"/>
 	<param name="db.user" value="bill"/>
 	<param name="db.pswd" value="bgbilling"/>
 	<param name="db.validationTimeout" value="10"/>
 	
 	<!-- Параметры подключения к MQ -->
-	<param name="mq.url" value="failover:(tcp://activemq:61616)"/>
+	<param name="mq.url" value="failover:(tcp://localhost:61616)"/>
 	<param name="mq.user" value="bill"/>
 	<param name="mq.pswd" value="bgbilling"/>
 	
@@ -97,7 +97,7 @@
 				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
 				<param name="host" value=""/>
 				<!-- Порт, на котором будет открыт сокет -->
-				<param name="port" value="10067"/>
+				<param name="port" value="67"/>
 				<!-- Размер буфера приема слушателя -->
 				<param name="recvBufferSize">512 * 1024</param>
 				<!-- Количество потоков-обработчиков -->

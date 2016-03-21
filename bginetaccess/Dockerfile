@@ -19,6 +19,6 @@ ADD container/bginetaccess.sh /
 VOLUME $BGINETACCESS_HOME
 
 EXPOSE 1812/udp
-EXPOSE 10067/udp
+EXPOSE 67/udp
 
 CMD /bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.log
