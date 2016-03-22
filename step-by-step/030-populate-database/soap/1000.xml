@@ -16,7 +16,7 @@
                 <config></config>
                 <host>10.252.0.32:23</host>
                 <password>admin</password>
-                <secret></secret>
+                <secret>secret</secret>
                 <username>admin</username>
             </arg0>
         </ns5:deviceUpdate>

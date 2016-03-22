@@ -9,7 +9,7 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="0" entityId="0" entitySpecId="0" id="-1"
+            <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="1" entityId="0" entitySpecId="0" id="-1"
                   scriptId="0" title="D-Link DES-3200-28 A1" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
                 <comment></comment>
                 <config></config>

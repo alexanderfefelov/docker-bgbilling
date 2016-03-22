@@ -15,7 +15,7 @@
                 <config>ip.resource.categoryId=1</config>
                 <host>10.252.0.32:23</host>
                 <password>admin</password>
-                <secret></secret>
+                <secret>secret</secret>
                 <username>admin</username>
                 <invConfig></invConfig>
                 <invDeviceId>2</invDeviceId>
