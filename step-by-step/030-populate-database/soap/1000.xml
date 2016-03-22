@@ -13,7 +13,7 @@
                   orderManagerDisabled="false" parentId="1" title="10.252.0.32" xsi:type="ns5:invDevice">
                 <entityAttributes></entityAttributes>
                 <comment></comment>
-                <config></config>
+                <config>ip.resource.categoryId=1</config>
                 <host>10.252.0.32:23</host>
                 <password>admin</password>
                 <secret>secret</secret>
