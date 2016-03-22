@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!-- Создаем группу для коммутаторов доступа -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:deviceGroupUpdate xmlns:common="http://common.bitel.ru"
+                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
+                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <arg0 xmlns="" id="-1" title="Коммутатор доступа">
+                <cityId>0</cityId>
+                <comment></comment>
+                <parentId>0</parentId>
+            </arg0>
+        </ns5:deviceGroupUpdate>
+    </S:Body>
+</S:Envelope>

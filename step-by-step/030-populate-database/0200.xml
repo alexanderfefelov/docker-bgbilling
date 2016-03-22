@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!-- Создаем услугу -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:serviceUpdate xmlns:common="http://common.bitel.ru"
+                           xmlns:ns5="http://service.common.module.kernel.bgbilling.bitel.ru/"
+                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <service xmlns="" id="-1" moduleId="1" title="Доступ в интернет" unit="30000" using="true"></service>
+        </ns5:serviceUpdate>
+    </S:Body>
+</S:Envelope>

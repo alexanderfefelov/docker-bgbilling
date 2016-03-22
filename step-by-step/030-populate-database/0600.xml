@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!-- Создаем корневое устройство -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:inetDeviceUpdate xmlns:common="http://common.bitel.ru"
+                              xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
+                              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <inetDevice xmlns="" deviceGroupIds="" deviceTypeId="1" entityId="0" entitySpecId="0" id="-1" ident=""
+                        orderManagerDisabled="false" parentId="0" title="IPoE1">
+                <entityAttributes></entityAttributes>
+                <comment></comment>
+                <config></config>
+                <host></host>
+                <password></password>
+                <secret></secret>
+                <username></username>
+                <invConfig></invConfig>
+                <invDeviceId>0</invDeviceId>
+                <invDeviceTypeId>1</invDeviceTypeId>
+                <invHost></invHost>
+                <invIdentifier>IPoE1</invIdentifier>
+            </inetDevice>
+            <updateInvDevice xmlns="">true</updateInvDevice>
+        </ns5:inetDeviceUpdate>
+    </S:Body>
+</S:Envelope>
