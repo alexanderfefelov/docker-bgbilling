@@ -2,7 +2,11 @@
 0001.xml ru.bitel.oss.kernel.entity/EntityService
 0010.xml ru.bitel.oss.kernel.entity/EntityService
 0100.xml ru.bitel.bgbilling.kernel.module/ModuleService
+0101.xml ru.bitel.bgbilling.kernel.module/ModuleService
+0102.xml ru.bitel.bgbilling.kernel.module/ModuleService
 0200.xml ru.bitel.bgbilling.kernel.module/ServiceService
+0201.xml ru.bitel.bgbilling.kernel.module/ServiceService
+0202.xml ru.bitel.bgbilling.kernel.module/ServiceService
 0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 0301.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 0400.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
