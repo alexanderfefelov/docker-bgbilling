@@ -11,7 +11,18 @@
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <arg0 xmlns="" deviceGroupIds="1" deviceTypeId="2" entityId="0" entitySpecId="0" id="-1" ident="10.252.0.32"
                   orderManagerDisabled="false" parentId="1" title="10.252.0.32" xsi:type="ns5:invDevice">
-                <entityAttributes></entityAttributes>
+                <entityAttributes>
+                    <entry>
+                        <key>1</key>
+                        <value xsi:type="ns5:entityAttrAddress"
+                               flat="" floor="0" houseId="1" pod="5" room=""
+                               comment="подвал">
+                            <entityId>-1</entityId>
+                            <entitySpecAttrId>1</entitySpecAttrId>
+                            <formatKey>Обычный</formatKey>
+                        </value>
+                    </entry>
+                </entityAttributes>
                 <comment></comment>
                 <config>ip.resource.categoryId=1</config>
                 <host>10.252.0.32:23</host>
