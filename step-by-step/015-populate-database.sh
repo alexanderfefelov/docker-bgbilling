@@ -1,5 +1,6 @@
 DATA_DIR=015-populate-database
-FILE=$DATA_DIR/0000.sql
 
-echo $FILE
-mysql --host=127.0.0.1 bgbilling < $FILE
+for file in $DATA_DIR/*.sql; do
+  echo $file
+  mysql --host=127.0.0.1 bgbilling < $file
+done
