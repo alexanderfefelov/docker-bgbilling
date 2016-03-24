@@ -14,6 +14,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGInetAccess_$BGINETACCESS_VERS
   && ln -s $BGINETACCESS_HOME/script/bginet_access /etc/init.d/bginet_access \
   && update-rc.d bginet_access defaults
 ADD container/setenv.sh $BGINETACCESS_HOME/
+ADD container/log4j-access.xml $BGINETACCESS_HOME/
 ADD container/inet-access.xml.template /
 ADD container/bginetaccess.sh /
 VOLUME $BGINETACCESS_HOME
@@ -21,4 +22,4 @@ VOLUME $BGINETACCESS_HOME
 EXPOSE 1812/udp
 EXPOSE 67/udp
 
-CMD /bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.log
+CMD /bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.out
