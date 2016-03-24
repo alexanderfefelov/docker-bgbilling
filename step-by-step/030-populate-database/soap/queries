@@ -1,5 +1,8 @@
 0000.xml ru.bitel.oss.kernel.entity/EntityService
 0001.xml ru.bitel.oss.kernel.entity/EntityService
+0002.xml ru.bitel.oss.kernel.entity/EntityService
+0006.xml ru.bitel.oss.kernel.entity/EntityService
+0007.xml ru.bitel.oss.kernel.entity/EntityService
 0010.xml ru.bitel.oss.kernel.entity/EntityService
 0100.xml ru.bitel.bgbilling.kernel.module/ModuleService
 0101.xml ru.bitel.bgbilling.kernel.module/ModuleService
@@ -15,7 +18,17 @@
 0700.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
 0701.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
 0800.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0801.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0802.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 0900.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 0901.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0902.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0903.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0904.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+0905.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 1000.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1001.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1002.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 1100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1101.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1102.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService

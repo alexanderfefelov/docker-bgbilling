@@ -9,7 +9,7 @@
                                xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" id="-1" title="Коммутатор доступа">
+            <arg0 xmlns="" id="-1" title="Сервер доступа">
                 <cityId>0</cityId>
                 <comment></comment>
                 <parentId>0</parentId>

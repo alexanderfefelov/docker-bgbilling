@@ -9,11 +9,23 @@
                           xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" deviceGroupIds="3" deviceTypeId="4" entityId="0" entitySpecId="0" id="-1" ident="192.168.1.139"
-                  orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
+            <arg0 xmlns="" deviceGroupIds="2" deviceTypeId="3" entityId="0" entitySpecId="0" id="-1" ident="10.252.0.22"
+                  orderManagerDisabled="false" parentId="2" xsi:type="ns5:invDevice">
+                <entityAttributes>
+                    <entry>
+                        <key>1</key>
+                        <value xsi:type="ns5:entityAttrAddress"
+                               flat="" floor="0" houseId="1" pod="5" room=""
+                               comment="подвал" title="г. Звенигород, ул. Мира, д. 1 , п. 5, подвал">
+                            <entityId>-1</entityId>
+                            <entitySpecAttrId>1</entitySpecAttrId>
+                            <formatKey>Обычный</formatKey>
+                        </value>
+                    </entry>
+                </entityAttributes>
                 <comment></comment>
                 <config>ip.resource.categoryId=1</config>
-                <host>192.168.1.139</host>
+                <host>10.252.0.22:23</host>
                 <password>admin</password>
                 <secret>secret</secret>
                 <username>admin</username>

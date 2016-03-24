@@ -12,7 +12,7 @@
             <inetServType xmlns="" addressAllInterface="false" addressType="5" deviceGroupIds="1" deviceTypeIds=""
                           id="0" needContractObject="false" needDevice="true" needIdentifier="false"
                           needInterface="true" needLogin="false" needMacAddress="false" needRestriction="false"
-                          needVlan="false" parentTypeIds="" personalInterface="true" personalVlan="true"
+                          needVlan="true" parentTypeIds="" personalInterface="true" personalVlan="true"
                           sessionCountLimit="1" sessionCountLimitLock="false" sessionInitiationType="0" title="DHCP"
                           trafficTypeLinkId="0">
                 <config>title.pattern=DHCP (${deviceIdentifier}):(${interfaceId})</config>
