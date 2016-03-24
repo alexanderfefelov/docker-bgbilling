@@ -9,7 +9,7 @@
                           xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" deviceGroupIds="2" deviceTypeId="3" entityId="0" entitySpecId="0" id="-1" ident="10.252.0.22"
+            <arg0 xmlns="" deviceGroupIds="2" deviceTypeId="3" entityId="0" entitySpecId="2" id="-1" ident="10.252.0.22"
                   orderManagerDisabled="false" parentId="2" xsi:type="ns5:invDevice">
                 <entityAttributes>
                     <entry>

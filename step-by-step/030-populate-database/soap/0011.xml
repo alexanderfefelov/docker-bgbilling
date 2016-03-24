@@ -9,7 +9,7 @@
                               xmlns:ns5="http://service.common.entity.kernel.oss.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" id="-1" title="Коммутатор доступа">
+            <arg0 xmlns="" id="-1" title="Коммутатор агрегации">
                 <attributeList>
                     <attributeList id="1" title="Адрес">
                         <comment></comment>
@@ -20,6 +20,11 @@
                         <comment></comment>
                         <history>false</history>
                         <type>1</type>
+                    </attributeList>
+                    <attributeList id="3" title="SVID">
+                        <comment></comment>
+                        <history>false</history>
+                        <type>4</type>
                     </attributeList>
                 </attributeList>
                 <comment></comment>
