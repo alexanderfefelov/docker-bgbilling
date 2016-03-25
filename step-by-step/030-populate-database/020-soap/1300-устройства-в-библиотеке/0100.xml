@@ -10,11 +10,11 @@
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <arg0 xmlns="" deviceGroupIds="" deviceTypeId="0" entityId="0" entitySpecId="0" id="-1"
-                  ident="SP-VID 0800" orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
+                  ident="SPVID 0800" orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
                 <entityAttributes></entityAttributes>
                 <comment></comment>
                 <config>
-qinq.sp-vid=800
+qinq.spvid=800
 ip.resource.categoryId=1
 vlan.resource.category=1
                 </config>

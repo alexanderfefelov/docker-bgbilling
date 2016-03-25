@@ -9,7 +9,7 @@
                                 xmlns:ns5="http://common.resource.inventory.systems.oss.bitel.ru/"
                                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <category xmlns="" id="0" parentId="0" title="SP-VID 0800"></category>
+            <category xmlns="" id="0" parentId="0" title="SPVID 0800"></category>
         </ns5:vlanCategoryUpdate>
     </S:Body>
 </S:Envelope>
