@@ -9,7 +9,7 @@
                                 xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <inetServType xmlns="" addressAllInterface="false" addressType="5" deviceGroupIds="1" deviceTypeIds=""
+            <inetServType xmlns="" addressAllInterface="false" addressType="5" deviceGroupIds="3" deviceTypeIds=""
                           id="0" needContractObject="false" needDevice="true" needIdentifier="false"
                           needInterface="true" needLogin="false" needMacAddress="false" needRestriction="false"
                           needVlan="false" parentTypeIds="" personalInterface="true" personalVlan="true"
