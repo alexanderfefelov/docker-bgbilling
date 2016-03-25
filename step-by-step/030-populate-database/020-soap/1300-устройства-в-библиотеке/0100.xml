@@ -9,14 +9,18 @@
                           xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" deviceGroupIds="1" deviceTypeId="2" entityId="0" entitySpecId="0" id="-1" ident="192.168.1.139"
-                  orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
+            <arg0 xmlns="" deviceGroupIds="" deviceTypeId="0" entityId="0" entitySpecId="0" id="-1"
+                  ident="SP-VID 0800" orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
+                <entityAttributes></entityAttributes>
                 <comment></comment>
-                <config>ip.resource.categoryId=1</config>
-                <host>192.168.1.139</host>
-                <password>admin</password>
-                <secret>secret</secret>
-                <username>admin</username>
+                <config>
+ip.resource.categoryId=1
+vlan.resource.category=1
+                </config>
+                <host></host>
+                <password></password>
+                <secret></secret>
+                <username></username>
             </arg0>
         </ns5:deviceUpdate>
     </S:Body>

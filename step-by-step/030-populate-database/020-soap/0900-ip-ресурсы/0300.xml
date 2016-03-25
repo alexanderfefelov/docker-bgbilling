@@ -1,20 +1,15 @@
 <?xml version="1.0" ?>
-<!-- Создаем IP-ресурс -->
+<!-- Создаем категорию IP-ресурса -->
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Header>
         <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
     </S:Header>
     <S:Body>
-        <ns5:ipResourceUpdate xmlns:common="http://common.bitel.ru"
+        <ns5:ipCategoryUpdate xmlns:common="http://common.bitel.ru"
                               xmlns:ns5="http://common.resource.inventory.systems.oss.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <resource xmlns="" addressFrom="wKjIFA==" addressTo="wKjI/g==" categoryId="1" dns="8.8.8.8" id="0"
-                      router="192.168.200.1" subnetMask="255.255.255.0">
-                <comment></comment>
-                <config></config>
-            </resource>
-            <skipSubscriptionCheck xmlns="">true</skipSubscriptionCheck>
-        </ns5:ipResourceUpdate>
+            <category xmlns="" id="0" parentId="0" title="192.168.210.0/24"></category>
+        </ns5:ipCategoryUpdate>
     </S:Body>
 </S:Envelope>

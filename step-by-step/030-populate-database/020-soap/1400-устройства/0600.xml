@@ -9,20 +9,20 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <inetDevice xmlns="" deviceTypeId="0" entityId="0" entitySpecId="0" id="0" ident="SP-VID 0900"
-                        orderManagerDisabled="false" parentId="1">
+            <inetDevice xmlns="" deviceTypeId="2" entityId="0" entitySpecId="0" id="0" ident="192.168.1.139"
+                        orderManagerDisabled="false" parentId="3">
                 <comment></comment>
                 <config></config>
-                <host></host>
-                <password></password>
-                <secret></secret>
-                <username></username>
+                <host>192.168.1.139</host>
+                <password>admin</password>
+                <secret>secret</secret>
+                <username>admin</username>
                 <invConfig></invConfig>
-                <invDeviceGroupIds></invDeviceGroupIds>
-                <invDeviceId>3</invDeviceId>
-                <invDeviceTypeId>0</invDeviceTypeId>
-                <invHost></invHost>
-                <invIdentifier></invIdentifier>
+                <invDeviceGroupIds>3</invDeviceGroupIds>
+                <invDeviceId>4</invDeviceId>
+                <invDeviceTypeId>2</invDeviceTypeId>
+                <invHost>192.168.1.139</invHost>
+                <invIdentifier>192.168.1.139</invIdentifier>
             </inetDevice>
             <updateInvDevice xmlns="">false</updateInvDevice>
         </ns5:inetDeviceUpdate>
