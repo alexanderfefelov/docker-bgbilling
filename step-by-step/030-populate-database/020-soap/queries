@@ -1,0 +1,45 @@
+0100-атрибуты/0100.xml ru.bitel.oss.kernel.entity/EntityService
+0100-атрибуты/0200.xml ru.bitel.oss.kernel.entity/EntityService
+
+0200-сущности/0100.xml ru.bitel.oss.kernel.entity/EntityService
+0200-сущности/0200.xml ru.bitel.oss.kernel.entity/EntityService
+
+0300-экземпляры-модулей/0100.xml ru.bitel.bgbilling.kernel.module/ModuleService
+0300-экземпляры-модулей/0200.xml ru.bitel.bgbilling.kernel.module/ModuleService
+0300-экземпляры-модулей/0300.xml ru.bitel.bgbilling.kernel.module/ModuleService
+
+0400-услуги-модуля-inet/0100.xml ru.bitel.bgbilling.kernel.module/ServiceService
+
+0500-услуги-модуля-npay/0100.xml ru.bitel.bgbilling.kernel.module/ServiceService
+
+0600-услуги-модуля-rscm/0100.xml ru.bitel.bgbilling.kernel.module/ServiceService
+
+0700-типы-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0700-типы-трафика/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+
+0800-типы-сервисов/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+
+0900-ip-ресурсы/0100.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
+0900-ip-ресурсы/0200.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
+
+1000-типы-устройств/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0400.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0500.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0600.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1000-типы-устройств/0700.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+
+1100-группы-устройств/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1100-группы-устройств/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1100-группы-устройств/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+
+1200-устройства/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+
+1300-устройства-в-библиотеке/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1300-устройства-в-библиотеке/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1300-устройства-в-библиотеке/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+
+1400-устройства/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1400-устройства/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
+1400-устройства/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService

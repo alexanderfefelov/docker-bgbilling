@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!-- Создаем тип устройств -->
+<!-- Создаем тип устройства -->
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Header>
         <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
@@ -9,8 +9,8 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="1" entityId="0" entitySpecId="0" id="2"
-                  scriptId="0" title="D-Link DES-3200-28 A1" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
+            <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="2" entityId="0" entitySpecId="0" id="3"
+                  scriptId="0" title="D-Link DGS-3120-24 B1" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
                 <comment></comment>
                 <config></config>
                 <managmentType>0</managmentType>
@@ -41,10 +41,6 @@
                     <interfaceList deviceTypeId="0" id="22" title="Порт 22"></interfaceList>
                     <interfaceList deviceTypeId="0" id="23" title="Порт 23"></interfaceList>
                     <interfaceList deviceTypeId="0" id="24" title="Порт 24"></interfaceList>
-                    <interfaceList deviceTypeId="0" id="25" title="Порт 25"></interfaceList>
-                    <interfaceList deviceTypeId="0" id="26" title="Порт 26"></interfaceList>
-                    <interfaceList deviceTypeId="0" id="27" title="Порт 27"></interfaceList>
-                    <interfaceList deviceTypeId="0" id="28" title="Порт 28"></interfaceList>
                 </interfaceList>
             </arg0>
         </ns5:deviceTypeUpdate>
