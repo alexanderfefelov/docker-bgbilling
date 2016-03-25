@@ -36,6 +36,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && mv rscm_7.0_175.zip $BGBILLING_HOME/install
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
+ADD container/dyn/ $BGBILLING_HOME/dyn/
 ADD container/bgbilling.sh /
 VOLUME $BGBILLING_HOME
 
