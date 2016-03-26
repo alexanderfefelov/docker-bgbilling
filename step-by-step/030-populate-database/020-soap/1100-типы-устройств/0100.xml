@@ -10,13 +10,9 @@
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="0" entityId="0" entitySpecId="0" id="-1"
-                  scriptId="0" title="Access+Accounting" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
+                  scriptId="0" title="Access + Accounting" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
                 <comment></comment>
-                <config>
-dhcp.ipCategories=1,2
-dhcp.option.serverIdentifier=192.168.99.254
-dhcp.option.leaseTime=180
-                </config>
+                <config></config>
                 <managmentType>0</managmentType>
                 <serviceActivationType>0</serviceActivationType>
                 <source>false</source>

@@ -10,7 +10,7 @@
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <arg0 xmlns="" deviceGroupIds="2" deviceTypeId="3" entityId="0" entitySpecId="2" id="-1" ident="10.252.0.22"
-                  orderManagerDisabled="false" parentId="1" xsi:type="ns5:invDevice">
+                  orderManagerDisabled="false" parentId="0" xsi:type="ns5:invDevice">
                 <entityAttributes>
                     <entry>
                         <key>1</key>

@@ -9,7 +9,7 @@
                                 xmlns:ns5="http://common.resource.inventory.systems.oss.bitel.ru/"
                                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <vlan xmlns="" id="-1" title="CVIDs" vlanFrom="10" vlanTo="4000">
+            <vlan xmlns="" id="-1" title="SPVID 0900 CVIDs" vlanFrom="10" vlanTo="4000">
                 <categoryId>2</categoryId>
                 <comment></comment>
             </vlan>

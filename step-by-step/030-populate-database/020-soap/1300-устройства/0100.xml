@@ -9,8 +9,8 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <inetDevice xmlns="" deviceGroupIds="" deviceTypeId="1" entityId="0" entitySpecId="0" id="-1" ident=""
-                        orderManagerDisabled="false" parentId="0" title="IPoE1">
+            <inetDevice xmlns="" deviceGroupIds="" deviceTypeId="1" entityId="0" entitySpecId="0" id="-1" ident="VLAN per user, Q-in-Q"
+                        orderManagerDisabled="false" parentId="0">
                 <entityAttributes></entityAttributes>
                 <comment></comment>
                 <config></config>
@@ -18,11 +18,22 @@
                 <password></password>
                 <secret></secret>
                 <username></username>
-                <invConfig></invConfig>
+<invConfig>
+# Режим поиска сервиса на устройстве
+#   2 - поиск по VLAN'у на устройстве
+dhcp.servSearchMode=2
+
+# Пулы IP-адресов
+dhcp.ipCategories=1,2
+
+# DHCP-опции в ответах
+dhcp.option.serverIdentifier=192.168.99.254
+dhcp.option.leaseTime=180
+</invConfig>
                 <invDeviceId>0</invDeviceId>
                 <invDeviceTypeId>1</invDeviceTypeId>
                 <invHost></invHost>
-                <invIdentifier>IPoE1</invIdentifier>
+                <invIdentifier>VLAN per user, Q-in-Q</invIdentifier>
             </inetDevice>
             <updateInvDevice xmlns="">true</updateInvDevice>
         </ns5:inetDeviceUpdate>
