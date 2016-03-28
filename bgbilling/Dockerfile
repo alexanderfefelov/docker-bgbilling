@@ -8,6 +8,7 @@ RUN apt-get install --yes mysql-client
 
 ENV BGBILLING_VERSION 7.0_1007
 ENV BGBILLING_HOME /bgbilling
+
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
@@ -34,10 +35,12 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && mv inet_7.0_624.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_7.0_175.zip \
   && mv rscm_7.0_175.zip $BGBILLING_HOME/install
+
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
 ADD container/dyn/ $BGBILLING_HOME/dyn/
 ADD container/bgbilling.sh /
+
 VOLUME $BGBILLING_HOME
 
 EXPOSE 8080

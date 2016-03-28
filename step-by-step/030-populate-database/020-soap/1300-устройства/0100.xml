@@ -38,4 +38,5 @@ dhcp.option.leaseTime=180
             <updateInvDevice xmlns="">true</updateInvDevice>
         </ns5:inetDeviceUpdate>
     </S:Body>
-</S:Envelope>
+</S:Envelope
+>
