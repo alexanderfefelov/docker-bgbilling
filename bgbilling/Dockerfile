@@ -39,6 +39,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
 ADD container/dyn/ $BGBILLING_HOME/dyn/
+ADD container/lib/ext/ $BGBILLING_HOME/lib/ext/
 ADD container/bgbilling.sh /
 
 VOLUME $BGBILLING_HOME

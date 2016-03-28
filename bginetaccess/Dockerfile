@@ -17,6 +17,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGInetAccess_$BGINETACCESS_VERS
 
 ADD container/setenv.sh $BGINETACCESS_HOME/
 ADD container/log4j-access.xml $BGINETACCESS_HOME/
+ADD container/lib/ext/ $BGINETACCESS_HOME/lib/ext/
 ADD container/inet-access.xml.template /
 ADD container/bginetaccess.sh /
 
