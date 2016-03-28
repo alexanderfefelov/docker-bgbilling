@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.protocolhandler;
+package com.github.alexanderfefelov.bgbilling.device.murmuring;
 
 import org.apache.log4j.*;
 import ru.bitel.common.*;

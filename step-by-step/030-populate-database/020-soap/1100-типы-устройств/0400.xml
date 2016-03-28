@@ -10,8 +10,8 @@
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="2" entityId="0" entitySpecId="0" id="-1"
-                  saHandlerClass="com.github.alexanderfefelov.bgbilling.serviceactivator.MurmuringServiceActivator"
-                  protocolHandlerClass="com.github.alexanderfefelov.bgbilling.protocolhandler.MurmuringProtocolHandler"
+                  saHandlerClass="com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"
+                  protocolHandlerClass="com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"
                   scriptId="0" title="D-Link DGS-3120-24 B1" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
                 <comment></comment>
                 <config></config>
