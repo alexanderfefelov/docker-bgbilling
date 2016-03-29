@@ -1,2 +1,3 @@
-module=tariff&action=ModifTariffNode&command=create&parent=1&mtree_id=1&type=trafficType
-module=tariff&action=ModifTariffNode&command=update&data=trafficTypeId%261%2C2&id=2
+# Добавляем услугу
+module=tariff&action=ModifTariffNode&command=create&parent=2&mtree_id=1&type=serviceSet
+module=tariff&action=ModifTariffNode&command=update&data=serviceId%261&id=3

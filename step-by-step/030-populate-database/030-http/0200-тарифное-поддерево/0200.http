@@ -1,1 +1,3 @@
-module=tariff&action=ModifTariffNode&command=create&parent=0&mtree_id=1&type=root
+# Добавляем типы трафика
+module=tariff&action=ModifTariffNode&command=create&parent=1&mtree_id=1&type=trafficType
+module=tariff&action=ModifTariffNode&command=update&data=trafficTypeId%261%2C2&id=2

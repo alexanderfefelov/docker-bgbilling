@@ -24,8 +24,10 @@ for dir in $DATA_DIR/030-http/*; do
     echo $file
     while read -r line
     do
-      echo -n ...
-      curl --request GET --silent --output /dev/null --write-out "%{http_code}\n" "$HTTP_BASE_URL?user=admin&pswd=admin&$line"
+      if [[ $line != \#* ]]; then
+        echo -n ...
+        curl --request GET --silent --output /dev/null --write-out "%{http_code}\n" "$HTTP_BASE_URL?user=admin&pswd=admin&$line"
+      fi
     done < $file
   done
 done
