@@ -19,6 +19,10 @@
 
 0800-типы-сервисов/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
+0820-опции/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0820-опции/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0820-опции/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+
 0900-ip-ресурсы/0100.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
 0900-ip-ресурсы/0200.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
 0900-ip-ресурсы/0300.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService

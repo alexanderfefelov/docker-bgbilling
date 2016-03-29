@@ -1,0 +1,2 @@
+module=tariff&action=AddTariffPlan&used=1
+module=tariff&action=UpdateTariffPlan&tpid=2&face=1&title=Тариф2&title_web=Тариф2&use_title_in_web=1&values=&tpused=1&mask=
