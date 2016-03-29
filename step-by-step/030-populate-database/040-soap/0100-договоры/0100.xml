@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!-- Добавляем сервис в договор -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:inetServUpdate xmlns:common="http://common.bitel.ru"
+                            xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <inetServ xmlns="" accessCode="0" cid="1" coid="0" dateFrom="2016-03-15T00:00:00+03:00" devState="0" did="6"
+                      id="0" ifaceId="2" ipResId="0" ipResSubsriptionId="0" parentId="0" passw="" scid="0"
+                      sessCntLimit="1" status="0" typeId="1" uname="" vlan="102">
+                <comment></comment>
+                <config></config>
+                <identifierList></identifierList>
+                <macList></macList>
+            </inetServ>
+            <generateLogin xmlns="">true</generateLogin>
+            <generatePassword xmlns="">true</generatePassword>
+            <saWaitTimeout xmlns="">0</saWaitTimeout>
+        </ns5:inetServUpdate>
+    </S:Body>
+</S:Envelope>
