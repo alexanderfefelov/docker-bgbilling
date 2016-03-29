@@ -1,0 +1,2 @@
+module=tariff&action=ModifTariffNode&command=create&parent=2&mtree_id=1&type=cost
+module=tariff&action=ModifTariffNode&command=update&data=type%262%25col%261%25cost%260.0&id=4

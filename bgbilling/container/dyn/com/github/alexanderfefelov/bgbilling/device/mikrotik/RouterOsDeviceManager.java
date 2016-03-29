@@ -1,7 +1,7 @@
 package com.github.alexanderfefelov.bgbilling.device.mikrotik;
 
+import com.github.alexanderfefelov.bgbilling.device.framework.Loggable;
 import me.legrange.mikrotik.ApiConnection;
-import org.apache.log4j.Logger;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
@@ -16,11 +16,12 @@ import javax.net.SocketFactory;
 import java.util.List;
 import java.util.Map;
 
-public class RouterOsDeviceManager implements DeviceManager {
+public class RouterOsDeviceManager implements DeviceManager,
+        Loggable {
 
     @Override
     public Object init(Setup setup, int i, Device<?, ?> device, DeviceType deviceType, ParameterMap config) throws Exception {
-        logger.trace("init: " + device.toString());
+        logger().trace("init: " + device.toString());
 
         this.device = device;
         identifier = device.getIdentifier();
@@ -52,14 +53,14 @@ public class RouterOsDeviceManager implements DeviceManager {
 
     @Override
     public Object destroy() throws Exception {
-        logger.trace("destroy: " + device.toString());
+        logger().trace("destroy: " + device.toString());
 
         return true;
     }
 
     @Override
     public Object connect() throws Exception {
-        logger.trace("connect: " + device.toString());
+        logger().trace("connect: " + device.toString());
 
         apiConnection = ApiConnection.connect(SocketFactory.getDefault(), host, port, 10 * 1000);
         apiConnection.login(username, password);
@@ -69,7 +70,7 @@ public class RouterOsDeviceManager implements DeviceManager {
 
     @Override
     public Object disconnect() throws Exception {
-        logger.trace("disconnect: " + device.toString());
+        logger().trace("disconnect: " + device.toString());
 
         apiConnection.close();
 
@@ -78,7 +79,7 @@ public class RouterOsDeviceManager implements DeviceManager {
 
     @Override
     public Object uptime() throws Exception {
-        logger.trace("uptime: " + device.toString());
+        logger().trace("uptime: " + device.toString());
 
         List<Map<String, String>> results = apiConnection.execute("/system/resource/print");
         String str = results.get(0).get("uptime");
@@ -90,7 +91,7 @@ public class RouterOsDeviceManager implements DeviceManager {
 
     @DeviceManagerMethod(title = "Перезагрузить")
     public Object reboot() throws Exception {
-        logger.trace("reboot: " + device.toString());
+        logger().trace("reboot: " + device.toString());
 
         apiConnection.execute("/system/reboot");
 
@@ -105,7 +106,5 @@ public class RouterOsDeviceManager implements DeviceManager {
     private String password;
     private ApiConnection apiConnection;
     private PeriodFormatter formatter;
-
-    private static final Logger logger = Logger.getLogger(RouterOsDeviceManager.class);
 
 }
