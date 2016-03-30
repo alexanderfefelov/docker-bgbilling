@@ -1,0 +1,3 @@
+# Создаем помесячную абонентскую плату
+module=tariff&action=ModifTariffNode&command=create&parent=17&mtree_id=5&type=month_mode
+module=tariff&action=ModifTariffNode&command=update&data=mode%26month%25sid%262&id=18

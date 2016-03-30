@@ -1,0 +1,3 @@
+# Добавляем стоимость
+module=tariff&action=ModifTariffNode&command=create&parent=21&mtree_id=6&type=cost
+module=tariff&action=ModifTariffNode&command=update&data=col%261%25cost%2650.0&id=22

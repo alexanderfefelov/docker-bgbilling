@@ -1,0 +1,3 @@
+# Создаем тарифное поддерево модуля rscm
+module=tariff&action=CreateMtree&mid=3&parent_tree=0&tree=1
+module=tariff&action=ModifTariffNode&command=create&parent=0&mtree_id=3&type=root
