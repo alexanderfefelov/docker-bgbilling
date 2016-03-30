@@ -1,3 +1,0 @@
-# Добавляем опцию
-module=tariff&action=ModifTariffNode&command=create&parent=7&mtree_id=2&type=optionAdd
-module=tariff&action=ModifTariffNode&command=update&data=inetOptionId%263&id=10

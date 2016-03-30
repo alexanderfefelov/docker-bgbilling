@@ -1,3 +1,0 @@
-# Добавляем услугу
-module=tariff&action=ModifTariffNode&command=create&parent=7&mtree_id=2&type=serviceSet
-module=tariff&action=ModifTariffNode&command=update&data=serviceId%261&id=8

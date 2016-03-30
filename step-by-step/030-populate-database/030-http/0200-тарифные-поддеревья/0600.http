@@ -1,0 +1,3 @@
+# Создаем тарифное поддерево модуля npay
+module=tariff&action=CreateMtree&mid=2&parent_tree=0&tree=1
+module=tariff&action=ModifTariffNode&command=create&parent=0&mtree_id=2&type=root
