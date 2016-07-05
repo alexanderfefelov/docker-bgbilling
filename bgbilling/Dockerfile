@@ -6,8 +6,13 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.0_1007
+ENV BGBILLING_VERSION 7.0_1059
 ENV BGBILLING_HOME /bgbilling
+
+ENV NPAY_VERSION=7.0_197
+ENV CARD_VERSION=7.0_39
+ENV INET_VERSION=7.0_656
+ENV RSCM_VERSION=7.0_180
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
@@ -24,17 +29,17 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
-  && wget -q https://bgbilling.ru/test_license/6.0/lic.properties \
+  && wget -q https://bgbilling.ru/test_license/7.0/lic.properties \
   && mv lic.properties $BGBILLING_HOME/data \
   && mkdir --parents $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/npay_7.0_189.zip \
-  && mv npay_7.0_189.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/card_7.0_33.zip \
-  && mv card_7.0_33.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/inet_7.0_624.zip \
-  && mv inet_7.0_624.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_7.0_175.zip \
-  && mv rscm_7.0_175.zip $BGBILLING_HOME/install
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/npay_$NPAY_VERSION.zip \
+  && mv npay_$NPAY_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/card_$CARD_VERSION.zip \
+  && mv card_$CARD_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/inet_$INET_VERSION.zip \
+  && mv inet_$INET_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_$RSCM_VERSION.zip \
+  && mv rscm_$RSCM_VERSION.zip $BGBILLING_HOME/install
 
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
