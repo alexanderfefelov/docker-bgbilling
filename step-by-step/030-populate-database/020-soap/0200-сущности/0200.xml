@@ -9,7 +9,7 @@
                               xmlns:ns5="http://service.common.entity.kernel.oss.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" id="-1" title="Коммутатор агрегации">
+            <arg0 xmlns="" id="-1" title="Коммутатор агрегации" entityTitleMacros="$title ($attr(1))" hidden="false">
                 <attributeList>
                     <attributeList id="1" title="Адрес">
                         <comment></comment>
@@ -23,9 +23,6 @@
                     </attributeList>
                 </attributeList>
                 <comment></comment>
-                <entitySpecTypeId>0</entitySpecTypeId>
-                <entityTitleMacros>$title ($attr(1))</entityTitleMacros>
-                <hidden>false</hidden>
             </arg0>
         </ns5:entitySpecUpdate>
     </S:Body>
