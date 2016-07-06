@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!-- Создаем тип устройства -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:deviceTypeUpdate xmlns:common="http://common.bitel.ru"
+                              xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
+                              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <arg0 xmlns="" activeConfigId="0" configId="0" deviceEntitySpecId="1" entityId="0" entitySpecId="0" id="5"
+                  saHandlerClass="com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"
+                  protocolHandlerClass="com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"
+                  scriptId="0" title="D-Link DES-3200-28 C1" uniqueInterfaces="false" xsi:type="ns5:inetDeviceType">
+                <comment></comment>
+                <config></config>
+                <managmentType>0</managmentType>
+                <serviceActivationType>0</serviceActivationType>
+                <source>false</source>
+                <interfaceList>
+                    <interfaceList deviceTypeId="0" id="1" title="Порт 1"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="2" title="Порт 2"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="3" title="Порт 3"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="4" title="Порт 4"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="5" title="Порт 5"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="6" title="Порт 6"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="7" title="Порт 7"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="8" title="Порт 8"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="9" title="Порт 9"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="10" title="Порт 10"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="11" title="Порт 11"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="12" title="Порт 12"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="13" title="Порт 13"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="14" title="Порт 14"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="15" title="Порт 15"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="16" title="Порт 16"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="17" title="Порт 17"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="18" title="Порт 18"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="19" title="Порт 19"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="20" title="Порт 20"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="21" title="Порт 21"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="22" title="Порт 22"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="23" title="Порт 23"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="24" title="Порт 24"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="25" title="Порт 25"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="26" title="Порт 26"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="27" title="Порт 27"></interfaceList>
+                    <interfaceList deviceTypeId="0" id="28" title="Порт 28"></interfaceList>
+                </interfaceList>
+            </arg0>
+        </ns5:deviceTypeUpdate>
+    </S:Body>
+</S:Envelope>
