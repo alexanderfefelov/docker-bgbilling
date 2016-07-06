@@ -16,7 +16,7 @@ public class MurmuringProtocolHandler implements ProtocolHandler,
 
     @Override
     public void init(Setup setup, int moduleId, InetDevice device, InetDeviceType deviceType, ParameterMap config) {
-        logger().trace("init: " + device.toString() + " " + removeNewLines(config.toString()));
+        logger().trace("init: [" + device.getId() + "] " + device.toString() + " " + removeNewLines(config.toString()));
 
         this.device = device;
         this.config = config;
@@ -24,32 +24,32 @@ public class MurmuringProtocolHandler implements ProtocolHandler,
 
     @Override
     public void preprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
-        logger().trace("preprocessDhcpRequest: " + device.toString() + ", " + removeNewLines(request.toString()));
+        logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
     @Override
     public void postprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
-        logger().trace("postprocessDhcpRequest: " + device.toString() + ", " + removeNewLines(response.toString()));
+        logger().trace("postprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(response.toString()));
     }
 
     @Override
     public void preprocessAccessRequest(RadiusPacket request, RadiusPacket response, ConnectionSet connectionSet) {
-        logger().trace("preprocessAccessRequest: " + device.toString() + ", " + removeNewLines(request.toString()));
+        logger().trace("preprocessAccessRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
     @Override
     public void postprocessAccessRequest(RadiusPacket request, RadiusPacket response, ConnectionSet connectionSet) {
-        logger().trace("postprocessAccessRequest: " + device.toString() + ", " + removeNewLines(response.toString()));
+        logger().trace("postprocessAccessRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(response.toString()));
     }
 
     @Override
     public void preprocessAccountingRequest(RadiusPacket request, RadiusPacket response, ConnectionSet connectionSet) {
-        logger().trace("preprocessAccountingRequest: " + device.toString() + ", " + removeNewLines(request.toString()));
+        logger().trace("preprocessAccountingRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
     @Override
     public void postprocessAccountingRequest(RadiusPacket request, RadiusPacket response, ConnectionSet connectionSet) {
-        logger().trace("postprocessAccountingRequest: " + device.toString() + ", " + removeNewLines(response.toString()));
+        logger().trace("postprocessAccountingRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(response.toString()));
     }
 
     private InetDevice device;

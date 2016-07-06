@@ -14,7 +14,7 @@ public class MurmuringServiceActivator implements ServiceActivator,
 
     @Override
     public Object init(Setup setup, int moduleId, InetDevice device, InetDeviceType deviceType, ParameterMap config) {
-        logger().trace("init: " + device.toString() + " " + removeNewLines(config.toString()));
+        logger().trace("init: [" + device.getId() + "] " + device.toString() + " " + removeNewLines(config.toString()));
 
         this.device = device;
         this.config = config;
@@ -24,70 +24,70 @@ public class MurmuringServiceActivator implements ServiceActivator,
 
     @Override
     public Object destroy() {
-        logger().trace("destroy: " + device.toString());
+        logger().trace("destroy: [" + device.getId() + "] " + device.toString());
 
         return true;
     }
 
     @Override
     public Object connect() {
-        logger().trace("connect: " + device.toString());
+        logger().trace("connect: [" + device.getId() + "] " + device.toString());
 
         return true;
     }
 
     @Override
     public Object disconnect() {
-        logger().trace("disconnect: " + device.toString());
+        logger().trace("disconnect: [" + device.getId() + "] " + device.toString());
 
         return true;
     }
 
     @Override
     public Object serviceCreate(ServiceActivatorEvent event) {
-        logger().trace("serviceCreate: " + device.toString() + ", " + event.toString());
+        logger().trace("serviceCreate: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object serviceModify(ServiceActivatorEvent event) {
-        logger().trace("serviceModify: " + device.toString() + ", " + event.toString());
+        logger().trace("serviceModify: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object serviceCancel(ServiceActivatorEvent event) {
-        logger().trace("serviceCancel: " + device.toString() + ", " + event.toString());
+        logger().trace("serviceCancel: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object connectionModify(ServiceActivatorEvent event) {
-        logger().trace("connectionModify: " + device.toString() + ", " + event.toString());
+        logger().trace("connectionModify: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object connectionClose(ServiceActivatorEvent event) {
-        logger().trace("connectionClose: " + device.toString() + ", " + event.toString());
+        logger().trace("connectionClose: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object onAccountingStart(ServiceActivatorEvent event) {
-        logger().trace("onAccountingStart: " + device.toString() + ", " + event.toString());
+        logger().trace("onAccountingStart: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
 
     @Override
     public Object onAccountingStop(ServiceActivatorEvent event) {
-        logger().trace("onAccountingStop: " + device.toString() + ", " + event.toString());
+        logger().trace("onAccountingStop: [" + device.getId() + "] " + device.toString() + ", " + event.toString());
 
         return true;
     }
