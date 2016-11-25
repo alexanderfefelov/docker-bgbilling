@@ -1,9 +1,3 @@
-/*
-
-Создаем конфигурацию
-
-*/
-
 insert into module_config(mid, uid, dt, title, active, config)
   values(0, 1, now(), 'Default', 1, '
 # Форматы адресов
