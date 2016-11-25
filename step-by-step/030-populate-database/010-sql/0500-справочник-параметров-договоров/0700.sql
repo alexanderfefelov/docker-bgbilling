@@ -1,2 +1,2 @@
 insert into contract_parameters_pref(pt, title, script, history, flags)
-  values(2, 'Адрес регистрации', '', 0, 1);
+  values(6, 'Дата рождения', '', 0, 1);
