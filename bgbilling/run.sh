@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker run --name mysql --detach \
   --env MYSQL_ALLOW_EMPTY_PASSWORD=yes \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \

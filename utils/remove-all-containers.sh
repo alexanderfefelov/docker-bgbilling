@@ -1,3 +1,5 @@
+#!/bin/bash
+
 read -p "All containers will be stopped and removed. Are you sure? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]

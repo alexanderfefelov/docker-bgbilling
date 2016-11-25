@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DATA_DIR=030-populate-database
 SOAP_BASE_URL=http://localhost:8080/bgbilling/executer
 HTTP_BASE_URL=http://localhost:8080/bgbilling/executer

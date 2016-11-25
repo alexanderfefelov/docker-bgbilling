@@ -1,3 +1,5 @@
+#!/bin/bash
+
 read -p "All garbage will be collected. Are you sure? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
