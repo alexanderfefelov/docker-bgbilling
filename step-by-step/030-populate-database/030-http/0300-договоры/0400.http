@@ -1,2 +1,2 @@
 # Добавляем экземпляры модулей в договор
-module=contract&action=ContractModuleAdd&module_ids=2&cid=1
+module=contract&action=ContractModuleAdd&module_ids=3&cid=1
