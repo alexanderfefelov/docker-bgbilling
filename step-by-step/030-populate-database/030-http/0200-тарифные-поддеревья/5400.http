@@ -1,3 +1,5 @@
 # Добавляем стоимость трафика
-module=tariff&action=ModifTariffNode&command=create&parent=13&mtree_id=4&type=cost
-module=tariff&action=ModifTariffNode&command=update&data=type%262%25col%261%25cost%260.0&id=15
+module=tariff&action=ModifTariffNode&command=create&parent=14&mtree_id=4&type=cost
+module=tariff&action=ModifTariffNode&command=update&data=type%262%25col%261%25cost%260.0&id=16
+module=tariff&action=ModifTariffNode&command=create&parent=14&mtree_id=4&type=cost
+module=tariff&action=ModifTariffNode&command=update&data=type%265%25col%261%25cost%260.0&id=17
