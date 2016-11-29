@@ -1,8 +1,8 @@
-0100-атрибуты/0100.xml ru.bitel.oss.kernel.entity/EntityService
-0100-атрибуты/0200.xml ru.bitel.oss.kernel.entity/EntityService
+0100-справочник-атрибутов/0100.xml ru.bitel.oss.kernel.entity/EntityService
+0100-справочник-атрибутов/0200.xml ru.bitel.oss.kernel.entity/EntityService
 
-0200-сущности/0100.xml ru.bitel.oss.kernel.entity/EntityService
-0200-сущности/0200.xml ru.bitel.oss.kernel.entity/EntityService
+0200-справочник-сущностей/0100.xml ru.bitel.oss.kernel.entity/EntityService
+0200-справочник-сущностей/0200.xml ru.bitel.oss.kernel.entity/EntityService
 
 0300-экземпляры-модулей/0100.xml ru.bitel.bgbilling.kernel.module/ModuleService
 0300-экземпляры-модулей/0200.xml ru.bitel.bgbilling.kernel.module/ModuleService
@@ -14,14 +14,14 @@
 
 0600-услуги-модуля-rscm/0100.xml ru.bitel.bgbilling.kernel.module/ServiceService
 
-0700-типы-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
-0700-типы-трафика/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0700-справочник-типов-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0700-справочник-типов-трафика/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
-0800-типы-сервисов/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0800-справочник-типов-сервисов/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
-0820-опции/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
-0820-опции/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
-0820-опции/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0820-справочник-опций/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0820-справочник-опций/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+0820-справочник-опций/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
 0900-ip-ресурсы/0100.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
 0900-ip-ресурсы/0200.xml ru.bitel.oss.systems.inventory.resource/1/ResourceService
