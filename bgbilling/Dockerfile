@@ -6,12 +6,12 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.0_1155
+ENV BGBILLING_VERSION 7.0_1161
 ENV BGBILLING_HOME /bgbilling
 
 ENV NPAY_VERSION=7.0_199
 ENV CARD_VERSION=7.0_40
-ENV INET_VERSION=7.0_705
+ENV INET_VERSION=7.0_707
 ENV RSCM_VERSION=7.0_183
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERSION.zip \
