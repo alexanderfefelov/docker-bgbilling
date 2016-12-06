@@ -1,0 +1,2 @@
+# Устанавливаем тариф
+module=contract&action=UpdateContractTariffPlan&tpid=2&pos=&comment=&id=0&date2=&date1=01.11.2016&cid=2
