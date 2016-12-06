@@ -1,2 +1,3 @@
 0100-договоры/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 0100-договоры/0200.xml ru.bitel.bgbilling.kernel.contract.api/ContractService
+0200-платежи/0100.xml ru.bitel.bgbilling.kernel.contract.balance/PaymentService
