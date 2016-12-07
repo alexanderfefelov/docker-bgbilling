@@ -11,7 +11,7 @@
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <contractId xmlns="">1</contractId>
-            <contractGroupId xmlns="">0</contractGroupId>
+            <contractGroupId xmlns="">4</contractGroupId>
         </ns5:contractGroupAdd>
     </S:Body>
 </S:Envelope>

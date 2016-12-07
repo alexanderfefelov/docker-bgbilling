@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!-- Справочники -> Тарифные планы -> ТАРИФ -> Метки -->
+<!-- Добавляем метки тарифу -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:setTariffLabelTreeItemList xmlns:common="http://common.bitel.ru"
+                                        xmlns:ns5="http://service.common.tariff.kernel.bgbilling.bitel.ru/"
+                                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <arg0 xmlns="">1</arg0>
+            <arg1 xmlns="" id="1" parentId="0" selected="true" tariffLinkCount="0" title="Сотрудник"></arg1>
+            <arg1 xmlns="" id="5" parentId="0" selected="true" tariffLinkCount="0" title="Многоквартирный дом"></arg1>
+        </ns5:setTariffLabelTreeItemList>
+    </S:Body>
+</S:Envelope>

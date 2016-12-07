@@ -1,4 +1,4 @@
 # Справочники -> Тарифные планы -> ТАРИФ -> Дерево
 # Добавляем стоимость
 module=tariff&action=ModifTariffNode&command=create&parent=20&mtree_id=5&type=month_cost
-module=tariff&action=ModifTariffNode&command=update&data=cost%261000.0%25type%260&id=21
+module=tariff&action=ModifTariffNode&command=update&data=cost%261000.0%25type%261&id=21
