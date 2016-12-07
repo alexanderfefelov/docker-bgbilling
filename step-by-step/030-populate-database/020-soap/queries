@@ -14,6 +14,8 @@
 
 0600-услуги-модуля-rscm/0100.xml ru.bitel.bgbilling.kernel.module/ServiceService
 
+0650-услуги-экземпляра-модуля-rscm/100.xml ru.bitel.bgbilling.modules.rscm/3/RSCMService
+
 0700-справочник-типов-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 0700-справочник-типов-трафика/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
