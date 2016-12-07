@@ -5,7 +5,6 @@ SOAP_BASE_URL=http://localhost:8080/bgbilling/executer
 HTTP_BASE_URL=http://localhost:8080/bgbilling/executer
 
 for dir in $DATA_DIR/010-sql/*; do
-  echo $dir
   for file in $dir/*.sql; do
     echo $file
     mysql --host=127.0.0.1 bgbilling < $file
