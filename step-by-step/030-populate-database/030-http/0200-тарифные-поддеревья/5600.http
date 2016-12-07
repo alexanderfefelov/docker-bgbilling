@@ -1,3 +1,4 @@
+# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
 # Создаем тарифное поддерево модуля npay
 module=tariff&action=CreateMtree&parent_tree=0&tree=2&mid=2
 module=tariff&action=ModifTariffNode&command=create&parent=0&mtree_id=5&type=root

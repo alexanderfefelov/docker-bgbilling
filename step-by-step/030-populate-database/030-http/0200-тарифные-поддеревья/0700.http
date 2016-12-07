@@ -1,3 +1,4 @@
+# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
 # Создаем помесячную абонентскую плату
 module=tariff&action=ModifTariffNode&command=create&parent=7&mtree_id=2&type=month_mode
 module=tariff&action=ModifTariffNode&command=update&data=mode%26month%25sid%262&id=8

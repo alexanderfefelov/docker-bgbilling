@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!-- Создаем тип устройства -->
+<!-- Модули -> Интернет -> Устройства и ресурсы -> Типы устройств -->
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
     <S:Header>
         <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>

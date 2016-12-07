@@ -1,2 +1,3 @@
+# Договор -> Открыть договор -> ДОГОВОР -> Модули -> Периодические услуги
 # Добавляем абонентскую плату
 module=npay&action=ServiceObjectUpdate&mid=2&comment=&id=new&date2=&oid=0&date1=06.12.2016&cid=1&sid=2

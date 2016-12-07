@@ -1,2 +1,3 @@
+# Договор -> Открыть договор -> ДОГОВОР -> Режим
 # Включаем режим "Дебет"
 module=contract&action=UpdateContractMode&id=1&value=debet&cid=1

@@ -1,3 +1,4 @@
+-- Справочники -> Другие -> Договоры - группы параметров
 insert into contract_parameter_group(gid, pid) values
   (1, 1),
   (1, 2),
