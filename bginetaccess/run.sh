@@ -13,4 +13,4 @@ docker run --name bginetaccess --detach \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
   --publish 67:67/udp \
   --publish 1812:1812/udp \
-  alexanderfefelov/docker-bginetaccess
+  alexanderfefelov/bginetaccess

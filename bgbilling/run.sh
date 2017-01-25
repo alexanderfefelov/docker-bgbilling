@@ -21,4 +21,4 @@ docker run --name bgbilling --detach \
   --link mysql:mysql \
   --link activemq:activemq \
   --publish 8080:8080 \
-  alexanderfefelov/docker-bgbilling
+  alexanderfefelov/bgbilling

@@ -13,4 +13,4 @@ docker run --name bginetaccounting --detach \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
   --publish 1813:1813/udp \
   --publish 2001:2001/udp \
-  alexanderfefelov/docker-bginetaccounting
+  alexanderfefelov/bginetaccounting
