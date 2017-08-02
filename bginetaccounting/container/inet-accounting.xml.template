@@ -100,7 +100,7 @@
 		<bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlowListener">
 			<constructor factoryMethod="newInstance">
 				<!-- Тип слушателя, netflow, netflow9 или sflow -->
-				<param name="type" value="netflow"/>
+				<param name="type" value="netflow9"/>
 				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
 				<param name="host" value=""/>
 				<!-- Порт, на котором будет открыт сокет -->
