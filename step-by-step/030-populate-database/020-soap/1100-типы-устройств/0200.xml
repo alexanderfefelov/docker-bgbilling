@@ -18,7 +18,7 @@
                 <config></config>
                 <managmentType>0</managmentType>
                 <serviceActivationType>0</serviceActivationType>
-                <source>false</source>
+                <source>true</source>
                 <interfaceList></interfaceList>
             </arg0>
         </ns5:deviceTypeUpdate>
