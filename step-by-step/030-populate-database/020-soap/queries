@@ -19,6 +19,8 @@
 0700-справочник-типов-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 0700-справочник-типов-трафика/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
+0750-справочник-привязок-типов-трафика/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
+
 0800-справочник-типов-сервисов/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService
 
 0820-справочник-опций/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetServService

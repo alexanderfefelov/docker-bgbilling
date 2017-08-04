@@ -19,12 +19,13 @@
                 <secret></secret>
                 <username></username>
 <invConfig>
-# Режим поиска сервиса на устройстве
-#   2 - поиск по VLAN'у на устройстве
-dhcp.servSearchMode=2
+# Режим поиска устройства
+#   0 - по giaddr или IP-адресу источника
+dhcp.deviceSearchMode=0
 
-# Пулы IP-адресов
-dhcp.ipCategories=1,2
+# Режим поиска сервиса на устройстве
+#   2 - поиск по VLAN
+dhcp.servSearchMode=2
 
 # DHCP-опции в ответах
 dhcp.option.serverIdentifier=192.168.99.254

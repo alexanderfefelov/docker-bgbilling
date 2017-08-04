@@ -15,7 +15,6 @@
                 <comment></comment>
 <config>
 qinq.spvid=900
-ip.resource.categoryId=2
 vlan.resource.category=2
 </config>
                 <host></host>

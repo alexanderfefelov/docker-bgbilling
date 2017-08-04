@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!-- Модули -> Интернет -> Справочники -> Трафик -> Привязка типов трафика -->
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Header>
+        <auth xmlns="http://ws.base.kernel.bgbilling.bitel.ru/" pswd="admin" user="admin"></auth>
+    </S:Header>
+    <S:Body>
+        <ns5:trafficTypeLinkUpdate xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
+                                   xmlns:common="http://common.bitel.ru" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <trafficTypeLink id="-1" title="NetFlow">
+                <trafficTypeLinkRuleList>
+                    <trafficTypeLinkRuleList id="0">
+                        <timeFrom>0</timeFrom>
+                        <timeTo>0</timeTo>
+                        <type>2</type>
+                        <counterVendor>-1</counterVendor>
+                        <counterType>-1</counterType>
+                        <sourceId>0</sourceId>
+                        <interfaceId>-1</interfaceId>
+                        <direction>1</direction>
+                        <addressFrom addr="wKgAAQ=="/>
+                        <addressTo addr="wKj//w=="/>
+                        <portFrom>0</portFrom>
+                        <portTo>0</portTo>
+                        <diffServ>-1</diffServ>
+                        <diffServMask>0</diffServMask>
+                        <diffServString/>
+                        <trafficTypeId>2</trafficTypeId>
+                        <comment/>
+                    </trafficTypeLinkRuleList>
+                    <trafficTypeLinkRuleList id="0">
+                        <timeFrom>0</timeFrom>
+                        <timeTo>0</timeTo>
+                        <type>2</type>
+                        <counterVendor>-1</counterVendor>
+                        <counterType>-1</counterType>
+                        <sourceId>0</sourceId>
+                        <interfaceId>-1</interfaceId>
+                        <direction>2</direction>
+                        <addressFrom addr="wKgAAQ=="/>
+                        <addressTo addr="wKgA/w=="/>
+                        <portFrom>0</portFrom>
+                        <portTo>0</portTo>
+                        <diffServ>-1</diffServ>
+                        <diffServMask>0</diffServMask>
+                        <diffServString/>
+                        <trafficTypeId>1</trafficTypeId>
+                        <comment/>
+                    </trafficTypeLinkRuleList>
+                </trafficTypeLinkRuleList>
+            </trafficTypeLink>
+        </ns5:trafficTypeLinkUpdate>
+    </S:Body>
+</S:Envelope>
