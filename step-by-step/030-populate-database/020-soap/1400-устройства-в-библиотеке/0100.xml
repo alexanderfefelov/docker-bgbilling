@@ -16,6 +16,8 @@
 <config>
 qinq.spvid=800
 vlan.resource.category=1
+dhcp.ipCategories=1
+ip.resource.categoryId=1
 </config>
                 <host></host>
                 <password></password>
