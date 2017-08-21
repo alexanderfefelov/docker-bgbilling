@@ -9,7 +9,7 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <inetDevice xmlns="" deviceTypeId="0" entityId="0" entitySpecId="0" id="0" ident="SPVID 0800"
+            <inetDevice xmlns="" deviceTypeId="0" entityId="0" entitySpecId="0" id="0" ident="Core"
                         orderManagerDisabled="false" parentId="1">
                 <comment></comment>
                 <config></config>

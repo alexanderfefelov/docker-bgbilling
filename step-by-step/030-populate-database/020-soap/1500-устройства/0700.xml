@@ -10,7 +10,7 @@
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <inetDevice xmlns="" deviceTypeId="3" entityId="0" entitySpecId="2" id="0" ident="10.252.0.22"
-                        orderManagerDisabled="false" parentId="7">
+                        orderManagerDisabled="false" parentId="3">
                 <comment></comment>
                 <config></config>
                 <host>10.252.0.22:23</host>
