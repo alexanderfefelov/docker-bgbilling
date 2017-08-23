@@ -30,6 +30,13 @@ dhcp.servSearchMode=2
 # DHCP-опции в ответах
 dhcp.option.serverIdentifier=192.168.99.254
 dhcp.option.leaseTime=180
+
+# Категории IP-ресурсов для динамических адресов
+dhcp.ipCategories=2
+
+# Посервисные категории IP-ресурсов для статических адресов
+ip.resource.categoryId.2=2
+ip.resource.categoryId.3=1
 </invConfig>
                 <invDeviceId>0</invDeviceId>
                 <invDeviceTypeId>1</invDeviceTypeId>

@@ -9,8 +9,8 @@
                               xmlns:ns5="http://common.resource.inventory.systems.oss.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <resource xmlns="" addressFrom="wKjSFA==" addressTo="wKjS/g==" categoryId="2" dns="8.8.8.8" id="0"
-                      router="192.168.210.1" subnetMask="255.255.255.0">
+            <resource xmlns="" addressFrom="rBAAFA==" addressTo="rBAA/g==" categoryId="2" dns="8.8.8.8" id="0"
+                      router="172.16.0.1" subnetMask="255.255.255.0">
                 <comment></comment>
                 <config></config>
             </resource>
