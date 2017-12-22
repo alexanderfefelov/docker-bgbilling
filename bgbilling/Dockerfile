@@ -6,15 +6,15 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.0_1263
+ENV BGBILLING_VERSION 7.1_81
 ENV BGBILLING_HOME /bgbilling
 
-ENV NPAY_VERSION=7.0_210
-ENV CARD_VERSION=7.0_44
-ENV INET_VERSION=7.0_772
-ENV RSCM_VERSION=7.0_186
+ENV NPAY_VERSION=7.1_163
+ENV CARD_VERSION=7.1_182
+ENV INET_VERSION=7.1_564
+ENV RSCM_VERSION=7.1_154
 
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERSION.zip \
+RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
   && mv dump.sql $BGBILLING_HOME \
@@ -29,16 +29,16 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/BGBillingServer_$BGBILLING_VERS
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
-  && wget -q https://bgbilling.ru/test_license/7.0/lic.properties \
+  && wget -q https://bgbilling.ru/test_license/7.1/lic.properties \
   && mv lic.properties $BGBILLING_HOME/data \
   && mkdir --parents $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/npay_$NPAY_VERSION.zip \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/npay_$NPAY_VERSION.zip \
   && mv npay_$NPAY_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/card_$CARD_VERSION.zip \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/card_$CARD_VERSION.zip \
   && mv card_$CARD_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/inet_$INET_VERSION.zip \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/inet_$INET_VERSION.zip \
   && mv inet_$INET_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.0/rscm_$RSCM_VERSION.zip \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/rscm_$RSCM_VERSION.zip \
   && mv rscm_$RSCM_VERSION.zip $BGBILLING_HOME/install
 
 ADD container/data.properties $BGBILLING_HOME/data/
