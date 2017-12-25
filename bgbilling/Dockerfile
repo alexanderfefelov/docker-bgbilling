@@ -6,7 +6,7 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.1_81
+ENV BGBILLING_VERSION 7.1_941
 ENV BGBILLING_HOME /bgbilling
 
 ENV NPAY_VERSION=7.1_163
@@ -29,7 +29,7 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERS
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
-  && wget -q https://bgbilling.ru/test_license/7.1/lic.properties \
+  && wget -q https://bgbilling.ru/test_license/7.0/lic.properties \
   && mv lic.properties $BGBILLING_HOME/data \
   && mkdir --parents $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/npay_$NPAY_VERSION.zip \
