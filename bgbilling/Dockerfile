@@ -6,13 +6,17 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.1_941
+ENV BGBILLING_VERSION 7.1_942
 ENV BGBILLING_HOME /bgbilling
 
 ENV NPAY_VERSION=7.1_163
-ENV CARD_VERSION=7.1_182
-ENV INET_VERSION=7.1_564
+ENV CARD_VERSION=7.1_183
+ENV INET_VERSION=7.1_565
 ENV RSCM_VERSION=7.1_154
+ENV BILL_VERSION=7.1_242
+ENV SUBSCRIPTION_VERSION=7.1_11
+ENV MONETA_VERSION=7.1_5
+ENV QIWI_VERSION=7.1_12
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
@@ -39,7 +43,15 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERS
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/inet_$INET_VERSION.zip \
   && mv inet_$INET_VERSION.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/rscm_$RSCM_VERSION.zip \
-  && mv rscm_$RSCM_VERSION.zip $BGBILLING_HOME/install
+  && mv rscm_$RSCM_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/bill_$BILL_VERSION.zip \
+  && mv bill_$BILL_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/subscription_$SUBSCRIPTION_VERSION.zip \
+  && mv subscription_$SUBSCRIPTION_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/moneta_$MONETA_VERSION.zip \
+  && mv moneta_$MONETA_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/qiwi_$QIWI_VERSION.zip \
+  && mv qiwi_$QIWI_VERSION.zip $BGBILLING_HOME/install
 
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
