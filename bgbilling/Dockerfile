@@ -6,7 +6,7 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.1_942
+ENV BGBILLING_VERSION 7.1_943
 ENV BGBILLING_HOME /bgbilling
 
 ENV NPAY_VERSION=7.1_163
@@ -17,6 +17,9 @@ ENV BILL_VERSION=7.1_242
 ENV SUBSCRIPTION_VERSION=7.1_11
 ENV MONETA_VERSION=7.1_5
 ENV QIWI_VERSION=7.1_12
+ENV BONUS_VERSION=7.1_93
+ENV DISPATCH_VERSION=7.1_21
+ENV MPS_VERSION=7.1_167
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
@@ -51,7 +54,13 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGBillingServer_$BGBILLING_VERS
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/moneta_$MONETA_VERSION.zip \
   && mv moneta_$MONETA_VERSION.zip $BGBILLING_HOME/install \
   && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/qiwi_$QIWI_VERSION.zip \
-  && mv qiwi_$QIWI_VERSION.zip $BGBILLING_HOME/install
+  && mv qiwi_$QIWI_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/bonus_$BONUS_VERSION.zip \
+  && mv bonus_$BONUS_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/dispatch_$DISPATCH_VERSION.zip \
+  && mv dispatch_$DISPATCH_VERSION.zip $BGBILLING_HOME/install \
+  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/mps_$MPS_VERSION.zip \
+  && mv mps_$MPS_VERSION.zip $BGBILLING_HOME/install
 
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/
