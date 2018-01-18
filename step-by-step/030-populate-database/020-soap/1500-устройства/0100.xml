@@ -9,22 +9,16 @@
                               xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <inetDevice xmlns="" deviceTypeId="0" entityId="0" entitySpecId="0" id="0" ident="Core"
-                        orderManagerDisabled="false" parentId="1">
+            <inetDevice deviceTypeId="0" entityId="0" entitySpecId="0" id="0" ident="Core"
+                        invDeviceGroupIds="" invDeviceId="2" invDeviceTypeId="0" invHost=""
+                        invIdent="Core" omDisabled="false" parentId="1" password="" secret="">
                 <comment></comment>
                 <config></config>
                 <host></host>
-                <password></password>
-                <secret></secret>
                 <username></username>
                 <invConfig></invConfig>
-                <invDeviceGroupIds></invDeviceGroupIds>
-                <invDeviceId>2</invDeviceId>
-                <invDeviceTypeId>0</invDeviceTypeId>
-                <invHost></invHost>
-                <invIdentifier></invIdentifier>
             </inetDevice>
-            <updateInvDevice xmlns="">false</updateInvDevice>
+            <updateInvDevice>false</updateInvDevice>
         </ns5:inetDeviceUpdate>
     </S:Body>
 </S:Envelope>

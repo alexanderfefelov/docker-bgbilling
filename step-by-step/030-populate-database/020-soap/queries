@@ -53,8 +53,6 @@
 1200-группы-устройств/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 1200-группы-устройств/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 
-1300-устройства/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
-
 1400-устройства-в-библиотеке/0100.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 1400-устройства-в-библиотеке/0200.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService
 1400-устройства-в-библиотеке/0300.xml ru.bitel.bgbilling.modules.inet.api/1/InetDeviceService

@@ -9,8 +9,8 @@
                           xmlns:ns5="http://service.common.api.inet.modules.bgbilling.bitel.ru/"
                           xmlns:xs="http://www.w3.org/2001/XMLSchema"
                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <arg0 xmlns="" deviceGroupIds="3" deviceTypeId="5" entityId="0" entitySpecId="1" id="-1" ident="10.252.0.33"
-                  orderManagerDisabled="false" parentId="0" xsi:type="ns5:invDevice">
+            <arg0 deviceGroupIds="3" deviceTypeId="5" entityId="0" entitySpecId="1" id="-1" ident="10.252.0.33"
+                  omDisabled="false" parentId="0" password="" secret="" xsi:type="ns5:invDevice">
                 <entityAttributes>
                     <entry>
                         <key>1</key>
@@ -26,8 +26,6 @@
                 <comment></comment>
                 <config></config>
                 <host>10.252.0.33:23</host>
-                <password>admin</password>
-                <secret>secret</secret>
                 <username>admin</username>
             </arg0>
         </ns5:deviceUpdate>
