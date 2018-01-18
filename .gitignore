@@ -1,3 +1,5 @@
 /.idea
 /.lib
+/tmp
 *.iml
+*.log
