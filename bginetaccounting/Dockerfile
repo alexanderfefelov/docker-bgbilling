@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV BGINETACCOUNTING_VERSION 7.1_29
+ENV BGINETACCOUNTING_VERSION 7.1_31
 ENV BGINETACCOUNTING_HOME /bginetaccounting
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
