@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV BGINETACCOUNTING_VERSION 7.1_31
 ENV BGINETACCOUNTING_HOME /bginetaccounting
 
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
+RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && unzip -qq BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && mv BGInetAccounting $BGINETACCOUNTING_HOME \
   && rm -f BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \

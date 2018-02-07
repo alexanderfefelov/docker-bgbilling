@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV BGINETACCESS_VERSION 7.1_31
 ENV BGINETACCESS_HOME /bginetaccess
 
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/BGInetAccess_$BGINETACCESS_VERSION.zip \
+RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
   && unzip -qq BGInetAccess_$BGINETACCESS_VERSION.zip \
   && mv BGInetAccess $BGINETACCESS_HOME \
   && rm -f BGInetAccess_$BGINETACCESS_VERSION.zip \
