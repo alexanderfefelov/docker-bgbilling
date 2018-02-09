@@ -11,12 +11,42 @@ object Main extends App {
 
   Db.init()
 
+  moduleConfigs()
   addresses()
   contractPaymentTypes()
+  contractParametersPrefs()
   modulesAndServices()
   inetDeviceTypes()
+  inetDeviceGroups()
 
   println("Finished")
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Настройка -> Конфигурация
+  // Модули -> МОДУЛЬ -> Конфигурация модуля
+  //
+  private def moduleConfigs() = {
+    ModuleConfig.create(mid = Some(0), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
+      """
+        |# Конфигурация ядра
+        |
+      """.stripMargin))
+    ModuleConfig.create(mid = Some(1), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
+      """
+        |# Конфигурация модуля inet
+        |
+      """.stripMargin))
+    ModuleConfig.create(mid = Some(2), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
+      """
+        |# Конфигурация модуля npay
+        |
+      """.stripMargin))
+    ModuleConfig.create(mid = Some(3), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
+      """
+        |# Конфигурация модуля rscm
+        |
+      """.stripMargin))
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Адреса
@@ -35,6 +65,28 @@ object Main extends App {
     ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
     ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
 
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Договоры - параметры
+  //
+  private def contractParametersPrefs() = {
+    // Физ. лица
+    //
+    ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 9, title = "Телефон моб.", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 9, title = "Телефон дом.", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 3, title = "Email", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 1, title = "Данные паспорта", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    // Юр. лица
+    //
+    ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 1, title = "Телефон(ы)", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = DateTime.now())
+    ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = DateTime.now())
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -69,7 +121,42 @@ object Main extends App {
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
   private def inetDeviceTypes() = {
-    InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+    InetDeviceType1.create(title = "Root Device", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+
+    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"), uniqueinterfaces = 1, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    for (i <- 1 to 24) {
+      InetInterface1.create(i, s"ether$i", deviceTypeId)
+    }
+    InetInterface1.create(25, s"sfp1", deviceTypeId)
+
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-3120-24SC B1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 1, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    for (i <- 1 to 24) {
+      InetInterface1.create(i, s"$i", deviceTypeId)
+    }
+
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 A1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 1, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    for (i <- 1 to 28) {
+      InetInterface1.create(i, s"$i", deviceTypeId)
+    }
+
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 C1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 1, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    for (i <- 1 to 28) {
+      InetInterface1.create(i, s"$i", deviceTypeId)
+    }
+
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME C1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 1, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    for (i <- 1 to 28) {
+      InetInterface1.create(i, s"$i", deviceTypeId)
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Устройства и ресурсы -> Группы устройств
+  //
+  private def inetDeviceGroups() = {
+    InvDeviceGroup1.create(parentid = 0, title = "Сервер доступа", cityid = 0, comment = "")
+    InvDeviceGroup1.create(parentid = 0, title = "Коммутатор агрегации", cityid = 0, comment = "")
+    InvDeviceGroup1.create(parentid = 0, title = "Коммутатор доступа", cityid = 0, comment = "")
   }
 
 }
