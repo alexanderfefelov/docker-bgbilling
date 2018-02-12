@@ -11,6 +11,7 @@ object Main extends App {
 
   Db.init()
 
+  dynamicCodeRecompile()
   moduleConfigs()
   addresses()
   contractPaymentTypes()
@@ -18,8 +19,26 @@ object Main extends App {
   modulesAndServices()
   inetDeviceTypes()
   inetDeviceGroups()
+  deviceReload()
 
   println("Finished")
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Автоматизация -> Управление динамическим кодом -> Скомпилировать всё
+  //
+  private def dynamicCodeRecompile() = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
+
+    class DynamicCodeServiceCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("DynamicCodeService"))
+    }
+    val dynamicCodeServiceCake = new DynamicCodeServiceCake
+    val dynamicCode = dynamicCodeServiceCake.service
+
+    val responseFuture = dynamicCode.recompileAll()
+    Await.result(responseFuture, 5.minutes)
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Сервис -> Настройка -> Конфигурация
@@ -64,7 +83,6 @@ object Main extends App {
   private def contractPaymentTypes() = {
     ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
     ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -114,7 +132,6 @@ object Main extends App {
     val rscmModuleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Разовые услуги"))
     val rscmModuleId = Await.result(rscmModuleIdFuture, 60.seconds)
     DbService.create("Подключение", mid = rscmModuleId, parentid = 0, datefrom = None, dateto = None, comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -157,6 +174,23 @@ object Main extends App {
     InvDeviceGroup1.create(parentid = 0, title = "Сервер доступа", cityid = 0, comment = "")
     InvDeviceGroup1.create(parentid = 0, title = "Коммутатор агрегации", cityid = 0, comment = "")
     InvDeviceGroup1.create(parentid = 0, title = "Коммутатор доступа", cityid = 0, comment = "")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Устройства и ресурсы -> Дерево -> Перечитать конфигурацию на серверах
+  //
+  private def deviceReload() = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.inet._
+    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
+
+    class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("InetDeviceService"))
+    }
+    val inetDeviceServiceCake = new InetDeviceServiceCake
+    val inetDevice = inetDeviceServiceCake.service
+
+    val responseFuture = inetDevice.deviceReload()
+    Await.result(responseFuture, 5.minutes)
   }
 
 }
