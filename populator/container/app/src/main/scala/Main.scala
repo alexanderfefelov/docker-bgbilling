@@ -55,6 +55,9 @@ object Main extends App {
       """
         |# Конфигурация модуля inet
         |
+        |# ID типа устройства, являющегося (корневым) InetAccounting-сервером. Параметр обязателен!
+        |accounting.deviceTypeIds=3
+        |
       """.stripMargin))
     ModuleConfig.create(mid = Some(2), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
       """
@@ -139,6 +142,10 @@ object Main extends App {
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
   private def inetDeviceTypes() = {
+    InetDeviceType1.create(title = "Network", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+
+    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"), uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
@@ -168,7 +175,7 @@ object Main extends App {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
 
-    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME C1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME B1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0).id
     for (i <- 1 to 28) {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
@@ -200,7 +207,7 @@ object Main extends App {
 
     var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 0),
+      "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 1),
       "ident" ->        DataRecord(None, Some("ident"), "Моя сеть"),
       "password" ->     DataRecord(None, Some("password"), ""),
       "secret" ->       DataRecord(None, Some("secret"), "")
@@ -209,7 +216,7 @@ object Main extends App {
     val rootId = Await.result(responseFuture, 15.seconds)
     var device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 0),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 1),
       "ident" ->           DataRecord(None, Some("ident"), "Моя сеть"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
@@ -223,7 +230,7 @@ object Main extends App {
 
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 1),
+      "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 3),
       "ident" ->        DataRecord(None, Some("ident"), "Access + Accounting"),
       "password" ->     DataRecord(None, Some("password"), ""),
       "secret" ->       DataRecord(None, Some("secret"), "")
@@ -232,7 +239,7 @@ object Main extends App {
     val aaId = Await.result(responseFuture, 15.seconds)
     device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), rootInvId),
-      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 1),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 3),
       "ident" ->           DataRecord(None, Some("ident"), "Access + Accounting"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
@@ -244,75 +251,131 @@ object Main extends App {
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val aaInvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 2),
+      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 4),
       "deviceGroupIds" -> DataRecord(None, Some("deviceGroupIds"), "1"),
-      "ident" ->          DataRecord(None, Some("ident"), "MikroTik CRS125-24G-1S-RM"),
-      "password" ->       DataRecord(None, Some("password"), ""),
+      "ident" ->          DataRecord(None, Some("ident"), "192.168.99.1:8728"),
+      "password" ->       DataRecord(None, Some("password"), "api"),
       "secret" ->         DataRecord(None, Some("secret"), "")
     ))
     responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val mtId = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), aaInvId),
-      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 2),
-      "ident" ->           DataRecord(None, Some("ident"), "MikroTik CRS125-24G-1S-RM"),
-      "password" ->        DataRecord(None, Some("password"), ""),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 4),
+      "ident" ->           DataRecord(None, Some("ident"), "192.168.99.1"),
+      "password" ->        DataRecord(None, Some("password"), "api"),
       "secret" ->          DataRecord(None, Some("secret"), ""),
       "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), mtId),
       "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
-      "invIdent" ->        DataRecord(None, Some("invIdent"), "MikroTik CRS125-24G-1S-RM"),
-      "invHost" ->         DataRecord(None, Some("invHost"), "")
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "192.168.99.1"),
+      "invHost" ->         DataRecord(None, Some("invHost"), "192.168.99.1:8728")
     ))
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val mtInvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    var cfg =
+      """
+        |qinq.spvid=800
+      """.stripMargin
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 0),
-      "ident" ->          DataRecord(None, Some("ident"), "SP800"),
+      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 2),
+      "ident" ->          DataRecord(None, Some("ident"), "SP-VLAN 800"),
       "password" ->       DataRecord(None, Some("password"), ""),
       "secret" ->         DataRecord(None, Some("secret"), "")
     ))
     responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val sp800Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), mtInvId),
-      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 0),
-      "ident" ->           DataRecord(None, Some("ident"), "SP800"),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 2),
+      "ident" ->           DataRecord(None, Some("ident"), "SP-VLAN 800"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
       "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), sp800Id),
       "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
-      "invIdent" ->        DataRecord(None, Some("invIdent"), "SP800"),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "SP-VLAN 800"),
       "invHost" ->         DataRecord(None, Some("invHost"), "")
     ))
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val sp800InvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    cfg =
+      """
+        |qinq.spvid=900
+      """.stripMargin
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
-      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 0),
-      "ident" ->          DataRecord(None, Some("ident"), "SP900"),
+      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 2),
+      "ident" ->          DataRecord(None, Some("ident"), "SP-VLAN 900"),
       "password" ->       DataRecord(None, Some("password"), ""),
       "secret" ->         DataRecord(None, Some("secret"), "")
     ))
     responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val sp900Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), mtInvId),
-      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 0),
-      "ident" ->           DataRecord(None, Some("ident"), "SP900"),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 2),
+      "ident" ->           DataRecord(None, Some("ident"), "SP-VLAN 900"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
       "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), sp900Id),
       "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
-      "invIdent" ->        DataRecord(None, Some("invIdent"), "S900"),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "SP-VLAN 900"),
       "invHost" ->         DataRecord(None, Some("invHost"), "")
     ))
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val sp900InvId = Await.result(responseFuture, 15.seconds)
+
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.22:23"), uptime = None, uptimeTime = None, username = Some("admin"), attributes = Map(
+      "parentId" ->       DataRecord(None, Some("parentId"), 0),
+      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 5),
+      "deviceGroupIds" -> DataRecord(None, Some("deviceGroupIds"), "2"),
+      "ident" ->          DataRecord(None, Some("ident"), "10.0.0.22"),
+      "password" ->       DataRecord(None, Some("password"), "password"),
+      "secret" ->         DataRecord(None, Some("secret"), "")
+    ))
+    responseFuture = inetDevice.deviceUpdate(Some(invDevice))
+    val dlink3120Id = Await.result(responseFuture, 15.seconds)
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.22:23"), uptime = None, uptimeTime = None, username = Some("admin"), invConfig = Some(""), attributes = Map(
+      "parentId" ->        DataRecord(None, Some("parentId"), sp800InvId),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 5),
+      "ident" ->           DataRecord(None, Some("ident"), "10.0.0.22"),
+      "password" ->        DataRecord(None, Some("password"), "password"),
+      "secret" ->          DataRecord(None, Some("secret"), ""),
+      "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), dlink3120Id),
+      "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "10.0.0.22"),
+      "invHost" ->         DataRecord(None, Some("invHost"), "10.0.0.22:23")
+    ))
+    responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
+    val dlink3120InvId = Await.result(responseFuture, 15.seconds)
+
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.32:23"), uptime = None, uptimeTime = None, username = Some("admin"), attributes = Map(
+      "parentId" ->       DataRecord(None, Some("parentId"), 0),
+      "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 6),
+      "deviceGroupIds" -> DataRecord(None, Some("deviceGroupIds"), "3"),
+      "ident" ->          DataRecord(None, Some("ident"), "10.0.0.32"),
+      "password" ->       DataRecord(None, Some("password"), "password"),
+      "secret" ->         DataRecord(None, Some("secret"), "")
+    ))
+    responseFuture = inetDevice.deviceUpdate(Some(invDevice))
+    val dlink3200a1Id = Await.result(responseFuture, 15.seconds)
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.32:23"), uptime = None, uptimeTime = None, username = Some("admin"), invConfig = Some(""), attributes = Map(
+      "parentId" ->        DataRecord(None, Some("parentId"), dlink3120InvId),
+      "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 6),
+      "ident" ->           DataRecord(None, Some("ident"), "10.0.0.32"),
+      "password" ->        DataRecord(None, Some("password"), "password"),
+      "secret" ->          DataRecord(None, Some("secret"), ""),
+      "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), dlink3200a1Id),
+      "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "10.0.0.32"),
+      "invHost" ->         DataRecord(None, Some("invHost"), "10.0.0.32:23")
+    ))
+    responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
+    val dlink3200a1InvId = Await.result(responseFuture, 15.seconds)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
