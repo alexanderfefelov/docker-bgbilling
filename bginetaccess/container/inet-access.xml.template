@@ -82,7 +82,7 @@
 	
 	<context name="dhcp">
 		<!-- Cоздание процессора dhcp-пакетов -->
-		<bean name="dhcpProcessor" class="ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpProcessor2"/>
+		<bean name="dhcpProcessor" class="ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpHelperProcessor"/>
 	
 		<scheduledExecutorService name="hrlydtlggr" corePoolSize="1" />
 
