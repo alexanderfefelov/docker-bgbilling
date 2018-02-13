@@ -19,6 +19,7 @@ object Main extends App {
   modulesAndServices()
   inetDeviceTypes()
   inetDeviceGroups()
+  inetTrafficTypes()
   devices()
   deviceReload()
 
@@ -188,6 +189,14 @@ object Main extends App {
     InvDeviceGroup1.create(parentid = 0, title = "Сервер доступа", cityid = 0, comment = "")
     InvDeviceGroup1.create(parentid = 0, title = "Коммутатор агрегации", cityid = 0, comment = "")
     InvDeviceGroup1.create(parentid = 0, title = "Коммутатор доступа", cityid = 0, comment = "")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Справочники -> Трафик -> Типы трафика
+  //
+  private def inetTrafficTypes() = {
+    InetTrafficType1.create("Входящий трафик", 30000)
+    InetTrafficType1.create("Исходящий трафик", 30000)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
