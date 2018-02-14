@@ -21,7 +21,9 @@ object Main extends App {
   modulesAndServices()
   inetDeviceTypes()
   inetDeviceGroups()
+  inetVlanResources()
   inetTrafficTypes()
+  inetOptions()
   devices()
   deviceReload()
 
@@ -90,8 +92,8 @@ object Main extends App {
   // Справочники -> Адреса
   //
   private def addresses() = {
-    val countryId = AddressCountry.create("РФ").id
-    val cityId = AddressCity.create(countryId, "г. Звенигород").id
+    val countryId = AddressCountry.create(title = "РФ").id
+    val cityId = AddressCity.create(countryId = countryId, title = "г. Звенигород").id
     val streetId = AddressStreet.create(cityid = cityId, title = "ул. Мира", pIndex = "143180").id
     val houseId = AddressHouse.create(streetid = streetId, house = 1, frac = Some("Б"), amount = 128, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
   }
@@ -131,7 +133,7 @@ object Main extends App {
   //
   private def contractParameterGroups() = {
     ContractParameterGroupName.create("Физ. лицо")
-    ContractParameterGroup.create(1, 1)
+    ContractParameterGroup.create(gid = 1, pid = 1)
     ContractParameterGroup.create(1, 2)
     ContractParameterGroup.create(1, 3)
     ContractParameterGroup.create(1, 4)
@@ -140,19 +142,19 @@ object Main extends App {
     ContractParameterGroup.create(1, 7)
     ContractParameterGroup.create(1, 8)
     ContractParameterGroupName.create("Юр. лицо")
-    ContractParameterGroup.create(1, 1)
-    ContractParameterGroup.create(1, 9)
-    ContractParameterGroup.create(1, 12)
-    ContractParameterGroup.create(1, 10)
-    ContractParameterGroup.create(1, 11)
-    ContractParameterGroup.create(1, 5)
+    ContractParameterGroup.create(gid = 2, pid = 1)
+    ContractParameterGroup.create(2, 9)
+    ContractParameterGroup.create(2, 12)
+    ContractParameterGroup.create(2, 10)
+    ContractParameterGroup.create(2, 11)
+    ContractParameterGroup.create(2, 5)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - значения списков -> Значения списков
   //
   private def сontractParameterType7Values() = {
-    ContractParameterType7Values.create(12, "ООО")
+    ContractParameterType7Values.create(pid = 12, title = "ООО")
     ContractParameterType7Values.create(12, "ЗАО")
     ContractParameterType7Values.create(12, "ПАО")
   }
@@ -237,11 +239,30 @@ object Main extends App {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Устройства и ресурсы -> VLAN-ресурсы
+  //
+  private def inetVlanResources() = {
+    InvVlanCategory1.create(parentid = 0, title = "0800")
+    InvVlanResource1.create(title = "0800", vlanfrom = 500, vlanto = 4000, comment = "", categoryid = 1)
+    InvVlanCategory1.create(parentid = 0, title = "0900")
+    InvVlanResource1.create(title = "0900", vlanfrom = 500, vlanto = 4000, comment = "", categoryid = 2)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Трафик -> Типы трафика
   //
   private def inetTrafficTypes() = {
-    InetTrafficType1.create("Входящий трафик", 30000)
-    InetTrafficType1.create("Исходящий трафик", 30000)
+    InetTrafficType1.create(title = "Входящий трафик", unit = 30000)
+    InetTrafficType1.create(title = "Исходящий трафик", unit = 30000)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Справочники -> Опции
+  //
+  private def inetOptions() = {
+    InetOption1.create(parentid = 0, title = "Скорость", groupintersection = 0, config = "", comment = "")
+    InetOption1.create(parentid = 1, title = "50 Мбит/с", groupintersection = 0, config = "", comment = "")
+    InetOption1.create(parentid = 1, title = "100 Мбит/с", groupintersection = 0, config = "", comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -332,6 +353,8 @@ object Main extends App {
     var cfg =
       """
         |qinq.spvid=800
+        |vlan.resource.category=1
+        |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
@@ -359,6 +382,8 @@ object Main extends App {
     cfg =
       """
         |qinq.spvid=900
+        |vlan.resource.category=2
+        |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
