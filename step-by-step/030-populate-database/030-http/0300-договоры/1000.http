@@ -1,3 +1,0 @@
-# Договор -> Открыть договор -> ДОГОВОР -> Тарифные планы
-# Устанавливаем тариф
-module=contract&action=UpdateContractTariffPlan&tpid=1&pos=&comment=&id=0&date2=&date1=15.03.2016&cid=1

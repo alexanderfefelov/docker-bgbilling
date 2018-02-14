@@ -1,3 +1,0 @@
-# Договор -> Открыть договор -> ДОГОВОР -> Модули
-# Добавляем экземпляр модуля inet в договор
-module=contract&action=ContractModuleAdd&module_ids=1&cid=2
