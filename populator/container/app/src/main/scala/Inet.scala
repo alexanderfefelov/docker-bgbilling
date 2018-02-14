@@ -101,7 +101,11 @@ object Inet {
     val inetDeviceServiceCake = new InetDeviceServiceCake
     val inetDevice = inetDeviceServiceCake.service
 
-    var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    var cfg =
+      """
+        |
+      """.stripMargin
+    var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 1),
       "ident" ->        DataRecord(None, Some("ident"), "Моя сеть"),
@@ -110,7 +114,7 @@ object Inet {
     ))
     var responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val rootId = Await.result(responseFuture, 15.seconds)
-    var device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
+    var device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 1),
       "ident" ->           DataRecord(None, Some("ident"), "Моя сеть"),
@@ -124,7 +128,12 @@ object Inet {
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val rootInvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    cfg =
+      """
+        |radius.deviceTypeIds=4
+        |
+      """.stripMargin
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 3),
       "ident" ->        DataRecord(None, Some("ident"), "Access + Accounting"),
@@ -133,7 +142,7 @@ object Inet {
     ))
     responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val aaId = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), rootInvId),
       "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 3),
       "ident" ->           DataRecord(None, Some("ident"), "Access + Accounting"),
@@ -171,7 +180,7 @@ object Inet {
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val mtInvId = Await.result(responseFuture, 15.seconds)
 
-    var cfg =
+    cfg =
       """
         |qinq.spvid=800
         |vlan.resource.category=1
