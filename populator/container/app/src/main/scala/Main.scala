@@ -16,6 +16,8 @@ object Main extends App {
   addresses()
   contractPaymentTypes()
   contractParametersPrefs()
+  contractParameterGroups()
+  сontractParameterType7Values()
   modulesAndServices()
   inetDeviceTypes()
   inetDeviceGroups()
@@ -51,6 +53,11 @@ object Main extends App {
       """
         |# Конфигурация ядра
         |
+        |# Форматы адресов
+        |addrs.format=(${city})(, ${street}),(д. ${house})(${frac})(, кв. ${flat})(, п. ${pod})(, э. ${floor})
+        |addrs.format.pattern.Обычный=(${city})(, ${street})(, д. ${house})(${frac})(, кв. ${flat})(, п. ${pod})(, э. ${floor})(, ${comment})
+        |addrs.format.list=Обычный
+        |
       """.stripMargin))
     ModuleConfig.create(mid = Some(1), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
       """
@@ -64,10 +71,17 @@ object Main extends App {
       """
         |# Конфигурация модуля npay
         |
+        |# Автоматическое переначисление абонентских плат договора при изменении их периода, количества, закрытие договора и т. п.
+        |# 0 - выключить переначисление, 1 - включить переначисление, 2 - включить переначисление, но выполнять только для текущего месяца
+        |recalculate.on.service.change=1
+        |
       """.stripMargin))
     ModuleConfig.create(mid = Some(3), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
       """
         |# Конфигурация модуля rscm
+        |
+        |# Начисление денег сразу по добавлению услуги в договор
+        |hot.calc=1
         |
       """.stripMargin))
   }
@@ -110,6 +124,37 @@ object Main extends App {
     ContractParametersPref.create(pt = 1, title = "Телефон(ы)", sort = 1, script = "", flags = 1, lm = DateTime.now())
     ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = DateTime.now())
     ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = DateTime.now())
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Договоры - группы параметров
+  //
+  private def contractParameterGroups() = {
+    ContractParameterGroupName.create("Физ. лицо")
+    ContractParameterGroup.create(1, 1)
+    ContractParameterGroup.create(1, 2)
+    ContractParameterGroup.create(1, 3)
+    ContractParameterGroup.create(1, 4)
+    ContractParameterGroup.create(1, 5)
+    ContractParameterGroup.create(1, 6)
+    ContractParameterGroup.create(1, 7)
+    ContractParameterGroup.create(1, 8)
+    ContractParameterGroupName.create("Юр. лицо")
+    ContractParameterGroup.create(1, 1)
+    ContractParameterGroup.create(1, 9)
+    ContractParameterGroup.create(1, 12)
+    ContractParameterGroup.create(1, 10)
+    ContractParameterGroup.create(1, 11)
+    ContractParameterGroup.create(1, 5)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Договоры - значения списков -> Значения списков
+  //
+  private def сontractParameterType7Values() = {
+    ContractParameterType7Values.create(12, "ООО")
+    ContractParameterType7Values.create(12, "ЗАО")
+    ContractParameterType7Values.create(12, "ПАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -264,7 +309,7 @@ object Main extends App {
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 4),
       "deviceGroupIds" -> DataRecord(None, Some("deviceGroupIds"), "1"),
-      "ident" ->          DataRecord(None, Some("ident"), "192.168.99.1:8728"),
+      "ident" ->          DataRecord(None, Some("ident"), "192.168.99.1"),
       "password" ->       DataRecord(None, Some("password"), "api"),
       "secret" ->         DataRecord(None, Some("secret"), "")
     ))
