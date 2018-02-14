@@ -18,6 +18,7 @@ object Main extends App {
   contractParametersPrefs()
   contractParameterGroups()
   сontractParameterType7Values()
+  entitySpecs()
   modulesAndServices()
   Inet.deviceTypes()
   Inet.deviceGroups()
@@ -157,6 +158,18 @@ object Main extends App {
     ContractParameterType7Values.create(pid = 12, title = "ООО")
     ContractParameterType7Values.create(pid = 12, title = "ЗАО")
     ContractParameterType7Values.create(pid = 12, title = "ПАО")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Атрибуты -> Атрибуты
+  // Справочники -> Атрибуты -> Сущности
+  //
+  private def entitySpecs() = {
+    EntitySpecAttr.create(title = "Адрес", `type` = 8, comment = "")
+    EntitySpecAttr.create(title = "S/N", `type` = 1, comment = "")
+    EntitySpec.create(title = "Коммутатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
+    EntitySpecAttrLink.create(entityspecid = 1, entityspecattrid = 1, pos = 0)
+    EntitySpecAttrLink.create(entityspecid = 1, entityspecattrid = 2, pos = 0)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
