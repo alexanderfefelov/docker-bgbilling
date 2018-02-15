@@ -139,7 +139,6 @@ object Inet {
 
     cfg =
       """
-        |radius.deviceTypeIds=4
         |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
@@ -165,7 +164,29 @@ object Inet {
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
     val aaInvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
+    cfg =
+      """
+        |# dhcp.deviceSearchMode
+        |# 0 - по giaddr или IP-адресу источника идет поиск устройства, далее у этого устройства
+        |# вызывается предобработка preprocessDhcpRequest (где можно при необходимости извлечь и установить
+        |# AGENT_REMOTE_ID, а также INTERFACE_ID или VLAN_ID), далее по установленному AGENT_REMOTE_ID или,
+        |# если AGENT_REMOTE_ID не установлен - по конфигурации dhcp.option82.agentRemoteId.x agentRemoteId
+        |# если AGENT_REMOTE_ID не установлен - по конфигурации dhcp.option82.agentRemoteId.x agentRemoteId
+        |# извлекается из пакета и идет поиск агентского устройства по совпадению устройства, далее у идентификатора
+        |# агентского устройства, если таковое найдено вызывается preprocessDhcpRequest (где можно при
+        |# необходимости извлечь и установить INTERFACE_ID или VLAN_ID).
+        |dhcp.deviceSearchMode=0
+        |
+        |# dhcp.servSearchMode
+        |# 4 - поиск по VLAN'у на устройстве и его дочерних устройствах.
+        |dhcp.servSearchMode=4
+        |
+        |# qinq.vlansRegex
+        |# Регулярное выражение для извлечения SP-VID и CVID из Option 82 Agent Remote ID Sub-option
+        |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d)$
+        |
+      """.stripMargin
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
       "parentId" ->       DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" ->   DataRecord(None, Some("deviceTypeId"), 4),
       "deviceGroupIds" -> DataRecord(None, Some("deviceGroupIds"), "1"),
@@ -175,7 +196,7 @@ object Inet {
     ))
     responseFuture = inetDevice.deviceUpdate(Some(invDevice))
     val mtId = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), invConfig = Some(""), attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), aaInvId),
       "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 4),
       "ident" ->           DataRecord(None, Some("ident"), "192.168.99.1"),
