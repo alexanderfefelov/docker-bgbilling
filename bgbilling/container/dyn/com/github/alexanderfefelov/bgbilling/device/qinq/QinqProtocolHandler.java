@@ -7,12 +7,13 @@ import ru.bitel.bgbilling.kernel.network.radius.RadiusPacket;
 import ru.bitel.bgbilling.modules.inet.access.sa.ProtocolHandler;
 import ru.bitel.bgbilling.modules.inet.api.common.bean.InetDevice;
 import ru.bitel.bgbilling.modules.inet.api.common.bean.InetDeviceType;
+import ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpProcessor;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.ParameterMap;
 import ru.bitel.common.sql.ConnectionSet;
 
-import java.io.StringReader;
-import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class QinqProtocolHandler implements ProtocolHandler,
         Loggable, Utils {
@@ -23,13 +24,22 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
         this.device = device;
         this.config = config;
-        qinqMap = createQinqMap(device);
-
-        logger().trace("init: [" + device.getId() + "] " + Arrays.toString(qinqMap.entrySet().toArray()));
+        vlansRegex = config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d)$");
     }
 
     @Override
     public void preprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
+        Pattern pattern = Pattern.compile(vlansRegex);
+        String option82Str = request.getOption((byte)82).getValueAsString();
+        Matcher matcher = pattern.matcher(option82Str);
+        if (!matcher.find()) {
+            // TODO
+            return;
+        }
+        byte[] agentCircuitId = matcher.group(1).getBytes();
+        byte[] vlanId = matcher.group(2).getBytes();
+        request.setOption(InetDhcpProcessor.AGENT_CIRCUIT_ID, agentCircuitId);
+        request.setOption(InetDhcpProcessor.VLAN_ID, vlanId);
         logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
@@ -58,37 +68,8 @@ public class QinqProtocolHandler implements ProtocolHandler,
         logger().trace("postprocessAccountingRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(response.toString()));
     }
 
-    private Map<String, List<String>> createQinqMap(InetDevice root) {
-        Map<String, List<String>> map = new HashMap<>();
-        for (InetDevice container : root.getChildren()) {
-            try {
-                Properties config = new Properties();
-                config.load(new StringReader(container.getConfig()));
-                String spvid = config.getProperty("qinq.spvid");
-                if (spvid == null) {
-                    continue;
-                }
-                if (!map.containsKey(spvid)) {
-                    map.put(spvid, new ArrayList<String>());
-                }
-                f(container, spvid, map);
-            } catch (Throwable t) {
-                logger().error("foobar", t);
-            }
-        }
-        return map;
-    }
-
-    private void f(InetDevice device, String spvid, Map<String, List<String>> map) {
-            List<String> branch = map.get(spvid);
-            branch.add(device.getIdentifier());
-            for (InetDevice child : device.getChildren()) {
-                f(child, spvid, map);
-            }
-    }
-
     private InetDevice device;
     private ParameterMap config;
-    private Map<String, List<String>> qinqMap;
+    private String vlansRegex;
 
 }
