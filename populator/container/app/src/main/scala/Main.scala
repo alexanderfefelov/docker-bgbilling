@@ -24,6 +24,7 @@ object Main extends App {
   Inet.deviceGroups()
   Inet.vlanResources()
   Inet.trafficTypes()
+  Inet.trafficTypeLinks()
   Inet.options()
   Inet.devices()
   Inet.deviceReload()

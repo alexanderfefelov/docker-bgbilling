@@ -17,7 +17,7 @@ object Inet {
 
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"), uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.qinq.QinqProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"), uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ether$i", deviceTypeId)
     }
@@ -75,6 +75,15 @@ object Inet {
   def trafficTypes() = {
     InetTrafficType1.create(title = "Входящий трафик", unit = 30000)
     InetTrafficType1.create(title = "Исходящий трафик", unit = 30000)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Справочники -> Трафик -> Привязка типов трафика
+  //
+  def trafficTypeLinks() = {
+    InetTrafficTypeLink1.create("NetFlow")
+    InetTrafficTypeLinkRule1.create(1, 0, None, None, 2, 0, -1, 1, Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), 0, 0, None, "", "", -1, -1, None, 2, "")
+    InetTrafficTypeLinkRule1.create(1, 0, None, None, 2, 0, -1, 2, Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), 0, 0, None, "", "", -1, -1, None, 1, "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
