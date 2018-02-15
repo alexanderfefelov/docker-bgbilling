@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.device.framework;
+package com.github.alexanderfefelov.bgbilling.framework;
 
 import org.apache.log4j.Logger;
 

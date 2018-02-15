@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.device.murmuring;
+package com.github.alexanderfefelov.bgbilling.device.qinq;
 
 import com.github.alexanderfefelov.bgbilling.framework.Loggable;
 import com.github.alexanderfefelov.bgbilling.framework.Utils;
@@ -11,7 +11,10 @@ import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.ParameterMap;
 import ru.bitel.common.sql.ConnectionSet;
 
-public class MurmuringProtocolHandler implements ProtocolHandler,
+import java.io.StringReader;
+import java.util.*;
+
+public class QinqProtocolHandler implements ProtocolHandler,
         Loggable, Utils {
 
     @Override
@@ -20,6 +23,9 @@ public class MurmuringProtocolHandler implements ProtocolHandler,
 
         this.device = device;
         this.config = config;
+        qinqMap = createQinqMap(device);
+
+        logger().trace("init: [" + device.getId() + "] " + Arrays.toString(qinqMap.entrySet().toArray()));
     }
 
     @Override
@@ -52,7 +58,37 @@ public class MurmuringProtocolHandler implements ProtocolHandler,
         logger().trace("postprocessAccountingRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(response.toString()));
     }
 
+    private Map<String, List<String>> createQinqMap(InetDevice root) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (InetDevice child : root.getChildren()) {
+            f(map, child);
+        }
+        return map;
+    }
+
+    private void f(Map<String, List<String>> map, InetDevice device) {
+        try {
+            Properties config = new Properties();
+            config.load(new StringReader(device.getConfig()));
+            String spvid = config.getProperty("qinq.spvid");
+            if (spvid == null) {
+                return;
+            }
+            if (!map.containsKey(spvid)) {
+                map.put(spvid, new ArrayList<String>());
+            }
+            List<String> branch = map.get(spvid);
+            branch.add(device.getIdentifier());
+            for (InetDevice child : device.getChildren()) {
+                f(map, child);
+            }
+        } catch (Throwable t) {
+            logger().error("foobar", t);
+        }
+    }
+
     private InetDevice device;
     private ParameterMap config;
+    private Map<String, List<String>> qinqMap;
 
 }
