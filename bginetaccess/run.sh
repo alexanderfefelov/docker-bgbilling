@@ -11,8 +11,6 @@ docker run --name bginetaccess --detach \
   --env MODULE_ID=1 \
   --env ROOT_DEVICE_ID=2 \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
-  --link mysql:mysql \
-  --link activemq:activemq \
   --publish 67:67/udp \
   --publish 1812:1812/udp \
   alexanderfefelov/bginetaccess
