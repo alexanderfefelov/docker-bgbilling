@@ -12,6 +12,7 @@ import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.ParameterMap;
 import ru.bitel.common.sql.ConnectionSet;
 
+import java.nio.ByteBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,20 +25,19 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
         this.device = device;
         this.config = config;
-        vlansRegex = config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d)$");
+        vlansRegexPattern = Pattern.compile(config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d)$"));
     }
 
     @Override
     public void preprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
-        Pattern pattern = Pattern.compile(vlansRegex);
         String option82Str = request.getOption((byte)82).getValueAsString();
-        Matcher matcher = pattern.matcher(option82Str);
+        Matcher matcher = vlansRegexPattern.matcher(option82Str);
         if (!matcher.find()) {
             // TODO
             return;
         }
         byte[] agentCircuitId = matcher.group(1).getBytes();
-        byte[] vlanId = matcher.group(2).getBytes();
+        byte[] vlanId = ByteBuffer.allocate(2).putShort(Short.parseShort(matcher.group(2))).array();
         request.setOption(InetDhcpProcessor.AGENT_CIRCUIT_ID, agentCircuitId);
         request.setOption(InetDhcpProcessor.VLAN_ID, vlanId);
         logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
@@ -70,6 +70,6 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
     private InetDevice device;
     private ParameterMap config;
-    private String vlansRegex;
+    private Pattern vlansRegexPattern;
 
 }
