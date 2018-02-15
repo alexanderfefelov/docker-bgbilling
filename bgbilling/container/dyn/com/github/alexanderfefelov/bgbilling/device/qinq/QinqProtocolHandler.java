@@ -60,31 +60,31 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
     private Map<String, List<String>> createQinqMap(InetDevice root) {
         Map<String, List<String>> map = new HashMap<>();
-        for (InetDevice child : root.getChildren()) {
-            f(map, child);
+        for (InetDevice container : root.getChildren()) {
+            try {
+                Properties config = new Properties();
+                config.load(new StringReader(container.getConfig()));
+                String spvid = config.getProperty("qinq.spvid");
+                if (spvid == null) {
+                    continue;
+                }
+                if (!map.containsKey(spvid)) {
+                    map.put(spvid, new ArrayList<String>());
+                }
+                f(container, spvid, map);
+            } catch (Throwable t) {
+                logger().error("foobar", t);
+            }
         }
         return map;
     }
 
-    private void f(Map<String, List<String>> map, InetDevice device) {
-        try {
-            Properties config = new Properties();
-            config.load(new StringReader(device.getConfig()));
-            String spvid = config.getProperty("qinq.spvid");
-            if (spvid == null) {
-                return;
-            }
-            if (!map.containsKey(spvid)) {
-                map.put(spvid, new ArrayList<String>());
-            }
+    private void f(InetDevice device, String spvid, Map<String, List<String>> map) {
             List<String> branch = map.get(spvid);
             branch.add(device.getIdentifier());
             for (InetDevice child : device.getChildren()) {
-                f(map, child);
+                f(child, spvid, map);
             }
-        } catch (Throwable t) {
-            logger().error("foobar", t);
-        }
     }
 
     private InetDevice device;
