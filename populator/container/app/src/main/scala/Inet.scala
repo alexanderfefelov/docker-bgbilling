@@ -212,14 +212,14 @@ object Inet {
 
     cfg =
       """
-        |qinq.spvid=800
+        |qinq.spvid=0800
         |vlan.resource.category=1
         |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 2),
-      "ident" ->        DataRecord(None, Some("ident"), "SP-VLAN 800"),
+      "ident" ->        DataRecord(None, Some("ident"), "0800"),
       "password" ->     DataRecord(None, Some("password"), ""),
       "secret" ->       DataRecord(None, Some("secret"), "")
     ))
@@ -228,12 +228,12 @@ object Inet {
     device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), mtInvId),
       "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 2),
-      "ident" ->           DataRecord(None, Some("ident"), "SP-VLAN 800"),
+      "ident" ->           DataRecord(None, Some("ident"), "0800"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
       "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), sp800Id),
       "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
-      "invIdent" ->        DataRecord(None, Some("invIdent"), "SP-VLAN 800"),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "0800"),
       "invHost" ->         DataRecord(None, Some("invHost"), "")
     ))
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
@@ -241,14 +241,14 @@ object Inet {
 
     cfg =
       """
-        |qinq.spvid=900
+        |qinq.spvid=0900
         |vlan.resource.category=2
         |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     DataRecord(None, Some("parentId"), 0),
       "deviceTypeId" -> DataRecord(None, Some("deviceTypeId"), 2),
-      "ident" ->        DataRecord(None, Some("ident"), "SP-VLAN 900"),
+      "ident" ->        DataRecord(None, Some("ident"), "0900"),
       "password" ->     DataRecord(None, Some("password"), ""),
       "secret" ->       DataRecord(None, Some("secret"), "")
     ))
@@ -257,12 +257,12 @@ object Inet {
     device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), invConfig = Some(""), attributes = Map(
       "parentId" ->        DataRecord(None, Some("parentId"), mtInvId),
       "deviceTypeId" ->    DataRecord(None, Some("deviceTypeId"), 2),
-      "ident" ->           DataRecord(None, Some("ident"), "SP-VLAN 900"),
+      "ident" ->           DataRecord(None, Some("ident"), "0900"),
       "password" ->        DataRecord(None, Some("password"), ""),
       "secret" ->          DataRecord(None, Some("secret"), ""),
       "invDeviceId" ->     DataRecord(None, Some("invDeviceId"), sp900Id),
       "invDeviceTypeId" -> DataRecord(None, Some("invDeviceTypeId"), 2),
-      "invIdent" ->        DataRecord(None, Some("invIdent"), "SP-VLAN 900"),
+      "invIdent" ->        DataRecord(None, Some("invIdent"), "0900"),
       "invHost" ->         DataRecord(None, Some("invHost"), "")
     ))
     responseFuture = inetDevice.inetDeviceUpdate(Some(device), false)
