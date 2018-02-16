@@ -25,7 +25,7 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
         this.device = device;
         this.config = config;
-        vlansRegexPattern = Pattern.compile(config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d)$"));
+        vlansRegexPattern = Pattern.compile(config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d).*"));
     }
 
     @Override

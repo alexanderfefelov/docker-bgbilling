@@ -64,9 +64,9 @@ object Inet {
   //
   def vlanResources() = {
     InvVlanCategory1.create(parentid = 0, title = "0800")
-    InvVlanResource1.create(title = "0800", vlanfrom = 500, vlanto = 4000, comment = "", categoryid = 1)
+    InvVlanResource1.create(title = "0800", vlanfrom = 100, vlanto = 3500, comment = "", categoryid = 1)
     InvVlanCategory1.create(parentid = 0, title = "0900")
-    InvVlanResource1.create(title = "0900", vlanfrom = 500, vlanto = 4000, comment = "", categoryid = 2)
+    InvVlanResource1.create(title = "0900", vlanfrom = 100, vlanto = 3500, comment = "", categoryid = 2)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ object Inet {
         |
         |# qinq.vlansRegex
         |# Регулярное выражение для извлечения SP-VID и CVID из Option 82 Agent Remote ID Sub-option
-        |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d)$
+        |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
         |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
