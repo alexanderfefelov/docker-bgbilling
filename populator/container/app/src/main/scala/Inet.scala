@@ -14,7 +14,8 @@ object Inet {
   }
   private val inetDeviceService = new InetDeviceServiceCake().service
 
-  private def dr[A](key: String, value: A) = DataRecord(Some(""), Some(key), value)
+  private def dr(key: String, value: String) = DataRecord(None, Some(key), value)
+  private def dr(key: String, value: Int) = DataRecord(None, Some(key), value)
 
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
