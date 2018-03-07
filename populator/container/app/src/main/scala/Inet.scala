@@ -90,11 +90,11 @@ object Inet {
     InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 50, 10), addressto = Array[Byte](192.toByte, 168.toByte, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "")
     InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 51, 10), addressto = Array[Byte](192.toByte, 168.toByte, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "")
     InvIpCategory1.create(parentid = 0, title = "Динамические белые адреса")
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "")
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "")
     InvIpCategory1.create(parentid = 0, title = "Статические белые адреса")
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "")
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -132,23 +132,23 @@ object Inet {
     var cfg =
       """
         |ip.resource.categoryId=1
-        |title.pattern=Динамический серый адрес, VLAN ${vlan}
+        |title.pattern=Динамический серый адрес, VLAN (${vlan})
       """.stripMargin
     InetServType1.create(title = "Динамический серый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
     cfg =
       """
         |ip.resource.categoryId=2
-        |title.pattern=Динамический белый адрес, VLAN ${vlan}
+        |title.pattern=Динамический белый адрес, VLAN (${vlan})
         |      """.stripMargin
     InetServType1.create(title = "Динамический белый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
     cfg =
       """
-        |title.pattern=Статический белый адрес ${addressIp}, VLAN ${vlan}
+        |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
       """.stripMargin
     InetServType1.create(title = "Статический белый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 3, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
     InetServTypeDeviceGroupLink1.create(inetservid = 1, devicegroupid = 3)
     InetServTypeDeviceGroupLink1.create(inetservid = 2, devicegroupid = 3)
-    InetServTypeDeviceGroupLink1.create(inetservid = 2, devicegroupid = 3)
+    InetServTypeDeviceGroupLink1.create(inetservid = 3, devicegroupid = 3)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
