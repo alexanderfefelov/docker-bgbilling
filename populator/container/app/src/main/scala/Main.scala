@@ -23,10 +23,12 @@ object Main extends App {
   Inet.deviceTypes()
   Inet.deviceGroups()
   Inet.vlanResources()
+  Inet.ipResources()
   Inet.trafficTypes()
   Inet.trafficTypeLinks()
   Inet.options()
   Inet.devices()
+  Inet.servTypes()
   Inet.deviceReload()
 
   println("Finished. Press Ctrl+C")

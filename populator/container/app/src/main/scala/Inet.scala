@@ -82,6 +82,21 @@ object Inet {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Устройства и ресурсы -> IP-ресурсы
+  //
+  def ipResources() = {
+    InvIpCategory1.create(parentid = 0, title = "Динамические серые адреса")
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 50, 10), addressto = Array[Byte](192.toByte, 168.toByte, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 51, 10), addressto = Array[Byte](192.toByte, 168.toByte, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "")
+    InvIpCategory1.create(parentid = 0, title = "Динамические белые адреса")
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "")
+    InvIpCategory1.create(parentid = 0, title = "Статические белые адреса")
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Трафик -> Типы трафика
   //
   def trafficTypes() = {
@@ -107,6 +122,18 @@ object Inet {
     create(0, "Скорость")
     create(1, "50 Мбит/с")
     create(1, "100 Мбит/с")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Интернет -> Справочники -> Типы сервисов
+  //
+  def servTypes() = {
+    InetServType1.create(title = "Динамический серый адрес", config = Some("ip.resource.categoryId=1"), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
+    InetServType1.create(title = "Динамический белый адрес", config = Some("ip.resource.categoryId=2"), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
+    InetServType1.create(title = "Статический белый адрес", config = Some(""), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
+    InetServTypeDeviceGroupLink1.create(inetservid = 1, devicegroupid = 3)
+    InetServTypeDeviceGroupLink1.create(inetservid = 2, devicegroupid = 3)
+    InetServTypeDeviceGroupLink1.create(inetservid = 2, devicegroupid = 3)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -162,6 +189,16 @@ object Inet {
 
     var cfg =
       """
+        |dhcp.serverIdentifier=192.168.99.254
+        |
+        |dhcp.option.leaseTime=300
+        |dhcp.option.renewalTime=150
+        |dhcp.option.rebindingTime=250
+        |
+        |# Пулы для сервисов с типом адреса "статический адрес". Пулы для сервисов
+        |# с типом адреса "динамический адрес" указываются в конфигурации сервисов.
+        |ip.resource.categoryId=3
+        |
         |# dhcp.deviceSearchMode
         |# 0 - по giaddr или IP-адресу источника идет поиск устройства, далее у этого устройства
         |# вызывается предобработка preprocessDhcpRequest (где можно при необходимости извлечь и установить
@@ -177,7 +214,7 @@ object Inet {
         |dhcp.servSearchMode=4
         |
         |# qinq.vlansRegex
-        |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option
+        |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option.
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
         |
       """.stripMargin
