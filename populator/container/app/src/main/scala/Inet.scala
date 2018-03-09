@@ -75,8 +75,8 @@ object Inet {
   //
   def vlanResources() = {
     def create(title: String, vlanFrom: Int, vlanTo: Int) = {
-      InvVlanCategory1.create(parentid = 0, title = title)
-      InvVlanResource1.create(title = title, vlanfrom = vlanFrom, vlanto = vlanTo, comment = "", categoryid = 1)
+      val id = InvVlanCategory1.create(parentid = 0, title = title).id
+      InvVlanResource1.create(title = title, vlanfrom = vlanFrom, vlanto = vlanTo, comment = "", categoryid = id)
     }
     create("0800", 100, 3500)
     create("0900", 100, 3500)
