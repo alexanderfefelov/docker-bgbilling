@@ -87,14 +87,14 @@ object Inet {
   //
   def ipResources() = {
     InvIpCategory1.create(parentid = 0, title = "Динамические серые адреса")
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 50, 10), addressto = Array[Byte](192.toByte, 168.toByte, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "")
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 51, 10), addressto = Array[Byte](192.toByte, 168.toByte, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 50, 10), addressto = Array[Byte](192.toByte, 168.toByte, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 51, 10), addressto = Array[Byte](192.toByte, 168.toByte, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
     InvIpCategory1.create(parentid = 0, title = "Динамические белые адреса")
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "")
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
     InvIpCategory1.create(parentid = 0, title = "Статические белые адреса")
-    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "")
-    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "")
+    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
