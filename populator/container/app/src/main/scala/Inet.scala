@@ -129,8 +129,8 @@ object Inet {
   // Модули -> Интернет -> Справочники -> Типы сервисов
   //
   def servTypes() = {
-    def create(title: String, config: String) = {
-      val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
+    def create(title: String, config: String, addressType: Byte) = {
+      val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = addressType, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
       InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
     }
     var cfg =
@@ -138,18 +138,18 @@ object Inet {
         |ip.resource.categoryId=1
         |title.pattern=Динамический серый адрес, VLAN (${vlan})
       """.stripMargin
-    create("Динамический серый адрес", cfg)
+    create("Динамический серый адрес", cfg, 4)
     cfg =
       """
         |ip.resource.categoryId=2
         |title.pattern=Динамический белый адрес, VLAN (${vlan})
       """.stripMargin
-    create("Динамический белый адрес", cfg)
+    create("Динамический белый адрес", cfg, 4)
     cfg =
       """
         |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
       """.stripMargin
-    create("Статический белый адрес", cfg)
+    create("Статический белый адрес", cfg, 3)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
