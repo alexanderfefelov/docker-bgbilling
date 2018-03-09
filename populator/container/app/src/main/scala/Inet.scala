@@ -111,8 +111,8 @@ object Inet {
   //
   def trafficTypeLinks() = {
     InetTrafficTypeLink1.create("NetFlow")
-    InetTrafficTypeLinkRule1.create(1, 0, None, None, 2, 0, -1, 1, Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), 0, 0, None, "", "", -1, -1, None, 2, "")
-    InetTrafficTypeLinkRule1.create(1, 0, None, None, 2, 0, -1, 2, Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), 0, 0, None, "", "", -1, -1, None, 1, "")
+    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1, addressfrom = Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), addressto = Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
+    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2, addressfrom = Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), addressto = Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -129,26 +129,27 @@ object Inet {
   // Модули -> Интернет -> Справочники -> Типы сервисов
   //
   def servTypes() = {
+    def create(title: String, config: String) = {
+      val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
+      InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
+    }
     var cfg =
       """
         |ip.resource.categoryId=1
         |title.pattern=Динамический серый адрес, VLAN (${vlan})
       """.stripMargin
-    InetServType1.create(title = "Динамический серый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
+    create("Динамический серый адрес", cfg)
     cfg =
       """
         |ip.resource.categoryId=2
         |title.pattern=Динамический белый адрес, VLAN (${vlan})
-        |      """.stripMargin
-    InetServType1.create(title = "Динамический белый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 4, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
+      """.stripMargin
+    create("Динамический белый адрес", cfg)
     cfg =
       """
         |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
       """.stripMargin
-    InetServType1.create(title = "Статический белый адрес", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 3, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1)
-    InetServTypeDeviceGroupLink1.create(inetservid = 1, devicegroupid = 3)
-    InetServTypeDeviceGroupLink1.create(inetservid = 2, devicegroupid = 3)
-    InetServTypeDeviceGroupLink1.create(inetservid = 3, devicegroupid = 3)
+    create("Статический белый адрес", cfg)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -210,8 +211,7 @@ object Inet {
         |dhcp.option.renewalTime=150
         |dhcp.option.rebindingTime=250
         |
-        |# Пулы для сервисов с типом адреса "статический адрес". Пулы для сервисов
-        |# с типом адреса "динамический адрес" указываются в конфигурации сервисов.
+        |# Пулы для сервисов с типом адреса "статический адрес".
         |ip.resource.categoryId=3
         |
         |# dhcp.deviceSearchMode
@@ -231,7 +231,6 @@ object Inet {
         |# qinq.vlansRegex
         |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option.
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
-        |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
       "parentId" ->       dr("parentId", 0),
@@ -261,7 +260,6 @@ object Inet {
       """
         |qinq.spvid=0800
         |vlan.resource.category=1
-        |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
@@ -290,7 +288,6 @@ object Inet {
       """
         |qinq.spvid=0900
         |vlan.resource.category=2
-        |
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
