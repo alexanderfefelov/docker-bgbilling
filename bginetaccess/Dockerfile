@@ -2,7 +2,8 @@ FROM openjdk:8-jdk
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV BGINETACCESS_VERSION 7.1_31
+ENV BGINETACCESS_VERSION 7.1_33
+
 ENV BGINETACCESS_HOME /bginetaccess
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
