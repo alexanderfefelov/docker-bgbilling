@@ -1,3 +1,6 @@
+import java.nio.charset.Charset
+
+import better.files.File
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
@@ -55,41 +58,20 @@ object Main extends App {
   // Модули -> ЭКЗЕМПЛЯР_МОДУЛЯ -> Конфигурация модуля
   //
   private def moduleConfigs() = {
+    implicit val charset: Charset = Charset.forName("UTF-8")
+
     ModuleConfig.create(mid = Some(0), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      """
-        |# Конфигурация ядра
-        |
-        |# Форматы адресов
-        |addrs.format=(${city})(, ${street}),(д. ${house})(${frac})(, кв. ${flat})(, п. ${pod})(, э. ${floor})
-        |addrs.format.pattern.Обычный=(${city})(, ${street})(, д. ${house})(${frac})(, кв. ${flat})(, п. ${pod})(, э. ${floor})(, ${comment})
-        |addrs.format.list=Обычный
-        |
-      """.stripMargin))
+      File("bgbilling/kernel.conf").contentAsString
+    ))
     ModuleConfig.create(mid = Some(1), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      """
-        |# Конфигурация модуля inet
-        |
-        |# ID типа устройства, являющегося (корневым) InetAccounting-сервером. Параметр обязателен!
-        |accounting.deviceTypeIds=3
-        |
-      """.stripMargin))
+      File("bgbilling/inet.conf").contentAsString
+    ))
     ModuleConfig.create(mid = Some(2), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      """
-        |# Конфигурация модуля npay
-        |
-        |# Автоматическое переначисление абонентских плат договора при изменении их периода, количества, закрытие договора и т. п.
-        |# 0 - выключить переначисление, 1 - включить переначисление, 2 - включить переначисление, но выполнять только для текущего месяца
-        |recalculate.on.service.change=1
-        |
-      """.stripMargin))
+      File("bgbilling/npay.conf").contentAsString
+    ))
     ModuleConfig.create(mid = Some(3), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      """
-        |# Конфигурация модуля rscm
-        |
-        |# Начисление денег сразу по добавлению услуги в договор
-        |hot.calc=1
-        |
-      """.stripMargin))
+      File("bgbilling/rscm.conf").contentAsString
+    ))
   }
 
   //--------------------------------------------------------------------------------------------------------------------

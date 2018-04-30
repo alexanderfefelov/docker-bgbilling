@@ -4,6 +4,7 @@ scalaVersion := "2.11.12"
 
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.9.9",
+  "com.github.pathikrit" %% "better-files" % "3.4.0",
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bill" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bonus" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-db-card" % "0.1.0-SNAPSHOT",
