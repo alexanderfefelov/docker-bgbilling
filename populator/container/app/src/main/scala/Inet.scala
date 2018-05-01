@@ -22,7 +22,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
-  def deviceTypes() = {
+  def deviceTypes(): Unit = {
     InetDeviceType1.create(title = "Network", configid = 0, config = "",
       protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
       sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
@@ -97,7 +97,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> Группы устройств
   //
-  def deviceGroups() = {
+  def deviceGroups(): Unit = {
     def create(title: String) = InvDeviceGroup1.create(parentid = 0, title = title, cityid = 0, comment = "")
     create("Сервер доступа")
     create("Коммутатор агрегации")
@@ -107,7 +107,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> VLAN-ресурсы
   //
-  def vlanResources() = {
+  def vlanResources(): Unit = {
     def create(title: String, vlanFrom: Int, vlanTo: Int) = {
       val id = InvVlanCategory1.create(parentid = 0, title = title).id
       InvVlanResource1.create(title = title, vlanfrom = vlanFrom, vlanto = vlanTo, comment = "", categoryid = id)
@@ -119,7 +119,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> IP-ресурсы
   //
-  def ipResources() = {
+  def ipResources(): Unit = {
     InvIpCategory1.create(parentid = 0, title = "Динамические серые адреса")
     InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 50, 10), addressto = addr(192, 168, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
     InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 51, 10), addressto = addr(192, 168, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
@@ -134,7 +134,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Трафик -> Типы трафика
   //
-  def trafficTypes() = {
+  def trafficTypes(): Unit = {
     def create(title: String) = InetTrafficType1.create(title = title, unit = 30000)
     create("Входящий трафик")
     create("Исходящий трафик")
@@ -143,7 +143,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Трафик -> Привязка типов трафика
   //
-  def trafficTypeLinks() = {
+  def trafficTypeLinks(): Unit = {
     InetTrafficTypeLink1.create("NetFlow")
     InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
     InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
@@ -152,7 +152,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Опции
   //
-  def options() = {
+  def options(): Unit = {
     def create(parentId: Int, title: String) = InetOption1.create(parentid = parentId, title = title, groupintersection = 0, config = "", comment = "")
     create(0, "Скорость")
     create(1, "50 Мбит/с")
@@ -162,7 +162,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Справочники -> Типы сервисов
   //
-  def servTypes() = {
+  def servTypes(): Unit = {
     def create(title: String, config: String, addressType: Byte) = {
       val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = addressType, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
       InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
@@ -190,7 +190,7 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> Библиотека
   // Модули -> Интернет -> Устройства и ресурсы -> Дерево
   //
-  def devices() = {
+  def devices(): Unit = {
     var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None,
       username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
@@ -415,7 +415,7 @@ object Inet {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> Дерево -> Перечитать конфигурацию на серверах
   //
-  def deviceReload() = {
+  def deviceReload(): Unit = {
     val responseFuture = inetDeviceService.deviceReload()
     Await.result(responseFuture, 5.minutes)
   }

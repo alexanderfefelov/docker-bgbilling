@@ -12,6 +12,8 @@ import scalaxb.DispatchHttpClientsAsync
 
 object Main extends App {
 
+  implicit val charset: Charset = Charset.forName("UTF-8")
+
   Db.init()
 
   dynamicCodeRecompile()
@@ -39,7 +41,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Сервис -> Автоматизация -> Управление динамическим кодом -> Скомпилировать всё
   //
-  private def dynamicCodeRecompile() = {
+  private def dynamicCodeRecompile(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
@@ -57,27 +59,19 @@ object Main extends App {
   // Сервис -> Настройка -> Конфигурация
   // Модули -> ЭКЗЕМПЛЯР_МОДУЛЯ -> Конфигурация модуля
   //
-  private def moduleConfigs() = {
-    implicit val charset: Charset = Charset.forName("UTF-8")
-
-    ModuleConfig.create(mid = Some(0), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      File("bgbilling/kernel.conf").contentAsString
-    ))
-    ModuleConfig.create(mid = Some(1), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      File("bgbilling/inet.conf").contentAsString
-    ))
-    ModuleConfig.create(mid = Some(2), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      File("bgbilling/npay.conf").contentAsString
-    ))
-    ModuleConfig.create(mid = Some(3), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1), config = Some(
-      File("bgbilling/rscm.conf").contentAsString
-    ))
+  private def moduleConfigs(): Unit = {
+    val modules = Seq("kernel", "inet", "npay", "rscm")
+    for (i <- modules.indices) {
+      ModuleConfig.create(mid = Some(i), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1),
+        config = Some(File(s"bgbilling/${modules(i)}.conf").contentAsString)
+      )
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Адреса
   //
-  private def addresses() = {
+  private def addresses(): Unit = {
     val countryId = AddressCountry.create(title = "РФ").id
     val cityId = AddressCity.create(countryId = countryId, title = "г. Звенигород").id
     val streetId = AddressStreet.create(cityid = cityId, title = "ул. Мира", pIndex = "143180").id
@@ -87,7 +81,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Типы платежей
   //
-  private def contractPaymentTypes() = {
+  private def contractPaymentTypes(): Unit = {
     ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
     ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
   }
@@ -95,7 +89,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - параметры
   //
-  private def contractParametersPrefs() = {
+  private def contractParametersPrefs(): Unit = {
     // Физ. лица
     //
     ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 1, lm = DateTime.now())
@@ -117,7 +111,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - группы параметров
   //
-  private def contractParameterGroups() = {
+  private def contractParameterGroups(): Unit = {
     ContractParameterGroupName.create("Физ. лицо")
     ContractParameterGroup.create(gid = 1, pid = 1)
     ContractParameterGroup.create(gid = 1, pid = 2)
@@ -139,7 +133,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - значения списков -> Значения списков
   //
-  private def сontractParameterType7Values() = {
+  private def сontractParameterType7Values(): Unit = {
     ContractParameterType7Values.create(pid = 12, title = "ООО")
     ContractParameterType7Values.create(pid = 12, title = "ЗАО")
     ContractParameterType7Values.create(pid = 12, title = "ПАО")
@@ -149,7 +143,7 @@ object Main extends App {
   // Справочники -> Атрибуты -> Атрибуты
   // Справочники -> Атрибуты -> Сущности
   //
-  private def entitySpecs() = {
+  private def entitySpecs(): Unit = {
     EntitySpecAttr.create(title = "Адрес", `type` = 8, comment = "")
     EntitySpecAttr.create(title = "S/N", `type` = 1, comment = "")
     EntitySpec.create(title = "Коммутатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
@@ -160,7 +154,7 @@ object Main extends App {
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Редактор модулей и услуг
   //
-  private def modulesAndServices() = {
+  private def modulesAndServices(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.db.repository.{Service => DbService}
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
@@ -173,15 +167,18 @@ object Main extends App {
 
     val inetModuleIdFuture = moduleService.moduleAdd(Some("inet"), Some("Интернет"))
     val inetModuleId = Await.result(inetModuleIdFuture, 2.minutes)
-    DbService.create("Доступ в интернет", mid = inetModuleId, parentid = 0, datefrom = None, dateto = None, comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
+    DbService.create("Доступ в интернет", mid = inetModuleId, parentid = 0, datefrom = None, dateto = None,
+      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
 
     val npayModuleIdFuture = moduleService.moduleAdd(Some("npay"), Some("Периодические услуги"))
     val npayModuleId = Await.result(npayModuleIdFuture, 60.seconds)
-    DbService.create("Абонентская плата", mid = npayModuleId, parentid = 0, datefrom = None, dateto = None, comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
+    DbService.create("Абонентская плата", mid = npayModuleId, parentid = 0, datefrom = None, dateto = None,
+      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
 
     val rscmModuleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Разовые услуги"))
     val rscmModuleId = Await.result(rscmModuleIdFuture, 60.seconds)
-    DbService.create("Подключение", mid = rscmModuleId, parentid = 0, datefrom = None, dateto = None, comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
+    DbService.create("Подключение", mid = rscmModuleId, parentid = 0, datefrom = None, dateto = None,
+      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
   }
 
 }
