@@ -14,6 +14,8 @@ object Inet {
   }
   private val inetDeviceService = new InetDeviceServiceCake().service
 
+  private def addr(a1: Int, a2: Int, a3: Int, a4: Int) = Array[Byte](a1.toByte, a2.toByte, a3.toByte, a4.toByte)
+
   private def dr(key: String, value: String) = DataRecord(None, Some(key), value)
   private def dr(key: String, value: Int) = DataRecord(None, Some(key), value)
 
@@ -21,24 +23,48 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
   def deviceTypes() = {
-    InetDeviceType1.create(title = "Network", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+    InetDeviceType1.create(title = "Network", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+    InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.qinq.QinqProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"), uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.qinq.QinqProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"),
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ether$i", deviceTypeId)
     }
     InetInterface1.create(25, s"sfp1", deviceTypeId)
 
-    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-3120-24SC B1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-3120-24SC B1", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
 
-    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 A1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 A1", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"$i", deviceTypeId)
     }
@@ -46,7 +72,11 @@ object Inet {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
 
-    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 C1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 C1", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"$i", deviceTypeId)
     }
@@ -54,7 +84,11 @@ object Inet {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
 
-    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME B1", configid = 0, config = "", protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"), sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"), devicemanagerclass = None, uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+    deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME B1", configid = 0, config = "",
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
+      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 28) {
       InetInterface1.create(i, s"ge$i", deviceTypeId)
     }
@@ -87,14 +121,14 @@ object Inet {
   //
   def ipResources() = {
     InvIpCategory1.create(parentid = 0, title = "Динамические серые адреса")
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 50, 10), addressto = Array[Byte](192.toByte, 168.toByte, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 1, addressfrom = Array[Byte](192.toByte, 168.toByte, 51, 10), addressto = Array[Byte](192.toByte, 168.toByte, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 50, 10), addressto = addr(192, 168, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 51, 10), addressto = addr(192, 168, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
     InvIpCategory1.create(parentid = 0, title = "Динамические белые адреса")
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 60, 10), addressto = Array[Byte](192.toByte, 168.toByte, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 2, addressfrom = Array[Byte](192.toByte, 168.toByte, 61, 10), addressto = Array[Byte](192.toByte, 168.toByte, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 60, 10), addressto = addr(192, 168, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 61, 10), addressto = addr(192, 168, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
     InvIpCategory1.create(parentid = 0, title = "Статические белые адреса")
-    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 70, 10), addressto = Array[Byte](192.toByte, 168.toByte, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 3, addressfrom = Array[Byte](192.toByte, 168.toByte, 71, 10), addressto = Array[Byte](192.toByte, 168.toByte, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 70, 10), addressto = addr(192, 168, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 71, 10), addressto = addr(192, 168, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,8 +145,8 @@ object Inet {
   //
   def trafficTypeLinks() = {
     InetTrafficTypeLink1.create("NetFlow")
-    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1, addressfrom = Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), addressto = Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
-    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2, addressfrom = Some(Array[Byte](192.toByte, 168.toByte, 0, 1)), addressto = Some(Array[Byte](192.toByte, 168.toByte, 255.toByte, 255.toByte)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
+    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
+    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -157,7 +191,8 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> Дерево
   //
   def devices() = {
-    var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    var invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None,
+      username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
       "deviceTypeId" -> dr("deviceTypeId", 1),
       "ident" ->        dr("ident", "Моя сеть"),
@@ -166,7 +201,8 @@ object Inet {
     ))
     var responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val rootId = Await.result(responseFuture, 15.seconds)
-    var device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    var device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", 0),
       "deviceTypeId" ->    dr("deviceTypeId", 1),
       "ident" ->           dr("ident", "Моя сеть"),
@@ -180,7 +216,8 @@ object Inet {
     responseFuture = inetDeviceService.inetDeviceUpdate(Some(device), false)
     val rootInvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(""), uptime = None, uptimeTime = None,
+      username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
       "deviceTypeId" -> dr("deviceTypeId", 3),
       "ident" ->        dr("ident", "Access + Accounting"),
@@ -189,7 +226,8 @@ object Inet {
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val aaId = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", rootInvId),
       "deviceTypeId" ->    dr("deviceTypeId", 3),
       "ident" ->           dr("ident", "Access + Accounting"),
@@ -232,26 +270,29 @@ object Inet {
         |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option.
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
       """.stripMargin
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some("192.168.99.1:8728"), uptime = None, uptimeTime = None, username = Some("api"), attributes = Map(
+    var host = "192.168.99.1"
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(s"$host:8728"), uptime = None, uptimeTime = None,
+      username = Some("api"), attributes = Map(
       "parentId" ->       dr("parentId", 0),
       "deviceTypeId" ->   dr("deviceTypeId", 4),
       "deviceGroupIds" -> dr("deviceGroupIds", "1"),
-      "ident" ->          dr("ident", "192.168.99.1"),
+      "ident" ->          dr("ident", host),
       "password" ->       dr("password", "api"),
       "secret" ->         dr("secret", "")
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val mtId = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", aaInvId),
       "deviceTypeId" ->    dr("deviceTypeId", 4),
-      "ident" ->           dr("ident", "192.168.99.1"),
+      "ident" ->           dr("ident", host),
       "password" ->        dr("password", "api"),
       "secret" ->          dr("secret", ""),
       "invDeviceId" ->     dr("invDeviceId", mtId),
       "invDeviceTypeId" -> dr("invDeviceTypeId", 2),
-      "invIdent" ->        dr("invIdent", "192.168.99.1"),
-      "invHost" ->         dr("invHost", "192.168.99.1:8728")
+      "invIdent" ->        dr("invIdent", host),
+      "invHost" ->         dr("invHost", s"$host:8728")
     ))
     responseFuture = inetDeviceService.inetDeviceUpdate(Some(device), false)
     val mtInvId = Await.result(responseFuture, 15.seconds)
@@ -261,7 +302,8 @@ object Inet {
         |qinq.spvid=0800
         |vlan.resource.category=1
       """.stripMargin
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
+      username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
       "deviceTypeId" -> dr("deviceTypeId", 2),
       "ident" ->        dr("ident", "0800"),
@@ -270,7 +312,8 @@ object Inet {
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val sp800Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", mtInvId),
       "deviceTypeId" ->    dr("deviceTypeId", 2),
       "ident" ->           dr("ident", "0800"),
@@ -289,7 +332,8 @@ object Inet {
         |qinq.spvid=0900
         |vlan.resource.category=2
       """.stripMargin
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None, username = Some(""), attributes = Map(
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
+      username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
       "deviceTypeId" -> dr("deviceTypeId", 2),
       "ident" ->        dr("ident", "0900"),
@@ -298,7 +342,8 @@ object Inet {
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val sp900Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", mtInvId),
       "deviceTypeId" ->    dr("deviceTypeId", 2),
       "ident" ->           dr("ident", "0900"),
@@ -312,50 +357,56 @@ object Inet {
     responseFuture = inetDeviceService.inetDeviceUpdate(Some(device), false)
     val sp900InvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.22:23"), uptime = None, uptimeTime = None, username = Some("admin"), attributes = Map(
+    host = "10.0.0.22"
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(s"$host:23"), uptime = None, uptimeTime = None,
+      username = Some("admin"), attributes = Map(
       "parentId" ->       dr("parentId", 0),
       "deviceTypeId" ->   dr("deviceTypeId", 5),
       "deviceGroupIds" -> dr("deviceGroupIds", "2"),
-      "ident" ->          dr("ident", "10.0.0.22"),
+      "ident" ->          dr("ident", host),
       "password" ->       dr("password", "password"),
       "secret" ->         dr("secret", "")
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val dlink3120Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", sp800InvId),
       "deviceTypeId" ->    dr("deviceTypeId", 5),
-      "ident" ->           dr("ident", "10.0.0.22"),
+      "ident" ->           dr("ident", host),
       "password" ->        dr("password", "password"),
       "secret" ->          dr("secret", ""),
       "invDeviceId" ->     dr("invDeviceId", dlink3120Id),
       "invDeviceTypeId" -> dr("invDeviceTypeId", 2),
-      "invIdent" ->        dr("invIdent", "10.0.0.22"),
-      "invHost" ->         dr("invHost", "10.0.0.22:23")
+      "invIdent" ->        dr("invIdent", host),
+      "invHost" ->         dr("invHost", s"$host:23")
     ))
     responseFuture = inetDeviceService.inetDeviceUpdate(Some(device), false)
     val dlink3120InvId = Await.result(responseFuture, 15.seconds)
 
-    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some("10.0.0.32:23"), uptime = None, uptimeTime = None, username = Some("admin"), attributes = Map(
+    host = "10.0.0.32"
+    invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(""), host = Some(s"$host:23"), uptime = None, uptimeTime = None,
+      username = Some("admin"), attributes = Map(
       "parentId" ->       dr("parentId", 0),
       "deviceTypeId" ->   dr("deviceTypeId", 6),
       "deviceGroupIds" -> dr("deviceGroupIds", "3"),
-      "ident" ->          dr("ident", "10.0.0.32"),
+      "ident" ->          dr("ident", host),
       "password" ->       dr("password", "password"),
       "secret" ->         dr("secret", "")
     ))
     responseFuture = inetDeviceService.deviceUpdate(Some(invDevice))
     val dlink3200a1Id = Await.result(responseFuture, 15.seconds)
-    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None, username = None, invConfig = None, attributes = Map(
+    device = InetDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = None, config = None, host = None, uptime = None, uptimeTime = None,
+      username = None, invConfig = None, attributes = Map(
       "parentId" ->        dr("parentId", dlink3120InvId),
       "deviceTypeId" ->    dr("deviceTypeId", 6),
-      "ident" ->           dr("ident", "10.0.0.32"),
+      "ident" ->           dr("ident", host),
       "password" ->        dr("password", "password"),
       "secret" ->          dr("secret", ""),
       "invDeviceId" ->     dr("invDeviceId", dlink3200a1Id),
       "invDeviceTypeId" -> dr("invDeviceTypeId", 2),
-      "invIdent" ->        dr("invIdent", "10.0.0.32"),
-      "invHost" ->         dr("invHost", "10.0.0.32:23")
+      "invIdent" ->        dr("invIdent", host),
+      "invHost" ->         dr("invHost", s"$host:23")
     ))
     responseFuture = inetDeviceService.inetDeviceUpdate(Some(device), false)
     val dlink3200a1InvId = Await.result(responseFuture, 15.seconds)
