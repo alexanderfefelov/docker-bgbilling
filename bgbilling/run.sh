@@ -18,6 +18,7 @@ docker run --rm --link activemq:activemq martin/wait -p 61616
 
 docker run --name bgbilling --detach \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+  --volume bgbilling:/bgbilling \
   --link mysql:mysql \
   --link activemq:activemq \
   --publish 8080:8080 \
