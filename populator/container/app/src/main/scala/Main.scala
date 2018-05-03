@@ -25,6 +25,7 @@ object Main extends App {
   сontractParameterType7Values()
   entitySpecs()
   modulesAndServices()
+  scheduledTasks()
   Inet.deviceTypes()
   Inet.deviceGroups()
   Inet.vlanResources()
@@ -155,7 +156,6 @@ object Main extends App {
   // Модули -> Редактор модулей и услуг
   //
   private def modulesAndServices(): Unit = {
-    import com.github.alexanderfefelov.bgbilling.api.db.repository.{Service => DbService}
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
@@ -165,20 +165,17 @@ object Main extends App {
     val moduleServiceCake = new ModuleServiceCake
     val moduleService = moduleServiceCake.service
 
-    val inetModuleIdFuture = moduleService.moduleAdd(Some("inet"), Some("Интернет"))
-    val inetModuleId = Await.result(inetModuleIdFuture, 2.minutes)
-    DbService.create("Доступ в интернет", mid = inetModuleId, parentid = 0, datefrom = None, dateto = None,
-      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
+    Inet.moduleAndServices(moduleService)
+    Npay.moduleAndServices(moduleService)
+    Rscm.moduleAndServices(moduleService)
+  }
 
-    val npayModuleIdFuture = moduleService.moduleAdd(Some("npay"), Some("Периодические услуги"))
-    val npayModuleId = Await.result(npayModuleIdFuture, 60.seconds)
-    DbService.create("Абонентская плата", mid = npayModuleId, parentid = 0, datefrom = None, dateto = None,
-      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
-
-    val rscmModuleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Разовые услуги"))
-    val rscmModuleId = Await.result(rscmModuleIdFuture, 60.seconds)
-    DbService.create("Подключение", mid = rscmModuleId, parentid = 0, datefrom = None, dateto = None,
-      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Администрирование -> Планировщик заданий
+  //
+  private def scheduledTasks() = {
+    Npay.scheduledTasks()
+    Rscm.scheduledTasks()
   }
 
 }

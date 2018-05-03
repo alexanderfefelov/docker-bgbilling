@@ -1,7 +1,9 @@
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.inet._
+import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
 import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import org.joda.time.DateTime
 import scalaxb.{DataRecord, DispatchHttpClientsAsync}
 
 import scala.concurrent.Await
@@ -20,30 +22,46 @@ object Inet {
   private def dr(key: String, value: Int) = DataRecord(None, Some(key), value)
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Модули -> Редактор модулей и услуг
+  //
+  def moduleAndServices(moduleService: ModuleService): Int = {
+    import com.github.alexanderfefelov.bgbilling.api.db.repository.{Service => DbService}
+
+    val inetModuleIdFuture = moduleService.moduleAdd(Some("inet"), Some("Интернет"))
+    val inetModuleId = Await.result(inetModuleIdFuture, 2.minutes)
+    DbService.create("Доступ в интернет", mid = inetModuleId, parentid = 0, datefrom = None, dateto = None,
+      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
+    inetModuleId
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
   def deviceTypes(): Unit = {
+    val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"
+    val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"
+
     InetDeviceType1.create(title = "Network", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "",
       protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.qinq.QinqProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"),
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
@@ -52,8 +70,8 @@ object Inet {
     InetInterface1.create(25, s"sfp1", deviceTypeId)
 
     deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-3120-24SC B1", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
@@ -61,8 +79,8 @@ object Inet {
     }
 
     deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 A1", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
@@ -73,8 +91,8 @@ object Inet {
     }
 
     deviceTypeId = InetDeviceType1.create(title = "D-Link DES-3200-28 C1", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
@@ -85,8 +103,8 @@ object Inet {
     }
 
     deviceTypeId = InetDeviceType1.create(title = "D-Link DGS-1210-28/ME B1", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"),
-      sahandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"),
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 28) {
@@ -169,19 +187,19 @@ object Inet {
     }
     var cfg =
       """
-        |ip.resource.categoryId=1
-        |title.pattern=Динамический серый адрес, VLAN (${vlan})
+        |ip.resource.categoryId = 1
+        |title.pattern = Динамический серый адрес, VLAN (${vlan})
       """.stripMargin
     create("Динамический серый адрес", cfg, 4)
     cfg =
       """
-        |ip.resource.categoryId=2
-        |title.pattern=Динамический белый адрес, VLAN (${vlan})
+        |ip.resource.categoryId = 2
+        |title.pattern = Динамический белый адрес, VLAN (${vlan})
       """.stripMargin
     create("Динамический белый адрес", cfg, 4)
     cfg =
       """
-        |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
+        |title.pattern = Статический белый адрес (${addressIp}), VLAN (${vlan})
       """.stripMargin
     create("Статический белый адрес", cfg, 3)
   }
@@ -243,14 +261,14 @@ object Inet {
 
     var cfg =
       """
-        |dhcp.serverIdentifier=192.168.99.254
+        |dhcp.serverIdentifier = 192.168.99.254
         |
-        |dhcp.option.leaseTime=300
-        |dhcp.option.renewalTime=150
-        |dhcp.option.rebindingTime=250
+        |dhcp.option.leaseTime = 300
+        |dhcp.option.renewalTime = 150
+        |dhcp.option.rebindingTime = 250
         |
         |# Пулы для сервисов с типом адреса "статический адрес".
-        |ip.resource.categoryId=3
+        |ip.resource.categoryId = 3
         |
         |# dhcp.deviceSearchMode
         |# 0 - по giaddr или IP-адресу источника идет поиск устройства, далее у этого устройства
@@ -260,15 +278,15 @@ object Inet {
         |# извлекается из пакета и идет поиск агентского устройства по совпадению идентификатора устройства,
         |# далее у агентского устройства, если таковое найдено, вызывается preprocessDhcpRequest (где можно
         |# при необходимости извлечь и установить INTERFACE_ID или VLAN_ID).
-        |dhcp.deviceSearchMode=0
+        |dhcp.deviceSearchMode = 0
         |
         |# dhcp.servSearchMode
         |# 4 - поиск по VLAN'у на устройстве и его дочерних устройствах.
-        |dhcp.servSearchMode=4
+        |dhcp.servSearchMode = 4
         |
         |# qinq.vlansRegex
         |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option.
-        |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
+        |qinq.vlansRegex = .*s(\d\d\d\d)c(\d\d\d\d).*
       """.stripMargin
     var host = "192.168.99.1"
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(s"$host:8728"), uptime = None, uptimeTime = None,
@@ -299,8 +317,8 @@ object Inet {
 
     cfg =
       """
-        |qinq.spvid=0800
-        |vlan.resource.category=1
+        |qinq.spvid = 0800
+        |vlan.resource.category = 1
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
       username = Some(""), attributes = Map(
@@ -329,8 +347,8 @@ object Inet {
 
     cfg =
       """
-        |qinq.spvid=0900
-        |vlan.resource.category=2
+        |qinq.spvid = 0900
+        |vlan.resource.category = 2
       """.stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
       username = Some(""), attributes = Map(
