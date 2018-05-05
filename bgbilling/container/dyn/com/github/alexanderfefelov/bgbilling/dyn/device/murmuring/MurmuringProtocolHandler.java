@@ -1,7 +1,7 @@
-package com.github.alexanderfefelov.bgbilling.device.murmuring;
+package com.github.alexanderfefelov.bgbilling.dyn.device.murmuring;
 
-import com.github.alexanderfefelov.bgbilling.framework.Loggable;
-import com.github.alexanderfefelov.bgbilling.framework.Utils;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.Utils;
 import ru.bitel.bgbilling.kernel.network.dhcp.DhcpPacket;
 import ru.bitel.bgbilling.kernel.network.radius.RadiusPacket;
 import ru.bitel.bgbilling.modules.inet.access.sa.ProtocolHandler;

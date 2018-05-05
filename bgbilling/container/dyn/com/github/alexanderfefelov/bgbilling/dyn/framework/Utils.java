@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.framework;
+package com.github.alexanderfefelov.bgbilling.dyn.framework;
 
 public interface Utils {
 

@@ -38,8 +38,8 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> Типы устройств
   //
   def deviceTypes(): Unit = {
-    val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringProtocolHandler"
-    val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.device.murmuring.MurmuringServiceActivator"
+    val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringProtocolHandler"
+    val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringServiceActivator"
 
     InetDeviceType1.create(title = "Network", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
@@ -60,9 +60,9 @@ object Inet {
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "",
-      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.device.qinq.QinqProtocolHandler"),
+      protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.qinq.QinqProtocolHandler"),
       sahandlerclass = Some(murmuringServiceActivator),
-      devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.device.mikrotik.RouterOsDeviceManager"),
+      devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.mikrotik.RouterOsDeviceManager"),
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ether$i", deviceTypeId)

@@ -1,6 +1,6 @@
-package com.github.alexanderfefelov.bgbilling.device.mikrotik;
+package com.github.alexanderfefelov.bgbilling.dyn.device.mikrotik;
 
-import com.github.alexanderfefelov.bgbilling.framework.Loggable;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import me.legrange.mikrotik.ApiConnection;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;

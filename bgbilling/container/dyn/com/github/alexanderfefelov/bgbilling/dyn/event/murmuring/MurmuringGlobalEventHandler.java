@@ -1,6 +1,6 @@
-package com.github.alexanderfefelov.bgbilling.event.murmuring;
+package com.github.alexanderfefelov.bgbilling.dyn.event.murmuring;
 
-import com.github.alexanderfefelov.bgbilling.framework.Loggable;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
 import ru.bitel.bgbilling.server.util.Setup;
