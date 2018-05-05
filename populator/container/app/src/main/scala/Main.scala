@@ -201,6 +201,7 @@ object Main extends App {
     val cake = new Cake
     val service = cake.service
 
+    Bonus.plugin(service)
     Dispatch.plugin(service)
   }
 

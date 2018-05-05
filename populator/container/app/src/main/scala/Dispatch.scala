@@ -12,7 +12,8 @@ object Dispatch {
   // Плагины -> Настройки плагинов
   //
   def plugin(plugincfgService: PlugincfgService) = {
-    val responseFuture = plugincfgService.updatePlugin(Some(PluginItem(config = Some(""), enabled = true, id = pluginId)))
+    val cfg = ""
+    val responseFuture = plugincfgService.updatePlugin(Some(PluginItem(config = Some(cfg), enabled = true, id = pluginId)))
     Await.result(responseFuture, 60.seconds)
   }
 
@@ -21,7 +22,7 @@ object Dispatch {
   //
   def scheduledTasks() = {
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 0, min = 0, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
-      `class` = "ru.bitel.bgbilling.plugins.dispatch.server.task.DispatchWorker", moduleId = "p4", comment = "", params = "")
+      `class` = "ru.bitel.bgbilling.plugins.dispatch.server.task.DispatchWorker", moduleId = s"p$pluginId", comment = "Внимание! Эта задача должна выполняться каждую минуту.", params = "")
   }
 
 }
