@@ -61,7 +61,20 @@ object Main extends App {
   // Модули -> ЭКЗЕМПЛЯР_МОДУЛЯ -> Конфигурация модуля
   //
   private def moduleConfigs(): Unit = {
-    val modules = Seq("kernel", "inet", "npay", "rscm")
+    val modules = Seq(
+      // Ядро
+      "kernel",
+      // Модули интернета
+      "inet",
+      // Модули абонентских плат и разовых услуг
+      "npay",
+      "rscm",
+      "subscription",
+      // Модули платежных систем
+      "moneta",
+      "qiwi",
+      "mps"
+    )
     for (i <- modules.indices) {
       ModuleConfig.create(mid = Some(i), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1),
         config = Some(File(s"bgbilling/${modules(i)}.conf").contentAsString)
@@ -168,6 +181,10 @@ object Main extends App {
     Inet.moduleAndServices(moduleService)
     Npay.moduleAndServices(moduleService)
     Rscm.moduleAndServices(moduleService)
+    Subscription.moduleAndServices(moduleService)
+    Moneta.moduleAndServices(moduleService)
+    Qiwi.moduleAndServices(moduleService)
+    Mps.moduleAndServices(moduleService)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

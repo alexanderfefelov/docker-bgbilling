@@ -11,11 +11,11 @@ object Npay {
   // Модули -> Редактор модулей и услуг
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
-    val npayModuleIdFuture = moduleService.moduleAdd(Some("npay"), Some("Периодические услуги"))
-    val npayModuleId = Await.result(npayModuleIdFuture, 60.seconds)
-    DbService.create("Абонентская плата", mid = npayModuleId, parentid = 0, datefrom = None, dateto = None,
+    val moduleIdFuture = moduleService.moduleAdd(Some("npay"), Some("Периодические услуги"))
+    val moduleId = Await.result(moduleIdFuture, 60.seconds)
+    DbService.create("Абонентская плата", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
-    npayModuleId
+    moduleId
   }
 
   //--------------------------------------------------------------------------------------------------------------------

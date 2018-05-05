@@ -11,11 +11,13 @@ object Rscm {
   // Модули -> Редактор модулей и услуг
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
-    val rscmModuleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Разовые услуги"))
-    val rscmModuleId = Await.result(rscmModuleIdFuture, 60.seconds)
-    DbService.create("Подключение", mid = rscmModuleId, parentid = 0, datefrom = None, dateto = None,
+    val moduleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Разовые услуги"))
+    val moduleId = Await.result(moduleIdFuture, 60.seconds)
+    DbService.create("Подключение", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
-    rscmModuleId
+    DbService.create("Выезд технического специалиста", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
+      comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
+    moduleId
   }
 
   //--------------------------------------------------------------------------------------------------------------------
