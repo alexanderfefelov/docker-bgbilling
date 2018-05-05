@@ -25,6 +25,7 @@ object Main extends App {
   сontractParameterType7Values()
   entitySpecs()
   modulesAndServices()
+  plugins()
   scheduledTasks()
   Inet.deviceTypes()
   Inet.deviceGroups()
@@ -172,19 +173,35 @@ object Main extends App {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
-    class ModuleServiceCake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
+    class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("ModuleService"))
     }
-    val moduleServiceCake = new ModuleServiceCake
-    val moduleService = moduleServiceCake.service
+    val cake = new Cake
+    val service = cake.service
 
-    Inet.moduleAndServices(moduleService)
-    Npay.moduleAndServices(moduleService)
-    Rscm.moduleAndServices(moduleService)
-    Subscription.moduleAndServices(moduleService)
-    Moneta.moduleAndServices(moduleService)
-    Qiwi.moduleAndServices(moduleService)
-    Mps.moduleAndServices(moduleService)
+    Inet.moduleAndServices(service)
+    Npay.moduleAndServices(service)
+    Rscm.moduleAndServices(service)
+    Subscription.moduleAndServices(service)
+    Moneta.moduleAndServices(service)
+    Qiwi.moduleAndServices(service)
+    Mps.moduleAndServices(service)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Плагины -> Настройки плагинов
+  //
+  private def plugins(): Unit = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
+
+    class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("PlugincfgService"))
+    }
+    val cake = new Cake
+    val service = cake.service
+
+    Dispatch.plugin(service)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -193,6 +210,7 @@ object Main extends App {
   private def scheduledTasks() = {
     Npay.scheduledTasks()
     Rscm.scheduledTasks()
+    Dispatch.scheduledTasks()
   }
 
 }
