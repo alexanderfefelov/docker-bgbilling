@@ -4,7 +4,9 @@ import better.files.File
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import modules._
 import org.joda.time.DateTime
+import plugins._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -74,7 +76,9 @@ object Main extends App {
       // Модули платежных систем
       "moneta",
       "qiwi",
-      "mps"
+      "mps",
+      // Прочее
+      "bill"
     )
     for (i <- modules.indices) {
       ModuleConfig.create(mid = Some(i), dt = DateTime.now(), title = "Default", active = 1, uid = Some(1),
@@ -186,6 +190,7 @@ object Main extends App {
     Moneta.moduleAndServices(service)
     Qiwi.moduleAndServices(service)
     Mps.moduleAndServices(service)
+    Bill.moduleAndServices(service)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -211,6 +216,7 @@ object Main extends App {
   private def scheduledTasks() = {
     Npay.scheduledTasks()
     Rscm.scheduledTasks()
+    Bonus.scheduledTasks()
     Dispatch.scheduledTasks()
   }
 

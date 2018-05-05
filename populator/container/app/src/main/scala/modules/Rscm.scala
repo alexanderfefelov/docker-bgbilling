@@ -1,3 +1,5 @@
+package modules
+
 import com.github.alexanderfefelov.bgbilling.api.db.repository.{ScheduledTasks, Service => DbService}
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
 import org.joda.time.DateTime

@@ -1,3 +1,5 @@
+package modules
+
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
 
 import scala.concurrent.Await

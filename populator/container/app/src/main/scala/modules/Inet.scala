@@ -1,3 +1,5 @@
+package modules
+
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.inet._
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService

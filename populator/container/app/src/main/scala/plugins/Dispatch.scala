@@ -1,3 +1,5 @@
+package plugins
+
 import com.github.alexanderfefelov.bgbilling.api.db.repository.ScheduledTasks
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.{PluginItem, PlugincfgService}
 
