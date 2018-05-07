@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PWD=`pwd`
-
-cd ../populator
+cd populator
 ./run.sh
-cd $PWD
+cd ..

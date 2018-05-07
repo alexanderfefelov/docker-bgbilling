@@ -1,19 +1,17 @@
 #!/bin/bash
 
-PWD=`pwd`
-
-cd ../bgbilling
+cd bgbilling
 ./build.sh
-cd $PWD
+cd ..
 
-cd ../bginetaccess
+cd bginetaccess
 ./build.sh
-cd $PWD
+cd ..
 
-cd ../bginetaccounting
+cd bginetaccounting
 ./build.sh
-cd $PWD
+cd ..
 
-cd ../populator
+cd populator
 ./build.sh
-cd $PWD
+cd ..

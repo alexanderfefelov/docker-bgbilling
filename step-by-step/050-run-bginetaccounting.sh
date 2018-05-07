@@ -1,4 +1,4 @@
 #!/bin/bash
 
-../bginetaccounting/run.sh
+bginetaccounting/run.sh
 docker logs -f bginetaccounting

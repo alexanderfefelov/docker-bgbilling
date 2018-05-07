@@ -1,4 +1,4 @@
 #!/bin/bash
 
-../bgbilling/run.sh
+bgbilling/run.sh
 docker logs -f bgbilling
