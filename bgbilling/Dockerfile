@@ -6,7 +6,7 @@ RUN apt-get update
 
 RUN apt-get install --yes mysql-client
 
-ENV BGBILLING_VERSION 7.1_971
+ENV BGBILLING_VERSION=7.1_971
 
 ENV BILL_VERSION=7.1_257
 ENV BONUS_VERSION=7.1_96
@@ -20,7 +20,9 @@ ENV QIWI_VERSION=7.1_15
 ENV RSCM_VERSION=7.1_157
 ENV SUBSCRIPTION_VERSION=7.1_14
 
-ENV BGBILLING_HOME /bgbilling
+ENV BGBILLING_HOME=/bgbilling
+ENV BGBILLING_DATA=$BGBILLING_HOME/data
+ENV BGBILLING_INSTALL=$BGBILLING_HOME/install
 
 RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
@@ -37,31 +39,19 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGBillingServer_$BGBILLING
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
-  && wget -q https://bgbilling.ru/test_license/7.0/lic.properties \
-  && mv lic.properties $BGBILLING_HOME/data \
-  && mkdir --parents $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/npay_$NPAY_VERSION.zip \
-  && mv npay_$NPAY_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/card_$CARD_VERSION.zip \
-  && mv card_$CARD_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/inet_$INET_VERSION.zip \
-  && mv inet_$INET_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/rscm_$RSCM_VERSION.zip \
-  && mv rscm_$RSCM_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/bill_$BILL_VERSION.zip \
-  && mv bill_$BILL_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/subscription_$SUBSCRIPTION_VERSION.zip \
-  && mv subscription_$SUBSCRIPTION_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/moneta_$MONETA_VERSION.zip \
-  && mv moneta_$MONETA_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/qiwi_$QIWI_VERSION.zip \
-  && mv qiwi_$QIWI_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/bonus_$BONUS_VERSION.zip \
-  && mv bonus_$BONUS_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/dispatch_$DISPATCH_VERSION.zip \
-  && mv dispatch_$DISPATCH_VERSION.zip $BGBILLING_HOME/install \
-  && wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/mps_$MPS_VERSION.zip \
-  && mv mps_$MPS_VERSION.zip $BGBILLING_HOME/install
+  && mkdir --parents $BGBILLING_INSTALL \
+  && wget -q --directory $BGBILLING_DATA https://bgbilling.ru/test_license/7.0/lic.properties \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bill_$BILL_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bonus_$BONUS_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/card_$CARD_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/dispatch_$DISPATCH_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/inet_$INET_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/moneta_$MONETA_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/mps_$MPS_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/npay_$NPAY_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/qiwi_$QIWI_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/rscm_$RSCM_VERSION.zip \
+  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/subscription_$SUBSCRIPTION_VERSION.zip
 
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/

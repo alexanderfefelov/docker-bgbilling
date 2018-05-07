@@ -18,6 +18,7 @@ libraryDependencies ++= Seq(
   "com.github.alexanderfefelov" %% "bgbilling-api-db-rscm" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-db-subscription" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-soap-bill" % "0.1.0-SNAPSHOT",
+  "com.github.alexanderfefelov" %% "bgbilling-api-soap-bonus" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-soap-card" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-soap-inet" % "0.1.0-SNAPSHOT",
   "com.github.alexanderfefelov" %% "bgbilling-api-soap-kernel" % "0.1.0-SNAPSHOT",
