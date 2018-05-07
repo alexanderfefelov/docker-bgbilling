@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd populator
+cd ../populator
 ./run.sh
-cd ..
+cd --

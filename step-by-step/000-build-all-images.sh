@@ -1,17 +1,17 @@
 #!/bin/bash
 
-cd bgbilling
+cd ../bgbilling
 ./build.sh
-cd ..
+cd --
 
-cd bginetaccess
+cd ../bginetaccess
 ./build.sh
-cd ..
+cd --
 
-cd bginetaccounting
+cd ../bginetaccounting
 ./build.sh
-cd ..
+cd --
 
-cd populator
+cd ../populator
 ./build.sh
-cd ..
+cd --
