@@ -1,12 +1,15 @@
 FROM openjdk:8-jdk
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV BGINETACCESS_VERSION=7.1_33 \
+\
+  BGINETACCESS_HOME=/bginetaccess \
+\
+  DEBIAN_FRONTEND=noninteractive
 
-ENV BGINETACCESS_VERSION=7.1_33
-
-ENV BGINETACCESS_HOME=/bginetaccess
-
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
+RUN apt-get -qq update \
+  && apt-get -qq install --yes unzip \
+  && apt-get -qq clean \
+  && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
   && unzip -qq BGInetAccess_$BGINETACCESS_VERSION.zip \
   && mv BGInetAccess $BGINETACCESS_HOME \
   && rm -f BGInetAccess_$BGINETACCESS_VERSION.zip \
@@ -14,10 +17,10 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS
   && chmod +x $BGINETACCESS_HOME/script/* \
   && sed -i 's@\/usr\/local\/BGInetAccess@'"$BGINETACCESS_HOME"'@' $BGINETACCESS_HOME/script/bginet_access \
   && ln -s $BGINETACCESS_HOME/script/bginet_access /etc/init.d/bginet_access \
-  && update-rc.d bginet_access defaults
+  && update-rc.d bginet_access defaults \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD container/setenv.sh $BGINETACCESS_HOME/
-ADD container/log4j-access.xml $BGINETACCESS_HOME/
+ADD container/setenv.sh container/log4j-access.xml $BGINETACCESS_HOME/
 ADD container/lib/ext/ $BGINETACCESS_HOME/lib/ext/
 ADD container/inet-access.xml.template /
 ADD container/bginetaccess.sh /

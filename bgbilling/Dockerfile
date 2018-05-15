@@ -1,30 +1,29 @@
-FROM openjdk:8-jdk
+FROM alexanderfefelov/graalvm
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update
-
-RUN apt-get install --yes mysql-client
-
-ENV BGBILLING_VERSION=7.1_971
-
-ENV BILL_VERSION=7.1_257
-ENV BONUS_VERSION=7.1_96
-ENV CARD_VERSION=7.1_186
-ENV DISPATCH_VERSION=7.1_29
-ENV INET_VERSION=7.1_587
-ENV MONETA_VERSION=7.1_8
-ENV MPS_VERSION=7.1_171
-ENV NPAY_VERSION=7.1_167
-ENV QIWI_VERSION=7.1_15
-ENV RSCM_VERSION=7.1_157
-ENV SUBSCRIPTION_VERSION=7.1_14
+ENV BGBILLING_VERSION=7.1_971 \
+\
+  BILL_VERSION=7.1_257 \
+  BONUS_VERSION=7.1_96 \
+  CARD_VERSION=7.1_186 \
+  DISPATCH_VERSION=7.1_29 \
+  INET_VERSION=7.1_587 \
+  MONETA_VERSION=7.1_8 \
+  MPS_VERSION=7.1_171 \
+  NPAY_VERSION=7.1_167 \
+  QIWI_VERSION=7.1_15 \
+  RSCM_VERSION=7.1_157 \
+  SUBSCRIPTION_VERSION=7.1_14
 
 ENV BGBILLING_HOME=/bgbilling
-ENV BGBILLING_DATA=$BGBILLING_HOME/data
-ENV BGBILLING_INSTALL=$BGBILLING_HOME/install
+ENV BGBILLING_DATA=$BGBILLING_HOME/data \
+  BGBILLING_INSTALL=$BGBILLING_HOME/install \
+\
+  DEBIAN_FRONTEND=noninteractive
 
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGBillingServer_$BGBILLING_VERSION.zip \
+RUN apt-get -qq update \
+  && apt-get -qq install --yes mysql-client unzip \
+  && apt-get -qq clean \
+  && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
   && mv dump.sql $BGBILLING_HOME \
@@ -40,18 +39,19 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGBillingServer_$BGBILLING
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
   && mkdir --parents $BGBILLING_INSTALL \
-  && wget -q --directory $BGBILLING_DATA https://bgbilling.ru/test_license/7.0/lic.properties \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bill_$BILL_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bonus_$BONUS_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/card_$CARD_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/dispatch_$DISPATCH_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/inet_$INET_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/moneta_$MONETA_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/mps_$MPS_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/npay_$NPAY_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/qiwi_$QIWI_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/rscm_$RSCM_VERSION.zip \
-  && wget -q --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/subscription_$SUBSCRIPTION_VERSION.zip
+  && wget --quiet --directory $BGBILLING_DATA https://bgbilling.ru/test_license/7.0/lic.properties \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bill_$BILL_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bonus_$BONUS_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/card_$CARD_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/dispatch_$DISPATCH_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/inet_$INET_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/moneta_$MONETA_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/mps_$MPS_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/npay_$NPAY_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/qiwi_$QIWI_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/rscm_$RSCM_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/subscription_$SUBSCRIPTION_VERSION.zip \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/data.properties $BGBILLING_HOME/data/
 ADD container/setenv.sh $BGBILLING_HOME/

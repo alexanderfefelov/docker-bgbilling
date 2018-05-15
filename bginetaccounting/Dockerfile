@@ -1,12 +1,15 @@
 FROM openjdk:8-jdk
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV BGINETACCOUNTING_VERSION=7.1_33 \
+\
+  BGINETACCOUNTING_HOME=/bginetaccounting \
+\
+  DEBIAN_FRONTEND=noninteractive
 
-ENV BGINETACCOUNTING_VERSION=7.1_33
-
-ENV BGINETACCOUNTING_HOME=/bginetaccounting
-
-RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
+RUN apt-get -qq update \
+  && apt-get -qq install --yes unzip \
+  && apt-get -qq clean \
+  && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && unzip -qq BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && mv BGInetAccounting $BGINETACCOUNTING_HOME \
   && rm -f BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
@@ -14,7 +17,8 @@ RUN wget -q ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccounting_$BGINETAC
   && chmod +x $BGINETACCOUNTING_HOME/script/* \
   && sed -i 's@\/usr\/local\/BGInetAccounting@'"$BGINETACCOUNTING_HOME"'@' $BGINETACCOUNTING_HOME/script/bginet_accounting \
   && ln -s $BGINETACCOUNTING_HOME/script/bginet_accounting /etc/init.d/bginet_accounting \
-  && update-rc.d bginet_accounting defaults
+  && update-rc.d bginet_accounting defaults \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/setenv.sh $BGINETACCOUNTING_HOME/
 ADD container/inet-accounting.xml.template /
