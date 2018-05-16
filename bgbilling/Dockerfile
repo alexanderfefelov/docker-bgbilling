@@ -1,4 +1,4 @@
-FROM alexanderfefelov/graalvm
+FROM alexanderfefelov/graalvm-polyglot
 
 ENV BGBILLING_VERSION=7.1_971 \
 \
