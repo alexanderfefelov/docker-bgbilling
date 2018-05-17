@@ -39,7 +39,6 @@ RUN apt-get -qq update \
   && update-rc.d bgbilling defaults \
   && update-rc.d bgscheduler defaults \
   && mkdir --parents $BGBILLING_INSTALL \
-  && wget --quiet --directory $BGBILLING_DATA https://bgbilling.ru/test_license/7.0/lic.properties \
   && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bill_$BILL_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/bonus_$BONUS_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/card_$CARD_VERSION.zip \
