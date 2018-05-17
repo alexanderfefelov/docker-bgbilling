@@ -53,14 +53,10 @@ RUN apt-get -qq update \
   && wget --quiet --directory $BGBILLING_INSTALL ftp://bgbilling.ru/pub/bgbilling/7.1/data/subscription_$SUBSCRIPTION_VERSION.zip \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD container/data.properties $BGBILLING_HOME/data/
-ADD container/setenv.sh $BGBILLING_HOME/
-ADD container/dyn/ $BGBILLING_HOME/dyn/
-ADD container/lib/ext/ $BGBILLING_HOME/lib/ext/
-ADD container/bgbilling.sh /
+ADD container/ $BGBILLING_HOME/
 
 VOLUME $BGBILLING_HOME
 
 EXPOSE 8080
 
-CMD /bgbilling.sh && tail -F $BGBILLING_HOME/log/server.log
+CMD $BGBILLING_HOME/bgbilling.sh && tail -F $BGBILLING_HOME/log/server.log

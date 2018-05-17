@@ -20,13 +20,11 @@ RUN apt-get -qq update \
   && update-rc.d bginet_accounting defaults \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD container/setenv.sh $BGINETACCOUNTING_HOME/
-ADD container/inet-accounting.xml.template /
-ADD container/bginetaccounting.sh /
+ADD container/ $BGINETACCOUNTING_HOME/
 
 VOLUME $BGINETACCOUNTING_HOME
 
 EXPOSE 1813/udp
 EXPOSE 2001/udp
 
-CMD /bginetaccounting.sh && tail -F $BGINETACCOUNTING_HOME/log/accounting.log
+CMD $BGINETACCOUNTING_HOME/bginetaccounting.sh && tail -F $BGINETACCOUNTING_HOME/log/accounting.log

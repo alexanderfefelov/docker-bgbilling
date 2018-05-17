@@ -20,14 +20,11 @@ RUN apt-get -qq update \
   && update-rc.d bginet_access defaults \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD container/setenv.sh container/log4j-access.xml $BGINETACCESS_HOME/
-ADD container/lib/ext/ $BGINETACCESS_HOME/lib/ext/
-ADD container/inet-access.xml.template /
-ADD container/bginetaccess.sh /
+ADD container/ $BGINETACCESS_HOME/
 
 VOLUME $BGINETACCESS_HOME
 
 EXPOSE 1812/udp
 EXPOSE 67/udp
 
-CMD /bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.out
+CMD $BGINETACCESS_HOME/bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.out

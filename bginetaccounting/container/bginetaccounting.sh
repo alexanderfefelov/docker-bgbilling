@@ -5,13 +5,15 @@
 [ -z "$MODULE_ID" ] && echo MODULE_ID_ID is required && exit 1
 [ -z "$ROOT_DEVICE_ID" ] && echo ROOT_DEVICE_ID is required && exit 1
 
-cat /inet-accounting.xml.template \
+export BGINETACCOUNTING_HOME=/bginetaccounting
+
+cat $BGINETACCOUNTING_HOME/inet-accounting.xml.template \
   | sed 's@APP_NAME@'"$APP_NAME"'@' \
   | sed 's@APP_ID@'"$APP_ID"'@' \
   | sed 's@MODULE_ID@'"$MODULE_ID"'@' \
   | sed 's@ROOT_DEVICE_ID@'"$ROOT_DEVICE_ID"'@' \
-  > /bginetaccounting/inet-accounting.xml
+  > $BGINETACCOUNTING_HOME/inet-accounting.xml
 
-/bginetaccounting/update.sh
+$BGINETACCOUNTING_HOME/update.sh
 
 service bginet_accounting start
