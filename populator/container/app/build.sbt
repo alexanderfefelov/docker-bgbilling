@@ -2,7 +2,7 @@ name := "populator"
 
 scalaVersion := "2.11.12"
 
-apiV := "0.1.0-SNAPSHOT"
+lazy val apiV = "0.1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.9.9",
