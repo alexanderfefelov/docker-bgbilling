@@ -27,4 +27,4 @@ VOLUME $BGINETACCESS_HOME
 EXPOSE 1812/udp
 EXPOSE 67/udp
 
-CMD $BGINETACCESS_HOME/bginetaccess.sh && tail -F $BGINETACCESS_HOME/log/access.out
+CMD $BGINETACCESS_HOME/bginetaccess.sh && tail -f /dev/null
