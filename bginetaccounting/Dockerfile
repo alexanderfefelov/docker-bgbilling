@@ -27,4 +27,4 @@ VOLUME $BGINETACCOUNTING_HOME
 EXPOSE 1813/udp
 EXPOSE 2001/udp
 
-CMD $BGINETACCOUNTING_HOME/bginetaccounting.sh && tail -F $BGINETACCOUNTING_HOME/log/accounting.log
+CMD $BGINETACCOUNTING_HOME/bginetaccounting.sh && tail -f /dev/null
