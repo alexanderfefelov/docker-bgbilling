@@ -2,6 +2,10 @@
 
 PWD=`pwd`
 
+cd ../mysql
+./build.sh
+cd $PWD
+
 cd ../bgbilling
 ./build.sh
 cd $PWD
