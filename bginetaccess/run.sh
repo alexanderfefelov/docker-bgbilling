@@ -1,8 +1,8 @@
 #!/bin/bash
 
-docker run --rm --link mysql:mysql martin/wait -p 3306
-docker run --rm --link activemq:activemq martin/wait -p 61616
-docker run --rm --link bgbilling:bgbilling martin/wait -p 8080 -t 300
+docker run --rm --link mysql-master:foobar martin/wait
+docker run --rm --link activemq:foobar martin/wait
+docker run --rm --link bgbilling:foobar martin/wait
 
 docker run --name bginetaccess --detach \
   --net host \

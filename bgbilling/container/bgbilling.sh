@@ -7,7 +7,7 @@ export BGBILLING_HOME=/bgbilling
 if [ -f $BGBILLING_HOME/dump.sql ]
 then
   echo -ne Seeding database...
-  mysql --host=mysql --default-character-set=utf8 < $BGBILLING_HOME/dump.sql
+  mysql --host=mysql --user=root --password=password --default-character-set=utf8 < $BGBILLING_HOME/dump.sql
   rm -f $BGBILLING_HOME/dump.sql
   echo done
 fi
