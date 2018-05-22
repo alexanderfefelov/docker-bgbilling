@@ -52,7 +52,6 @@ function start_mysql_slave() {
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 300
 }
 
-
 start_mysql_master
 start_mysql_backup
 start_mysql_slave
