@@ -5,8 +5,14 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     docker rm --force --volumes bginetaccounting
+    docker volume rm bginetaccounting
+
     docker rm --force --volumes bginetaccess
+    docker volume rm bginetaccess
+
     docker rm --force --volumes bgbilling
+    docker volume rm bgbilling
+
     docker rm --force --volumes activemq
     docker rm --force --volumes mysql-slave
     docker rm --force --volumes mysql-backup
