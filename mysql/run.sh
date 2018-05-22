@@ -12,6 +12,7 @@ function run_mysql_master() {
       --env MODE=master \
       --env MYSQL_ROOT_PASSWORD=password \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+      --volume mysql-master:/var/lib/mysql \
       --publish 3306:3306 \
       alexanderfefelov/mysql \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t $TIMEOUT
@@ -27,6 +28,7 @@ function run_mysql_backup() {
       --env MYSQL_ROOT_PASSWORD=password \
       --env MASTER_HOST=$MYSQL_MASTER_IP_ADDRESS \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+      --volume mysql-backup:/var/lib/mysql \
       --publish 10002:3306 \
       alexanderfefelov/mysql \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 300 \
@@ -45,6 +47,7 @@ function run_mysql_slave() {
       --env MYSQL_ROOT_PASSWORD=password \
       --env MASTER_HOST=$MYSQL_MASTER_IP_ADDRESS \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+      --volume mysql-slave:/var/lib/mysql \
       --publish 10003:3306 \
       alexanderfefelov/mysql \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t $TIMEOUT \

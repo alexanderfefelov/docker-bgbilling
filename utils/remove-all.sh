@@ -14,7 +14,13 @@ then
     docker volume rm bgbilling
 
     docker rm --force --volumes activemq
+
     docker rm --force --volumes mysql-slave
+    docker volume rm mysql-slave
+
     docker rm --force --volumes mysql-backup
+    docker volume rm mysql-backup
+
     docker rm --force --volumes mysql-master
+    docker volume rm mysql-master
 fi
