@@ -28,7 +28,7 @@ function start_mysql_backup() {
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 300 \
     && docker exec $CONTAINER_NAME cp /read-only.cnf /etc/mysql/mysql.conf.d/ \
     && docker restart $CONTAINER_NAME \
-    && docker run --rm --$CONTAINER_NAME:foobar martin/wait -t 300
+    && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 300
 }
 
 function start_mysql_slave() {
