@@ -58,4 +58,4 @@ VOLUME $BGBILLING_HOME
 
 EXPOSE 8080
 
-CMD $BGBILLING_HOME/bgbilling.sh && tail -f /dev/null
+CMD $BGBILLING_HOME/bgbilling.sh && tail -F $BGBILLING_HOME/log/server.log

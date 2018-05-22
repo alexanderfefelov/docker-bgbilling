@@ -22,8 +22,7 @@ function start_bgbilling() {
       --link mysql-master:mysql \
       --link activemq:activemq \
       --publish 8080:8080 \
-      alexanderfefelov/bgbilling \
-    && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
+      alexanderfefelov/bgbilling
 }
 
 start_activemq
