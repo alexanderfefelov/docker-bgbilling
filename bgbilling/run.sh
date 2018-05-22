@@ -1,5 +1,7 @@
 #!/bin/bash
 
+MYSQL_MASTER_IP_ADDRESS=192.168.99.254
+
 function start_mysql_master() {
     CONTAINER_NAME=mysql-master
     docker run \
@@ -22,6 +24,7 @@ function start_mysql_backup() {
       --env SERVER_ID=2 \
       --env MODE=slave \
       --env MYSQL_ROOT_PASSWORD=password \
+      --env MASTER_HOST=$MYSQL_MASTER_IP_ADDRESS \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --publish 10002:3306 \
       alexanderfefelov/mysql-replication \
@@ -39,6 +42,7 @@ function start_mysql_slave() {
       --env SERVER_ID=3 \
       --env MODE=slave \
       --env MYSQL_ROOT_PASSWORD=password \
+      --env MASTER_HOST=$MYSQL_MASTER_IP_ADDRESS \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --publish 10003:3306 \
       alexanderfefelov/mysql-replication \
