@@ -13,8 +13,8 @@ import scala.concurrent.duration._
 
 object Inet {
 
-  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
-    override def baseAddress = new java.net.URI(soapServiceBaseAddress("InetDeviceService"))
+  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    override def baseAddress = new java.net.URI(soapServiceBaseAddress("inet-device-service"))
   }
   private val inetDeviceService = new InetDeviceServiceCake().service
 
@@ -30,7 +30,7 @@ object Inet {
     import com.github.alexanderfefelov.bgbilling.api.db.repository.{Service => DbService}
 
     val moduleIdFuture = moduleService.moduleAdd(Some("inet"), Some("Интернет"))
-    val moduleId = Await.result(moduleIdFuture, 2.minutes)
+    val moduleId = Await.result(moduleIdFuture, 10.minutes)
     DbService.create("Доступ в интернет", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
     moduleId

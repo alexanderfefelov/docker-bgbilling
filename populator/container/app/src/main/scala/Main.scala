@@ -49,8 +49,8 @@ object Main extends App {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
-    class DynamicCodeServiceCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
-      override def baseAddress = new java.net.URI(soapServiceBaseAddress("DynamicCodeService"))
+    class DynamicCodeServiceCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("dynamic-code-service"))
     }
     val dynamicCodeServiceCake = new DynamicCodeServiceCake
     val dynamicCode = dynamicCodeServiceCake.service
@@ -177,8 +177,8 @@ object Main extends App {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
-    class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
-      override def baseAddress = new java.net.URI(soapServiceBaseAddress("ModuleService"))
+    class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-service"))
     }
     val cake = new Cake
     val service = cake.service
@@ -200,8 +200,8 @@ object Main extends App {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
     import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
-    class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with DispatchHttpClientsAsync with ApiSoapConfig {
-      override def baseAddress = new java.net.URI(soapServiceBaseAddress("PlugincfgService"))
+    class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("plugincfg-service"))
     }
     val cake = new Cake
     val service = cake.service

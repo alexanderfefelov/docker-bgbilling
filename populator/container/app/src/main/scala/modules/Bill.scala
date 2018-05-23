@@ -12,7 +12,7 @@ object Bill {
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("bill"), Some("Счета"))
-    Await.result(moduleIdFuture, 60.seconds)
+    Await.result(moduleIdFuture, 10.minutes)
   }
 
 }

@@ -14,7 +14,7 @@ object Subscription {
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("subscription"), Some("Подписки"))
-    val moduleId = Await.result(moduleIdFuture, 60.seconds)
+    val moduleId = Await.result(moduleIdFuture, 10.minutes)
     DbService.create("Подписка", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
     moduleId
