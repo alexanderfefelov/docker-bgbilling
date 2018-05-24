@@ -7,7 +7,7 @@ function run() {
     docker run \
       --name $CONTAINER_NAME \
       --detach \
-      --env SERVER_ID=2 \
+      --env SERVER_ID=3 \
       --env MODE=slave \
       --env MYSQL_ROOT_PASSWORD=password \
       --env MASTER_HOST=master.mysql.bgbilling.local \
