@@ -4,23 +4,23 @@ read -p "All containers and volumes will be removed. Are you sure? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    docker rm --force --volumes bginetaccounting
-    docker volume rm bginetaccounting
+    docker rm --force --volumes bgbilling-accounting
+    docker volume rm bgbilling-accounting
 
-    docker rm --force --volumes bginetaccess
-    docker volume rm bginetaccess
+    docker rm --force --volumes bgbilling-access
+    docker volume rm bgbilling-access
 
-    docker rm --force --volumes bgbilling
-    docker volume rm bgbilling
+    docker rm --force --volumes bgbilling-billing
+    docker volume rm bgbilling-billing
 
-    docker rm --force --volumes activemq
+    docker rm --force --volumes bgbilling-activemq
 
-    docker rm --force --volumes mysql-slave
-    docker volume rm mysql-slave
+    docker rm --force --volumes bgbilling-mysql-slave
+    docker volume rm bgbilling-mysql-slave
 
-    docker rm --force --volumes mysql-backup
-    docker volume rm mysql-backup
+    docker rm --force --volumes bgbilling-mysql-backup
+    docker volume rm bgbilling-mysql-backup
 
-    docker rm --force --volumes mysql-master
-    docker volume rm mysql-master
+    docker rm --force --volumes bgbilling-mysql-master
+    docker volume rm bgbilling-mysql-master
 fi

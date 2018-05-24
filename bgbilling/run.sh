@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_NAME=bgbilling
+CONTAINER_NAME=bgbilling-billing
 
 function run() {
     docker run \
@@ -8,10 +8,8 @@ function run() {
       --detach \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --volume $CONTAINER_NAME:/bgbilling \
-      --link mysql-master:mysql \
-      --link activemq:activemq \
       --publish 8080:8080 \
-      alexanderfefelov/bgbilling \
+      alexanderfefelov/bgbilling-billing \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
 }
 

@@ -1,11 +1,9 @@
 #!/bin/bash
 
-docker stop bginetaccounting
-docker stop bginetaccess
-docker stop bgbilling
+docker stop bgbilling-accounting
+docker stop bgbilling-access
+docker stop bgbilling-billing
 
-docker start bgbilling
-docker run --rm --link bgbilling:bgbilling martin/wait -p 8080 -t 300
-
-docker start bginetaccess
-docker start bginetaccounting
+docker start bgbilling-billing
+docker start bgbilling-access
+docker start bgbilling-accounting

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_NAME=activemq
+CONTAINER_NAME=bgbilling-activemq
 
 function run() {
     docker run \

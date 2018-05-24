@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_NAME=bginetaccess
+CONTAINER_NAME=bgbilling-access
 
 function run() {
     docker run \
@@ -14,7 +14,7 @@ function run() {
         --volume $CONTAINER_NAME:/bginetaccess \
         --publish 67:67/udp \
         --publish 1812:1812/udp \
-    alexanderfefelov/bginetaccess
+    alexanderfefelov/bgbilling-access
 }
 
 run \

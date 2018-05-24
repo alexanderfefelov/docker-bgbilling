@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_NAME=mysql-master
+CONTAINER_NAME=bgbilling-mysql-master
 
 function run() {
     docker run \
@@ -12,7 +12,7 @@ function run() {
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --volume $CONTAINER_NAME:/var/lib/mysql \
       --publish 3306:3306 \
-      alexanderfefelov/mysql \
+      alexanderfefelov/mysql-bg \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 600
 }
 

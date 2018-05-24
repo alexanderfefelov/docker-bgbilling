@@ -1,8 +1,7 @@
 #!/bin/bash
 
-CONTAINER_NAME=mysql-backup
+CONTAINER_NAME=bgbilling-mysql-backup
 TIMEOUT=600
-MYSQL_MASTER_HOST=bgbilling.local
 
 function run() {
     docker run \
@@ -11,11 +10,11 @@ function run() {
       --env SERVER_ID=2 \
       --env MODE=slave \
       --env MYSQL_ROOT_PASSWORD=password \
-      --env MASTER_HOST=$MYSQL_MASTER_HOST \
+      --env MASTER_HOST=master.mysql.bgbilling.local \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --volume $CONTAINER_NAME:/var/lib/mysql \
       --publish 10002:3306 \
-      alexanderfefelov/mysql \
+      alexanderfefelov/mysql-bg \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t $TIMEOUT \
     && docker exec $CONTAINER_NAME cp /read-only.cnf /etc/mysql/mysql.conf.d/ \
     && docker restart $CONTAINER_NAME \

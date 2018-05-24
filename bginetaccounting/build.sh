@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --tag alexanderfefelov/bginetaccounting .
+docker build --tag alexanderfefelov/bgbilling-accounting .

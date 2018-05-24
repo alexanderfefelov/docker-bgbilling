@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_NAME=bginetaccounting
+CONTAINER_NAME=bgbilling-accounting
 
 function run() {
     docker run \
@@ -14,7 +14,7 @@ function run() {
         --volume $CONTAINER_NAME:/bginetaccounting \
         --publish 1813:1813/udp \
         --publish 2001:2001/udp \
-        alexanderfefelov/bginetaccounting
+        alexanderfefelov/bgbilling-accounting
 }
 
 run \

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --tag alexanderfefelov/mysql .
+docker build --tag alexanderfefelov/bgbilling-mysql .

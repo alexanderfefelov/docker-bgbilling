@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --tag alexanderfefelov/bginetaccess .
+docker build --tag alexanderfefelov/bgbilling-access .

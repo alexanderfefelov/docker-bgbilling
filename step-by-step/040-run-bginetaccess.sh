@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ../bginetaccess/run.sh
-docker logs -f bginetaccess
+docker logs -f bgbilling-access

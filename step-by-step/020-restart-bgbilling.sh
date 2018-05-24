@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker restart bgbilling
-docker logs -f bgbilling
+docker restart bgbilling-billing
+docker logs -f bgbilling-billing
