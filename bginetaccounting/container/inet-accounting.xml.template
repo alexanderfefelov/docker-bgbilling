@@ -7,7 +7,7 @@
 
 	<!-- Параметры подключения к БД -->
 	<param name="db.driver" value="com.mysql.jdbc.Driver"/>
-	<param name="db.url" value="jdbc:mysql://localhost/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&useSSL=false"/>
+	<param name="db.url" value="jdbc:mysql://localhost/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&amp;useSSL=false"/>
 	<param name="db.user" value="bill"/>
 	<param name="db.pswd" value="bgbilling"/>
 	<param name="db.validationTimeout" value="10"/>
