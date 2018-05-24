@@ -10,6 +10,10 @@ cd ../bgbilling
 ./build.sh
 cd $PWD
 
+cd ../bgscheduler
+./build.sh
+cd $PWD
+
 cd ../bginetaccess
 ./build.sh
 cd $PWD

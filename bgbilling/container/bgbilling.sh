@@ -13,7 +13,6 @@ then
 fi
 
 service bgbilling start
-service bgscheduler start
 
 # Если в каталоге install существуют zip-файлы, устанавливаем их как модули (плагины) и удаляем
 #

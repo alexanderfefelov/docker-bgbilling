@@ -10,6 +10,9 @@ then
     docker rm --force --volumes bgbilling-access
     docker volume rm bgbilling-access
 
+    docker rm --force --volumes bgbilling-scheduler
+    docker volume rm bgbilling-scheduler
+
     docker rm --force --volumes bgbilling-billing
     docker volume rm bgbilling-billing
 

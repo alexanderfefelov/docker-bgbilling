@@ -32,13 +32,10 @@ RUN apt-get -qq update \
   && chmod +x $BGBILLING_HOME/*.sh \
   && chmod +x $BGBILLING_HOME/script/* \
   && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgbilling \
-  && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgscheduler \
   && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgcommonrc \
   && ln -s $BGBILLING_HOME/script/bgcommonrc /etc/init.d/bgcommonrc \
   && ln -s $BGBILLING_HOME/script/bgbilling /etc/init.d/bgbilling \
-  && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgbilling defaults \
-  && update-rc.d bgscheduler defaults \
   && mkdir --parents $BGBILLING_INSTALL \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/bill_$BILL_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/bonus_$BONUS_VERSION.zip \
