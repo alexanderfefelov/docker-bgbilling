@@ -9,8 +9,7 @@ function run() {
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --volume $CONTAINER_NAME:/bgbilling \
       --publish 8080:8080 \
-      alexanderfefelov/bgbilling-billing \
-    && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
+      alexanderfefelov/bgbilling-billing
 }
 
 run \

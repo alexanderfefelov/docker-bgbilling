@@ -12,7 +12,7 @@ function run() {
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --volume $CONTAINER_NAME:/var/lib/mysql \
       --publish 3306:3306 \
-      alexanderfefelov/mysql-bg \
+      alexanderfefelov/bgbilling-mysql \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait -t 600
 }
 
