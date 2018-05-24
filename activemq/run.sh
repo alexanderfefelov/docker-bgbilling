@@ -1,7 +1,8 @@
 #!/bin/bash
 
-function run_activemq() {
-    CONTAINER_NAME=activemq
+CONTAINER_NAME=activemq
+
+function run() {
     docker run \
       --name $CONTAINER_NAME \
       --detach \
@@ -12,4 +13,5 @@ function run_activemq() {
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
 }
 
-run_activemq
+run \
+&& docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CONTAINER_NAME
