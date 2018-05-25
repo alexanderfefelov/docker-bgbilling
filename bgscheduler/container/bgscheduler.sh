@@ -17,7 +17,7 @@ $filename
 EOF
     unzip -p $m server.zip | funzip > $name.jar
     mv --force $name.jar $BGBILLING_HOME/lib/app
-    rm -f $m
+    rm --force $m
   fi
 done
 

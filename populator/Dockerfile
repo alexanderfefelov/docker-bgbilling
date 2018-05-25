@@ -8,7 +8,7 @@ RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://d
   && cd bgbilling-api \
   && sbt publishLocal \
   && cd .. \
-  && rm -rf bgbilling-api
+  && rm --recursive --force bgbilling-api
 
 WORKDIR /app
 

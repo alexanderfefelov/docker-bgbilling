@@ -12,13 +12,13 @@ RUN apt-get -qq update \
   && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
   && unzip -qq BGInetAccess_$BGINETACCESS_VERSION.zip \
   && mv BGInetAccess $BGINETACCESS_HOME \
-  && rm -f BGInetAccess_$BGINETACCESS_VERSION.zip \
+  && rm --force BGInetAccess_$BGINETACCESS_VERSION.zip \
   && chmod +x $BGINETACCESS_HOME/*.sh \
   && chmod +x $BGINETACCESS_HOME/script/* \
   && sed -i 's@\/usr\/local\/BGInetAccess@'"$BGINETACCESS_HOME"'@' $BGINETACCESS_HOME/script/bginet_access \
   && ln -s $BGINETACCESS_HOME/script/bginet_access /etc/init.d/bginet_access \
   && update-rc.d bginet_access defaults \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGINETACCESS_HOME/
 

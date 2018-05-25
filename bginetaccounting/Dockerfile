@@ -12,13 +12,13 @@ RUN apt-get -qq update \
   && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && unzip -qq BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && mv BGInetAccounting $BGINETACCOUNTING_HOME \
-  && rm -f BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
+  && rm --force BGInetAccounting_$BGINETACCOUNTING_VERSION.zip \
   && chmod +x $BGINETACCOUNTING_HOME/*.sh \
   && chmod +x $BGINETACCOUNTING_HOME/script/* \
   && sed -i 's@\/usr\/local\/BGInetAccounting@'"$BGINETACCOUNTING_HOME"'@' $BGINETACCOUNTING_HOME/script/bginet_accounting \
   && ln -s $BGINETACCOUNTING_HOME/script/bginet_accounting /etc/init.d/bginet_accounting \
   && update-rc.d bginet_accounting defaults \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGINETACCOUNTING_HOME/
 

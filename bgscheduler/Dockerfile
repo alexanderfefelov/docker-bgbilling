@@ -20,7 +20,7 @@ RUN apt-get -qq update \
   && wget --quiet $FTP_DATA_DIR/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
-  && rm -f BGBillingServer_$BGBILLING_VERSION.zip \
+  && rm --force BGBillingServer_$BGBILLING_VERSION.zip \
   && chmod +x $BGBILLING_HOME/*.sh \
   && chmod +x $BGBILLING_HOME/script/* \
   && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgscheduler \
@@ -33,7 +33,7 @@ RUN apt-get -qq update \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/dispatch_$DISPATCH_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/npay_$NPAY_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/rscm_$RSCM_VERSION.zip \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGBILLING_HOME/
 

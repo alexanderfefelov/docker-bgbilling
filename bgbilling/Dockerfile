@@ -28,7 +28,7 @@ RUN apt-get -qq update \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
   && mv dump.sql $BGBILLING_HOME \
-  && rm -f BGBillingServer_$BGBILLING_VERSION.zip \
+  && rm --force BGBillingServer_$BGBILLING_VERSION.zip \
   && chmod +x $BGBILLING_HOME/*.sh \
   && chmod +x $BGBILLING_HOME/script/* \
   && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgbilling \
@@ -48,7 +48,7 @@ RUN apt-get -qq update \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/qiwi_$QIWI_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/rscm_$RSCM_VERSION.zip \
   && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/subscription_$SUBSCRIPTION_VERSION.zip \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGBILLING_HOME/
 
