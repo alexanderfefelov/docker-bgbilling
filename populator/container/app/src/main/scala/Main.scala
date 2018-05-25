@@ -20,6 +20,7 @@ object Main extends App {
 
   dynamicCodeRecompile()
   moduleConfigs()
+  bgsGroups()
   addresses()
   contractPaymentTypes()
   contractParametersPrefs()
@@ -85,6 +86,18 @@ object Main extends App {
         config = Some(File(s"bgbilling/${modules(i)}.conf").contentAsString)
       )
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Администрирование -> Пользователи и права -> Группы
+  //
+  private def bgsGroups(): Unit = {
+    BgsGroup.create(title = "Системные администраторы", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
+    BgsGroup.create(title = "Техническая поддержка", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
+    BgsGroup.create(title = "Строительный отдел", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
+    BgsGroup.create(title = "Абонентский отдел", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
+    BgsGroup.create(title = "Ресепшен", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
+    BgsGroup.create(title = "Ночной колл-центр", comment = "", cgr = 0, pids = None, opids = None, cgrMode = 0)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
