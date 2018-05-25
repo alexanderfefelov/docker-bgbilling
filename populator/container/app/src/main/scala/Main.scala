@@ -214,6 +214,7 @@ object Main extends App {
   // Сервис -> Администрирование -> Планировщик заданий
   //
   private def scheduledTasks() = {
+    Kernel.scheduledTasks()
     Npay.scheduledTasks()
     Rscm.scheduledTasks()
     Bonus.scheduledTasks()
