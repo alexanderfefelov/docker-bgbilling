@@ -1,6 +1,8 @@
 #!/bin/bash
 
+CONTAINER_NAME=bgbilling-mysql-slave
+
 . functions
 
-run_slave bgbilling-mysql-slave 3 \
+run_slave $CONTAINER_NAME 3 \
 && docker inspect --format '{{ .NetworkSettings.IPAddress }}' $CONTAINER_NAME
