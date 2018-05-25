@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../activemq/run.sh
+(cd ../activemq && ./run.sh)

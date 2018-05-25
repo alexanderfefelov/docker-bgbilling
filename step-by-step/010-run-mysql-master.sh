@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../mysql/run-master.sh
+(cd ../mysql && ./run-master.sh)

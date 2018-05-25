@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../populator/run.sh
+(cd ../populator && ./run.sh)

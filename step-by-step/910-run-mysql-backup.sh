@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../mysql/run-backup.sh
+(cd ../mysql && ./run-backup.sh)

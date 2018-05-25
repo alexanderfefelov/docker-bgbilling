@@ -2,7 +2,7 @@
 
 CONTAINER_NAME=bgbilling-accounting
 
-function run() {
+function run {
     docker run \
         --name $CONTAINER_NAME \
         --detach \

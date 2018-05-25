@@ -2,7 +2,7 @@
 
 CONTAINER_NAME=bgbilling-mysql-master
 
-function run() {
+function run {
     docker run \
       --name $CONTAINER_NAME \
       --detach \

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../mysql/run-slave.sh
+(cd ../mysql && ./run-slave.sh)
