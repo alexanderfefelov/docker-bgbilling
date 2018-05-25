@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA_DIR=030-populate-database
+DATA_DIR=055-populate-database
 HTTP_BASE_URL=http://billing.bgbilling.local:8080/bgbilling/executer
 
 for dir in $DATA_DIR/030-http/*; do
