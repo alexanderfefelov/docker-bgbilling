@@ -1,22 +1,26 @@
 #!/bin/bash
 
 export BGBILLING_HOME=/bgbilling
+BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap
 
-# Если существует файл dump.sql, выполняем его в MySQL и удаляем
+# Если в каталоге bootstrap существуют sql-файлы, выполняем их в MySQL и удаляем
 #
-if [ -f $BGBILLING_HOME/dump.sql ]
-then
-  echo Seeding database...
-  mysql --host=master.mysql.bgbilling.local --user=root --password=password --default-character-set=utf8 < $BGBILLING_HOME/dump.sql
-  rm --force $BGBILLING_HOME/dump.sql
-  echo done
-fi
+SQLS=$BGBILLING_BOOTSTRAP/*.sql
+for s in $SQLS
+do
+  if [ -f $s ]
+  then
+    echo Executing $s
+    mysql --host=master.mysql.bgbilling.local --user=root --password=password --default-character-set=utf8 < $s
+    rm --force $s
+  fi
+done
 
 service bgbilling start
 
-# Если в каталоге install существуют zip-файлы, устанавливаем их как модули (плагины) и удаляем
+# Если в каталоге bootstrap существуют zip-файлы, устанавливаем их как модули (плагины) и удаляем
 #
-MODULES=$BGBILLING_HOME/install/*.zip
+MODULES=$BGBILLING_BOOTSTRAP/*.zip
 for m in $MODULES
 do
   if [ -f $m ]

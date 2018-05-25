@@ -2,10 +2,10 @@
 
 export BGBILLING_HOME=/bgbilling
 
-# Если в каталоге install существуют zip-файлы, считаем их модулями (плагинами),
+# Если в каталоге bootstrap существуют zip-файлы, считаем их модулями (плагинами),
 # извлекаем из них server.jar, переносим server.jar в lib/app, и удаляем zip-файлы
 #
-MODULES=$BGBILLING_HOME/install/*.zip
+MODULES=$BGBILLING_HOME/bootstrap/*.zip
 for m in $MODULES
 do
   if [ -f $m ]

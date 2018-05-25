@@ -16,7 +16,7 @@ ENV BGBILLING_VERSION=7.1_971 \
 
 ENV BGBILLING_HOME=/bgbilling
 ENV BGBILLING_DATA=$BGBILLING_HOME/data \
-  BGBILLING_INSTALL=$BGBILLING_HOME/install \
+  BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap \
   FTP_DATA_DIR=ftp://bgbilling.ru/pub/bgbilling/7.1/data \
 \
   DEBIAN_FRONTEND=noninteractive
@@ -27,7 +27,7 @@ RUN apt-get -qq update \
   && wget --quiet $FTP_DATA_DIR/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
-  && mv dump.sql $BGBILLING_HOME \
+  && mv dump.sql $BGBILLING_BOOTSTRAP \
   && rm --force BGBillingServer_$BGBILLING_VERSION.zip \
   && chmod +x $BGBILLING_HOME/*.sh \
   && chmod +x $BGBILLING_HOME/script/* \
@@ -36,18 +36,18 @@ RUN apt-get -qq update \
   && ln -s $BGBILLING_HOME/script/bgcommonrc /etc/init.d/bgcommonrc \
   && ln -s $BGBILLING_HOME/script/bgbilling /etc/init.d/bgbilling \
   && update-rc.d bgbilling defaults \
-  && mkdir --parents $BGBILLING_INSTALL \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/bill_$BILL_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/bonus_$BONUS_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/card_$CARD_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/dispatch_$DISPATCH_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/inet_$INET_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/moneta_$MONETA_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/mps_$MPS_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/npay_$NPAY_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/qiwi_$QIWI_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/rscm_$RSCM_VERSION.zip \
-  && wget --quiet --directory $BGBILLING_INSTALL $FTP_DATA_DIR/subscription_$SUBSCRIPTION_VERSION.zip \
+  && mkdir --parents $BGBILLING_BOOTSTRAP \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/bill_$BILL_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/bonus_$BONUS_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/card_$CARD_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/dispatch_$DISPATCH_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/inet_$INET_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/moneta_$MONETA_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/mps_$MPS_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/npay_$NPAY_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/qiwi_$QIWI_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/rscm_$RSCM_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/subscription_$SUBSCRIPTION_VERSION.zip \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGBILLING_HOME/
