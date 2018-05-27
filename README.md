@@ -7,11 +7,14 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
 | Контейнер | Описание | FQDN
 | --------- | -------- | ----
-| bgbilling-mysql-master | Master-сервер MySQL | master.mysql.bgbilling.local 
-| bgbilling-mysql-backup | Slave-сервер MySQL для резервного копирования, read-only | backup.mysql.bgbilling.local
-| bgbilling-mysql-slave  | Slave-сервер MySQL для отчётов, read-only | slave.mysql.bgbilling.local
-| bgbilling-activemq     | Сервер ActiveMQ | activemq.bgbilling.local
-| bgbilling-billing      | Сервер BGBilling | billing.bgbilling.local
-| bgbilling-scheduler    | Планировщик BGBilling | scheduler.bgbilling.local
-| bgbilling-access       | Сервер BGInetAccess | access.bgbilling.local
-| bgbilling-accounting   | Сервер BGInetAccounting | accounting.bgbilling.local
+| `bgbilling-mysql-master` | Master-сервер MySQL | `master.mysql.bgbilling.local` 
+| `bgbilling-mysql-backup` | Slave-сервер MySQL для резервного копирования, read-only | `backup.mysql.bgbilling.local`
+| `bgbilling-mysql-slave`  | Slave-сервер MySQL для отчётов, read-only | `slave.mysql.bgbilling.local`
+| `bgbilling-activemq`     | Сервер ActiveMQ | `activemq.bgbilling.local`
+| `bgbilling-billing`      | Сервер BGBilling | `billing.bgbilling.local`
+| `bgbilling-scheduler`    | Планировщик BGBilling | `scheduler.bgbilling.local`
+| `bgbilling-access`       | Сервер BGInetAccess | `access.bgbilling.local`
+| `bgbilling-accounting`   | Сервер BGInetAccounting | `accounting.bgbilling.local`
+
+Контейнеры для связи между собой используют DNS-имена, указанные в столбце FQDN в таблице выше. Ваш DNS-сервер должен
+правильно резолвить эти имена.
