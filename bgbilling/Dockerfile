@@ -27,6 +27,7 @@ RUN apt-get -qq update \
   && wget --quiet $FTP_DATA_DIR/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
   && mv BGBillingServer $BGBILLING_HOME \
+  && mkdir --parents $BGBILLING_BOOTSTRAP \
   && mv dump.sql $BGBILLING_BOOTSTRAP \
   && rm --force BGBillingServer_$BGBILLING_VERSION.zip \
   && chmod +x $BGBILLING_HOME/*.sh \
@@ -36,7 +37,6 @@ RUN apt-get -qq update \
   && ln -s $BGBILLING_HOME/script/bgcommonrc /etc/init.d/bgcommonrc \
   && ln -s $BGBILLING_HOME/script/bgbilling /etc/init.d/bgbilling \
   && update-rc.d bgbilling defaults \
-  && mkdir --parents $BGBILLING_BOOTSTRAP \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/bill_$BILL_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/bonus_$BONUS_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/card_$CARD_VERSION.zip \
