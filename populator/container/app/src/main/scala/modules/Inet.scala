@@ -204,6 +204,13 @@ object Inet {
         |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
       """.stripMargin
     create("Статический белый адрес", cfg, 3)
+
+    cfg =
+      """
+        |title.pattern=Порт Ethernet, VLAN (${vlan})
+      """.stripMargin
+    val id = InetServType1.create(title = "Порт Ethernet", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 0, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 0).id
+    InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

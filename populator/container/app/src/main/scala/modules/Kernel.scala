@@ -74,31 +74,32 @@ object Kernel {
   def contractParametersPrefs(): Unit = {
     // Общее
     //
-    /*  1 */ ContractParametersPref.create(pt = 1, title = "Логин", sort = 1, script = "", flags = 1, lm = now)
-    /*  2 */ ContractParametersPref.create(pt = 1, title = "Лицевой счёт", sort = 1, script = "", flags = 1, lm = now)
-    /*  3 */ ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 1, lm = now)
-    /*  4 */ ContractParametersPref.create(pt = 9, title = "Телефон(ы) для связи", sort = 1, script = "", flags = 1, lm = now)
-    /*  5 */ ContractParametersPref.create(pt = 3, title = "Email", sort = 1, script = "", flags = 1, lm = now)
+    /*  1 */ ContractParametersPref.create(pt = 7, title = "Домен", sort = 1, script = "", flags = 1, lm = now)
+    /*  2 */ ContractParametersPref.create(pt = 1, title = "Логин", sort = 1, script = "", flags = 1, lm = now)
+    /*  3 */ ContractParametersPref.create(pt = 1, title = "Лицевой счёт", sort = 1, script = "", flags = 1, lm = now)
+    /*  4 */ ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 1, lm = now)
+    /*  5 */ ContractParametersPref.create(pt = 9, title = "Телефон(ы) для связи", sort = 1, script = "", flags = 1, lm = now)
+    /*  6 */ ContractParametersPref.create(pt = 3, title = "Email", sort = 1, script = "", flags = 1, lm = now)
 
     // Физ. лица
     //
-    /*  6 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
-    /*  7 */ ContractParametersPref.create(pt = 1, title = "Данные паспорта", sort = 1, script = "", flags = 1, lm = now)
-    /*  8 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
-    /*  9 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
+    /*  7 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
+    /*  8 */ ContractParametersPref.create(pt = 1, title = "Данные паспорта", sort = 1, script = "", flags = 1, lm = now)
+    /*  9 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
+    /* 10 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
 
     // Юр. лица
     //
-    /* 10 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
-    /* 11 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
-    /* 12 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
+    /* 11 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
+    /* 12 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
+    /* 13 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - группы параметров
   //
   def contractParameterGroups(): Unit = {
-    ContractParameterGroupName.create("Физ. лицо")
+    /* 1 */ ContractParameterGroupName.create("Физ. лицо")
     ContractParameterGroup.create(gid = 1, pid = 1)
     ContractParameterGroup.create(gid = 1, pid = 2)
     ContractParameterGroup.create(gid = 1, pid = 3)
@@ -108,7 +109,8 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 7)
     ContractParameterGroup.create(gid = 1, pid = 8)
     ContractParameterGroup.create(gid = 1, pid = 9)
-    ContractParameterGroupName.create("Юр. лицо")
+    ContractParameterGroup.create(gid = 1, pid = 10)
+    /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
     ContractParameterGroup.create(gid = 1, pid = 2)
     ContractParameterGroup.create(gid = 1, pid = 3)
@@ -117,15 +119,19 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 10)
     ContractParameterGroup.create(gid = 2, pid = 11)
     ContractParameterGroup.create(gid = 2, pid = 12)
+    ContractParameterGroup.create(gid = 2, pid = 13)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - значения списков -> Значения списков
   //
   def сontractParameterType7Values(): Unit = {
-    ContractParameterType7Values.create(pid = 12, title = "ООО")
-    ContractParameterType7Values.create(pid = 12, title = "ЗАО")
-    ContractParameterType7Values.create(pid = 12, title = "ПАО")
+    ContractParameterType7Values.create(pid = 1, title = "zvenigorod-center")
+    ContractParameterType7Values.create(pid = 1, title = "praha-nove-mesto")
+
+    ContractParameterType7Values.create(pid = 13, title = "ООО")
+    ContractParameterType7Values.create(pid = 13, title = "ЗАО")
+    ContractParameterType7Values.create(pid = 13, title = "ПАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
