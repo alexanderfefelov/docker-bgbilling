@@ -12,8 +12,7 @@ function run {
         --env ROOT_DEVICE_ID=2 \
         --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
         --volume $CONTAINER_NAME:/bginetaccounting \
-        --publish 1813:1813/udp \
-        --publish 2001:2001/udp \
+        --net host \
         alexanderfefelov/bgbilling-accounting
 }
 
