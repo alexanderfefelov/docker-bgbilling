@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM alexanderfefelov/graalvm-polyglot
 
 ENV BGINETACCOUNTING_VERSION=7.1_33 \
 \

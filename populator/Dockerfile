@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM alexanderfefelov/graalvm-polyglot
 
 ENV SBT_VERSION=0.13.16
 RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb \
