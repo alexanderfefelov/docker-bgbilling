@@ -36,9 +36,9 @@ public class QinqProtocolHandler implements ProtocolHandler,
             // TODO
             return;
         }
-        byte[] agentCircuitId = matcher.group(1).getBytes();
+        byte[] agentRemoteId = matcher.group(1).getBytes();
         byte[] vlanId = ByteBuffer.allocate(2).putShort(Short.parseShort(matcher.group(2))).array();
-        request.setOption(InetDhcpProcessor.AGENT_CIRCUIT_ID, agentCircuitId);
+        request.setOption(InetDhcpProcessor.AGENT_REMOTE_ID, agentCircuitId);
         request.setOption(InetDhcpProcessor.VLAN_ID, vlanId);
         logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
