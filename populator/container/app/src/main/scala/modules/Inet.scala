@@ -43,17 +43,30 @@ object Inet {
     val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringProtocolHandler"
     val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringServiceActivator"
 
+    cmt =
+      """
+        |Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
+        |
+        |Назначение - распространение каких-то глобальных параметров конфигурации по всем устройствам.
+        |""".stripMargin
     InetDeviceType1.create(title = "Network", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = cmt, source = None, deviceentityspecid = 0)
 
+    cmt =
+      """
+        |Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
+        |
+        |Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
+        |значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
+        |""".stripMargin
     InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = cmt, source = None, deviceentityspecid = 0)
 
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
@@ -191,24 +204,24 @@ object Inet {
       """
         |ip.resource.categoryId=1
         |title.pattern=Динамический серый адрес, VLAN (${vlan})
-      """.stripMargin
+        |""".stripMargin
     create("Динамический серый адрес", cfg, 4)
     cfg =
       """
         |ip.resource.categoryId=2
         |title.pattern=Динамический белый адрес, VLAN (${vlan})
-      """.stripMargin
+        |""".stripMargin
     create("Динамический белый адрес", cfg, 4)
     cfg =
       """
         |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
-      """.stripMargin
+        |""".stripMargin
     create("Статический белый адрес", cfg, 3)
 
     cfg =
       """
         |title.pattern=Порт Ethernet, VLAN (${vlan})
-      """.stripMargin
+        |""".stripMargin
     val id = InetServType1.create(title = "Порт Ethernet", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 0, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 0).id
     InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
   }
@@ -294,9 +307,9 @@ object Inet {
         |dhcp.servSearchMode=4
         |
         |# qinq.vlansRegex
-        |# Регулярное выражение для извлечения SP-VID и C-VID из Option 82 Agent Remote ID Sub-option.
+        |# Регулярное выражение для извлечения SP-VID и C-VID из DHCP Relay Agent Information Option.
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
-      """.stripMargin
+        |""".stripMargin
     var host = "192.168.99.1"
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(s"$host:8728"), uptime = None, uptimeTime = None,
       username = Some("api"), attributes = Map(
@@ -328,7 +341,7 @@ object Inet {
       """
         |qinq.spvid=0800
         |vlan.resource.category=1
-      """.stripMargin
+        |""".stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
       username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
@@ -358,7 +371,7 @@ object Inet {
       """
         |qinq.spvid=0900
         |vlan.resource.category=2
-      """.stripMargin
+        |""".stripMargin
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(""), uptime = None, uptimeTime = None,
       username = Some(""), attributes = Map(
       "parentId" ->     dr("parentId", 0),
