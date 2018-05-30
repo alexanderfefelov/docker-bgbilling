@@ -30,7 +30,7 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 * JVM
 
 В качестве Java-машины для всех приложений BGBilling используется [GraalVM](https://www.graalvm.org/). Это позволяет
-выполнять код на JavaScript, Python 3 и Ruby из BGBilling, и наоборот, использовать [API BGBilling](https://bgbilling.ru/v7.1/javadoc/index.html)
+выполнять код на JavaScript, Python 3, Ruby и R из BGBilling, и наоборот, использовать [API BGBilling](https://bgbilling.ru/v7.1/javadoc/index.html)
 из кода на перечисленных языках ([примеры](bgbilling/container/polyglot/demo/)).
 
 * База данных
