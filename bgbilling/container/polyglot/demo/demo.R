@@ -8,6 +8,8 @@
 
 "
 
+cat("Hello from R", sep = "\n")
+
 # Java: Calling static method
 #
 VersionInfoType <- java.type("bitel.billing.common.VersionInfo")

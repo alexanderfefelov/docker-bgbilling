@@ -8,6 +8,8 @@
 
 */
 
+console.log('Hello from JavaScript');
+
 // Java: Calling static method
 //
 const VersionInfoType = Java.type('bitel.billing.common.VersionInfo');

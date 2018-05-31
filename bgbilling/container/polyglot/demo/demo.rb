@@ -8,6 +8,8 @@
 
 =end
 
+puts('Hello from Ruby')
+
 # Java: Calling static method
 #
 VersionInfoType = Java.type('bitel.billing.common.VersionInfo')

@@ -12,6 +12,8 @@ import java
 from os import listdir
 from os.path import isfile, join
 
+print("Hello from Python")
+
 # Java: Calling static method
 #
 version_info_type = java.type("bitel.billing.common.VersionInfo")
