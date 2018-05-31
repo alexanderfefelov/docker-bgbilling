@@ -3,11 +3,29 @@
   Run this demo with:
 
       docker exec --tty bgbilling-billing \
-        polyglot --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar \
+        polyglot --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar:/bgbilling/lib/ext/joda-time-2.9.9.jar \
           /bgbilling/polyglot/demo/demo.rb
 
 =end
 
-VersionInfo = Java.type('bitel.billing.common.VersionInfo')
-versionInfoString = VersionInfo.getVersionInfo('server').getVersionString()
-print(versionInfoString)
+# Java: Calling static method
+#
+VersionInfoType = Java.type('bitel.billing.common.VersionInfo')
+versionInfoString = VersionInfoType.getVersionInfo('server').getVersionString()
+puts(versionInfoString)
+
+# Java: Using objects
+#
+DateTimeFormatType = Java.type('org.joda.time.format.DateTimeFormat')
+formatter = DateTimeFormatType.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z")
+DateTimeType = Java.type('org.joda.time.DateTime')
+dt = DateTimeType.new(2018, 5, 31, 4, 0, 0, 0)
+puts(dt.toString(formatter))
+
+# Plain old Ruby
+#
+Dir['/bgbilling/polyglot/demo/*'].select {
+    |f| File.file?(f)
+}.each {
+    |f| puts(File.basename(f))
+}
