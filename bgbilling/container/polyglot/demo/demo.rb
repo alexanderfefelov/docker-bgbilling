@@ -24,8 +24,6 @@ puts(dt.toString(formatter))
 
 # Plain old Ruby
 #
-Dir['/bgbilling/polyglot/demo/*'].select {
-    |f| File.file?(f)
-}.each {
-    |f| puts(File.basename(f))
-}
+path = '/bgbilling/polyglot/demo/*'
+onlyFiles = Dir[path].select { |f| File.file?(f) }
+onlyFiles.each { |f| puts(File.basename(f)) }

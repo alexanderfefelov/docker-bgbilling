@@ -26,8 +26,7 @@ console.log(dt.toString(formatter));
 //
 const fs = require('fs');
 const path = '/bgbilling/polyglot/demo';
-fs.readdir(path, (err, files) => {
-    files.forEach(file => {
-        console.log(file);
-    });
+const onlyFiles = fs.readdir(path);
+onlyFiles.forEach(f => {
+    console.log(f);
 });

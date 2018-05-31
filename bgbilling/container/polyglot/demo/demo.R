@@ -24,5 +24,5 @@ cat(dt$toString(formatter), sep = "\n")
 
 # Plain old R
 #
-files <- list.files("/bgbilling/polyglot/demo", no.. = TRUE)
-cat(files, sep = "\n")
+onlyFiles <- list.files("/bgbilling/polyglot/demo", no.. = TRUE)
+cat(onlyFiles, sep = "\n")
