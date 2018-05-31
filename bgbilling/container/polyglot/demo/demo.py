@@ -4,7 +4,7 @@
 
       docker exec --tty bgbilling-billing \
         polyglot --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar:/bgbilling/lib/ext/joda-time-2.9.9.jar --language python \
-          /bgbilling/polyglot/demo/ServerVersionInfo.py
+          /bgbilling/polyglot/demo/demo.py
 
 """
 

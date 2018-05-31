@@ -4,7 +4,7 @@
 
       docker exec --tty bgbilling-billing \
         polyglot --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar \
-          /bgbilling/polyglot/demo/ServerVersionInfo.R
+          /bgbilling/polyglot/demo/demo.R
 
 "
 
