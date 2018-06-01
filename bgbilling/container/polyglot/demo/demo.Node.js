@@ -4,11 +4,11 @@
 
       docker exec --tty bgbilling-billing \
         node --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar:/bgbilling/lib/ext/joda-time-2.9.9.jar \
-          /bgbilling/polyglot/demo/demo.js
+          /bgbilling/polyglot/demo/demo.Node.js
 
 */
 
-console.log('Hello from JavaScript');
+console.log('Hello from Node.js');
 
 // Java: Calling static method
 //
@@ -28,7 +28,7 @@ console.log(dt.toString(formatter));
 //
 const fs = require('fs');
 const path = '/bgbilling/polyglot/demo';
-const onlyFiles = fs.readdir(path);
+const onlyFiles = fs.readdirSync(path);
 onlyFiles.forEach(f => {
     console.log(f);
 });
