@@ -43,30 +43,34 @@ object Inet {
     val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringProtocolHandler"
     val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringServiceActivator"
 
-    var cmt =
+    var cfg =
       """
-        |Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
-        |
-        |Назначение - распространение каких-то глобальных параметров конфигурации по всем устройствам.
+        |#----------
+        |# Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
+        |#
+        |# Назначение - распространение каких-то глобальных параметров конфигурации по всем устройствам.
+        |#----------
         |""".stripMargin
-    InetDeviceType1.create(title = "Network", configid = 0, config = "",
+    InetDeviceType1.create(title = "Network", configid = 0, config = cfg,
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = cmt, source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    cmt =
+    cfg =
       """
+        |#----------
         |Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
         |
         |Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
         |значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
+        |#----------
         |""".stripMargin
-    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
+    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = cfg,
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = cmt, source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
