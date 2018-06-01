@@ -51,7 +51,6 @@ RUN apt-get -qq update \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD container/ $BGBILLING_HOME/
-ADD ../dyn/container/ $BGBILLING_HOME/
 
 VOLUME $BGBILLING_HOME
 
