@@ -3,7 +3,7 @@
   Run this demo with:
 
       docker exec --tty bgbilling-billing \
-        node --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar:/bgbilling/lib/ext/joda-time-2.9.9.jar \
+        node --jvm --jvm.cp=/bgbilling/lib/app/kernel.jar:/bgbilling/lib/ext/joda-time-2.10.jar \
           /bgbilling/polyglot/demo/demo.Node.js
 
 */
