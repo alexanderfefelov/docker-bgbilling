@@ -63,11 +63,7 @@ public class PolyglotRunner
             }
         }, timeout);
 
-        try {
-            return context.eval(source);
-        } finally {
-            context.close();
-        }
+        return context.eval(source);
     }
 
     private static final String SCRIPT_PATH_PREFIX = "/bgbilling/polyglot/";
