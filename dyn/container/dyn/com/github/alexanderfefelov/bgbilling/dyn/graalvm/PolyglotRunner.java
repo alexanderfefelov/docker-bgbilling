@@ -2,6 +2,7 @@ package com.github.alexanderfefelov.bgbilling.dyn.graalvm;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import org.graalvm.polyglot.Context;
+import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 
@@ -12,9 +13,40 @@ import java.util.TimerTask;
 public class PolyglotRunner
         implements Loggable {
 
-    public Value run(PolyglotLanguage language, String relativeScriptPath, long timeout,
+    public Value runFile(PolyglotLanguage language, String filePath, long timeout,
                      boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
-        logger().trace(String.format("run: %s, %s, %d, %b, %b, %b, %b", language.language(), relativeScriptPath, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
+        int id = hashCode();
+        logger().trace(String.format("%d running file %s: %s, %d, %b, %b, %b, %b", id, language.language(), filePath, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
+        File sourceFile = new File(SCRIPT_PATH_PREFIX + filePath);
+        try {
+            Source source = Source.newBuilder(language.language(), sourceFile).build();
+            Value result = run(source, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess);
+            logger().trace(String.format("%d finished", id));
+            return result;
+        } catch (Exception e) {
+            logger().error(e.toString());
+            return null;
+        }
+    }
+
+    public Value runLiteralText(PolyglotLanguage language, String text, long timeout,
+                     boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
+        int id = hashCode();
+        logger().trace(String.format("%d running text %s: %s, %d, %b, %b, %b, %b", id, language.language(), text.substring(0, 20), timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
+        try {
+            Source source = Source.newBuilder(language.language(), text, "<literal>").build();
+            Value result = run(source, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess);
+            logger().trace(String.format("%d finished", id));
+            return result;
+        } catch (Exception e) {
+            logger().error(e.toString());
+            return null;
+        }
+    }
+
+    private Value run(Source source, long timeout,
+                     boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess)
+            throws PolyglotException {
         Context context = Context
                 .newBuilder()
                 .allowCreateThread(allowCreateThread)
@@ -22,7 +54,6 @@ public class PolyglotRunner
                 .allowIO(allowIO)
                 .allowNativeAccess(allowNativeAccess)
                 .build();
-        File sourceFile = new File(SCRIPT_PATH_PREFIX + relativeScriptPath);
 
         Timer timer = new Timer(true);
         timer.schedule(new TimerTask() {
@@ -33,13 +64,9 @@ public class PolyglotRunner
         }, timeout);
 
         try {
-            Source source = Source.newBuilder(language.language(), sourceFile).build();
-            Value result = context.eval(source);
-            logger().trace(String.format("result: %s", result.toString()));
-            return result;
-        } catch (Exception e) {
-            logger().error(e.toString());
-            return null;
+            return context.eval(source);
+        } finally {
+            context.close();
         }
     }
 
