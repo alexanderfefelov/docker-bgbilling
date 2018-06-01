@@ -43,7 +43,7 @@ object Inet {
     val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringProtocolHandler"
     val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringServiceActivator"
 
-    cmt =
+    var cmt =
       """
         |Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
         |
