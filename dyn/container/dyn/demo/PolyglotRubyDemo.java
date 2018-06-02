@@ -17,8 +17,8 @@ public class PolyglotRubyDemo {
 
     public static void main(String[] args) {
         String text = String.join("\n",
-                "// Ruby",
-                "console.log('Hello from Ruby')",
+                "# Ruby",
+                "puts('Hello from Ruby')",
                 "VersionInfoType = Java.type('bitel.billing.common.VersionInfo')",
                 "versionInfoString = VersionInfoType.getVersionInfo('server').getVersionString()",
                 "versionInfoString");
