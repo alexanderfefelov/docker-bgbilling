@@ -1,4 +1,4 @@
-FROM alexanderfefelov/graalvm-polyglot
+FROM openjdk:8-jdk
 
 ENV BGINETACCESS_VERSION=7.1_33 \
 \
