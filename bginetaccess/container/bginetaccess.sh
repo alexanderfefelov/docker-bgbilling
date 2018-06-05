@@ -7,7 +7,7 @@
 
 export BGINETACCESS_HOME=/bginetaccess
 
-cat $BGINETACCESS_HOME/inet-access.xml.template \
+cat $BGINETACCESS_HOME/inet-access.template.xml \
   | sed 's@APP_NAME@'"$APP_NAME"'@' \
   | sed 's@APP_ID@'"$APP_ID"'@' \
   | sed 's@MODULE_ID@'"$MODULE_ID"'@' \

@@ -7,7 +7,7 @@
 
 export BGINETACCOUNTING_HOME=/bginetaccounting
 
-cat $BGINETACCOUNTING_HOME/inet-accounting.xml.template \
+cat $BGINETACCOUNTING_HOME/inet-accounting.template.xml \
   | sed 's@APP_NAME@'"$APP_NAME"'@' \
   | sed 's@APP_ID@'"$APP_ID"'@' \
   | sed 's@MODULE_ID@'"$MODULE_ID"'@' \

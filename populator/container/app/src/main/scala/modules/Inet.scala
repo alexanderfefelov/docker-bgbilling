@@ -60,10 +60,10 @@ object Inet {
     cfg =
       """
         |#----------
-        |Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
-        |
-        |Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
-        |значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
+        |# Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
+        |#
+        |# Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
+        |# значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
         |#----------
         |""".stripMargin
     InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = cfg,
@@ -206,13 +206,11 @@ object Inet {
     }
     var cfg =
       """
-        |ip.resource.categoryId=1
         |title.pattern=Динамический серый адрес, VLAN (${vlan})
         |""".stripMargin
     create("Динамический серый адрес", cfg, 4)
     cfg =
       """
-        |ip.resource.categoryId=2
         |title.pattern=Динамический белый адрес, VLAN (${vlan})
         |""".stripMargin
     create("Динамический белый адрес", cfg, 4)
