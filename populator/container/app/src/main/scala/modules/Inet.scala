@@ -78,11 +78,26 @@ object Inet {
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = "",
+    cfg =
+      """
+        |# flow.agent.type
+        |#
+        |# Тип источника данных о трафике
+        |#
+        |flow.agent.type=netflow9
+        |
+        |
+        |# flow.agent.link
+        |#
+        |# Связь с источником данных о трафике
+        |#
+        |flow.agent.link={@deviceId}:-1
+        |""".stripMargin
+    var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = cfg,
       protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.qinq.QinqProtocolHandler"),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.mikrotik.RouterOsDeviceManager"),
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 1).id
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = Some(1), deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ether$i", deviceTypeId)
     }
