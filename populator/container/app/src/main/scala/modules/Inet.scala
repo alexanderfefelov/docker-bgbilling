@@ -211,7 +211,7 @@ object Inet {
     }
     var cfg =
       """
-        |title.pattern=Серый статический адрес, VLAN (${vlan})
+        |title.pattern=Серый статический адрес (${addressIp}), VLAN (${vlan})
         |""".stripMargin
     /* 1 */ create("Серый статический адрес", cfg, 3)
     cfg =
@@ -223,12 +223,12 @@ object Inet {
       """
         |title.pattern=Белый статический адрес (${addressIp}), VLAN (${vlan})
         |""".stripMargin
-    /* 3 */create("Белый статический адрес", cfg, 3)
+    /* 3 */ create("Белый статический адрес", cfg, 3)
     cfg =
       """
-        |title.pattern=Белый динамический адрес (${addressIp}), VLAN (${vlan})
+        |title.pattern=Белый динамический адрес, VLAN (${vlan})
         |""".stripMargin
-    /* 4 */create("Белый динамический адрес", cfg, 4)
+    /* 4 */ create("Белый динамический адрес", cfg, 4)
 
     cfg =
       """
