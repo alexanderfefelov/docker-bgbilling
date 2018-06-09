@@ -2,8 +2,6 @@ import java.util.*;
 import bitel.billing.common.VersionInfo;
 import ru.bitel.bgbilling.kernel.module.common.bean.BGModule;
 import ru.bitel.bgbilling.kernel.module.server.ModuleCache;
-import ru.bitel.bgbilling.kernel.plugin.common.BGPluginBase;
-import ru.bitel.bgbilling.kernel.plugin.server.BGPluginManagerServer;
 
 public class SysInfo {
 
@@ -56,7 +54,8 @@ public class SysInfo {
             "System properties",
             HR
         ));
-        Map<String, String> properties = new TreeMap(System.getProperties());
+        Map<String, String> properties = new TreeMap<>();
+        System.getProperties().forEach((k, v) -> properties.put((String)k, (String)v));
         for (String key : properties.keySet()) {
             System.out.println(key + ": " + properties.get(key));
         }
