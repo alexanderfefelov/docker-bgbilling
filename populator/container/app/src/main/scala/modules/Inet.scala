@@ -157,15 +157,20 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> IP-ресурсы
   //
   def ipResources(): Unit = {
-    InvIpCategory1.create(parentid = 0, title = "Динамические серые адреса")
-    InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 50, 10), addressto = addr(192, 168, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 1, addressfrom = addr(192, 168, 51, 10), addressto = addr(192, 168, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
-    InvIpCategory1.create(parentid = 0, title = "Динамические белые адреса")
-    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 60, 10), addressto = addr(192, 168, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 61, 10), addressto = addr(192, 168, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
-    InvIpCategory1.create(parentid = 0, title = "Статические белые адреса")
-    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 70, 10), addressto = addr(192, 168, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 71, 10), addressto = addr(192, 168, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
+    /* 1 */ InvIpCategory1.create(parentid = 0, title = "Серые адреса")
+    /* 2 */ InvIpCategory1.create(parentid = 1, title = "Динамические")
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 50, 10), addressto = addr(192, 168, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 51, 10), addressto = addr(192, 168, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
+    /* 3 */ InvIpCategory1.create(parentid = 1, title = "Статические")
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 60, 10), addressto = addr(192, 168, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 61, 10), addressto = addr(192, 168, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
+    /* 4 */ InvIpCategory1.create(parentid = 0, title = "Белые адреса")
+    /* 5 */ InvIpCategory1.create(parentid = 4, title = "Динамические")
+    InvIpResource1.create(categoryid = 5, addressfrom = addr(192, 168, 70, 10), addressto = addr(192, 168, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 5, addressfrom = addr(192, 168, 71, 10), addressto = addr(192, 168, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
+    /* 6 */ InvIpCategory1.create(parentid = 4, title = "Статические")
+    InvIpResource1.create(categoryid = 6, addressfrom = addr(192, 168, 80, 10), addressto = addr(192, 168, 80, 12), router = "192.168.80.1", subnetmask = "255.255.255.0", dns = "192.168.80.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 6, addressfrom = addr(192, 168, 81, 10), addressto = addr(192, 168, 81, 12), router = "192.168.81.1", subnetmask = "255.255.255.0", dns = "192.168.81.1", config = "", comment = "", dynamic = Some(false))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -206,26 +211,31 @@ object Inet {
     }
     var cfg =
       """
-        |title.pattern=Динамический серый адрес, VLAN (${vlan})
+        |title.pattern=Серый статический адрес, VLAN (${vlan})
         |""".stripMargin
-    create("Динамический серый адрес", cfg, 4)
+    /* 1 */ create("Серый статический адрес", cfg, 3)
     cfg =
       """
-        |title.pattern=Динамический белый адрес, VLAN (${vlan})
+        |title.pattern=Серый динамический адрес, VLAN (${vlan})
         |""".stripMargin
-    create("Динамический белый адрес", cfg, 4)
+    /* 2 */ create("Серый динамический адрес", cfg, 4)
     cfg =
       """
-        |title.pattern=Статический белый адрес (${addressIp}), VLAN (${vlan})
+        |title.pattern=Белый статический адрес (${addressIp}), VLAN (${vlan})
         |""".stripMargin
-    create("Статический белый адрес", cfg, 3)
+    /* 3 */create("Белый статический адрес", cfg, 3)
+    cfg =
+      """
+        |title.pattern=Белый динамический адрес (${addressIp}), VLAN (${vlan})
+        |""".stripMargin
+    /* 4 */create("Белый динамический адрес", cfg, 4)
 
     cfg =
       """
         |title.pattern=Порт Ethernet, VLAN (${vlan})
         |""".stripMargin
     val id = InetServType1.create(title = "Порт Ethernet", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 0, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 0).id
-    InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
+    /* 5 */ InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -287,14 +297,29 @@ object Inet {
       """
         |dhcp.serverIdentifier=192.168.99.254
         |
+        |
         |dhcp.option.leaseTime=300
         |dhcp.option.renewalTime=150
         |dhcp.option.rebindingTime=250
         |
-        |# Пулы для сервисов с типом адреса "статический адрес".
-        |ip.resource.categoryId=3
+        |
+        |# dhcp.ipCategories
+        |#
+        |# Категории IP-ресурсов для динамической раздачи.
+        |#
+        |dhcp.ipCategories=5
+        |
+        |
+        |# ip.resource.categoryId.$
+        |#
+        |# Категории IP-ресурсов для типов сервисов с типом адреса "статический адрес".
+        |#
+        |ip.resource.categoryId.1=3
+        |ip.resource.categoryId.3=6
+        |
         |
         |# dhcp.deviceSearchMode
+        |#
         |# 0 - по giaddr или IP-адресу источника идет поиск устройства, далее у этого устройства
         |# вызывается предобработка preprocessDhcpRequest (где можно при необходимости извлечь и установить
         |# AGENT_REMOTE_ID, а также INTERFACE_ID или VLAN_ID), далее по установленному AGENT_REMOTE_ID или,
@@ -302,14 +327,21 @@ object Inet {
         |# извлекается из пакета и идет поиск агентского устройства по совпадению идентификатора устройства,
         |# далее у агентского устройства, если таковое найдено, вызывается preprocessDhcpRequest (где можно
         |# при необходимости извлечь и установить INTERFACE_ID или VLAN_ID).
+        |#
         |dhcp.deviceSearchMode=0
         |
+        |
         |# dhcp.servSearchMode
+        |#
         |# 4 - поиск по VLAN'у на устройстве и его дочерних устройствах.
+        |#
         |dhcp.servSearchMode=4
         |
+        |
         |# qinq.vlansRegex
+        |#
         |# Регулярное выражение для извлечения SP-VID и C-VID из DHCP Relay Agent Information Option.
+        |#
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
         |""".stripMargin
     var host = "192.168.99.1"
