@@ -66,7 +66,7 @@ object Kernel {
   def contractPaymentTypes(): Unit = {
     ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
     ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
-    ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 0)
+    ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 1)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -97,7 +97,7 @@ object Inet {
       protocolhandlerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.qinq.QinqProtocolHandler"),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = Some("com.github.alexanderfefelov.bgbilling.dyn.device.mikrotik.RouterOsDeviceManager"),
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = Some(1), deviceentityspecid = 1).id
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = Some(true), deviceentityspecid = 1).id
     for (i <- 1 to 24) {
       InetInterface1.create(i, s"ether$i", deviceTypeId)
     }
