@@ -66,6 +66,7 @@ object Kernel {
   def contractPaymentTypes(): Unit = {
     ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
     ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
+    ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 0)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -78,21 +79,26 @@ object Kernel {
     /*  2 */ ContractParametersPref.create(pt = 1, title = "Логин", sort = 1, script = "", flags = 1, lm = now)
     /*  3 */ ContractParametersPref.create(pt = 1, title = "Лицевой счёт", sort = 1, script = "", flags = 1, lm = now)
     /*  4 */ ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 1, lm = now)
-    /*  5 */ ContractParametersPref.create(pt = 9, title = "Телефон(ы) для связи", sort = 1, script = "", flags = 1, lm = now)
+    /*  5 */ ContractParametersPref.create(pt = 9, title = "Телефон", sort = 1, script = "", flags = 1, lm = now)
     /*  6 */ ContractParametersPref.create(pt = 3, title = "Email", sort = 1, script = "", flags = 1, lm = now)
 
     // Физ. лица
     //
-    /*  7 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
-    /*  8 */ ContractParametersPref.create(pt = 1, title = "Данные паспорта", sort = 1, script = "", flags = 1, lm = now)
-    /*  9 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
-    /* 10 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
+    /*  7 */ ContractParametersPref.create(pt = 1, title = "Фамилия", sort = 1, script = "", flags = 1, lm = now)
+    /*  8 */ ContractParametersPref.create(pt = 1, title = "Имя", sort = 1, script = "", flags = 1, lm = now)
+    /*  9 */ ContractParametersPref.create(pt = 1, title = "Отчество", sort = 1, script = "", flags = 1, lm = now)
+    /* 10 */ ContractParametersPref.create(pt = 7, title = "Тип удостоверения личности", sort = 1, script = "", flags = 1, lm = now)
+    /* 11 */ ContractParametersPref.create(pt = 1, title = "Данные удостоверения личности", sort = 1, script = "", flags = 1, lm = now)
+    /* 12 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
+    /* 13 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
+    /* 14 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
 
     // Юр. лица
     //
-    /* 11 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
-    /* 12 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
-    /* 13 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
+    /* 15 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now)
+    /* 16 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
+    /* 17 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
+    /* 18 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -110,16 +116,21 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 8)
     ContractParameterGroup.create(gid = 1, pid = 9)
     ContractParameterGroup.create(gid = 1, pid = 10)
+    ContractParameterGroup.create(gid = 1, pid = 11)
+    ContractParameterGroup.create(gid = 1, pid = 12)
+    ContractParameterGroup.create(gid = 1, pid = 13)
+    ContractParameterGroup.create(gid = 1, pid = 14)
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
-    ContractParameterGroup.create(gid = 1, pid = 2)
-    ContractParameterGroup.create(gid = 1, pid = 3)
-    ContractParameterGroup.create(gid = 1, pid = 4)
-    ContractParameterGroup.create(gid = 1, pid = 5)
-    ContractParameterGroup.create(gid = 2, pid = 10)
-    ContractParameterGroup.create(gid = 2, pid = 11)
-    ContractParameterGroup.create(gid = 2, pid = 12)
-    ContractParameterGroup.create(gid = 2, pid = 13)
+    ContractParameterGroup.create(gid = 2, pid = 2)
+    ContractParameterGroup.create(gid = 2, pid = 3)
+    ContractParameterGroup.create(gid = 2, pid = 4)
+    ContractParameterGroup.create(gid = 2, pid = 5)
+    ContractParameterGroup.create(gid = 2, pid = 6)
+    ContractParameterGroup.create(gid = 2, pid = 15)
+    ContractParameterGroup.create(gid = 2, pid = 16)
+    ContractParameterGroup.create(gid = 2, pid = 17)
+    ContractParameterGroup.create(gid = 2, pid = 18)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -129,9 +140,14 @@ object Kernel {
     ContractParameterType7Values.create(pid = 1, title = "zvenigorod-center")
     ContractParameterType7Values.create(pid = 1, title = "praha-nove-mesto")
 
-    ContractParameterType7Values.create(pid = 13, title = "ООО")
-    ContractParameterType7Values.create(pid = 13, title = "ЗАО")
-    ContractParameterType7Values.create(pid = 13, title = "ПАО")
+    ContractParameterType7Values.create(pid = 10, title = "Паспорт гражданина РФ")
+    ContractParameterType7Values.create(pid = 10, title = "Удостоверение личности военнослужащего РФ")
+    ContractParameterType7Values.create(pid = 10, title = "Военный билет")
+    ContractParameterType7Values.create(pid = 10, title = "Временное удостоверение личности гражданина РФ")
+
+    ContractParameterType7Values.create(pid = 17, title = "ООО")
+    ContractParameterType7Values.create(pid = 17, title = "ЗАО")
+    ContractParameterType7Values.create(pid = 17, title = "ПАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------

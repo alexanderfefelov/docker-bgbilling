@@ -55,7 +55,7 @@ public class SysInfo {
             HR
         ));
         Map<String, String> properties = new TreeMap<>();
-        System.getProperties().forEach((k, v) -> properties.put((String)k, (String)v));
+        System.getProperties().forEach((k, v) -> properties.put((String) k, (String) v));
         for (String key : properties.keySet()) {
             System.out.println(key + ": " + properties.get(key));
         }

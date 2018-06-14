@@ -30,16 +30,16 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
     @Override
     public void preprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
-        String option82Str = request.getOption((byte)82).getValueAsString();
+        String option82Str = request.getOption((byte) 82).getValueAsString();
         Matcher matcher = vlansRegexPattern.matcher(option82Str);
         if (!matcher.find()) {
-            // TODO
+            logger.warn("VLAN ids not found");
             return;
         }
-        byte[] agentRemoteId = matcher.group(1).getBytes();
-        byte[] vlanId = ByteBuffer.allocate(2).putShort(Short.parseShort(matcher.group(2))).array();
-        request.setOption(InetDhcpProcessor.AGENT_REMOTE_ID, agentRemoteId);
-        request.setOption(InetDhcpProcessor.VLAN_ID, vlanId);
+        byte[] spVid = matcher.group(1).getBytes();
+        byte[] vid = ByteBuffer.allocate(2).putShort(Short.parseShort(matcher.group(2))).array();
+        request.setOption(InetDhcpProcessor.AGENT_REMOTE_ID, spVid);
+        request.setOption(InetDhcpProcessor.VLAN_ID, vid);
         logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
