@@ -172,20 +172,37 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> IP-ресурсы
   //
   def ipResources(): Unit = {
+    val now = DateTime.now.toLocalDate
     /* 1 */ InvIpCategory1.create(parentid = 0, title = "Серые адреса")
     /* 2 */ InvIpCategory1.create(parentid = 1, title = "Динамические")
-    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 50, 10), addressto = addr(192, 168, 50, 12), router = "192.168.50.1", subnetmask = "255.255.255.0", dns = "192.168.50.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 2, addressfrom = addr(192, 168, 51, 10), addressto = addr(192, 168, 51, 12), router = "192.168.51.1", subnetmask = "255.255.255.0", dns = "192.168.51.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 50, 10), addressto = addr(10, 0, 50, 12),
+      router = "10.0.50.1", subnetmask = "255.255.255.0", dns = "10.0.50.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
+    InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 51, 10), addressto = addr(10, 0, 51, 12),
+      router = "10.0.51.1", subnetmask = "255.255.255.0", dns = "10.0.51.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
     /* 3 */ InvIpCategory1.create(parentid = 1, title = "Статические")
-    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 60, 10), addressto = addr(192, 168, 60, 12), router = "192.168.60.1", subnetmask = "255.255.255.0", dns = "192.168.60.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 3, addressfrom = addr(192, 168, 61, 10), addressto = addr(192, 168, 61, 12), router = "192.168.61.1", subnetmask = "255.255.255.0", dns = "192.168.61.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 60, 10), addressto = addr(10, 0, 60, 12),
+      router = "10.0.60.1", subnetmask = "255.255.255.0", dns = "10.0.60.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
+    InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 61, 10), addressto = addr(10, 0, 61, 12),
+      router = "10.0.61.1", subnetmask = "255.255.255.0", dns = "10.0.61.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
     /* 4 */ InvIpCategory1.create(parentid = 0, title = "Белые адреса")
     /* 5 */ InvIpCategory1.create(parentid = 4, title = "Динамические")
-    InvIpResource1.create(categoryid = 5, addressfrom = addr(192, 168, 70, 10), addressto = addr(192, 168, 70, 12), router = "192.168.70.1", subnetmask = "255.255.255.0", dns = "192.168.70.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 5, addressfrom = addr(192, 168, 71, 10), addressto = addr(192, 168, 71, 12), router = "192.168.71.1", subnetmask = "255.255.255.0", dns = "192.168.71.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 5, addressfrom = addr(10, 0, 70, 10), addressto = addr(10, 0, 70, 12),
+      router = "10.0.70.1", subnetmask = "255.255.255.0", dns = "10.0.70.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
+    InvIpResource1.create(categoryid = 5, addressfrom = addr(10, 0, 71, 10), addressto = addr(10, 0, 71, 12),
+      router = "10.0.71.1", subnetmask = "255.255.255.0", dns = "10.0.71.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
     /* 6 */ InvIpCategory1.create(parentid = 4, title = "Статические")
-    InvIpResource1.create(categoryid = 6, addressfrom = addr(192, 168, 80, 10), addressto = addr(192, 168, 80, 12), router = "192.168.80.1", subnetmask = "255.255.255.0", dns = "192.168.80.1", config = "", comment = "", dynamic = Some(false))
-    InvIpResource1.create(categoryid = 6, addressfrom = addr(192, 168, 81, 10), addressto = addr(192, 168, 81, 12), router = "192.168.81.1", subnetmask = "255.255.255.0", dns = "192.168.81.1", config = "", comment = "", dynamic = Some(false))
+    InvIpResource1.create(categoryid = 6, addressfrom = addr(10, 0, 80, 10), addressto = addr(10, 0, 80, 12),
+      router = "10.0.80.1", subnetmask = "255.255.255.0", dns = "10.0.80.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
+    InvIpResource1.create(categoryid = 6, addressfrom = addr(10, 0, 81, 10), addressto = addr(10, 0, 81, 12),
+      router = "10.0.81.1", subnetmask = "255.255.255.0", dns = "10.0.81.1", config = "", comment = "", dynamic = Some(false),
+      datefrom = Some(now))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -201,9 +218,13 @@ object Inet {
   // Модули -> Интернет -> Справочники -> Трафик -> Привязка типов трафика
   //
   def trafficTypeLinks(): Unit = {
-    InetTrafficTypeLink1.create("NetFlow")
-    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
-    InetTrafficTypeLinkRule1.create(linkid = 1, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2, addressfrom = Some(addr(192, 168, 0, 1)), addressto = Some(addr(192, 168, 255, 255)), portfrom = 0, portto = 0, diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
+    val id = InetTrafficTypeLink1.create("NetFlow").id
+    InetTrafficTypeLinkRule1.create(linkid = id, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 1,
+      addressfrom = Some(addr(0, 0, 0, 0)), addressto = Some(addr(255, 255, 255, 255)), portfrom = 0, portto = 0,
+      diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 2, comment = "")
+    InetTrafficTypeLinkRule1.create(linkid = id, position = 0, datefrom = None, dateto = None, `type` = 2, sourceid = 0, interfaceid = -1, direction = 2,
+      addressfrom = Some(addr(0, 0, 0, 0)), addressto = Some(addr(255, 255, 255, 255)), portfrom = 0, portto = 0,
+      diffserv = None, counterrealm = "", counterservice = "", countervendor = -1, countertype = -1, counterprefix = None, traffictypeid = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -211,9 +232,9 @@ object Inet {
   //
   def options(): Unit = {
     def create(parentId: Int, title: String) = InetOption1.create(parentid = parentId, title = title, groupintersection = 0, config = "", comment = "")
-    create(0, "Скорость")
-    create(1, "50 Мбит/с")
-    create(1, "100 Мбит/с")
+    /* 1 */ create(0, "Скорость")
+    /* 2 */ create(1, "50 Мбит/с")
+    /* 3 */ create(1, "100 Мбит/с")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -221,7 +242,9 @@ object Inet {
   //
   def servTypes(): Unit = {
     def create(title: String, config: String, addressType: Byte) = {
-      val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = addressType, addressallinterface = 1, traffictypelinkid = 1, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
+      val id = InetServType1.create(title = title, config = Some(config), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1,
+        addresstype = addressType, addressallinterface = 0, traffictypelinkid = 1, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1,
+        needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 1).id
       InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
     }
     var cfg =
@@ -249,7 +272,9 @@ object Inet {
       """
         |title.pattern=Порт Ethernet, VLAN (${vlan})
         |""".stripMargin
-    val id = InetServType1.create(title = "Порт Ethernet", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1, addresstype = 0, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0, needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 0).id
+    val id = InetServType1.create(title = "Порт Ethernet", config = Some(cfg), parenttypeids = "", sessioninitiationtype = 0, sessioncountlimit = 1, sessioncountlimitlock = 1,
+      addresstype = 0, addressallinterface = 1, traffictypelinkid = 0, needlogin = 0, needdevice = 1, needinterface = 1, personalinterface = 1, needvlan = 1, needidentifier = 0,
+      needmacaddress = 0, needcontractobject = 0, needrestriction = 0, personalvlan = 0).id
     /* 5 */ InetServTypeDeviceGroupLink1.create(inetservid = id, devicegroupid = 3)
   }
 

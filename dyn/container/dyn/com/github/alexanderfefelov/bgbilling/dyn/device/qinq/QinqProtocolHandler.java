@@ -33,7 +33,7 @@ public class QinqProtocolHandler implements ProtocolHandler,
         String option82Str = request.getOption((byte) 82).getValueAsString();
         Matcher matcher = vlansRegexPattern.matcher(option82Str);
         if (!matcher.find()) {
-            logger.warn("VLAN ids not found");
+            logger().warn("VLAN ids not found");
             return;
         }
         byte[] spVid = matcher.group(1).getBytes();
