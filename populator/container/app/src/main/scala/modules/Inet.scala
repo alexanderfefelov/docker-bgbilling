@@ -172,37 +172,37 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> IP-ресурсы
   //
   def ipResources(): Unit = {
-    val now = DateTime.now.toLocalDate
+    val dateFrom = DateTime.now.minusDays(7).toLocalDate
     /* 1 */ InvIpCategory1.create(parentid = 0, title = "Серые адреса")
     /* 2 */ InvIpCategory1.create(parentid = 1, title = "Динамические")
     InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 50, 10), addressto = addr(10, 0, 50, 12),
       router = "10.0.50.1", subnetmask = "255.255.255.0", dns = "10.0.50.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 51, 10), addressto = addr(10, 0, 51, 12),
       router = "10.0.51.1", subnetmask = "255.255.255.0", dns = "10.0.51.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     /* 3 */ InvIpCategory1.create(parentid = 1, title = "Статические")
     InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 60, 10), addressto = addr(10, 0, 60, 12),
       router = "10.0.60.1", subnetmask = "255.255.255.0", dns = "10.0.60.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 61, 10), addressto = addr(10, 0, 61, 12),
       router = "10.0.61.1", subnetmask = "255.255.255.0", dns = "10.0.61.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     /* 4 */ InvIpCategory1.create(parentid = 0, title = "Белые адреса")
     /* 5 */ InvIpCategory1.create(parentid = 4, title = "Динамические")
     InvIpResource1.create(categoryid = 5, addressfrom = addr(10, 0, 70, 10), addressto = addr(10, 0, 70, 12),
       router = "10.0.70.1", subnetmask = "255.255.255.0", dns = "10.0.70.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     InvIpResource1.create(categoryid = 5, addressfrom = addr(10, 0, 71, 10), addressto = addr(10, 0, 71, 12),
       router = "10.0.71.1", subnetmask = "255.255.255.0", dns = "10.0.71.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     /* 6 */ InvIpCategory1.create(parentid = 4, title = "Статические")
     InvIpResource1.create(categoryid = 6, addressfrom = addr(10, 0, 80, 10), addressto = addr(10, 0, 80, 12),
       router = "10.0.80.1", subnetmask = "255.255.255.0", dns = "10.0.80.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
     InvIpResource1.create(categoryid = 6, addressfrom = addr(10, 0, 81, 10), addressto = addr(10, 0, 81, 12),
       router = "10.0.81.1", subnetmask = "255.255.255.0", dns = "10.0.81.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(now))
+      datefrom = Some(dateFrom))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
