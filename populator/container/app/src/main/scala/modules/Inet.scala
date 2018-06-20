@@ -357,7 +357,7 @@ object Inet {
         |# IP-пулы для динамических адресов.
         |#
         |resource.ip.pool.private.ipCategories=1
-        |resource.ip.pool.public.ipCategories=1
+        |resource.ip.pool.public.ipCategories=5
         |
         |
         |# ip.resource.categoryId.$
