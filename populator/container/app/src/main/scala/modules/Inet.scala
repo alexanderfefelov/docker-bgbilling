@@ -6,7 +6,7 @@ import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
 import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import org.joda.time.DateTime
-import scalaxb.{DataRecord, DispatchHttpClientsAsync}
+import scalaxb.DataRecord
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -82,14 +82,14 @@ object Inet {
       """
         |# flow.agent.type
         |#
-        |# Тип источника данных о трафике
+        |# Тип источника данных о трафике.
         |#
         |flow.agent.type=netflow9
         |
         |
         |# flow.agent.link
         |#
-        |# Связь с источником данных о трафике
+        |# Связь с источником данных о трафике.
         |#
         |flow.agent.link={@deviceId}:-1
         |""".stripMargin
@@ -173,22 +173,16 @@ object Inet {
   //
   def ipResources(): Unit = {
     val dateFrom = DateTime.now.minusDays(7).toLocalDate
-    /* 1 */ InvIpCategory1.create(parentid = 0, title = "Серые адреса")
-    /* 2 */ InvIpCategory1.create(parentid = 1, title = "Динамические")
+    /* 1 */ InvIpCategory1.create(parentid = 0, title = "Приватные адреса")
+    /* 2 */ InvIpCategory1.create(parentid = 1, title = "Пул 1")
     InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 50, 10), addressto = addr(10, 0, 50, 12),
       router = "10.0.50.1", subnetmask = "255.255.255.0", dns = "10.0.50.1", config = "", comment = "", dynamic = Some(false),
       datefrom = Some(dateFrom))
-    InvIpResource1.create(categoryid = 2, addressfrom = addr(10, 0, 51, 10), addressto = addr(10, 0, 51, 12),
-      router = "10.0.51.1", subnetmask = "255.255.255.0", dns = "10.0.51.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(dateFrom))
-    /* 3 */ InvIpCategory1.create(parentid = 1, title = "Статические")
+    /* 3 */ InvIpCategory1.create(parentid = 1, title = "Пул 2")
     InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 60, 10), addressto = addr(10, 0, 60, 12),
       router = "10.0.60.1", subnetmask = "255.255.255.0", dns = "10.0.60.1", config = "", comment = "", dynamic = Some(false),
       datefrom = Some(dateFrom))
-    InvIpResource1.create(categoryid = 3, addressfrom = addr(10, 0, 61, 10), addressto = addr(10, 0, 61, 12),
-      router = "10.0.61.1", subnetmask = "255.255.255.0", dns = "10.0.61.1", config = "", comment = "", dynamic = Some(false),
-      datefrom = Some(dateFrom))
-    /* 4 */ InvIpCategory1.create(parentid = 0, title = "Белые адреса")
+    /* 4 */ InvIpCategory1.create(parentid = 0, title = "Публичные адреса")
     /* 5 */ InvIpCategory1.create(parentid = 4, title = "Динамические")
     InvIpResource1.create(categoryid = 5, addressfrom = addr(10, 0, 70, 10), addressto = addr(10, 0, 70, 12),
       router = "10.0.70.1", subnetmask = "255.255.255.0", dns = "10.0.70.1", config = "", comment = "", dynamic = Some(false),
@@ -231,10 +225,31 @@ object Inet {
   // Модули -> Интернет -> Справочники -> Опции
   //
   def options(): Unit = {
-    def create(parentId: Int, title: String) = InetOption1.create(parentid = parentId, title = title, groupintersection = 0, config = "", comment = "")
-    /* 1 */ create(0, "Скорость")
-    /* 2 */ create(1, "50 Мбит/с")
-    /* 3 */ create(1, "100 Мбит/с")
+    def create(parentId: Int, title: String, config: String) = InetOption1.create(parentid = parentId, title = title, groupintersection = 0, config = config, comment = "")
+    /* 1 */ create(0, "Скорость", "")
+    var cfg =
+      """
+        |speed.download=50
+        |speed.upload=50
+        |""".stripMargin
+    /* 2 */ create(1, "50 Мбит/с", cfg)
+    cfg =
+      """
+        |speed.download=100
+        |speed.upload=100
+        |""".stripMargin
+    /* 3 */ create(1, "100 Мбит/с", cfg)
+    /* 4 */ create(0, "IP-адресация", "")
+    cfg =
+      """
+        |dhcp.ipPool=public
+        |""".stripMargin
+    /* 5 */ create(4, "Публичный IP-адрес", cfg)
+    cfg =
+      """
+        |dhcp.ipPool=private
+        |""".stripMargin
+    /* 6 */ create(4, "Приватный IP-адрес", cfg)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -249,24 +264,18 @@ object Inet {
     }
     var cfg =
       """
-        |title.pattern=Серый статический адрес (${addressIp}), VLAN (${vlan})
+        |title.pattern=Статический адрес (${addressIp}), VLAN (${vlan})
+        |
+        |# Пул адресов определяется конфигурацией устройства.
         |""".stripMargin
-    /* 1 */ create("Серый статический адрес", cfg, 3)
+    /* 1 */ create("Статический адрес", cfg, 3)
     cfg =
       """
-        |title.pattern=Серый динамический адрес, VLAN (${vlan})
+        |title.pattern=Динамический адрес, VLAN (${vlan})
+        |
+        |# Пул адресов определяется inet-опцией тарифа.
         |""".stripMargin
-    /* 2 */ create("Серый динамический адрес", cfg, 4)
-    cfg =
-      """
-        |title.pattern=Белый статический адрес (${addressIp}), VLAN (${vlan})
-        |""".stripMargin
-    /* 3 */ create("Белый статический адрес", cfg, 3)
-    cfg =
-      """
-        |title.pattern=Белый динамический адрес, VLAN (${vlan})
-        |""".stripMargin
-    /* 4 */ create("Белый динамический адрес", cfg, 4)
+    /* 2 */ create("Динамический адрес", cfg, 4)
 
     cfg =
       """
@@ -343,19 +352,19 @@ object Inet {
         |dhcp.option.rebindingTime=250
         |
         |
-        |# dhcp.ipCategories
+        |# resource.ip.pool.$.ipCategories
         |#
-        |# Категории IP-ресурсов для динамической раздачи.
+        |# IP-пулы для динамических адресов.
         |#
-        |dhcp.ipCategories=5
+        |resource.ip.pool.private.ipCategories=1
+        |resource.ip.pool.public.ipCategories=1
         |
         |
         |# ip.resource.categoryId.$
         |#
-        |# Категории IP-ресурсов для типов сервисов с типом адреса "статический адрес".
+        |# Категории IP-ресурсов для типов сервисов со статическими адресами.
         |#
-        |ip.resource.categoryId.1=3
-        |ip.resource.categoryId.3=6
+        |ip.resource.categoryId.1=6
         |
         |
         |# dhcp.deviceSearchMode
