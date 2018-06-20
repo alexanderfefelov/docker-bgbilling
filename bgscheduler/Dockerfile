@@ -1,6 +1,6 @@
 FROM alexanderfefelov/graalvm-polyglot
 
-ENV BGBILLING_VERSION=7.1_985 \
+ENV BGBILLING_VERSION=7.1_986 \
 \
   BONUS_VERSION=7.1_96 \
   DISPATCH_VERSION=7.1_31 \
