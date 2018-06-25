@@ -87,14 +87,15 @@ object Main extends App {
     val cake = new Cake
     val service = cake.service
 
-    Inet.moduleAndServices(service)
-    Npay.moduleAndServices(service)
-    Rscm.moduleAndServices(service)
-    Subscription.moduleAndServices(service)
-    Moneta.moduleAndServices(service)
-    Qiwi.moduleAndServices(service)
-    Mps.moduleAndServices(service)
-    Bill.moduleAndServices(service)
+    /* 1 */ Inet.moduleAndServices(service)
+    /* 2 */ Npay.moduleAndServices(service)
+    /* 3 */ Rscm.moduleAndServices(service)
+    /* 4 */ Subscription.moduleAndServices(service)
+    /* 5 */ Bill.moduleAndServices(service)
+    /* 6 */ Moneta.moduleAndServices(service)
+    /* 7 */ Qiwi.moduleAndServices(service)
+    /* 8 */ Card.moduleAndServices(service)
+    /* 9 */ Mps.moduleAndServices(service)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

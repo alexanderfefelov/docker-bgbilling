@@ -177,9 +177,7 @@ object Kernel {
         |            <currentServices/>
         |        </rscm>
         |    </modules>
-        |    <plugins>
-        |    </plugins>
-        |    <general dtl="0" status="0"/>
+        |    <general dtl="0" status="5"/>
         |</data>
         |""".stripMargin
     ContractPattern.create(title = "Ф/Л, дебет",
@@ -191,7 +189,7 @@ object Kernel {
       fc = 0, // Физ. лицо
       dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
-      status = 5 // Статус договора при создании
+      status = 0
     )
     ContractPattern.create(title = "Ю/Л, кредит",
       closesumma = 0.0f, // Лимит
@@ -202,7 +200,7 @@ object Kernel {
       fc = 1, // Юр. лицо
       dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
-      status = 5 // Статус договора при создании
+      status = 0
     )
   }
 

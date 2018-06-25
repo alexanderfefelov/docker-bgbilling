@@ -9,16 +9,16 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
 * Контейнеры
 
-| Контейнер | Описание | FQDN
-| --------- | -------- | ----
-| `bgbilling-mysql-master` | Master-сервер MySQL | `master.mysql.bgbilling.local` 
-| `bgbilling-mysql-backup` | Slave-сервер MySQL для резервного копирования, read-only | `backup.mysql.bgbilling.local`
-| `bgbilling-mysql-slave`  | Slave-сервер MySQL для отчётов, read-only | `slave.mysql.bgbilling.local`
-| `bgbilling-activemq`     | Сервер ActiveMQ | `activemq.bgbilling.local`
+| Название | Описание | FQDN
+| -------- | -------- | ----
 | `bgbilling-billing`      | Сервер BGBilling | `billing.bgbilling.local`
 | `bgbilling-scheduler`    | Планировщик BGBilling | `scheduler.bgbilling.local`
 | `bgbilling-access`       | Сервер BGInetAccess | `access.bgbilling.local`
 | `bgbilling-accounting`   | Сервер BGInetAccounting | `accounting.bgbilling.local`
+| `bgbilling-mysql-master` | Master-сервер MySQL | `master.mysql.bgbilling.local` 
+| `bgbilling-mysql-backup` | Slave-сервер MySQL для резервного копирования, read-only | `backup.mysql.bgbilling.local`
+| `bgbilling-mysql-slave`  | Slave-сервер MySQL для отчётов, read-only | `slave.mysql.bgbilling.local`
+| `bgbilling-activemq`     | Сервер ActiveMQ | `activemq.bgbilling.local`
 
 Все контейнеры могут работать на одном физическом хосте. При необходимости контейнеры можно расположить
 на разных физических хостах в произвольных комбинациях.
