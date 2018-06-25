@@ -27,6 +27,7 @@ object Main extends App {
   Kernel.contractParametersPrefs()
   Kernel.contractParameterGroups()
   Kernel.сontractParameterType7Values()
+  Kernel.contractPatterns()
   Kernel.entitySpecs()
   modulesAndServices()
   plugins()

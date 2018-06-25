@@ -7,7 +7,6 @@ import org.joda.time.DateTime
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-
 object Kernel {
 
   val now = DateTime.now()
@@ -148,6 +147,49 @@ object Kernel {
     ContractParameterType7Values.create(pid = 17, title = "ООО")
     ContractParameterType7Values.create(pid = 17, title = "ЗАО")
     ContractParameterType7Values.create(pid = 17, title = "ПАО")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Договор -> Шаблоны
+  //
+  def contractPatterns(): Unit = {
+    val data =
+      """
+        |<?xml version="1.0" encoding="UTF-8"?>
+        |<data webMenuId="-1">
+        |    <modules>
+        |        <inet mid="1">
+        |        </inet>
+        |        <npay mid="2">
+        |            <addServices>
+        |                <item sid="2"/>
+        |            </addServices>
+        |        </npay>
+        |        <rscm mid="3">
+        |            <currentServices/>
+        |        </rscm>
+        |    </modules>
+        |    <plugins>
+        |    </plugins>
+        |    <general dtl="0" status="0"/>
+        |</data>
+        |""".stripMargin
+    ContractPattern.create(title = "Ф/Л, дебет",
+      closesumma = 0.0f, // Лимит
+      tpid = "", groups = 0,
+      mode = 1, // Дебет
+      pgid = 1, // Группа параметров: Физ. лицо
+      pfid = 0,
+      fc = 0, // Физ. лицо
+      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes), patid = 0, status = 0)
+    ContractPattern.create(title = "Ю/Л, кредит",
+      closesumma = 0.0f, // Лимит
+      tpid = "", groups = 0,
+      mode = 0, // Кредит
+      pgid = 2, // Группа параметров: Юр. лицо
+      pfid = 0,
+      fc = 1, // Юр. лицо
+      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes), patid = 0, status = 0)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
