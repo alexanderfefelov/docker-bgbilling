@@ -150,6 +150,14 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Договоры - шаблоны комментариев
+  //
+  def contractCommentPatterns(): Unit = {
+    /* 1 */ ContractCommentPatterns.create(title = "ФИО", pat = "${param_7} ${param_8} ${param_9}")
+    /* 2 */ ContractCommentPatterns.create(title = "Название", pat = "${param_15} ${param_17}")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Договор -> Шаблоны
   //
   def contractPatterns(): Unit = {
@@ -181,7 +189,10 @@ object Kernel {
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes), patid = 0, status = 0)
+      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
+      patid = 1, // Шаблон комментария
+      status = 5 // Статус договора при создании
+    )
     ContractPattern.create(title = "Ю/Л, кредит",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
@@ -189,7 +200,10 @@ object Kernel {
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes), patid = 0, status = 0)
+      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
+      patid = 2, // Шаблон комментария
+      status = 5 // Статус договора при создании
+    )
   }
 
   //--------------------------------------------------------------------------------------------------------------------
