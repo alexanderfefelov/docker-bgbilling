@@ -167,16 +167,20 @@ object Kernel {
         |<data webMenuId="-1">
         |    <modules>
         |        <inet mid="1">
+        |            <addInetServ enable="0" inetServTypeId="1" sessionCountLimit="0" status="0"/>
         |        </inet>
         |        <npay mid="2">
-        |            <addServices>
-        |                <item sid="2"/>
-        |            </addServices>
+        |            <addServices/>
         |        </npay>
         |        <rscm mid="3">
         |            <currentServices/>
         |        </rscm>
         |    </modules>
+        |    <plugins>
+        |        <bonus include="false">
+        |            <addBonusProgram/>
+        |        </bonus>
+        |    </plugins>
         |    <general dtl="0" status="5"/>
         |</data>
         |""".stripMargin
@@ -189,7 +193,7 @@ object Kernel {
       fc = 0, // Физ. лицо
       dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
-      status = 0
+      status = 0, domainid = 0
     )
     ContractPattern.create(title = "Ю/Л, кредит",
       closesumma = 0.0f, // Лимит
@@ -200,7 +204,7 @@ object Kernel {
       fc = 1, // Юр. лицо
       dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
-      status = 0
+      status = 0, domainid = 0
     )
   }
 

@@ -539,7 +539,7 @@ object Inet {
   // Модули -> Интернет -> Устройства и ресурсы -> Дерево -> Перечитать конфигурацию на серверах
   //
   def deviceReload(): Unit = {
-    val responseFuture = inetDeviceService.deviceReload()
+    val responseFuture = inetDeviceService.deviceReload(1)
     Await.result(responseFuture, 5.minutes)
   }
 

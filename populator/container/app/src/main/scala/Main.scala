@@ -52,20 +52,16 @@ object Main extends App {
   //
   private def moduleConfigs(): Unit = {
     val modules = Seq(
-      // Ядро
-      "kernel",
-      // Модули интернета
-      "inet",
-      // Модули абонентских плат и разовых услуг
-      "npay",
-      "rscm",
-      "subscription",
-      // Модули платежных систем
-      "moneta",
-      "qiwi",
-      "mps",
-      // Прочее
-      "bill"
+      /* 0 */ "kernel",
+      /* 1 */ "inet",
+      /* 2 */ "npay",
+      /* 3 */ "rscm",
+      /* 4 */ "subscription",
+      /* 5 */ "bill",
+      /* 6 */ "moneta",
+      /* 7 */ "qiwi",
+      /* 8 */ "card",
+      /* 9 */ "mps"
     )
     for (i <- modules.indices) {
       ModuleConfig.create(mid = Some(i), dt = now, title = "Default", active = 1, uid = Some(1),
