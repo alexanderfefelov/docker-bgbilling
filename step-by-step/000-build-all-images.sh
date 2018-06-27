@@ -5,6 +5,7 @@ function build {
 }
 
 build mysql \
+&& build bgbilling-base \
 && build bgbilling \
 && build bgscheduler \
 && build bginetaccess \

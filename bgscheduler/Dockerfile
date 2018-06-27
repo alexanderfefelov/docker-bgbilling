@@ -1,31 +1,6 @@
-FROM alexanderfefelov/graalvm-polyglot
+FROM alexanderfefelov/bgbilling-base
 
-ENV BGBILLING_VERSION=7.1_986 \
-\
-  BONUS_VERSION=7.1_96 \
-  DISPATCH_VERSION=7.1_31 \
-  NPAY_VERSION=7.1_169 \
-  RSCM_VERSION=7.1_158
-
-ENV BGBILLING_HOME=/bgbilling
-ENV BGBILLING_DATA=$BGBILLING_HOME/data \
-  BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap \
-  FTP_DATA_DIR=ftp://bgbilling.ru/pub/bgbilling/7.1/data \
-\
-  DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get -qq update \
-  && apt-get -qq install --yes mysql-client unzip \
-  && apt-get -qq clean \
-  && wget --quiet $FTP_DATA_DIR/BGBillingServer_$BGBILLING_VERSION.zip \
-  && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
-  && mv BGBillingServer $BGBILLING_HOME \
-  && rm --force BGBillingServer_$BGBILLING_VERSION.zip \
-  && chmod +x $BGBILLING_HOME/*.sh \
-  && chmod +x $BGBILLING_HOME/script/* \
-  && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgscheduler \
-  && sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgcommonrc \
-  && ln -s $BGBILLING_HOME/script/bgcommonrc /etc/init.d/bgcommonrc \
+RUN sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgscheduler \
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgscheduler defaults \
   && mkdir --parents $BGBILLING_BOOTSTRAP \
