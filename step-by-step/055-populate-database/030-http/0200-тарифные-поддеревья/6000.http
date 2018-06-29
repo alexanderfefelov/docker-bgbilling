@@ -1,4 +1,0 @@
-# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
-# Создаем услугу
-module=tariff&action=ModifTariffNode&command=create&parent=22&mtree_id=6&type=service
-module=tariff&action=ModifTariffNode&command=update&data=3&id=23

@@ -1,4 +1,0 @@
-# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
-# Создаем тарифное поддерево модуля inet
-module=tariff&action=CreateMtree&parent_tree=0&tree=2&mid=1
-module=tariff&action=ModifTariffNode&command=create&parent=0&mtree_id=4&type=root

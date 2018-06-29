@@ -3,10 +3,9 @@ package modules
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.inet._
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
-import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import org.joda.time.DateTime
-import scalaxb.DataRecord
+import scalaxb._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._

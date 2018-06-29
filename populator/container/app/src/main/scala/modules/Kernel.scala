@@ -1,8 +1,10 @@
 package modules
 
+import com.github.alexanderfefelov.bgbilling.api.action.kernel.TariffModule
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import org.joda.time.DateTime
+import scalaxb._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -24,7 +26,6 @@ object Kernel {
   //
   def dynamicCodeRecompile(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
-    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
     class DynamicCodeServiceCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("dynamic-code-service"))
@@ -153,10 +154,117 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Тарифные планы
+  //
+  def tariffs(): Unit = {
+    case class TwoIds(var id1: Long, var id2: Long) { // https://stackoverflow.com/a/6196814/9152483
+      def update(ab: (Long, Long)): Unit = {
+        id1 = ab._1
+        id2 = ab._2
+      }
+    }
+
+    var tariffIdtreeId = TariffModule.addTariffPlan(used = 1)
+    TariffModule.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    var moduleId = TariffModule.bgBillingModuleId("inet")
+    // Создаем тарифное поддерево модуля inet
+    /* 1 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    var mtreeId = 1 // createMtree не возвращает идентификатор созданного объекта
+    var rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Добавляем типы трафика
+    var trafficTypeId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
+    TariffModule.modifTariffNode_update(id = trafficTypeId, data = "trafficTypeId&0,1,2")
+    // Добавляем услугу
+    var serviceSetId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "serviceSet")
+    TariffModule.modifTariffNode_update(id = serviceSetId, data = "serviceId&1")
+    // Добавляем стоимости трафика
+    var costId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "type&3%col&1%cost&0.0")
+    costId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
+    // Добавляем опции
+    var optionId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+    TariffModule.modifTariffNode_update(id = optionId, data = "inetOptionId&2")
+    optionId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+    TariffModule.modifTariffNode_update(id = optionId, data = "inetOptionId&6")
+    // Создаем тарифное поддерево модуля npay
+    moduleId = TariffModule.bgBillingModuleId("npay")
+    /* 2 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    mtreeId = 2 // createMtree не возвращает идентификатор созданного объекта
+    rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Создаем помесячную абонентскую плату
+    var monthModeId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
+    TariffModule.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&2")
+    // Добавляем стоимость
+    var monthCostId = TariffModule.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
+    TariffModule.modifTariffNode_update(id = monthCostId, data = "cost&500.0%type&1")
+    // Создаем тарифное поддерево модуля rscm
+    moduleId = TariffModule.bgBillingModuleId("rscm")
+    /* 3 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    mtreeId = 3 // createMtree не возвращает идентификатор созданного объекта
+    rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Создаем услугу
+    var serviceId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffModule.modifTariffNode_update(id = serviceId, data = "3")
+    // Добавляем стоимость
+    costId = TariffModule.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
+
+    tariffIdtreeId = TariffModule.addTariffPlan(used = 1)
+    TariffModule.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    moduleId = TariffModule.bgBillingModuleId("inet")
+    // Создаем тарифное поддерево модуля inet
+    /* 4 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    mtreeId = 4 // createMtree не возвращает идентификатор созданного объекта
+    rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Добавляем типы трафика
+    trafficTypeId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
+    TariffModule.modifTariffNode_update(id = trafficTypeId, data = "trafficTypeId&0,1,2")
+    // Добавляем услугу
+    serviceSetId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "serviceSet")
+    TariffModule.modifTariffNode_update(id = serviceSetId, data = "serviceId&1")
+    // Добавляем стоимости трафика
+    costId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "type&3%col&1%cost&0.0")
+    costId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
+    // Добавляем опции
+    optionId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+    TariffModule.modifTariffNode_update(id = optionId, data = "inetOptionId&3")
+    optionId = TariffModule.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+    TariffModule.modifTariffNode_update(id = optionId, data = "inetOptionId&5")
+    // Создаем тарифное поддерево модуля npay
+    moduleId = TariffModule.bgBillingModuleId("npay")
+    /* 5 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    mtreeId = 5 // createMtree не возвращает идентификатор созданного объекта
+    rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Создаем помесячную абонентскую плату
+    monthModeId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
+    TariffModule.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&2")
+    // Добавляем стоимость
+    monthCostId = TariffModule.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
+    TariffModule.modifTariffNode_update(id = monthCostId, data = "cost&1000.0%type&1")
+    // Создаем тарифное поддерево модуля rscm
+    moduleId = TariffModule.bgBillingModuleId("rscm")
+    /* 6 */ TariffModule.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
+    mtreeId = 6 // createMtree не возвращает идентификатор созданного объекта
+    rootId = TariffModule.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Создаем услугу
+    serviceId = TariffModule.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffModule.modifTariffNode_update(id = serviceId, data = "3")
+    // Добавляем стоимость
+    costId = TariffModule.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffModule.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
+
+    tariffIdtreeId = TariffModule.addTariffPlan(used = 1)
+    TariffModule.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - шаблоны комментариев
   //
   def contractCommentPatterns(): Unit = {
-    /* 1 */ ContractCommentPatterns.create(title = "ФИО", pat = "${param_6} ${param_7} ${param_7}")
+    /* 1 */ ContractCommentPatterns.create(title = "ФИО", pat = "${param_6} ${param_7} ${param_8}")
     /* 2 */ ContractCommentPatterns.create(title = "Название", pat = "${param_14} ${param_16}")
   }
 
@@ -165,8 +273,7 @@ object Kernel {
   //
   def contractPatterns(): Unit = {
     val data =
-      """
-        |<?xml version="1.0" encoding="UTF-8"?>
+      """<?xml version="1.0" encoding="UTF-8"?>
         |<data webMenuId="-1">
         |    <modules>
         |        <inet mid="1">

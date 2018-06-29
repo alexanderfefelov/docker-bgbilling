@@ -1,4 +1,0 @@
-# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
-# Добавляем типы трафика
-module=tariff&action=ModifTariffNode&command=create&parent=1&mtree_id=1&type=trafficType
-module=tariff&action=ModifTariffNode&command=update&data=trafficTypeId%260%2C1%2C2&id=2

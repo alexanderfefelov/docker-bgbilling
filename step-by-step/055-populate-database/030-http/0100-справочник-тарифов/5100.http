@@ -1,3 +1,0 @@
-# Справочники -> Тарифные планы
-module=tariff&action=AddTariffPlan&used=1
-module=tariff&action=UpdateTariffPlan&tpid=2&face=0&title=Internet-2&title_web=Internet-2&use_title_in_web=0&values=&tpused=1&config=&mask=&

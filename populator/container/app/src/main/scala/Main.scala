@@ -7,10 +7,7 @@ import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import modules._
 import org.joda.time.DateTime
 import plugins._
-
-import scala.concurrent.Await
-import scala.concurrent.duration._
-import scalaxb.DispatchHttpClientsAsync
+import scalaxb._
 
 object Main extends App {
 
@@ -44,6 +41,7 @@ object Main extends App {
   Inet.devices()
   Inet.servTypes()
   Inet.deviceReload()
+  Kernel.tariffs()
 
   println("Finished. Press Ctrl+C")
 
@@ -76,7 +74,6 @@ object Main extends App {
   //
   private def modulesAndServices(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
-    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
     class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-service"))
@@ -100,7 +97,6 @@ object Main extends App {
   //
   private def plugins(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
-    import com.github.alexanderfefelov.bgbilling.api.soap.scalaxb._
 
     class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("plugincfg-service"))

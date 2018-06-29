@@ -1,7 +1,0 @@
-# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
-# Добавляем стоимость
-module=tariff&action=ModifTariffNode&command=create&parent=8&mtree_id=2&type=month_cost
-# type:
-#   0 - безусловно
-#   1 - пропорционально периоду
-module=tariff&action=ModifTariffNode&command=update&data=cost%26500.0%25type%261&id=9

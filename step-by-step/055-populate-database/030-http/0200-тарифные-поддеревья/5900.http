@@ -1,4 +1,0 @@
-# Справочники -> Тарифные планы -> ТАРИФ -> Дерево
-# Создаем тарифное поддерево модуля rscm
-module=tariff&action=CreateMtree&tree=2&parent_tree=0&mid=3
-module=tariff&action=ModifTariffNode&parent=0&mtree_id=6&type=root&command=create
