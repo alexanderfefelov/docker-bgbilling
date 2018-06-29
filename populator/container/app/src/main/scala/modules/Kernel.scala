@@ -124,7 +124,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 3)
     ContractParameterGroup.create(gid = 2, pid = 4)
     ContractParameterGroup.create(gid = 2, pid = 5)
-    ContractParameterGroup.create(gid = 1, pid = 14)
+    ContractParameterGroup.create(gid = 2, pid = 14)
     ContractParameterGroup.create(gid = 2, pid = 15)
     ContractParameterGroup.create(gid = 2, pid = 16)
     ContractParameterGroup.create(gid = 2, pid = 17)
