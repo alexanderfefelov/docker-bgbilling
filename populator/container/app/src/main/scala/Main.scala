@@ -42,6 +42,7 @@ object Main extends App {
   Inet.servTypes()
   Inet.deviceReload()
   Kernel.tariffs()
+  Kernel.contracts()
 
   println("Finished. Press Ctrl+C")
 
