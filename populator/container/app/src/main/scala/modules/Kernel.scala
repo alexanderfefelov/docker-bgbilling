@@ -27,13 +27,12 @@ object Kernel {
   def dynamicCodeRecompile(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class DynamicCodeServiceCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    class Cake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("dynamic-code-service"))
     }
-    val dynamicCodeServiceCake = new DynamicCodeServiceCake
-    val dynamicCode = dynamicCodeServiceCake.service
+    val service = new Cake().service
 
-    val responseFuture = dynamicCode.recompileAll()
+    val responseFuture = service.recompileAll()
     Await.result(responseFuture, 5.minutes)
   }
 
@@ -134,14 +133,14 @@ object Kernel {
   // Справочники -> Другие -> Договоры - значения списков -> Значения списков
   //
   def сontractParameterType7Values(): Unit = {
-    ContractParameterType7Values.create(pid = 9, title = "Паспорт гражданина РФ")
-    ContractParameterType7Values.create(pid = 9, title = "Удостоверение личности военнослужащего РФ")
-    ContractParameterType7Values.create(pid = 9, title = "Военный билет")
-    ContractParameterType7Values.create(pid = 9, title = "Временное удостоверение личности гражданина РФ")
+    /* 1 */ ContractParameterType7Values.create(pid = 9, title = "Паспорт гражданина РФ")
+    /* 2 */ ContractParameterType7Values.create(pid = 9, title = "Удостоверение личности военнослужащего РФ")
+    /* 3 */ ContractParameterType7Values.create(pid = 9, title = "Военный билет")
+    /* 4 */ ContractParameterType7Values.create(pid = 9, title = "Временное удостоверение личности гражданина РФ")
 
-    ContractParameterType7Values.create(pid = 16, title = "ООО")
-    ContractParameterType7Values.create(pid = 16, title = "ЗАО")
-    ContractParameterType7Values.create(pid = 16, title = "ПАО")
+    /* 5 */ ContractParameterType7Values.create(pid = 16, title = "ООО")
+    /* 6 */ ContractParameterType7Values.create(pid = 16, title = "ЗАО")
+    /* 7 */ ContractParameterType7Values.create(pid = 16, title = "ПАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -264,8 +263,27 @@ object Kernel {
   // Договор -> Новый договор
   //
   def contracts(): Unit = {
-    var id = ContractActions.newContract(date = now, pattern_id = 1, super_id = 0, sub_mode = 0, params = "", title = None, custom_title = None)
-    id = ContractActions.newContract(date = now, pattern_id = 2, super_id = 0, sub_mode = 0, params = "", title = None, custom_title = None)
+    var cid = ContractActions.newContract(date = now, pattern_id = 1)
+    ContractActions.updateParameterType1(cid = cid, pid = 6, value = "Швейк")
+    ContractActions.updateParameterType1(cid = cid, pid = 7, value = "Йозеф")
+    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = now)
+
+    cid = ContractActions.newContract(date = now, pattern_id = 2)
+    ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
+    ContractActions.updateListParameter(cid = cid, pid = 16, value = 5, custom_value = None)
+    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 2, date1 = DateTime.parse("01.04.2018", dateFormatter))
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Договор -> Открыть договор -> Баланс
+  //
+  def payments(): Unit = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+
+    class Cake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
+    }
+    val service = new Cake().service
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -43,6 +43,7 @@ object Main extends App {
   Inet.deviceReload()
   Kernel.tariffs()
   Kernel.contracts()
+  Kernel.payments()
 
   println("Finished. Press Ctrl+C")
 
@@ -79,8 +80,7 @@ object Main extends App {
     class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-service"))
     }
-    val cake = new Cake
-    val service = cake.service
+    val service = new Cake().service
 
     /* 1 */ Inet.moduleAndServices(service)
     /* 2 */ Npay.moduleAndServices(service)
@@ -102,8 +102,7 @@ object Main extends App {
     class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("plugincfg-service"))
     }
-    val cake = new Cake
-    val service = cake.service
+    val service = new Cake().service
 
     Bonus.plugin(service)
     Dispatch.plugin(service)
