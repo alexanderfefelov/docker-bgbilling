@@ -156,8 +156,8 @@ object Kernel {
   // Справочники -> Тарифные планы
   //
   def tariffs(): Unit = {
-    case class TwoIds(var id1: Long, var id2: Long) { // https://stackoverflow.com/a/6196814/9152483
-      def update(ab: (Long, Long)): Unit = {
+    case class TwoIds(var id1: Int, var id2: Int) { // https://stackoverflow.com/a/6196814/9152483
+      def update(ab: (Int, Int)): Unit = {
         id1 = ab._1
         id2 = ab._2
       }
@@ -167,8 +167,7 @@ object Kernel {
     TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     var moduleId = TariffActions.bgBillingModuleId("inet")
     // Создаем тарифное поддерево модуля inet
-    /* 1 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    var mtreeId = 1 // createMtree не возвращает идентификатор созданного объекта
+    var mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
     var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Добавляем типы трафика
     var trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
@@ -188,8 +187,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = optionId, data = "inetOptionId&6")
     // Создаем тарифное поддерево модуля npay
     moduleId = TariffActions.bgBillingModuleId("npay")
-    /* 2 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    mtreeId = 2 // createMtree не возвращает идентификатор созданного объекта
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем помесячную абонентскую плату
     var monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
@@ -199,8 +197,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&500.0%type&1")
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
-    /* 3 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    mtreeId = 3 // createMtree не возвращает идентификатор созданного объекта
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем услугу
     var serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
@@ -211,10 +208,9 @@ object Kernel {
 
     tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
     TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
-    moduleId = TariffActions.bgBillingModuleId("inet")
     // Создаем тарифное поддерево модуля inet
-    /* 4 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    mtreeId = 4 // createMtree не возвращает идентификатор созданного объекта
+    moduleId = TariffActions.bgBillingModuleId("inet")
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Добавляем типы трафика
     trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
@@ -234,8 +230,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = optionId, data = "inetOptionId&5")
     // Создаем тарифное поддерево модуля npay
     moduleId = TariffActions.bgBillingModuleId("npay")
-    /* 5 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    mtreeId = 5 // createMtree не возвращает идентификатор созданного объекта
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем помесячную абонентскую плату
     monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
@@ -245,8 +240,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&1000.0%type&1")
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
-    /* 6 */ TariffActions.createMtree(mid = moduleId, parent_tree = 0, tree = tariffIdtreeId._2)
-    mtreeId = 6 // createMtree не возвращает идентификатор созданного объекта
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем услугу
     serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
@@ -267,6 +261,7 @@ object Kernel {
     ContractActions.updateParameterType1(cid = cid, pid = 6, value = "Швейк")
     ContractActions.updateParameterType1(cid = cid, pid = 7, value = "Йозеф")
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = now)
+    ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 1, pod = 4, floor = 5, flat = "6Б")
 
     cid = ContractActions.newContract(date = now, pattern_id = 2)
     ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
