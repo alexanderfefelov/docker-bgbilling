@@ -19,9 +19,6 @@ object Inet {
 
   private def addr(a1: Int, a2: Int, a3: Int, a4: Int) = Array[Byte](a1.toByte, a2.toByte, a3.toByte, a4.toByte)
 
-  private def dr(key: String, value: String) = DataRecord(None, Some(key), value)
-  private def dr(key: String, value: Int) = DataRecord(None, Some(key), value)
-
   //--------------------------------------------------------------------------------------------------------------------
   // Модули -> Редактор модулей и услуг
   //

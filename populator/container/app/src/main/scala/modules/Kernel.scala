@@ -270,12 +270,12 @@ object Kernel {
 
     cid = ContractActions.newContract(date = now, pattern_id = 2)
     ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
-    ContractActions.updateListParameter(cid = cid, pid = 16, value = 5, custom_value = None)
+    ContractActions.updateListParameter(cid = cid, pid = 16, value = 5)
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 2, date1 = DateTime.parse("01.04.2018", dateFormatter))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Договор -> Открыть договор -> Баланс
+  // Договор -> Открыть договор -> ДОГОВОР -> Приход
   //
   def payments(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
@@ -284,6 +284,32 @@ object Kernel {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
     }
     val service = new Cake().service
+
+    val dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
+
+    var payment = Payment(comment = Some("Какой-то комментарий"), attributes = Map(
+      "id" ->         dr("id", -1),
+      "contractId" -> dr("contractId", 1),
+      "date" ->       dr("date", now.toString(dateTimeFormat)),
+      "sum" ->        dr("sum", 100.0),
+      "summa" ->      dr("summa", 100.0),
+      "typeId" ->     dr("typeId", 1),
+      "userId" ->     dr("userId", 0)
+    ))
+    var responseFuture = service.paymentUpdate(Some(payment), None)
+    Await.result(responseFuture, 15.seconds)
+
+    payment = Payment(comment = None, attributes = Map(
+      "id" ->         dr("id", -1),
+      "contractId" -> dr("contractId", 1),
+      "date" ->       dr("date", now.toString(dateTimeFormat)),
+      "sum" ->        dr("sum", -10.0),
+      "summa" ->      dr("summa", -10.0),
+      "typeId" ->     dr("typeId", 1),
+      "userId" ->     dr("userId", 0)
+    ))
+    responseFuture = service.paymentUpdate(Some(payment), None)
+    Await.result(responseFuture, 15.seconds)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
