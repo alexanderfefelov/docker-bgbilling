@@ -11,7 +11,7 @@ import scala.concurrent.duration._
 
 object Kernel {
 
-  val now = DateTime.now()
+  val now: DateTime = DateTime.now()
 
   //--------------------------------------------------------------------------------------------------------------------
   // Сервис -> Администрирование -> Планировщик заданий
@@ -165,8 +165,8 @@ object Kernel {
 
     var tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
     TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
-    var moduleId = TariffActions.bgBillingModuleId("inet")
     // Создаем тарифное поддерево модуля inet
+    var moduleId = TariffActions.bgBillingModuleId("inet")
     var mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
     var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Добавляем типы трафика
@@ -341,7 +341,7 @@ object Kernel {
         |    <general dtl="0" status="5"/>
         |</data>
         |""".stripMargin
-    ContractPattern.create(title = "Ф/Л, дебет",
+    ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 1, // Дебет
@@ -351,6 +351,28 @@ object Kernel {
       dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
+    )
+    ContractPattern.create(title = "Ф/Л, кредит",
+      closesumma = 0.0f, // Лимит
+      tpid = "", groups = 0,
+      mode = 0, // Кредит
+      pgid = 1, // Группа параметров: Физ. лицо
+      pfid = 0,
+      fc = 0, // Физ. лицо
+      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
+      patid = 1, // Шаблон комментария
+      status = 0, domainid = 1
+    )
+    ContractPattern.create(title = "Ю/Л, аванс",
+      closesumma = 0.0f, // Лимит
+      tpid = "", groups = 0,
+      mode = 1, // Дебет
+      pgid = 2, // Группа параметров: Юр. лицо
+      pfid = 0,
+      fc = 1, // Юр. лицо
+      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
+      patid = 2, // Шаблон комментария
+      status = 0, domainid = 3
     )
     ContractPattern.create(title = "Ю/Л, кредит",
       closesumma = 0.0f, // Лимит

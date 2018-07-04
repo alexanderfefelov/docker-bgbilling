@@ -1,3 +1,3 @@
 FROM alexanderfefelov/mysql-replication
 
-COPY container/sql_mode.cnf /etc/mysql/mysql.conf.d/
+COPY container/sql-mode.cnf /etc/mysql/mysql.conf.d/
