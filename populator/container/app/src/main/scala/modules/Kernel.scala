@@ -138,9 +138,10 @@ object Kernel {
     /* 3 */ ContractParameterType7Values.create(pid = 9, title = "Военный билет")
     /* 4 */ ContractParameterType7Values.create(pid = 9, title = "Временное удостоверение личности гражданина РФ")
 
-    /* 5 */ ContractParameterType7Values.create(pid = 16, title = "ООО")
-    /* 6 */ ContractParameterType7Values.create(pid = 16, title = "ЗАО")
-    /* 7 */ ContractParameterType7Values.create(pid = 16, title = "ПАО")
+    /* 5 */ ContractParameterType7Values.create(pid = 16, title = "ИП")
+    /* 6 */ ContractParameterType7Values.create(pid = 16, title = "ООО")
+    /* 7 */ ContractParameterType7Values.create(pid = 16, title = "ЗАО")
+    /* 8 */ ContractParameterType7Values.create(pid = 16, title = "ПАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -263,9 +264,9 @@ object Kernel {
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = now)
     ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 1, pod = 4, floor = 5, flat = "6Б")
 
-    cid = ContractActions.newContract(date = now, pattern_id = 2)
+    cid = ContractActions.newContract(date = now, pattern_id = 4)
     ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
-    ContractActions.updateListParameter(cid = cid, pid = 16, value = 5)
+    ContractActions.updateListParameter(cid = cid, pid = 16, value = 6)
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 2, date1 = DateTime.parse("01.04.2018", dateFormatter))
   }
 
@@ -341,7 +342,7 @@ object Kernel {
         |    <general dtl="0" status="5"/>
         |</data>
         |""".stripMargin
-    ContractPattern.create(title = "Ф/Л, аванс",
+    /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 1, // Дебет
@@ -352,7 +353,7 @@ object Kernel {
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
-    ContractPattern.create(title = "Ф/Л, кредит",
+    /* 2 */ ContractPattern.create(title = "Ф/Л, кредит",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 0, // Кредит
@@ -363,7 +364,7 @@ object Kernel {
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
-    ContractPattern.create(title = "Ю/Л, аванс",
+    /* 3 */ ContractPattern.create(title = "Ю/Л, аванс",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 1, // Дебет
@@ -374,7 +375,7 @@ object Kernel {
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
-    ContractPattern.create(title = "Ю/Л, кредит",
+    /* 4 */ ContractPattern.create(title = "Ю/Л, кредит",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 0, // Кредит
