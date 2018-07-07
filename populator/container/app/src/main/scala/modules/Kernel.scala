@@ -54,8 +54,8 @@ object Kernel {
   //
   def addresses(): Unit = {
     val countryId = AddressCountry.create(title = "РФ").id
-    val cityId = AddressCity.create(countryId = countryId, title = "г. Звенигород").id
-    val streetId = AddressStreet.create(cityid = cityId, title = "ул. Мира", pIndex = "143180").id
+    val cityId = AddressCity.create(countryId = countryId, title = "Звенигород г.").id
+    val streetId = AddressStreet.create(cityid = cityId, title = "Мира ул.", pIndex = "143180").id
     val houseId = AddressHouse.create(streetid = streetId, house = 1, frac = Some("Б"), amount = 128, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
   }
 
@@ -360,7 +360,7 @@ object Kernel {
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
@@ -371,7 +371,7 @@ object Kernel {
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "В-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
@@ -382,7 +382,7 @@ object Kernel {
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "Г-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
