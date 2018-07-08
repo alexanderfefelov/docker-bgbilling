@@ -54,9 +54,29 @@ object Kernel {
   //
   def addresses(): Unit = {
     val countryId = AddressCountry.create(title = "РФ").id
-    val cityId = AddressCity.create(countryId = countryId, title = "Звенигород г.").id
-    val streetId = AddressStreet.create(cityid = cityId, title = "Мира ул.", pIndex = "143180").id
-    val houseId = AddressHouse.create(streetid = streetId, house = 1, frac = Some("Б"), amount = 128, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+
+    var cityId = AddressCity.create(countryId = countryId, title = "Звенигород г.").id
+
+    var streetId = AddressStreet.create(cityid = cityId, title = "Абрикосовая ул.", pIndex = "143180").id
+    AddressHouse.create(streetid = streetId, house = 1, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 1, frac = Some("Б"), amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 2, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+
+    streetId = AddressStreet.create(cityid = cityId, title = "Виноградная ул.", pIndex = "143180").id
+    AddressHouse.create(streetid = streetId, house = 4, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 6, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+
+    streetId = AddressStreet.create(cityid = cityId, title = "Тенистая ул.", pIndex = "143180").id
+    AddressHouse.create(streetid = streetId, house = 1, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 2, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 3, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+
+    cityId = AddressCity.create(countryId = countryId, title = "Одинцовский р-н, Ершово с.").id
+
+    streetId = AddressStreet.create(cityid = cityId, title = "-", pIndex = "143055").id
+    AddressHouse.create(streetid = streetId, house = 10, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 12, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    AddressHouse.create(streetid = streetId, house = 13, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -142,6 +162,7 @@ object Kernel {
     /* 6 */ ContractParameterType7Values.create(pid = 16, title = "ООО")
     /* 7 */ ContractParameterType7Values.create(pid = 16, title = "ЗАО")
     /* 8 */ ContractParameterType7Values.create(pid = 16, title = "ПАО")
+    /* 9 */ ContractParameterType7Values.create(pid = 16, title = "ОАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
