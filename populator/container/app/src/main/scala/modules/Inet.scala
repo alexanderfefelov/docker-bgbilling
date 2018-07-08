@@ -39,34 +39,30 @@ object Inet {
     val murmuringProtocolHandler = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringProtocolHandler"
     val murmuringServiceActivator = "com.github.alexanderfefelov.bgbilling.dyn.device.murmuring.MurmuringServiceActivator"
 
-    var cfg =
+    var comment =
       """
-        |#----------
-        |# Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
-        |#
-        |# Назначение - распространение каких-то глобальных параметров конфигурации по всем устройствам.
-        |#----------
+        |Псевдоустройство этого типа должно являться единственным корнем дерева устройств.
+        |
+        |Назначение - распространение каких-то глобальных параметров конфигурации по всем устройствам.
         |""".stripMargin
-    InetDeviceType1.create(title = "Network", configid = 0, config = cfg,
+    InetDeviceType1.create(title = "Network", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = comment, source = None, deviceentityspecid = 0)
 
-    cfg =
+    comment =
       """
-        |#----------
-        |# Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
-        |#
-        |# Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
-        |# значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
-        |#----------
+        |Идентификатор псевдоустройств этого типа используется при dhcp.deviceSearchMode=0 и dhcp.servSearchMode=4.
+        |
+        |Идентификатор не случаен, это дополненное при необходимости нулями слева четырехзначное
+        |значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
         |""".stripMargin
-    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = cfg,
+    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
       sahandlerclass = Some(murmuringServiceActivator),
       devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = comment, source = None, deviceentityspecid = 0)
 
     InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
       protocolhandlerclass = Some(murmuringProtocolHandler),
@@ -74,7 +70,7 @@ object Inet {
       devicemanagerclass = None,
       uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
 
-    cfg =
+    var cfg =
       """
         |# flow.agent.type
         |#

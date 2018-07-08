@@ -3,7 +3,9 @@
 export BGBILLING_HOME=/bgbilling
 BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap
 
-# Если в каталоге bootstrap существуют sql-файлы, выполняем их в MySQL и удаляем
+# Если в каталоге bootstrap существуют sql-скрипты, выполняем их в MySQL и удаляем при отсутствии ошибок.
+# Если в скриптах производится обращение к таблицам, которые ещё не существуют (например, таблицы модулей),
+# скрипты не будут удалены, и, следовательно, будут выполнены при следующем запуске
 #
 SQLS=$BGBILLING_BOOTSTRAP/*.sql
 for s in $SQLS
@@ -11,8 +13,8 @@ do
   if [ -f $s ]
   then
     echo Executing $s
-    mysql --host=master.mysql.bgbilling.local --user=root --password=password --default-character-set=utf8 < $s
-    rm --force $s
+    mysql --host=master.mysql.bgbilling.local --user=root --password=password --default-character-set=utf8 < $s \
+    && rm --force $s
   fi
 done
 

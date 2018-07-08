@@ -169,9 +169,9 @@ object Kernel {
   // Справочники -> Другие -> Домены
   //
   def domains(): Unit = {
-    /* 1 */ Domain.create(parentid = 0, title = "foo", comment = "")
-    /* 2 */ Domain.create(parentid = 0, title = "bar", comment = "")
-    /* 3 */ Domain.create(parentid = 2, title = "baz", comment = "")
+    /* 1 */ Domain.create(parentid = 0, title = "foo", comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
+    /* 2 */ Domain.create(parentid = 0, title = "bar", comment = "Quisque vitae efficitur risus")
+    /* 3 */ Domain.create(parentid = 2, title = "baz", comment = "Mauris eleifend non lorem quis sagittis")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
