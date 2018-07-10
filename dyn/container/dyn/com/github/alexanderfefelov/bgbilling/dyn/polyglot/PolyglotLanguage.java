@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.dyn.graalvm;
+package com.github.alexanderfefelov.bgbilling.dyn.polyglot;
 
 public enum PolyglotLanguage {
 

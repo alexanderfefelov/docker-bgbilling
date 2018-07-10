@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.dyn.graalvm;
+package com.github.alexanderfefelov.bgbilling.dyn.polyglot;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import org.graalvm.polyglot.Context;

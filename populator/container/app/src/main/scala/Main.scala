@@ -43,6 +43,7 @@ object Main extends App {
   Inet.deviceReload()
   Kernel.tariffs()
   Kernel.contracts()
+  Kernel.contractComments()
   Kernel.payments()
 
   println("Finished. Press Ctrl+C")
