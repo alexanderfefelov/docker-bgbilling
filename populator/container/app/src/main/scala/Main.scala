@@ -8,6 +8,7 @@ import modules._
 import org.joda.time.DateTime
 import plugins._
 import scalaxb._
+import scalikejdbc._
 
 object Main extends App {
 
@@ -30,6 +31,9 @@ object Main extends App {
   Kernel.entitySpecs()
   modulesAndServices()
   plugins()
+
+  alterTables()
+
   scheduledTasks()
   Inet.deviceTypes()
   Inet.deviceGroups()
@@ -47,6 +51,11 @@ object Main extends App {
   Kernel.payments()
 
   println("Finished. Press Ctrl+C")
+
+  private def alterTables(): Unit = {
+    implicit val session = AutoSession
+    sql"""alter table inet_device_type_1 modify column comment text""".execute().apply()
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Сервис -> Настройка -> Конфигурация
