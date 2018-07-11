@@ -117,6 +117,7 @@ object Kernel {
     /* 15 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
     /* 16 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
     /* 17 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
+    /* 18 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -147,6 +148,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 15)
     ContractParameterGroup.create(gid = 2, pid = 16)
     ContractParameterGroup.create(gid = 2, pid = 17)
+    ContractParameterGroup.create(gid = 2, pid = 18)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -427,14 +429,15 @@ object Kernel {
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
-    /* 3 */ ContractPattern.create(title = "Ю/Л, аванс",
+    /* 3 */ ContractPattern.create(title = "Ю/Л, аванс, 3 дня",
       closesumma = 0.0f, // Лимит
       tpid = "", groups = 0,
       mode = 1, // Дебет
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "В-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 3, // Время жизни
+      tgid = "", scrid = "", namePattern = "В-${Y2}-${N6}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
