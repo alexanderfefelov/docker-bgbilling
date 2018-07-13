@@ -1,0 +1,92 @@
+{
+  "countries": [
+    {
+      "name": "РФ",
+      "cities": [
+        {
+          "name": "Звенигород г.",
+          "streets": [
+            {
+              "name": "Восточный, мкрн.",
+              "houses": [
+                {"number": "4"},
+                {"number": "5"},
+                {"number": "6"},
+                {"number": "7"},
+                {"number": "9"},
+                {"number": "10"},
+                {"number": "15"},
+                {"number": "16"},
+                {"number": "17"},
+                {"number": "25"},
+                {"number": "26"},
+                {"number": "27"},
+                {"number": "28"},
+                {"number": "29"},
+                {"number": "30"}
+              ]
+            },
+            {
+              "name": "Игнатьевское, ш.",
+              "houses": [
+                {"number": "45/1"}
+              ]
+            },
+            {
+              "name": "Нахабинское ш., Лермонтовский ЖК",
+              "houses": [
+                {"number": "1 К1"},
+                {"number": "1 К1"},
+                {"number": "1 К1"}
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Одинцовский р-н, Ершово с.",
+          "streets": [
+            {
+              "name": "-",
+              "houses": [
+                {"number": "1"},
+                {"number": "2"},
+                {"number": "3"},
+                {"number": "4"},
+                {"number": "5"},
+                {"number": "5А"},
+                {"number": "6"},
+                {"number": "8"},
+                {"number": "9"}
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Одинцовский р-н, Гигирево д.",
+          "streets": [
+            {
+              "name": "-",
+              "houses": [
+                {"number": "1"},
+                {"number": "2"}
+              ]
+            },
+            {
+              "name": "Жемчужина ЖК",
+              "houses": [
+                {"number": "Г"},
+                {"number": "Д"},
+                {"number": "Е"},
+                {"number": "Ж"},
+                {"number": "З"},
+                {"number": "К"},
+                {"number": "Юг"},
+                {"number": "Парус"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

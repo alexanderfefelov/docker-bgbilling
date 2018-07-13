@@ -351,7 +351,7 @@ object Kernel {
     var payment = Payment(comment = Some("Какой-то комментарий"), attributes = Map(
       "id" ->         dr("id", -1),
       "contractId" -> dr("contractId", 1),
-      "date" ->       dr("date", now.toString(dateTimeFormat)),
+      "date" ->       dr("date", now.minusMonths(2).toString(dateTimeFormat)),
       "sum" ->        dr("sum", 100.0),
       "summa" ->      dr("summa", 100.0),
       "typeId" ->     dr("typeId", 1),
@@ -364,8 +364,8 @@ object Kernel {
       "id" ->         dr("id", -1),
       "contractId" -> dr("contractId", 1),
       "date" ->       dr("date", now.toString(dateTimeFormat)),
-      "sum" ->        dr("sum", -10.0),
-      "summa" ->      dr("summa", -10.0),
+      "sum" ->        dr("sum", 10.0),
+      "summa" ->      dr("summa", 10.0),
       "typeId" ->     dr("typeId", 1),
       "userId" ->     dr("userId", 0)
     ))
@@ -414,7 +414,7 @@ object Kernel {
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N4}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
@@ -425,7 +425,7 @@ object Kernel {
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N4}", data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
@@ -437,18 +437,18 @@ object Kernel {
       pfid = 0,
       fc = 1, // Юр. лицо
       dtl = 3, // Время жизни
-      tgid = "", scrid = "", namePattern = "В-${Y2}-${N6}", data = Some(data.getBytes),
+      tgid = "", scrid = "", namePattern = "В-${Y2}-${N4}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
-    /* 4 */ ContractPattern.create(title = "Ю/Л, кредит",
-      closesumma = 0.0f, // Лимит
+    /* 4 */ ContractPattern.create(title = "Ю/Л, кредит, лимит -20000 руб.",
+      closesumma = -20000.0f, // Лимит
       tpid = "", groups = 0,
       mode = 0, // Кредит
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Г-${Y2}-${N6}", data = Some(data.getBytes),
+      dtl = 0, tgid = "", scrid = "", namePattern = "Г-${Y2}-${N4}", data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )

@@ -7,6 +7,9 @@ lazy val apiV = "0.1.0-SNAPSHOT"
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.10",
   "com.github.pathikrit" %% "better-files" % "3.5.0",
+  "io.circe" %% "circe-core" % "0.9.3",
+  "io.circe" %% "circe-generic" % "0.9.3",
+  "io.circe" %% "circe-parser" % "0.9.3",
   "com.github.alexanderfefelov" %% "bgbilling-api-action-kernel" % apiV,
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bill" % apiV,
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bonus" % apiV,

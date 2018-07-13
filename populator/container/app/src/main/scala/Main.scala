@@ -1,9 +1,10 @@
 import java.nio.charset.Charset
 
-import better.files.File
+import better.files._
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import loaders._
 import modules._
 import org.joda.time.DateTime
 import plugins._
@@ -31,10 +32,10 @@ object Main extends App {
   Kernel.entitySpecs()
   modulesAndServices()
   plugins()
+  scheduledTasks()
 
   alterTables()
 
-  scheduledTasks()
   Inet.deviceTypes()
   Inet.deviceGroups()
   Inet.vlanResources()
@@ -76,7 +77,7 @@ object Main extends App {
     )
     for (i <- modules.indices) {
       ModuleConfig.create(mid = Some(i), dt = now, title = "Default", active = 1, uid = Some(1),
-        config = Some(File(s"bgbilling/${modules(i)}.conf").contentAsString)
+        config = Some(Resource.getAsString(s"bgbilling/${modules(i)}.conf"))
       )
     }
   }
