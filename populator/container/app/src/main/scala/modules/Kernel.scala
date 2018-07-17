@@ -83,9 +83,9 @@ object Kernel {
   // Справочники -> Другие -> Типы платежей
   //
   def contractPaymentTypes(): Unit = {
-    ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
-    ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
-    ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 1)
+    /* 1 */ ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
+    /* 2 */ ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
+    /* 3 */ ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 1)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -118,6 +118,16 @@ object Kernel {
     /* 16 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
     /* 17 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
     /* 18 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now)
+    /* 19 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now)
+    /* 20 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 1, lm = now)
+    /* 21 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 1, lm = now)
+    /* 22 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 1, lm = now)
+    /* 23 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 1, lm = now)
+    /* 24 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now)
+    /* 25 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 1, lm = now)
+    /* 26 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 1, lm = now)
+    /* 27 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 1, lm = now)
+    /* 28 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -149,6 +159,16 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 16)
     ContractParameterGroup.create(gid = 2, pid = 17)
     ContractParameterGroup.create(gid = 2, pid = 18)
+    ContractParameterGroup.create(gid = 2, pid = 19)
+    ContractParameterGroup.create(gid = 2, pid = 20)
+    ContractParameterGroup.create(gid = 2, pid = 21)
+    ContractParameterGroup.create(gid = 2, pid = 22)
+    ContractParameterGroup.create(gid = 2, pid = 23)
+    ContractParameterGroup.create(gid = 2, pid = 24)
+    ContractParameterGroup.create(gid = 2, pid = 25)
+    ContractParameterGroup.create(gid = 2, pid = 26)
+    ContractParameterGroup.create(gid = 2, pid = 27)
+    ContractParameterGroup.create(gid = 2, pid = 28)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -281,13 +301,13 @@ object Kernel {
   // Договор -> Новый договор
   //
   def contracts(): Unit = {
-    var cid = ContractActions.newContract(date = now, pattern_id = 1)
+    /* 23456 */ var cid = ContractActions.newContract(date = now.minusMonths(3), pattern_id = 1)
     ContractActions.updateParameterType1(cid = cid, pid = 6, value = "Швейк")
     ContractActions.updateParameterType1(cid = cid, pid = 7, value = "Йозеф")
-    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = now)
+    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = DateTime.parse("01.01.2018", dateFormatter))
     ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 1, pod = 4, floor = 5, flat = "6Б")
 
-    cid = ContractActions.newContract(date = now, pattern_id = 4)
+    /* 23457 */ cid = ContractActions.newContract(date = now, pattern_id = 4)
     ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
     ContractActions.updateListParameter(cid = cid, pid = 16, value = 6)
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 2, date1 = DateTime.parse("01.04.2018", dateFormatter))
@@ -350,7 +370,7 @@ object Kernel {
 
     var payment = Payment(comment = Some("Какой-то комментарий"), attributes = Map(
       "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 1),
+      "contractId" -> dr("contractId", 23456),
       "date" ->       dr("date", now.minusMonths(2).toString(dateTimeFormat)),
       "sum" ->        dr("sum", 100.0),
       "summa" ->      dr("summa", 100.0),
@@ -362,7 +382,19 @@ object Kernel {
 
     payment = Payment(comment = None, attributes = Map(
       "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 1),
+      "contractId" -> dr("contractId", 23456),
+      "date" ->       dr("date", now.minusMonths(3).toString(dateTimeFormat)),
+      "sum" ->        dr("sum", 70.0),
+      "summa" ->      dr("summa", 70.0),
+      "typeId" ->     dr("typeId", 2),
+      "userId" ->     dr("userId", 0)
+    ))
+    responseFuture = service.paymentUpdate(Some(payment), None)
+    Await.result(responseFuture, 15.seconds)
+
+    payment = Payment(comment = None, attributes = Map(
+      "id" ->         dr("id", -1),
+      "contractId" -> dr("contractId", 23456),
       "date" ->       dr("date", now.toString(dateTimeFormat)),
       "sum" ->        dr("sum", 10.0),
       "summa" ->      dr("summa", 10.0),
@@ -377,8 +409,8 @@ object Kernel {
   // Справочники -> Другие -> Договоры - шаблоны комментариев
   //
   def contractCommentPatterns(): Unit = {
-    /* 1 */ ContractCommentPatterns.create(title = "ФИО", pat = "${param_6} ${param_7} ${param_8}")
-    /* 2 */ ContractCommentPatterns.create(title = "Название", pat = "${param_14} ${param_16}")
+    /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_6} ${param_7} ${param_8}, Л/С ${param_2}")
+    /* 2 */ ContractCommentPatterns.create(title = "Название + ОПФ + Л/С", pat = "${param_14} ${param_16}, Л/С ${param_2}")
   }
 
   //--------------------------------------------------------------------------------------------------------------------

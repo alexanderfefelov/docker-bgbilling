@@ -1,6 +1,7 @@
 import java.nio.charset.Charset
 
 import better.files._
+import com.github.alexanderfefelov.bgbilling.api.action.kernel.ServiceActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
@@ -76,9 +77,9 @@ object Main extends App {
       /* 9 */ "mps"
     )
     for (i <- modules.indices) {
-      ModuleConfig.create(mid = Some(i), dt = now, title = "Default", active = 1, uid = Some(1),
-        config = Some(Resource.getAsString(s"bgbilling/${modules(i)}.conf"))
-      )
+      val id = ModuleConfig.create(mid = Some(i), dt = now, title = "Default", active = 1, uid = Some(1),
+        config = Some(Resource.getAsString(s"bgbilling/${modules(i)}.conf"))).id
+      ServiceActions.setModuleConfig(i, id)
     }
   }
 
