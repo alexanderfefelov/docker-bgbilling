@@ -24,6 +24,7 @@ object Main extends App {
   Kernel.bgsGroups()
   Kernel.addresses()
   Kernel.contractPaymentTypes()
+  Kernel.contractChargeTypes()
   Kernel.contractParametersPrefs()
   Kernel.contractParameterGroups()
   Kernel.сontractParameterType7Values()

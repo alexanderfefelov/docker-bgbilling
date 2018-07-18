@@ -89,6 +89,13 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Типы расходов
+  //
+  def contractChargeTypes(): Unit = {
+    /* 1 */ ContractChargeTypes.create(title = "Подключение", up = 0, `type` = 0, flag = 0, payback = false)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - параметры
   //
   def contractParametersPrefs(): Unit = {
@@ -239,16 +246,6 @@ object Kernel {
     // Добавляем стоимость
     var monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&500.0%type&1")
-    // Создаем тарифное поддерево модуля rscm
-    moduleId = TariffActions.bgBillingModuleId("rscm")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
-    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
-    // Создаем услугу
-    var serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
-    TariffActions.modifTariffNode_update(id = serviceId, data = "4")
-    // Добавляем стоимость
-    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
 
     tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
     TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
@@ -282,19 +279,59 @@ object Kernel {
     // Добавляем стоимость
     monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&1000.0%type&1")
+
+    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+
+    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    // Создаем тарифное поддерево модуля rscm
+    moduleId = TariffActions.bgBillingModuleId("rscm")
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    // Создаем услугу
+    var serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "4")
+    // Добавляем стоимость
+    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
+    // Создаем услугу
+    serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "5")
+    // Добавляем стоимость
+    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&0.0")
+    // Создаем услугу
+    serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "6")
+    // Добавляем стоимость
+    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&300.0")
+
+    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Товары", title_web = "Товары", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
     mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем услугу
     serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
-    TariffActions.modifTariffNode_update(id = serviceId, data = "4")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "7")
     // Добавляем стоимость
     costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
-
-    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&3000.0")
+    // Создаем услугу
+    serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "8")
+    // Добавляем стоимость
+    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&3100.0")
+    // Создаем услугу
+    serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    TariffActions.modifTariffNode_update(id = serviceId, data = "9")
+    // Добавляем стоимость
+    costId = TariffActions.modifTariffNode_create(parent = serviceId, mtree_id = mtreeId, typ = "cost")
+    TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&3200.0")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -441,7 +478,8 @@ object Kernel {
         |""".stripMargin
     /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
-      tpid = "", groups = 0,
+      tpid = "4,5", // Тарифы
+      groups = 0,
       mode = 1, // Дебет
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
@@ -452,7 +490,8 @@ object Kernel {
     )
     /* 2 */ ContractPattern.create(title = "Ф/Л, кредит",
       closesumma = 0.0f, // Лимит
-      tpid = "", groups = 0,
+      tpid = "4,5", // Тарифы
+      groups = 0,
       mode = 0, // Кредит
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
