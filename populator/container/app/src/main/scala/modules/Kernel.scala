@@ -3,6 +3,7 @@ package modules
 import com.github.alexanderfefelov.bgbilling.api.action.kernel._
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import loaders.Addresses
 import org.joda.time.DateTime
 import scalaxb._
 
@@ -53,6 +54,10 @@ object Kernel {
   // Справочники -> Адреса
   //
   def addresses(): Unit = {
+    Addresses.load()
+
+    /* Теперь адреса загружаются из файла
+
     val countryId = AddressCountry.create(title = "РФ").id
 
     var cityId = AddressCity.create(countryId = countryId, title = "Звенигород г.").id
@@ -77,6 +82,7 @@ object Kernel {
     AddressHouse.create(streetid = streetId, house = 10, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
     AddressHouse.create(streetid = streetId, house = 12, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
     AddressHouse.create(streetid = streetId, house = 13, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
+    */
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -370,7 +376,7 @@ object Kernel {
     ContractActions.updateParameterType1(cid = cid, pid = 6, value = "Швейк")
     ContractActions.updateParameterType1(cid = cid, pid = 7, value = "Йозеф")
     ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = DateTime.parse("01.01.2018", dateFormatter))
-    ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 1, pod = 4, floor = 5, flat = "6Б")
+    ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 10000, pod = 4, floor = 5, flat = "6Б")
 
     /* 23457 */ cid = ContractActions.newContract(date = now, pattern_id = 4)
     ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")

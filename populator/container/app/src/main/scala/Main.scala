@@ -5,7 +5,6 @@ import com.github.alexanderfefelov.bgbilling.api.action.kernel.ServiceActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
-import loaders.Addresses
 import modules._
 import org.joda.time.{DateTime, Seconds}
 import plugins._
@@ -63,8 +62,6 @@ object Main extends App {
   execute("Kernel.contracts", Kernel.contracts())
   execute("Kernel.contractComments", Kernel.contractComments())
   execute("Kernel.payments", Kernel.payments())
-
-  execute("Addresses.load", Addresses.load())
 
   println("Finished. Press Ctrl+C")
 
