@@ -19,7 +19,9 @@ ENV BGBILLING_DATA=$BGBILLING_HOME/data \
   BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap \
   FTP_DATA_DIR=ftp://bgbilling.ru/pub/bgbilling/7.1/data \
 \
-  DEBIAN_FRONTEND=noninteractive
+  DEBIAN_FRONTEND=noninteractive \
+\
+  LANG=C.UTF-8
 
 RUN apt-get -qq update \
   && apt-get -qq install --yes mysql-client unzip \
