@@ -5,9 +5,8 @@ import com.github.alexanderfefelov.bgbilling.api.action.kernel.ServiceActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
-import loaders._
 import modules._
-import org.joda.time.DateTime
+import org.joda.time.{DateTime, Seconds}
 import plugins._
 import scalaxb._
 import scalikejdbc._
@@ -17,41 +16,52 @@ object Main extends App {
   implicit val charset: Charset = Charset.forName("UTF-8")
   val now = DateTime.now()
 
+  private def execute(name: String, f: => Unit): Unit = {
+    System.out.print(s"$name ")
+    System.out.flush()
+    val start = DateTime.now()
+    f
+    val end = DateTime.now()
+    val duration = Seconds.secondsBetween(start, end)
+    System.out.println(s"$duration second(s)")
+  }
+
+
   Db.init()
 
-  Kernel.dynamicCodeRecompile()
-  moduleConfigs()
-  Kernel.bgsGroups()
-  Kernel.addresses()
-  Kernel.contractPaymentTypes()
-  Kernel.contractChargeTypes()
-  Kernel.contractParametersPrefs()
-  Kernel.contractParameterGroups()
-  Kernel.сontractParameterType7Values()
-  Kernel.domains()
-  Kernel.contractCommentPatterns()
-  Kernel.contractPatterns()
-  Kernel.entitySpecs()
-  modulesAndServices()
-  plugins()
-  scheduledTasks()
+  execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
+  execute("moduleConfigs", moduleConfigs())
+  execute("Kernel.bgsGroups", Kernel.bgsGroups())
+  execute("Kernel.addresses", Kernel.addresses())
+  execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes())
+  execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes())
+  execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs())
+  execute("Kernel.contractParameterGroups", Kernel.contractParameterGroups())
+  execute("Kernel.сontractParameterType7Values", Kernel.сontractParameterType7Values())
+  execute("Kernel.domains", Kernel.domains())
+  execute("Kernel.contractCommentPatterns", Kernel.contractCommentPatterns())
+  execute("Kernel.contractPatterns", Kernel.contractPatterns())
+  execute("Kernel.entitySpecs", Kernel.entitySpecs())
+  execute("modulesAndServices", modulesAndServices())
+  execute("plugins", plugins())
+  execute("scheduledTasks", scheduledTasks())
 
-  alterTables()
+  execute("alterTables", alterTables())
 
-  Inet.deviceTypes()
-  Inet.deviceGroups()
-  Inet.vlanResources()
-  Inet.ipResources()
-  Inet.trafficTypes()
-  Inet.trafficTypeLinks()
-  Inet.options()
-  Inet.devices()
-  Inet.servTypes()
-  Inet.deviceReload()
-  Kernel.tariffs()
-  Kernel.contracts()
-  Kernel.contractComments()
-  Kernel.payments()
+  execute("Inet.deviceTypes", Inet.deviceTypes())
+  execute("Inet.deviceGroups", Inet.deviceGroups())
+  execute("Inet.vlanResources", Inet.vlanResources())
+  execute("Inet.ipResources", Inet.ipResources())
+  execute("Inet.trafficTypes", Inet.trafficTypes())
+  execute("Inet.trafficTypeLinks", Inet.trafficTypeLinks())
+  execute("Inet.options", Inet.options())
+  execute("Inet.devices", Inet.devices())
+  execute("Inet.servTypes", Inet.servTypes())
+  execute("Inet.deviceReload", Inet.deviceReload())
+  execute("Kernel.tariffs", Kernel.tariffs())
+  execute("Kernel.contracts", Kernel.contracts())
+  execute("Kernel.contractComments", Kernel.contractComments())
+  execute("Kernel.payments", Kernel.payments())
 
   println("Finished. Press Ctrl+C")
 
