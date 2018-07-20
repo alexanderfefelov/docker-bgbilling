@@ -3,7 +3,7 @@ package modules
 import com.github.alexanderfefelov.bgbilling.api.action.kernel._
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
-import loaders.Addresses
+import loaders._
 import org.joda.time.DateTime
 import scalaxb._
 
@@ -55,34 +55,6 @@ object Kernel {
   //
   def addresses(): Unit = {
     Addresses.load()
-
-    /* Теперь адреса загружаются из файла
-
-    val countryId = AddressCountry.create(title = "РФ").id
-
-    var cityId = AddressCity.create(countryId = countryId, title = "Звенигород г.").id
-
-    var streetId = AddressStreet.create(cityid = cityId, title = "Абрикосовая ул.", pIndex = "143180").id
-    AddressHouse.create(streetid = streetId, house = 1, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 1, frac = Some("Б"), amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 2, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-
-    streetId = AddressStreet.create(cityid = cityId, title = "Виноградная ул.", pIndex = "143180").id
-    AddressHouse.create(streetid = streetId, house = 4, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 6, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-
-    streetId = AddressStreet.create(cityid = cityId, title = "Тенистая ул.", pIndex = "143180").id
-    AddressHouse.create(streetid = streetId, house = 1, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 2, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 3, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-
-    cityId = AddressCity.create(countryId = countryId, title = "Одинцовский р-н, Ершово с.").id
-
-    streetId = AddressStreet.create(cityid = cityId, title = "-", pIndex = "143055").id
-    AddressHouse.create(streetid = streetId, house = 10, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 12, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    AddressHouse.create(streetid = streetId, house = 13, frac = None, amount = 0, comment = None, areaid = 0, quarterid = 0, boxIndex = None, dt = None, podDiapazon = "", pod = "").id
-    */
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -128,7 +100,7 @@ object Kernel {
     //
     /* 14 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now)
     /* 15 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now)
-    /* 16 */ ContractParametersPref.create(pt = 7, title = "Организационно-правовая форма", sort = 1, script = "", flags = 1, lm = now)
+    /* 16 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 1, lm = now)
     /* 17 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now)
     /* 18 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now)
     /* 19 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now)
@@ -192,12 +164,6 @@ object Kernel {
     /* 2 */ ContractParameterType7Values.create(pid = 9, title = "Удостоверение личности военнослужащего РФ")
     /* 3 */ ContractParameterType7Values.create(pid = 9, title = "Военный билет")
     /* 4 */ ContractParameterType7Values.create(pid = 9, title = "Временное удостоверение личности гражданина РФ")
-
-    /* 5 */ ContractParameterType7Values.create(pid = 16, title = "ИП")
-    /* 6 */ ContractParameterType7Values.create(pid = 16, title = "ООО")
-    /* 7 */ ContractParameterType7Values.create(pid = 16, title = "ЗАО")
-    /* 8 */ ContractParameterType7Values.create(pid = 16, title = "ПАО")
-    /* 9 */ ContractParameterType7Values.create(pid = 16, title = "ОАО")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -372,23 +338,15 @@ object Kernel {
   // Договор -> Новый договор
   //
   def contracts(): Unit = {
-    /* 23456 */ var cid = ContractActions.newContract(date = now.minusMonths(3), pattern_id = 1)
-    ContractActions.updateParameterType1(cid = cid, pid = 6, value = "Швейк")
-    ContractActions.updateParameterType1(cid = cid, pid = 7, value = "Йозеф")
-    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 1, date1 = DateTime.parse("01.01.2018", dateFormatter))
-    ContractActions.updateAddressInfo(cid = cid, pid = 3, hid = 10000, pod = 4, floor = 5, flat = "6Б")
-
-    /* 23457 */ cid = ContractActions.newContract(date = now, pattern_id = 4)
-    ContractActions.updateParameterType1(cid = cid, pid = 14, value = "Вектор")
-    ContractActions.updateListParameter(cid = cid, pid = 16, value = 6)
-    ContractActions.updateContractTariffPlan(id = 0, cid = cid, tpid = 2, date1 = DateTime.parse("01.04.2018", dateFormatter))
+    NaturalPersons.load()
+    LegalEntities.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Договор -> Открыть договор -> ДОГОВОР -> Примечания
   //
   def contractComments(): Unit = {
-    ContractComment.create(cid = 23456, uid = 1, subject = "Комплексный фторид церия как электронное облако", comment =
+    ContractComment.create(cid = 100, uid = 1, subject = "Комплексный фторид церия как электронное облако", comment =
       """
         |Руководствуясь периодическим законом, бертолетова соль испаряет белок так, как это могло влиять на реакцию Дильса-Альдера. Самосогласованная модель предсказывает, что при определенных условиях пламя сублимирует электролиз. В самом общем случае выпаривание сублимирует краситель.
         |
@@ -397,7 +355,7 @@ object Kernel {
         |Цепочка ДНК синтезирует сернистый газ. Подкисление эффективно адсорбирует рацемический 238 изотоп урана. Биуретовая реакция гидролизует ионный кетон. Электролиз методически нейтрализует пептидный белый пушистый осадок, поэтому перед употреблением взбалтывают. Голубой гель неустойчив.
         |
       """.stripMargin, dt = now.minusMonths(1), visibled = false)
-    ContractComment.create(cid = 23456, uid = 1, subject = "Плазменный газ: основные моменты", comment =
+    ContractComment.create(cid = 100, uid = 1, subject = "Плазменный газ: основные моменты", comment =
       """
         |Излучение противоречиво испускает векторный фронт. Поток отклоняет гидродинамический удар, как и предсказывает общая теория поля. Фронт устойчив в магнитном поле.
         |
@@ -406,7 +364,7 @@ object Kernel {
         |Еще в ранних работах Л.Д.Ландау показано, что атом гомогенно расщепляет газ. Фронт квантово разрешен. Ударная волна спонтанно ускоряет гидродинамический удар. Магнит когерентно вращает расширяющийся бозе-конденсат. В литературе неоднократно описано, как расслоение мономолекулярно сжимает ультрафиолетовый эксимер в полном соответствии с законом сохранения энергии.
         |
       """.stripMargin, dt = now.minusWeeks(1), visibled = false)
-    ContractComment.create(cid = 23457, uid = 1, subject = "Стремящийся интеграл Гамильтона: гипотеза и теории", comment =
+    ContractComment.create(cid = 200, uid = 1, subject = "Стремящийся интеграл Гамильтона: гипотеза и теории", comment =
       """
         |График функции многих переменных, конечно, восстанавливает комплексный интеграл по поверхности. Тем не менее, лист Мёбиуса существенно обуславливает детерминант. Подынтегральное выражение специфицирует ротор векторного поля. Не факт, что начало координат трансформирует метод последовательных приближений. Геодезическая линия отражает эмпирический определитель системы линейных уравнений.
         |
@@ -415,7 +373,7 @@ object Kernel {
         |Очевидно проверяется, что график функции переворачивает тригонометрический двойной интеграл. Метод последовательных приближений притягивает ряд Тейлора. Ортогональный определитель охватывает изоморфный неопределенный интеграл.
         |
       """.stripMargin, dt = now.minusDays(1), visibled = false)
-    ContractComment.create(cid = 23457, uid = 1, subject = "Почему неравномерен параллакс?", comment =
+    ContractComment.create(cid = 200, uid = 1, subject = "Почему неравномерен параллакс?", comment =
       """
         |Прямое восхождение представляет собой далекий перигелий. Декретное время перечеркивает центральный эффективный диаметp. Юлианская дата притягивает космический сарос, день этот пришелся на двадцать шестое число месяца карнея, который у афинян называется метагитнионом.
         |
@@ -441,7 +399,7 @@ object Kernel {
 
     var payment = Payment(comment = Some("Какой-то комментарий"), attributes = Map(
       "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 23456),
+      "contractId" -> dr("contractId", 100),
       "date" ->       dr("date", now.minusMonths(2).toString(dateTimeFormat)),
       "sum" ->        dr("sum", 100.0),
       "summa" ->      dr("summa", 100.0),
@@ -453,7 +411,7 @@ object Kernel {
 
     payment = Payment(comment = None, attributes = Map(
       "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 23456),
+      "contractId" -> dr("contractId", 100),
       "date" ->       dr("date", now.minusMonths(3).toString(dateTimeFormat)),
       "sum" ->        dr("sum", 70.0),
       "summa" ->      dr("summa", 70.0),
@@ -465,7 +423,7 @@ object Kernel {
 
     payment = Payment(comment = None, attributes = Map(
       "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 23456),
+      "contractId" -> dr("contractId", 100),
       "date" ->       dr("date", now.toString(dateTimeFormat)),
       "sum" ->        dr("sum", 10.0),
       "summa" ->      dr("summa", 10.0),
@@ -481,7 +439,7 @@ object Kernel {
   //
   def contractCommentPatterns(): Unit = {
     /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_6} ${param_7} ${param_8}, Л/С ${param_2}")
-    /* 2 */ ContractCommentPatterns.create(title = "Название + ОПФ + Л/С", pat = "${param_14} ${param_16}, Л/С ${param_2}")
+    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_14}, Л/С ${param_2}")
   }
 
   //--------------------------------------------------------------------------------------------------------------------

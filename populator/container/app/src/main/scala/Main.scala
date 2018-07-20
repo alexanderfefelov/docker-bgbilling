@@ -23,7 +23,7 @@ object Main extends App {
     f
     val end = DateTime.now()
     val duration = Seconds.secondsBetween(start, end)
-    System.out.println(s"$duration second(s)")
+    System.out.println(duration)
   }
 
 

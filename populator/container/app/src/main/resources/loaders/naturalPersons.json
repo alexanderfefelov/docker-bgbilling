@@ -1,0 +1,60 @@
+{
+  "naturalPersons": [
+    {
+      "id": 100,
+      "contractNo": "А100",
+      "contractDate": "20171101",
+      "name": "Махнёв Эмиль Платонович",
+      "login": "np_100",
+      "password": "conoheyifu"
+    },
+    {
+      "id": 101,
+      "contractNo": "А101",
+      "contractDate": "20170121",
+      "name": "Рыжов Мартьян Левович",
+      "login": "np_101",
+      "password": "qotewozeqi"
+    },
+    {
+      "id": 102,
+      "contractNo": "А102",
+      "contractDate": "20170303",
+      "name": "Типалова Любовь Тимофеевна",
+      "login": "np_102",
+      "password": "juyerifiwi"
+    },
+    {
+      "id": 103,
+      "contractNo": "А103",
+      "contractDate": "20170112",
+      "name": "Шерков Егор Ерофеевич",
+      "login": "np_103",
+      "password": "nerejisero"
+    },
+    {
+      "id": 104,
+      "contractNo": "А104",
+      "contractDate": "20171005",
+      "name": "Кобонова Светлана Константиновна",
+      "login": "np_104",
+      "password": "qohunedede"
+    },
+    {
+      "id": 105,
+      "contractNo": "А105",
+      "contractDate": "20170801",
+      "name": "Ельчукова Анастасия Алексеевна",
+      "login": "np_105",
+      "password": "getisojewa"
+    },
+    {
+      "id": 106,
+      "contractNo": "А106",
+      "contractDate": "20170916",
+      "name": "Кравчук Порфирий Михеевич",
+      "login": "np_106",
+      "password": "gegijeqife"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "legalEntities": [
+    {
+      "id": 200,
+      "contractNo": "А200",
+      "contractDate": "20160101",
+      "name": "Вектор ООО",
+      "budgetUnit": false,
+      "login": "le_200",
+      "password": "mobowimihe"
+    },
+    {
+      "id": 201,
+      "contractNo": "А201",
+      "contractDate": "20161114",
+      "name": "Ромашка ООО",
+      "budgetUnit": false,
+      "login": "le_201",
+      "password": "hamiqeqado"
+    },
+    {
+      "id": 202,
+      "contractNo": "А202",
+      "contractDate": "20171006",
+      "name": "ПромСбытЦентр ЗАО",
+      "budgetUnit": false,
+      "login": "le_202",
+      "password": "keviyeduwi"
+    },
+    {
+      "id": 203,
+      "contractNo": "А203",
+      "contractDate": "20180701",
+      "name": "Охранное агентство \"Холмс\" ООО",
+      "budgetUnit": false,
+      "login": "le_203",
+      "password": "holoyohawi"
+    },
+    {
+      "id": 204,
+      "contractNo": "А204",
+      "contractDate": "20160707",
+      "name": "Чапаев В. И. ИП",
+      "budgetUnit": false,
+      "login": "le_204",
+      "password": "homaxizawe"
+    },
+    {
+      "id": 205,
+      "contractNo": "А205",
+      "contractDate": "20160119",
+      "name": "МБОУ СОШ № 19",
+      "budgetUnit": true,
+      "login": "le_205",
+      "password": "noyoradira"
+    },
+    {
+      "id": 206,
+      "contractNo": "А206",
+      "contractDate": "20160101",
+      "name": "Лифт-中 ООО",
+      "budgetUnit": false,
+      "login": "le_206",
+      "password": "xeyidepuso"
+    }
+  ]
+}
