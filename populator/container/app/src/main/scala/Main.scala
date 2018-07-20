@@ -5,6 +5,7 @@ import com.github.alexanderfefelov.bgbilling.api.action.kernel.ServiceActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import loaders._
 import modules._
 import org.joda.time.{DateTime, Seconds}
 import plugins._
@@ -31,6 +32,7 @@ object Main extends App {
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
   execute("moduleConfigs", moduleConfigs())
+  execute("Kernel.users", Kernel.users())
   execute("Kernel.bgsGroups", Kernel.bgsGroups())
   execute("Kernel.addresses", Kernel.addresses())
   execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes())
