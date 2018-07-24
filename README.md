@@ -21,7 +21,7 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 | `bgbilling-activemq`        | Сервер ActiveMQ | `activemq.bgbilling.local`
 | `bgbilling-graphite-statsd` | Сервер Graphite и StatsD | `graphite.bgbilling.local`, `statsd.bgbilling.local`
 | `bgbilling-grafana`         | Сервер Grafana | `grafana.bgbilling.local`
-| `bgbilling-telegraf`        | Сервер Telegraf | `telegraf.bgbilling.local`
+| `bgbilling-telegraf`        | Сенсор Telegraf | `telegraf.bgbilling.local`
 
 Все контейнеры могут работать на одном физическом хосте. При необходимости контейнеры можно расположить
 на разных физических хостах в произвольных комбинациях.
@@ -39,6 +39,10 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 * База данных
 
 Для MySQL реализована master-slave репликация. Для slave-серверов включен режим `super_read_only`.
+
+* Мониторинг
+
+Сбор метрик - JMX через Java Agent (для Java-приложений) и Telegraf (для MySQL). Хранилище метрик - Graphite, визуализация - Grafana.
 
 ## Как это запустить?
 

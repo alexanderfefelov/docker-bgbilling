@@ -27,6 +27,8 @@ then
     docker rm --force --volumes bgbilling-mysql-master
     docker volume rm bgbilling-mysql-master
 
+    docker rm --force --volumes bgbilling-telegraf
+
     docker rm --force --volumes bgbilling-grafana
 
     docker rm --force --volumes bgbilling-graphite-statsd
