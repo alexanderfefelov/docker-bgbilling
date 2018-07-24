@@ -62,7 +62,6 @@ object Main extends App {
   execute("Inet.deviceReload", Inet.deviceReload())
   execute("Kernel.tariffs", Kernel.tariffs())
   execute("Kernel.contracts", Kernel.contracts())
-  execute("Kernel.contractComments", Kernel.contractComments())
   execute("Kernel.payments", Kernel.payments())
 
   println("Finished. Press Ctrl+C")

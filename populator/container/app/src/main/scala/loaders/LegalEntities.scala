@@ -2,6 +2,7 @@ package loaders
 
 import better.files.Resource
 import com.github.alexanderfefelov.bgbilling.api.action.kernel.ContractActions
+import com.github.alexanderfefelov.bgbilling.api.db.repository.ContractComment
 import io.circe.generic.auto._
 import io.circe.parser._
 import org.joda.time.DateTime
@@ -15,7 +16,9 @@ case class LegalEntity(
   name: String,
   budgetUnit: Boolean,
   login: String,
-  password: String
+  password: String,
+  note1Option: Option[String],
+  note2Option: Option[String]
 )
 
 object LegalEntities {
@@ -31,6 +34,8 @@ object LegalEntities {
           ContractActions.updateContractPassword(c.id, c.password)
           ContractActions.updateParameterType1(cid = c.id, pid = 1, value = c.login)
           ContractActions.updateParameterType1(cid = c.id, pid = 14, value = c.name)
+          c.note1Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
+          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = false))
         }
       case Left(error) =>
         throw new RuntimeException(error)
