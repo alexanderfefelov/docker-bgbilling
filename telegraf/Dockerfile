@@ -1,0 +1,3 @@
+FROM telegraf
+
+ADD container/ /
