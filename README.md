@@ -20,6 +20,7 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 | `bgbilling-mysql-slave`     | Slave-сервер MySQL для отчётов, read-only | `slave.mysql.bgbilling.local`
 | `bgbilling-activemq`        | Сервер ActiveMQ | `activemq.bgbilling.local`
 | `bgbilling-graphite-statsd` | Сервер Graphite и StatsD | `graphite.bgbilling.local`, `statsd.bgbilling.local`
+| `bgbilling-grafana`         | Сервер Grafana | `grafana.bgbilling.local`
 
 Все контейнеры могут работать на одном физическом хосте. При необходимости контейнеры можно расположить
 на разных физических хостах в произвольных комбинациях.
