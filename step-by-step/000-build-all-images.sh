@@ -10,5 +10,6 @@ build mysql \
 && build bgscheduler \
 && build bginetaccess \
 && build bginetaccounting \
+&& build grafana \
 && build populator \
 && build telegraf

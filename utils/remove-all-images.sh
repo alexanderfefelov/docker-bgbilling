@@ -8,6 +8,7 @@ then
     docker rmi alexanderfefelov/graalvm-polyglot
     docker rmi alexanderfefelov/populator
     docker rmi alexanderfefelov/bgbilling-telegraf
+    docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-mysql
     docker rmi alexanderfefelov/bgbilling-scheduler
     docker rmi alexanderfefelov/bgbilling-billing
