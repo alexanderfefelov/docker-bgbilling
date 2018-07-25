@@ -33,8 +33,8 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 * JVM
 
 В качестве Java-машины для всех приложений BGBilling используется [GraalVM](https://www.graalvm.org/). Это позволяет
-выполнять код на JavaScript, Python 3, Ruby и R из BGBilling ([примеры](dyn/container/dyn/demo/)), и наоборот, использовать [API BGBilling](https://bgbilling.ru/v7.1/javadoc/index.html)
-из кода на перечисленных языках ([примеры](dyn/container/polyglot/demo/)).
+выполнять код на JavaScript, Python 3, Ruby и R из BGBilling ([примеры](dyn/container/dyn/demo/)), и наоборот,
+использовать [API BGBilling](https://bgbilling.ru/v7.1/javadoc/index.html) из кода на перечисленных языках ([примеры](dyn/container/polyglot/demo/)).
 
 * База данных
 
@@ -42,7 +42,9 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
 * Мониторинг
 
-Сбор метрик - JMX через Java Agent (для Java-приложений) и Telegraf (для MySQL). Хранилище метрик - Graphite, визуализация - Grafana.
+Сбор метрик - [JMX через Java Agent](https://github.com/logzio/jmx2graphite) (для Java-приложений)
+и [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) (для MySQL). Хранилище метрик - [Graphite](https://graphiteapp.org/),
+визуализация - [Grafana](https://grafana.com/).
 
 ## Как это запустить?
 
@@ -56,5 +58,6 @@ cd docker-bgbilling/step-by-step
 ## Как это удалить?
 
 ```bash
-utils/remove-all.sh
+utils/remove-all-containers.sh
+utils/remove-all-images.sh
 ```
