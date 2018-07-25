@@ -4,7 +4,7 @@ cd ${0%${0##*/}}.
 
 . ./setenv.sh
 
-JMX="-javaagent:${BGBILLING_SERVER_DIR}/lib/jmx2graphite-1.2.4-javaagent.jar=SERVICE_NAME=bgbilling-scheduler;GRAPHITE_HOSTNAME=graphite.bgbilling.local"
+JMX="-javaagent:${BGBILLING_SERVER_DIR}/lib/ext/jmx2graphite-1.2.4-javaagent.jar=SERVICE_NAME=bgbilling-scheduler;GRAPHITE_HOSTNAME=graphite.bgbilling.local"
 CLASSPATH=${BGBILLING_SERVER_DIR}:${BGBILLING_SERVER_DIR}/lib/ext/bgcommon-boot.jar:${BGBILLING_SERVER_DIR}/lib/ext/*
 COMMON_PARAMS="${JMX} -Dnetworkaddress.cache.ttl=3600 -Djava.net.preferIPv4Stack=true -Djava.endorsed.dirs=${BGBILLING_SERVER_DIR}/lib/endorsed:${JAVA_HOME}/lib/endorsed"
 PARAMS="-Dboot.info=1 -Dapp.name=BGScheduler -Dlog4j.configuration=data/log4j.xml -Dlog.dir.path=log/ -Dlog.prefix=scheduler"
