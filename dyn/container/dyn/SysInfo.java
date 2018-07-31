@@ -11,6 +11,7 @@ public class SysInfo {
         modules();
         runtime();
         systemProperties();
+        environment();
     }
 
     private static void modules() {
@@ -58,6 +59,18 @@ public class SysInfo {
         System.getProperties().forEach((k, v) -> properties.put((String) k, (String) v));
         for (String key : properties.keySet()) {
             System.out.println(key + ": " + properties.get(key));
+        }
+        System.out.println();
+    }
+
+    private static void environment() {
+        System.out.println(String.join(NL,
+            "Environment",
+            HR
+        ));
+        Map<String, String> env = System.getenv();
+        for (String key : env.keySet()) {
+            System.out.println(key + "=" + env.get(key));
         }
         System.out.println();
     }
