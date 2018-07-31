@@ -39,7 +39,7 @@ object Main extends App {
   execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes())
   execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs())
   execute("Kernel.contractParameterGroups", Kernel.contractParameterGroups())
-  execute("Kernel.сontractParameterType7Values", Kernel.сontractParameterType7Values())
+  execute("Kernel.contractParameterType7Values", Kernel.contractParameterType7Values())
   execute("Kernel.domains", Kernel.domains())
   execute("Kernel.contractCommentPatterns", Kernel.contractCommentPatterns())
   execute("Kernel.contractPatterns", Kernel.contractPatterns())
