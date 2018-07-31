@@ -1,10 +1,8 @@
+FROM alexanderfefelov/bg-constants
+
 FROM openjdk:8-jdk
 
-ENV BGINETACCESS_VERSION=7.1_37 \
-\
-  BGINETACCESS_HOME=/bginetaccess \
-\
-  DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -qq update \
   && apt-get -qq install --yes unzip \

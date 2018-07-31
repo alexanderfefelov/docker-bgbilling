@@ -1,10 +1,8 @@
+FROM alexanderfefelov/bg-constants
+
 FROM openjdk:8-jdk
 
-ENV BGINETACCOUNTING_VERSION=7.1_37 \
-\
-  BGINETACCOUNTING_HOME=/bginetaccounting \
-\
-  DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -qq update \
   && apt-get -qq install --yes unzip \

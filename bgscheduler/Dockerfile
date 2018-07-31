@@ -1,5 +1,7 @@
 FROM alexanderfefelov/bgbilling-base
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BGBILLING_HOME/script/bgscheduler \
   && ln -s $BGBILLING_HOME/script/bgscheduler /etc/init.d/bgscheduler \
   && update-rc.d bgscheduler defaults \
