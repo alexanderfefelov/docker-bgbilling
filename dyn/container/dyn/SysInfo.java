@@ -69,7 +69,9 @@ public class SysInfo {
             HR
         ));
         Map<String, String> env = System.getenv();
-        for (String key : env.keySet()) {
+        List<String> keys = new ArrayList(env.keySet());
+        Collections.sort(keys);
+        for (String key : keys) {
             System.out.println(key + "=" + env.get(key));
         }
         System.out.println();
