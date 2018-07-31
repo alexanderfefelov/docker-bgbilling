@@ -14,6 +14,6 @@ cat $BGINETACCESS_HOME/inet-access.template.xml \
   | sed 's@ROOT_DEVICE_ID@'"$ROOT_DEVICE_ID"'@' \
   > $BGINETACCESS_HOME//inet-access.xml
 
-$BGINETACCESS_HOME//update.sh
+$BGINETACCESS_HOME/update.sh
 
 service bginet_access start
