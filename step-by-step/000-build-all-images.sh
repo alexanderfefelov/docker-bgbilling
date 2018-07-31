@@ -4,8 +4,7 @@ function build {
     (cd ../$1 && ./build.sh)
 }
 
-build bg-constants \
-&& build bgbilling-base \
+build bgbilling-base \
 && build bgbilling \
 && build bgscheduler \
 && build bginetaccess \

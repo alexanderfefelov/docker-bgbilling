@@ -1,6 +1,6 @@
-FROM alexanderfefelov/bg-constants
-
 FROM openjdk:8-jdk
+
+${INC}
 
 ENV DEBIAN_FRONTEND=noninteractive
 

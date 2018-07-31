@@ -1,6 +1,6 @@
-FROM alexanderfefelov/bg-constants
-
 FROM alexanderfefelov/graalvm-polyglot
+
+${INC}
 
 ENV BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap \
 \

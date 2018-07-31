@@ -1,5 +1,3 @@
-FROM scratch
-
 ENV LANG=C.UTF-8 \
 \
   FTP_DATA_DIR=ftp://bgbilling.ru/pub/bgbilling/7.1/data \
