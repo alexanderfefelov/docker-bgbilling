@@ -5,8 +5,6 @@
 [ -z "$MODULE_ID" ] && echo MODULE_ID_ID is required && exit 1
 [ -z "$ROOT_DEVICE_ID" ] && echo ROOT_DEVICE_ID is required && exit 1
 
-export BGINETACCOUNTING_HOME=/bginetaccounting
-
 cat $BGINETACCOUNTING_HOME/inet-accounting.template.xml \
   | sed 's@APP_NAME@'"$APP_NAME"'@' \
   | sed 's@APP_ID@'"$APP_ID"'@' \

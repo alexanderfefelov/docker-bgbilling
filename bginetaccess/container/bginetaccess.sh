@@ -5,8 +5,6 @@
 [ -z "$MODULE_ID" ] && echo MODULE_ID_ID is required && exit 1
 [ -z "$ROOT_DEVICE_ID" ] && echo ROOT_DEVICE_ID is required && exit 1
 
-export BGINETACCESS_HOME=/bginetaccess
-
 cat $BGINETACCESS_HOME/inet-access.template.xml \
   | sed 's@APP_NAME@'"$APP_NAME"'@' \
   | sed 's@APP_ID@'"$APP_ID"'@' \

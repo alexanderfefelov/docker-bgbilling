@@ -2,6 +2,8 @@ FROM scratch
 
 ENV LANG=C.UTF-8 \
 \
+  FTP_DATA_DIR=ftp://bgbilling.ru/pub/bgbilling/7.1/data \
+\
   BGBILLING_VERSION=7.1_1001 \
   UPDATE_SET=20180730205357 \
 \

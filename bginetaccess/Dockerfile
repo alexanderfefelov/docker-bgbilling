@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -qq update \
   && apt-get -qq install --yes unzip \
   && apt-get -qq clean \
-  && wget --quiet ftp://bgbilling.ru/pub/bgbilling/7.1/data/BGInetAccess_$BGINETACCESS_VERSION.zip \
+  && wget --quiet $FTP_DATA_DIR/BGInetAccess_$BGINETACCESS_VERSION.zip \
   && unzip -qq BGInetAccess_$BGINETACCESS_VERSION.zip \
   && mv BGInetAccess $BGINETACCESS_HOME \
   && rm --force BGInetAccess_$BGINETACCESS_VERSION.zip \
