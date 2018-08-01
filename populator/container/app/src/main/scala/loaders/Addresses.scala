@@ -20,13 +20,13 @@ object Addresses {
         for (country <- data.countries) {
           sql"insert into address_country (id, title) values (${country.id}, ${country.name})".update.apply()
 
-          for (city <-country.cities) {
+          for (city <- country.cities) {
             sql"insert into address_city (id, country_id, title) values (${city.id}, ${country.id}, ${city.name})".update.apply()
 
             for (street <- city.streets) {
               sql"""insert into address_street (id, cityid, title, p_index) values (${street.id}, ${city.id}, ${street.name}, "")""".update.apply()
 
-              for (house <-street.houses) {
+              for (house <- street.houses) {
                 val r = """^(\d*)(.*)""".r
                 house.number match {
                   case r(y, z) => (y, z)
