@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export BGBILLING_HOME=/bgbilling
-
 # Если в каталоге bootstrap существуют zip-файлы, считаем их модулями (плагинами),
 # извлекаем из них server.jar, переносим server.jar в lib/app, и удаляем zip-файлы
 #
