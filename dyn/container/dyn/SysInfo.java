@@ -45,9 +45,9 @@ public class SysInfo {
             "Memory free / max / total, MB: "
                 + Runtime.getRuntime().freeMemory()/MB + " / "
                 + Runtime.getRuntime().maxMemory()/MB + " / "
-                + Runtime.getRuntime().totalMemory()/MB,
-            NL
+                + Runtime.getRuntime().totalMemory()/MB
         ));
+        System.out.println();
     }
 
     private static void systemProperties() {

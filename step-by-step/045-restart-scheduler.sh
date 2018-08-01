@@ -1,4 +1,4 @@
 #!/bin/bash
 
-(cd ../bgscheduler && ./run.sh) \
+docker restart bgbilling-scheduler \
 && docker logs -f bgbilling-scheduler
