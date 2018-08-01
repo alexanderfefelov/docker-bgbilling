@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [ -z "$APP_NAME" ] && echo APP_NAME is required && exit 1
 [ -z "$APP_ID" ] && echo APP_ID is required && exit 1

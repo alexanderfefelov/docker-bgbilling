@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CONTAINER_NAME=bgbilling-accounting
 
-function run {
+run() {
     docker run \
         --name $CONTAINER_NAME \
         --detach \

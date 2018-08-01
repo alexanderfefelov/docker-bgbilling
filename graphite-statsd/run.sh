@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CONTAINER_NAME=bgbilling-graphite-statsd
 
-function run {
+run() {
     docker run \
       --name $CONTAINER_NAME \
       --detach \

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 read -p "All containers and volumes will be removed. Are you sure? " -n 1 -r
 echo

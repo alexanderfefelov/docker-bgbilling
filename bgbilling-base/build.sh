@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 INC="$(<"../bg-constants/Dockerfile.inc")" envsubst \$INC < "Dockerfile.in" > Dockerfile
 mkdir container

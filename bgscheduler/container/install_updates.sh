@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 service bgscheduler stop
 

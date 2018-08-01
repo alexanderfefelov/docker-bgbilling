@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-function build {
+build() {
     (cd ../$1 && ./build.sh)
 }
 

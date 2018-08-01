@@ -1,6 +1,6 @@
 TIMEOUT=600
 
-function run_master {
+run_master() {
     docker run \
       --name $1 \
       --detach \
@@ -14,7 +14,7 @@ function run_master {
     && docker run --rm --link $1:foobar martin/wait -t $TIMEOUT
 }
 
-function run_slave {
+run_slave() {
     docker run \
       --name $1 \
       --detach \

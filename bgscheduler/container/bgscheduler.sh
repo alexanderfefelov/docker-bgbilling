@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Если в каталоге bootstrap существуют zip-файлы, считаем их модулями (плагинами),
 # извлекаем из них server.jar, переносим server.jar в lib/app, и удаляем zip-файлы
@@ -9,7 +9,7 @@ do
   if [ -f $m ]
   then
     echo Installing $m
-    filename=`basename $m .zip`
+    filename=$(basename $m .zip)
     IFS=_ read name version <<EOF
 $filename
 EOF
