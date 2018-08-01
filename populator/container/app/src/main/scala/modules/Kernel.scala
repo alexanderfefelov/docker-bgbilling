@@ -80,16 +80,15 @@ object Kernel {
   // Справочники -> Другие -> Типы платежей
   //
   def contractPaymentTypes(): Unit = {
-    /* 1 */ ContractPaymentTypes.create(title = "Наличные", up = 0, `type` = 0, flag = 0)
-    /* 2 */ ContractPaymentTypes.create(title = "Банковская карта (офлайн)", up = 0, `type` = 0, flag = 0)
-    /* 3 */ ContractPaymentTypes.create(title = "Банковский перевод", up = 0, `type` = 0, flag = 1)
+    PaymentTypes.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Типы расходов
+  // Справочники -> Другие -> Типы возвратов
   //
   def contractChargeTypes(): Unit = {
-    /* 1 */ ContractChargeTypes.create(title = "Подключение", up = 0, `type` = 0, flag = 0, payback = false)
+    ChargeTypes.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------
