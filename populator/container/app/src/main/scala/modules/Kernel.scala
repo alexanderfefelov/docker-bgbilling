@@ -108,29 +108,31 @@ object Kernel {
     /*  6 */ ContractParametersPref.create(pt = 1, title = "Фамилия", sort = 1, script = "", flags = 1, lm = now, history = true)
     /*  7 */ ContractParametersPref.create(pt = 1, title = "Имя", sort = 1, script = "", flags = 1, lm = now, history = true)
     /*  8 */ ContractParametersPref.create(pt = 1, title = "Отчество", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /*  9 */ ContractParametersPref.create(pt = 7, title = "Тип удостоверения личности", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 10 */ ContractParametersPref.create(pt = 1, title = "Данные удостоверения личности", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 11 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 12 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 13 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /*  9 */ ContractParametersPref.create(pt = 7, title = "Удостоверение личности: тип", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 10 */ ContractParametersPref.create(pt = 6, title = "Удостоверение личности: дата", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 11 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: код подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 12 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: название подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 13 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 14 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 15 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
 
     // Юр. лица
     //
-    /* 14 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 15 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 16 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 17 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 18 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 19 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 20 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 21 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 22 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 23 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 24 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 25 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 26 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 27 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 28 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 16 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 17 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 18 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 19 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 20 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 21 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 22 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 23 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 24 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 25 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 26 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 27 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 28 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 29 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 30 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 1, lm = now, history = true)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -151,14 +153,14 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 11)
     ContractParameterGroup.create(gid = 1, pid = 12)
     ContractParameterGroup.create(gid = 1, pid = 13)
+    ContractParameterGroup.create(gid = 1, pid = 14)
+    ContractParameterGroup.create(gid = 1, pid = 15)
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
     ContractParameterGroup.create(gid = 2, pid = 2)
     ContractParameterGroup.create(gid = 2, pid = 3)
     ContractParameterGroup.create(gid = 2, pid = 4)
     ContractParameterGroup.create(gid = 2, pid = 5)
-    ContractParameterGroup.create(gid = 2, pid = 14)
-    ContractParameterGroup.create(gid = 2, pid = 15)
     ContractParameterGroup.create(gid = 2, pid = 16)
     ContractParameterGroup.create(gid = 2, pid = 17)
     ContractParameterGroup.create(gid = 2, pid = 18)
@@ -172,6 +174,8 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 26)
     ContractParameterGroup.create(gid = 2, pid = 27)
     ContractParameterGroup.create(gid = 2, pid = 28)
+    ContractParameterGroup.create(gid = 2, pid = 29)
+    ContractParameterGroup.create(gid = 2, pid = 30)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -206,11 +210,11 @@ object Kernel {
 
     // Интернет-1
     //
-    var tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    var tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     // Создаем тарифное поддерево модуля inet
     var moduleId = TariffActions.bgBillingModuleId("inet")
-    var mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
+    var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
     var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Добавляем типы трафика
     var trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
@@ -230,7 +234,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = optionId, data = "inetOptionId&6")
     // Создаем тарифное поддерево модуля npay
     moduleId = TariffActions.bgBillingModuleId("npay")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем помесячную абонентскую плату
     var monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
@@ -241,11 +245,11 @@ object Kernel {
 
     // Интернет-2
     //
-    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     // Создаем тарифное поддерево модуля inet
     moduleId = TariffActions.bgBillingModuleId("inet")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Добавляем типы трафика
     trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
@@ -265,7 +269,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = optionId, data = "inetOptionId&5")
     // Создаем тарифное поддерево модуля npay
     moduleId = TariffActions.bgBillingModuleId("npay")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем помесячную абонентскую плату
     monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
@@ -276,16 +280,16 @@ object Kernel {
 
     // Канал L2
     //
-    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
 
     // Разовые услуги
     //
-    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем услугу
     var serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
@@ -317,11 +321,11 @@ object Kernel {
 
     // Товары
     //
-    tariffIdtreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdtreeId._1, face = 0, title = "Товары", title_web = "Товары", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Товары", title_web = "Товары", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdtreeId._2, 0, now.getMillis).id
+    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
     rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем товар
     serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
