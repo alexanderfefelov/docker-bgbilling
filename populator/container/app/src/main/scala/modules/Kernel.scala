@@ -92,6 +92,13 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Другие -> Договоры - группы
+  //
+  def contractGroups(): Unit = {
+    ContractGroup.create(id = 0, title = "Служебный", enable = 1, editable = 1, comment = "")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - параметры
   //
   def contractParametersPrefs(): Unit = {
@@ -109,30 +116,31 @@ object Kernel {
     /*  7 */ ContractParametersPref.create(pt = 1, title = "Имя", sort = 1, script = "", flags = 1, lm = now, history = true)
     /*  8 */ ContractParametersPref.create(pt = 1, title = "Отчество", sort = 1, script = "", flags = 1, lm = now, history = true)
     /*  9 */ ContractParametersPref.create(pt = 7, title = "Удостоверение личности: тип", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 10 */ ContractParametersPref.create(pt = 6, title = "Удостоверение личности: дата", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 11 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: код подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 12 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: название подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 13 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 14 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 15 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 10 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: серия и номер", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 11 */ ContractParametersPref.create(pt = 6, title = "Удостоверение личности: дата", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 12 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: код подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 13 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: название подразделения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 14 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 15 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 16 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now, history = true)
 
     // Юр. лица
     //
-    /* 16 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 17 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 18 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 19 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 20 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 21 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 22 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 23 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 24 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 25 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 26 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 27 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 28 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 29 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 1, lm = now, history = true)
-    /* 30 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 17 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 18 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 19 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 20 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 21 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 22 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 23 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 24 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 25 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 26 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 27 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 28 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 29 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 30 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 1, lm = now, history = true)
+    /* 31 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 1, lm = now, history = true)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -155,13 +163,13 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 13)
     ContractParameterGroup.create(gid = 1, pid = 14)
     ContractParameterGroup.create(gid = 1, pid = 15)
+    ContractParameterGroup.create(gid = 1, pid = 16)
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
     ContractParameterGroup.create(gid = 2, pid = 2)
     ContractParameterGroup.create(gid = 2, pid = 3)
     ContractParameterGroup.create(gid = 2, pid = 4)
     ContractParameterGroup.create(gid = 2, pid = 5)
-    ContractParameterGroup.create(gid = 2, pid = 16)
     ContractParameterGroup.create(gid = 2, pid = 17)
     ContractParameterGroup.create(gid = 2, pid = 18)
     ContractParameterGroup.create(gid = 2, pid = 19)
@@ -176,6 +184,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 28)
     ContractParameterGroup.create(gid = 2, pid = 29)
     ContractParameterGroup.create(gid = 2, pid = 30)
+    ContractParameterGroup.create(gid = 2, pid = 31)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

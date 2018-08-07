@@ -35,6 +35,7 @@ object Main extends App {
   execute("Kernel.users", Kernel.users())
   execute("Kernel.bgsGroups", Kernel.bgsGroups())
   execute("Kernel.addresses", Kernel.addresses())
+  execute("Kernel.contractGroups", Kernel.contractGroups())
   execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes())
   execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes())
   execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs())
