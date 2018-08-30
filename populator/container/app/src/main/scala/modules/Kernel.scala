@@ -221,8 +221,8 @@ object Kernel {
 
     // Интернет-1
     //
-    var tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    var tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля inet
     var moduleId = TariffActions.bgBillingModuleId("inet")
     var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
@@ -256,8 +256,8 @@ object Kernel {
 
     // Интернет-2
     //
-    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля inet
     moduleId = TariffActions.bgBillingModuleId("inet")
     mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
@@ -291,13 +291,13 @@ object Kernel {
 
     // Канал L2
     //
-    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
 
     // Разовые услуги
     //
-    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
     mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
@@ -332,8 +332,8 @@ object Kernel {
 
     // Товары
     //
-    tariffIdTreeId = TariffActions.addTariffPlan(used = 1)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Товары", title_web = "Товары", use_title_in_web = 0, values = "", config = "", mask = "", tpused = 1)
+    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Товары", title_web = "Товары", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля rscm
     moduleId = TariffActions.bgBillingModuleId("rscm")
     mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
