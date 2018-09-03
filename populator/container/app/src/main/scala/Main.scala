@@ -102,20 +102,20 @@ object Main extends App {
   private def modulesAndServices(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class Cake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    class ModuleCake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-service"))
     }
-    val service = new Cake().service
+    val moduleService = new ModuleCake().service
 
-    /* 1 */ Inet.moduleAndServices(service)
-    /* 2 */ Npay.moduleAndServices(service)
-    /* 3 */ Rscm.moduleAndServices(service)
-    /* 4 */ Subscription.moduleAndServices(service)
-    /* 5 */ Bill.moduleAndServices(service)
-    /* 6 */ Moneta.moduleAndServices(service)
-    /* 7 */ Qiwi.moduleAndServices(service)
-    /* 8 */ Card.moduleAndServices(service)
-    /* 9 */ Mps.moduleAndServices(service)
+    /* 1 */ Inet.moduleAndServices(moduleService)
+    /* 2 */ Npay.moduleAndServices(moduleService)
+    /* 3 */ Rscm.moduleAndServices(moduleService)
+    /* 4 */ Subscription.moduleAndServices(moduleService)
+    /* 5 */ Bill.moduleAndServices(moduleService)
+    /* 6 */ Moneta.moduleAndServices(moduleService)
+    /* 7 */ Qiwi.moduleAndServices(moduleService)
+    /* 8 */ Card.moduleAndServices(moduleService)
+    /* 9 */ Mps.moduleAndServices(moduleService)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -124,13 +124,13 @@ object Main extends App {
   private def plugins(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class Cake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    class PlugincfgCake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("plugincfg-service"))
     }
-    val service = new Cake().service
+    val plugincfgService = new PlugincfgCake().service
 
-    Bonus.plugin(service)
-    Dispatch.plugin(service)
+    Bonus.plugin(plugincfgService)
+    Dispatch.plugin(plugincfgService)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@ import scala.concurrent.duration._
 
 object Inet {
 
-  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
     override def baseAddress = new java.net.URI(soapServiceBaseAddress("inet-device-service"))
   }
   private val inetDeviceService = new InetDeviceServiceCake().service

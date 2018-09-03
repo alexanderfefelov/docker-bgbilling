@@ -1,6 +1,6 @@
 name := "populator"
 
-scalaVersion := "2.11.12"
+scalaVersion := "2.12.6"
 
 lazy val apiV = "0.1.0-SNAPSHOT"
 

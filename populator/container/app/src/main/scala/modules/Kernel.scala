@@ -40,12 +40,12 @@ object Kernel {
   def dynamicCodeRecompile(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class Cake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    class DynamicCodeCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("dynamic-code-service"))
     }
-    val service = new Cake().service
+    val dynamicCodeService = new DynamicCodeCake().service
 
-    val responseFuture = service.recompileAll()
+    val responseFuture = dynamicCodeService.recompileAll()
     Await.result(responseFuture, 5.minutes)
   }
 
@@ -387,10 +387,10 @@ object Kernel {
   def payments(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class Cake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+    class PaymentCake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
     }
-    val service = new Cake().service
+    val paymentService = new PaymentCake().service
 
     val dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
 
@@ -403,7 +403,7 @@ object Kernel {
       "typeId" ->     dr("typeId", 1),
       "userId" ->     dr("userId", 0)
     ))
-    var responseFuture = service.paymentUpdate(Some(payment), None)
+    var responseFuture = paymentService.paymentUpdate(Some(payment), None)
     Await.result(responseFuture, 15.seconds)
 
     payment = Payment(comment = None, attributes = Map(
@@ -415,7 +415,7 @@ object Kernel {
       "typeId" ->     dr("typeId", 2),
       "userId" ->     dr("userId", 0)
     ))
-    responseFuture = service.paymentUpdate(Some(payment), None)
+    responseFuture = paymentService.paymentUpdate(Some(payment), None)
     Await.result(responseFuture, 15.seconds)
 
     payment = Payment(comment = None, attributes = Map(
@@ -427,7 +427,7 @@ object Kernel {
       "typeId" ->     dr("typeId", 1),
       "userId" ->     dr("userId", 0)
     ))
-    responseFuture = service.paymentUpdate(Some(payment), None)
+    responseFuture = paymentService.paymentUpdate(Some(payment), None)
     Await.result(responseFuture, 15.seconds)
   }
 

@@ -1,6 +1,5 @@
-import scalaxb._
-
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+import scalaxb._
 
 package object modules {
 
