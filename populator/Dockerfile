@@ -8,7 +8,7 @@ RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://d
   && cd scalaxb \
   && sed -i 's/1.5.2/local-SNAPSHOT/g' build.sbt \
   && sbt "project app" "+ publishLocal" \
-  && SBT "project scalaxbPlugin" "+ publishLocal" \
+  && sbt "project scalaxbPlugin" "+ publishLocal" \
   && cd .. \
   && rm --force --recursive scalaxb \
   && git clone https://github.com/alexanderfefelov/bgbilling-api.git \
