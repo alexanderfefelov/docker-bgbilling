@@ -15,7 +15,7 @@ object Rscm {
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("rscm"), Some("Товары и разовые услуги"))
-    val moduleId = Await.result(moduleIdFuture, 10.minutes)
+    val moduleId = Await.result(moduleIdFuture, 30.minutes)
     /* 4 */ DbService.create("Подключение", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
     RscmService3.create(Some("4"), Some("шт."))

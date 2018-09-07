@@ -12,7 +12,7 @@ object Card {
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("card"), Some("Карты"))
-    Await.result(moduleIdFuture, 10.minutes)
+    Await.result(moduleIdFuture, 30.minutes)
   }
 
 }

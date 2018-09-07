@@ -16,7 +16,7 @@ object Dispatch {
   def plugin(plugincfgService: PlugincfgService) = {
     val cfg = ""
     val responseFuture = plugincfgService.updatePlugin(Some(PluginItem(config = Some(cfg), enabled = true, id = pluginId)))
-    Await.result(responseFuture, 10.minutes)
+    Await.result(responseFuture, 30.minutes)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@ object Qiwi {
   //
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("qiwi"), Some("Qiwi"))
-    Await.result(moduleIdFuture, 10.minutes)
+    Await.result(moduleIdFuture, 30.minutes)
   }
 
 }
