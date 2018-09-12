@@ -4,13 +4,6 @@ ENV SBT_VERSION=1.2.1
 RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb \
   && dpkg -i sbt-$SBT_VERSION.deb \
   && rm sbt-$SBT_VERSION.deb \
-  && git clone https://github.com/eed3si9n/scalaxb.git \
-  && cd scalaxb \
-  && sed -i 's/1.5.2/local-SNAPSHOT/g' build.sbt \
-  && sbt "project app" "+ publishLocal" \
-  && sbt "project scalaxbPlugin" "+ publishLocal" \
-  && cd .. \
-  && rm --force --recursive scalaxb \
   && git clone https://github.com/alexanderfefelov/bgbilling-api.git \
   && cd bgbilling-api \
   && sbt publishLocal \
