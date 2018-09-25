@@ -97,7 +97,7 @@ object Kernel {
   //
   def contractGroups(): Unit = {
     ContractGroup.create(id = 0, title = "Специальный", enable = 1, editable = 1, comment = "")
-    ContractGroup.create(id = 0, title = "Служебный", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 1, title = "Служебный", enable = 1, editable = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
