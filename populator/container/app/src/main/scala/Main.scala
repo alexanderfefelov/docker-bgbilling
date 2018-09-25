@@ -102,7 +102,7 @@ object Main extends App {
   private def modulesAndServices(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class ModuleCake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
+    class ModuleCake extends ModuleServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-service"))
     }
     val moduleService = new ModuleCake().service
@@ -124,7 +124,7 @@ object Main extends App {
   private def plugins(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class PlugincfgCake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
+    class PlugincfgCake extends PlugincfgServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("plugincfg-service"))
     }
     val plugincfgService = new PlugincfgCake().service

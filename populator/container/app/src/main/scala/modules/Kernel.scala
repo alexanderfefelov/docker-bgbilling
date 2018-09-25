@@ -9,6 +9,7 @@ import scalaxb._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Kernel {
 
@@ -40,7 +41,7 @@ object Kernel {
   def dynamicCodeRecompile(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class DynamicCodeCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
+    class DynamicCodeCake extends DynamicCodeServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("dynamic-code-service"))
     }
     val dynamicCodeService = new DynamicCodeCake().service
@@ -95,6 +96,7 @@ object Kernel {
   // Справочники -> Другие -> Договоры - группы
   //
   def contractGroups(): Unit = {
+    ContractGroup.create(id = 0, title = "Специальный", enable = 1, editable = 1, comment = "")
     ContractGroup.create(id = 0, title = "Служебный", enable = 1, editable = 1, comment = "")
   }
 
@@ -387,7 +389,7 @@ object Kernel {
   def payments(): Unit = {
     import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-    class PaymentCake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
+    class PaymentCake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
     }
     val paymentService = new PaymentCake().service

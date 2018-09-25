@@ -5,6 +5,7 @@ import com.github.alexanderfefelov.bgbilling.api.soap.kernel.{PluginItem, Plugin
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Bonus {
 

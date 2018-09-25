@@ -9,10 +9,11 @@ import scalaxb._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Inet {
 
-  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with GlobalExecutionContextProvider with ApiSoapConfig {
+  private class InetDeviceServiceCake extends InetDeviceServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
     override def baseAddress = new java.net.URI(soapServiceBaseAddress("inet-device-service"))
   }
   private val inetDeviceService = new InetDeviceServiceCake().service
