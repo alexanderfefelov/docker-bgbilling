@@ -30,7 +30,7 @@ object Inet {
     val moduleId = Await.result(moduleIdFuture, 30.minutes)
     /* 1 */ DbService.create("Доступ в интернет", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 30000)
-    /* 2 */DbService.create("Канал L2", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
+    /* 2 */ DbService.create("Канал L2", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
     moduleId
   }
