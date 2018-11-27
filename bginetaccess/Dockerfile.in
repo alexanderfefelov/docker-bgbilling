@@ -13,7 +13,8 @@ RUN apt-get -qq update \
   && rm --force BGInetAccess_$BGINETACCESS_VERSION.zip \
   && chmod +x $BGINETACCESS_HOME/*.sh \
   && chmod +x $BGINETACCESS_HOME/script/* \
-  && sed -i 's@\/usr\/local\/BGInetAccess@'"$BGINETACCESS_HOME"'@' $BGINETACCESS_HOME/script/bginet_access \
+  && mkdir /opt/bgbilling \
+  && ln -s $BGINETACCESS_HOME /opt/bgbilling/BGInetAccess \
   && ln -s $BGINETACCESS_HOME/script/bginet_access /etc/init.d/bginet_access \
   && update-rc.d bginet_access defaults \
   && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
