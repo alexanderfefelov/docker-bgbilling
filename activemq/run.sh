@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=bgbilling-activemq
+HOST_NAME=$CONTAINER_NAME
 
 run() {
     docker run \
       --name $CONTAINER_NAME \
+      --hostname $HOST_NAME \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
       --publish 61616:61616 \
