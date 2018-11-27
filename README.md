@@ -41,9 +41,8 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
 * Мониторинг
 
-Сбор метрик - ~~[JMX через Java Agent](https://github.com/logzio/jmx2graphite) (для Java-приложений)
-и~~ [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) (для MySQL). Хранилище метрик - [Graphite](https://graphiteapp.org/),
-визуализация - [Grafana](https://grafana.com/).
+Сбор метрик -- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Хранилище метрик -- [Graphite](https://graphiteapp.org/),
+визуализация -- [Grafana](https://grafana.com/).
 
 ## Как это запустить?
 
