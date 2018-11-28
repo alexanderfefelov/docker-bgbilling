@@ -9,6 +9,7 @@ run() {
       --hostname $HOST_NAME \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
+      --volume /var/run/docker.sock:/var/run/docker.sock \
       --volume $CONTAINER_NAME:/ofelia \
       alexanderfefelov/bgbilling-ofelia
 }
