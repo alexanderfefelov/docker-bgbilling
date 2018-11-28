@@ -12,6 +12,6 @@ RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://d
 
 WORKDIR /app
 
-ADD container/* /app/
+ADD container/ /app/
 
 CMD ["sbt", "run"]

@@ -11,5 +11,6 @@ build bgbilling-base \
 && build bginetaccounting \
 && build mysql \
 && build grafana \
+&& build ofelia \
 && build populator \
 && build telegraf

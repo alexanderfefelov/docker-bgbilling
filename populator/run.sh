@@ -6,4 +6,4 @@ docker run \
   --tty \
   --rm \
   --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
-  alexanderfefelov/populator
+  alexanderfefelov/bgbilling-populator

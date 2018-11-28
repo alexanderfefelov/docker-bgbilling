@@ -18,6 +18,9 @@ then
 
     docker rm --force --volumes bgbilling-activemq
 
+    docker rm --force --volumes bgbilling-ofelia
+    docker volume rm bgbilling-ofelia
+
     docker rm --force --volumes bgbilling-mysql-slave
     docker volume rm bgbilling-mysql-slave
 
