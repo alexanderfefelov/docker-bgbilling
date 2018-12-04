@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 (cd ../bgscheduler && ./run.sh) \
-&& docker logs -f bgbilling-scheduler
+&& docker logs --follow bgbilling-scheduler
