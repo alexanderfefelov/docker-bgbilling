@@ -35,31 +35,31 @@ def main():
     random_str = base36.encode(random.randint(0, 42013))
 
     output_dir_name = OUTPUT_DIR_NAME_FORMAT.format(
-        backup_home = BACKUP_HOME,
-        host = HOST,
-        port = PORT,
-        database = DATABASE,
-        now_str = now_str,
-        random_str = random_str
+        backup_home=BACKUP_HOME,
+        host=HOST,
+        port=PORT,
+        database=DATABASE,
+        now_str=now_str,
+        random_str=random_str
     )
 
     mydumper_log_file_name = MYDUMPER_LOG_FILE_NAME_FORMAT.format(
-        output_dir_name = output_dir_name,
-        host = HOST,
-        port = PORT,
-        database = DATABASE
+        output_dir_name=output_dir_name,
+        host=HOST,
+        port=PORT,
+        database=DATABASE
     )
 
     cmd = MYDUMPER_CMD_FORMAT.format(
-        mydumper = MYDUMPER,
-        host = HOST,
-        port = PORT,
-        database = DATABASE,
-        username = USERNAME,
-        password = PASSWORD,
-        output_dir_name = output_dir_name,
-        log_file_name = mydumper_log_file_name,
-        verbose = 3
+        mydumper=MYDUMPER,
+        host=HOST,
+        port=PORT,
+        database=DATABASE,
+        username=USERNAME,
+        password=PASSWORD,
+        output_dir_name=output_dir_name,
+        log_file_name=mydumper_log_file_name,
+        verbose=3
     )
 
     os.makedirs(output_dir_name)
@@ -72,7 +72,7 @@ def main():
     )
 
     backup_file_names = os.listdir(output_dir_name)
-    with tarfile.open(tgz_file_name,'w:gz') as tgz_file:
+    with tarfile.open(tgz_file_name, 'w:gz') as tgz_file:
         for backup_file_name in backup_file_names:
             tgz_file.add(os.path.join(output_dir_name, backup_file_name))
 
