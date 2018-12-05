@@ -64,7 +64,7 @@ def main():
         port=MYSQL_PORT,
         database=MYSQL_DATABASE
     )
-    mydumper_log_file_path = os.path.join(output_dir_path, mydumper_log_file_name)
+    mydumper_log_file_path = os.path.join(tmp_dir_path, mydumper_log_file_name)
 
     cmd = MYDUMPER_CMD_FORMAT.format(
         mydumper=MYDUMPER,
@@ -94,7 +94,7 @@ def main():
             file_name = os.path.join(output_dir_name, backup_file_name)
             tgz_file.add(file_path, file_name)
 
-    shutil.rmtree(output_dir_path)
+    shutil.rmtree(tmp_dir_path)
 
 
 if __name__ == '__main__':
