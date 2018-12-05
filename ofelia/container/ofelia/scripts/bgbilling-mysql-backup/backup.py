@@ -87,10 +87,10 @@ def main():
     if ret_code != 0:
         pass
 
-    backup_file_names = os.listdir(output_dir_path)
+    backup_file_names = os.listdir(tmp_dir_path)
     with tarfile.open(tgz_file_path, 'w:gz') as tgz_file:
         for backup_file_name in backup_file_names:
-            file_path = os.path.join(output_dir_path, backup_file_name)
+            file_path = os.path.join(tmp_dir_path, backup_file_name)
             file_name = os.path.join(output_dir_name, backup_file_name)
             tgz_file.add(file_path, file_name)
 
