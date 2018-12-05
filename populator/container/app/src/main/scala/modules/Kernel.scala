@@ -521,11 +521,14 @@ object Kernel {
   // Справочники -> Атрибуты -> Сущности
   //
   def entitySpecs(): Unit = {
-    EntitySpecAttr.create(title = "Адрес", `type` = 8, comment = "")
-    EntitySpecAttr.create(title = "S/N", `type` = 1, comment = "")
-    EntitySpec.create(title = "Коммутатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
+    /* 1 */ EntitySpecAttr.create(title = "Адрес", `type` = 8, comment = "")
+    /* 2 */ EntitySpecAttr.create(title = "S/N", `type` = 1, comment = "")
+    /* 1 */ EntitySpec.create(title = "Коммутатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
     EntitySpecAttrLink.create(entityspecid = 1, entityspecattrid = 1, pos = 0)
     EntitySpecAttrLink.create(entityspecid = 1, entityspecattrid = 2, pos = 0)
+    /* 2 */ EntitySpec.create(title = "Маршрутизатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
+    EntitySpecAttrLink.create(entityspecid = 2, entityspecattrid = 1, pos = 0)
+    EntitySpecAttrLink.create(entityspecid = 2, entityspecattrid = 2, pos = 0)
   }
 
 }
