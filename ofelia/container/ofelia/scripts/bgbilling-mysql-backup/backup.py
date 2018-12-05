@@ -43,6 +43,9 @@ def main():
         print('{0} does not exist or can not be executed'.format(MYDUMPER))
         sys.exit(1)
 
+    if not os.path.exists(BACKUP_HOME):
+            os.makedirs(BACKUP_HOME, 0700)
+
     now_str = datetime.now().strftime(NOW_STR_FORMAT)
     random_str = __base36_encode(random.randint(0, 42013))
 
@@ -53,9 +56,8 @@ def main():
         now_str=now_str,
         random_str=random_str
     )
-
     output_dir_path = os.path.join(BACKUP_HOME, output_dir_name)
-    os.makedirs(output_dir_path, 0700)
+
     tmp_dir_path = os.path.join(TMP_HOME, output_dir_name)
     os.makedirs(tmp_dir_path, 0700)
 
