@@ -55,7 +55,9 @@ def main():
     )
 
     output_dir_path = os.path.join(BACKUP_HOME, output_dir_name)
+    os.makedirs(output_dir_path, 0700)
     tmp_dir_path = os.path.join(TMP_HOME, output_dir_name)
+    os.makedirs(tmp_dir_path, 0700)
 
     mydumper_log_file_name = MYDUMPER_LOG_FILE_NAME_FORMAT.format(
         host=MYSQL_HOST,
@@ -80,8 +82,6 @@ def main():
         output_dir_name
     )
     tgz_file_path = os.path.join(BACKUP_HOME, tgz_file_name)
-
-    os.makedirs(output_dir_path, 0700)
 
     ret_code = os.system(cmd)
     if ret_code != 0:
