@@ -10,16 +10,18 @@ import tarfile
 
 MYDUMPER = '/usr/bin/mydumper'
 BACKUP_HOME = '/ofelia/data/bgbilling-mysql-backup'
-HOST = 'backup.mysql.bgbilling.local'
-PORT = 3306
-DATABASE = 'bgbilling'
-USERNAME = 'root'
-PASSWORD = 'password'
-NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
+MYSQL_HOST = 'backup.mysql.bgbilling.local'
+MYSQL_PORT = 3306
+MYSQL_DATABASE = 'bgbilling'
+MYSQL_USERNAME = 'root'
+MYSQL_PASSWORD = 'password'
 OUTPUT_DIR_NAME_FORMAT = '{host}_{port}_{database}_{now_str}_{random_str}'
 MYDUMPER_LOG_FILE_NAME_FORMAT = '{host}_{port}_{database}.log'
 MYDUMPER_CMD_FORMAT = '{mydumper} --host {host} --port {port} --database {database} --user {username} --password {password} --outputdir {output_dir_path} --logfile {log_file_name} --verbose {verbose} --less-locking --use-savepoints'
+NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
 TGZ_FILE_NAME_FORMAT = '{0}.tar.gz'
+
+TMP_HOME = '/ofelia/tmp'
 
 
 def __base36_encode(integer):  # https://en.wikipedia.org/wiki/Base36#Python_implementation
@@ -43,32 +45,33 @@ def main():
 
     now_str = datetime.now().strftime(NOW_STR_FORMAT)
     random_str = __base36_encode(random.randint(0, 42013))
-    tmp_dir_path = '/ofelia/tmp'
 
     output_dir_name = OUTPUT_DIR_NAME_FORMAT.format(
-        host=HOST,
-        port=PORT,
-        database=DATABASE,
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        database=MYSQL_DATABASE,
         now_str=now_str,
         random_str=random_str
     )
-    output_dir_path = os.path.join(tmp_dir_path, output_dir_name)
+
+    output_dir_path = os.path.join(BACKUP_HOME, output_dir_name)
+    tmp_dir_path = os.path.join(TMP_HOME, output_dir_name)
 
     mydumper_log_file_name = MYDUMPER_LOG_FILE_NAME_FORMAT.format(
-        host=HOST,
-        port=PORT,
-        database=DATABASE
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        database=MYSQL_DATABASE
     )
     mydumper_log_file_path = os.path.join(output_dir_path, mydumper_log_file_name)
 
     cmd = MYDUMPER_CMD_FORMAT.format(
         mydumper=MYDUMPER,
-        host=HOST,
-        port=PORT,
-        database=DATABASE,
-        username=USERNAME,
-        password=PASSWORD,
-        output_dir_path=output_dir_path,
+        host=MYSQL_HOST,
+        port=MYSQL_PORT,
+        database=MYSQL_DATABASE,
+        username=MYSQL_USERNAME,
+        password=MYSQL_PASSWORD,
+        output_dir_path=tmp_dir_path,
         log_file_name=mydumper_log_file_path,
         verbose=3
     )
