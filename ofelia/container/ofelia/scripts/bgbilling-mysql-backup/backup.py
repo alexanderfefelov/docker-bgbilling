@@ -19,7 +19,8 @@ OUTPUT_DIR_NAME_FORMAT = '{host}_{port}_{database}_{now_str}_{random_str}'
 MYDUMPER_LOG_FILE_NAME_FORMAT = '{host}_{port}_{database}.log'
 MYDUMPER_CMD_FORMAT = '{mydumper} --host {host} --port {port} --database {database} --user {username} --password {password} --outputdir {output_dir_path} --logfile {log_file_name} --verbose {verbose} --less-locking --use-savepoints'
 NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
-TGZ_FILE_NAME_FORMAT = '{0}.tar.gz'
+ARCHIVE_BASE_NAME_FORMAT = '{0}'
+ARCHIVE_COMPRESSION = ''
 
 TMP_HOME = '/ofelia/tmp'
 
@@ -56,7 +57,6 @@ def main():
         now_str=now_str,
         random_str=random_str
     )
-    output_dir_path = os.path.join(BACKUP_HOME, output_dir_name)
 
     tmp_dir_path = os.path.join(TMP_HOME, output_dir_name)
     os.makedirs(tmp_dir_path, 0700)
@@ -80,21 +80,26 @@ def main():
         verbose=3
     )
 
-    tgz_file_name = TGZ_FILE_NAME_FORMAT.format(
+    archive_file_name = ARCHIVE_BASE_NAME_FORMAT.format(
         output_dir_name
     )
-    tgz_file_path = os.path.join(BACKUP_HOME, tgz_file_name)
+    archive_file_name += {
+        '': lambda: '.tar',
+        'gz': lambda: '.tar.gz',
+        'bz2': lambda: '.tar.bz2'
+    }[ARCHIVE_COMPRESSION]()
+    archive_file_path = os.path.join(BACKUP_HOME, archive_file_name)
 
     ret_code = os.system(cmd)
     if ret_code != 0:
         pass
 
     backup_file_names = os.listdir(tmp_dir_path)
-    with tarfile.open(tgz_file_path, 'w:gz') as tgz_file:
+    with tarfile.open(archive_file_path, 'w:' + ARCHIVE_COMPRESSION) as archive_file:
         for backup_file_name in backup_file_names:
             file_path = os.path.join(tmp_dir_path, backup_file_name)
             file_name = os.path.join(output_dir_name, backup_file_name)
-            tgz_file.add(file_path, file_name)
+            archive_file.add(file_path, file_name)
 
     shutil.rmtree(tmp_dir_path)
 
