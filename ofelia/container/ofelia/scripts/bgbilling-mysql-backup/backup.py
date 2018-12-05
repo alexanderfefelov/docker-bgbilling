@@ -1,6 +1,5 @@
 #!/usr/bin/env python2
 
-import _base36 as base36
 from datetime import datetime
 import os
 import random
@@ -17,10 +16,24 @@ DATABASE = 'bgbilling'
 USERNAME = 'root'
 PASSWORD = 'password'
 NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
-OUTPUT_DIR_NAME_FORMAT = '{backup_home}/{host}_{port}_{database}_{now_str}_{random_str}'
-MYDUMPER_LOG_FILE_NAME_FORMAT = '{output_dir_name}/{host}_{port}_{database}.log'
-MYDUMPER_CMD_FORMAT = '{mydumper} --host {host} --port {port} --database {database} --user {username} --password {password} --outputdir {output_dir_name} --logfile {log_file_name} --verbose {verbose} --less-locking --use-savepoints'
+OUTPUT_DIR_NAME_FORMAT = '{host}_{port}_{database}_{now_str}_{random_str}'
+MYDUMPER_LOG_FILE_NAME_FORMAT = '{host}_{port}_{database}.log'
+MYDUMPER_CMD_FORMAT = '{mydumper} --host {host} --port {port} --database {database} --user {username} --password {password} --outputdir {output_dir_path} --logfile {log_file_name} --verbose {verbose} --less-locking --use-savepoints'
 TGZ_FILE_NAME_FORMAT = '{0}.tar.gz'
+
+
+def __base36_encode(integer):  # https://en.wikipedia.org/wiki/Base36#Python_implementation
+    chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    sign = '-' if integer < 0 else ''
+    integer = abs(integer)
+    result = ''
+
+    while integer > 0:
+        integer, remainder = divmod(integer, 36)
+        result = chars[remainder] + result
+
+    return sign + result
 
 
 def main():
@@ -28,27 +41,25 @@ def main():
         print('{0} does not exist or can not be executed'.format(MYDUMPER))
         sys.exit(1)
 
-    if not os.path.exists(BACKUP_HOME):
-        os.makedirs(BACKUP_HOME, 0700)
-
     now_str = datetime.now().strftime(NOW_STR_FORMAT)
-    random_str = base36.encode(random.randint(0, 42013))
+    random_str = __base36_encode(random.randint(0, 42013))
+    tmp_dir_path = '/ofelia/tmp'
 
     output_dir_name = OUTPUT_DIR_NAME_FORMAT.format(
-        backup_home=BACKUP_HOME,
         host=HOST,
         port=PORT,
         database=DATABASE,
         now_str=now_str,
         random_str=random_str
     )
+    output_dir_path = os.path.join(tmp_dir_path, output_dir_name)
 
     mydumper_log_file_name = MYDUMPER_LOG_FILE_NAME_FORMAT.format(
-        output_dir_name=output_dir_name,
         host=HOST,
         port=PORT,
         database=DATABASE
     )
+    mydumper_log_file_path = os.path.join(output_dir_path, mydumper_log_file_name)
 
     cmd = MYDUMPER_CMD_FORMAT.format(
         mydumper=MYDUMPER,
@@ -57,26 +68,30 @@ def main():
         database=DATABASE,
         username=USERNAME,
         password=PASSWORD,
-        output_dir_name=output_dir_name,
-        log_file_name=mydumper_log_file_name,
+        output_dir_path=output_dir_path,
+        log_file_name=mydumper_log_file_path,
         verbose=3
     )
-
-    os.makedirs(output_dir_name)
-    print('Executing {0}...'.format(cmd))
-    ret_code = os.system(cmd)
-    print('...done, return code: {0}'.format(ret_code))
 
     tgz_file_name = TGZ_FILE_NAME_FORMAT.format(
         output_dir_name
     )
+    tgz_file_path = os.path.join(BACKUP_HOME, tgz_file_name)
 
-    backup_file_names = os.listdir(output_dir_name)
-    with tarfile.open(tgz_file_name, 'w:gz') as tgz_file:
+    os.makedirs(output_dir_path, 0700)
+
+    ret_code = os.system(cmd)
+    if ret_code != 0:
+        pass
+
+    backup_file_names = os.listdir(output_dir_path)
+    with tarfile.open(tgz_file_path, 'w:gz') as tgz_file:
         for backup_file_name in backup_file_names:
-            tgz_file.add(os.path.join(output_dir_name, backup_file_name))
+            file_path = os.path.join(output_dir_path, backup_file_name)
+            file_name = os.path.join(output_dir_name, backup_file_name)
+            tgz_file.add(file_path, file_name)
 
-    shutil.rmtree(output_dir_name)
+    shutil.rmtree(output_dir_path)
 
 
 if __name__ == '__main__':
