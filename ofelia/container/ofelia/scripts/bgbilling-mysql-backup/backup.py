@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 
 from datetime import datetime
+import glob
 import os
 import random
 import shutil
@@ -68,7 +69,7 @@ def main():
     )
     mydumper_log_file_path = os.path.join(tmp_dir_path, mydumper_log_file_name)
 
-    cmd = MYDUMPER_CMD_FORMAT.format(
+    mydumper_cmd = MYDUMPER_CMD_FORMAT.format(
         mydumper=MYDUMPER,
         host=MYSQL_HOST,
         port=MYSQL_PORT,
@@ -80,29 +81,32 @@ def main():
         verbose=3
     )
 
-    archive_file_name = ARCHIVE_BASE_NAME_FORMAT.format(
+    archive_base_name = ARCHIVE_BASE_NAME_FORMAT.format(
         output_dir_name
     )
-    archive_file_name += {
+    archive_file_name = archive_base_name + {
         '': lambda: '.tar',
         'gz': lambda: '.tar.gz',
         'bz2': lambda: '.tar.bz2'
     }[ARCHIVE_COMPRESSION]()
     archive_file_path = os.path.join(BACKUP_HOME, archive_file_name)
 
-    ret_code = os.system(cmd)
+    ret_code = os.system(mydumper_cmd)
     if ret_code != 0:
         pass
 
-    backup_file_names = os.listdir(tmp_dir_path)
+    tmp_file_names = os.listdir(tmp_dir_path)
     with tarfile.open(archive_file_path, 'w:' + ARCHIVE_COMPRESSION) as archive_file:
-        for backup_file_name in backup_file_names:
-            file_path = os.path.join(tmp_dir_path, backup_file_name)
-            file_name = os.path.join(output_dir_name, backup_file_name)
+        for file_name in tmp_file_names:
+            file_path = os.path.join(tmp_dir_path, file_name)
+            file_name = os.path.join(output_dir_name, file_name)
             archive_file.add(file_path, file_name)
 
     shutil.rmtree(tmp_dir_path)
 
+    archive_file_names = glob.glob(os.path.join(BACKUP_HOME, archive_base_name + '*'))
+    for file_name in archive_file_names:
+        print(file_name)
 
 if __name__ == '__main__':
     main()
