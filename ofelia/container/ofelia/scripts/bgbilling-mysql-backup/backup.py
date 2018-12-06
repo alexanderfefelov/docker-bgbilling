@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import glob
 import os
 import random
@@ -24,6 +24,7 @@ NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
 ARCHIVE_BASE_NAME_FORMAT = '{output_base_name}'
 ARCHIVE_FILE_NAME_FORMAT = '{archive_base_name}_{now_str}_{random_str}'
 ARCHIVE_COMPRESSION = ''
+KEEP_ARCHIVES = 2
 
 TMP_HOME = '/ofelia/tmp'
 
@@ -116,9 +117,14 @@ def main():
 
     shutil.rmtree(tmp_dir_path)
 
-    archive_file_names = glob.glob(os.path.join(BACKUP_HOME, '*' + archive_base_name + '*'))
-    for file_name in archive_file_names:
-        print(file_name)
+    archive_file_paths = glob.glob(os.path.join(BACKUP_HOME, '*' + archive_base_name + '*'))
+    now = datetime.today()
+    threshold = timedelta(days=KEEP_ARCHIVES)
+    for file_path in archive_file_paths:
+        file_time = datetime.fromtimestamp(os.stat(file_path).st_mtime)
+        if now - file_time > threshold:
+            os.remove(file_path)
+
 
 if __name__ == '__main__':
     main()
