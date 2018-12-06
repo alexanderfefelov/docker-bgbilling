@@ -96,7 +96,7 @@ def main():
         now_str=now_str,
         random_str=random_str
     )
-    archive_base_name += {
+    archive_file_name += {
         '': lambda: '.tar',
         'gz': lambda: '.tar.gz',
         'bz2': lambda: '.tar.bz2'
