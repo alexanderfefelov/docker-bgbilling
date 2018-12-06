@@ -16,11 +16,13 @@ MYSQL_PORT = 3306
 MYSQL_DATABASE = 'bgbilling'
 MYSQL_USERNAME = 'root'
 MYSQL_PASSWORD = 'password'
-OUTPUT_DIR_NAME_FORMAT = '{host}_{port}_{database}_{now_str}_{random_str}'
+OUTPUT_BASE_NAME_FORMAT = '{host}_{port}_{database}'
+OUTPUT_DIR_NAME_FORMAT = '{output_base_name}_{now_str}_{random_str}'
 MYDUMPER_LOG_FILE_NAME_FORMAT = '{host}_{port}_{database}.log'
 MYDUMPER_CMD_FORMAT = '{mydumper} --host {host} --port {port} --database {database} --user {username} --password {password} --outputdir {output_dir_path} --logfile {log_file_name} --verbose {verbose} --less-locking --use-savepoints'
 NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
-ARCHIVE_BASE_NAME_FORMAT = '{0}'
+ARCHIVE_BASE_NAME_FORMAT = '{output_base_name}'
+ARCHIVE_FILE_NAME_FORMAT = '{archive_base_name}_{now_str}_{random_str}'
 ARCHIVE_COMPRESSION = ''
 
 TMP_HOME = '/ofelia/tmp'
@@ -51,10 +53,14 @@ def main():
     now_str = datetime.now().strftime(NOW_STR_FORMAT)
     random_str = __base36_encode(random.randint(0, 42013))
 
-    output_dir_name = OUTPUT_DIR_NAME_FORMAT.format(
+    output_base_name = OUTPUT_BASE_NAME_FORMAT.format(
         host=MYSQL_HOST,
         port=MYSQL_PORT,
-        database=MYSQL_DATABASE,
+        database=MYSQL_DATABASE
+    )
+
+    output_dir_name = OUTPUT_DIR_NAME_FORMAT.format(
+        output_base_name=output_base_name,
         now_str=now_str,
         random_str=random_str
     )
@@ -82,9 +88,15 @@ def main():
     )
 
     archive_base_name = ARCHIVE_BASE_NAME_FORMAT.format(
-        output_dir_name
+        output_base_name=output_base_name
     )
-    archive_file_name = archive_base_name + {
+
+    archive_file_name = ARCHIVE_FILE_NAME_FORMAT.format(
+        archive_base_name=archive_base_name,
+        now_str=now_str,
+        random_str=random_str
+    )
+    archive_base_name += {
         '': lambda: '.tar',
         'gz': lambda: '.tar.gz',
         'bz2': lambda: '.tar.bz2'
@@ -104,7 +116,7 @@ def main():
 
     shutil.rmtree(tmp_dir_path)
 
-    archive_file_names = glob.glob(os.path.join(BACKUP_HOME, archive_base_name + '*'))
+    archive_file_names = glob.glob(os.path.join(BACKUP_HOME, '*' + archive_base_name + '*'))
     for file_name in archive_file_names:
         print(file_name)
 
