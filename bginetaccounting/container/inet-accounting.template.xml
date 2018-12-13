@@ -1,174 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application context="accounting">
-	<!-- Уникальное имя приложения -->
-	<param name="app.name" value="APP_NAME"/>
-	<!-- Уникальный числовой id приложения -->
-	<param name="app.id" value="APP_ID"/>
 
-	<!-- Параметры подключения к БД -->
-	<param name="db.driver" value="com.mysql.jdbc.Driver"/>
-	<param name="db.url" value="jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&amp;useSSL=false"/>
-	<param name="db.user" value="bill"/>
-	<param name="db.pswd" value="bgbilling"/>
-	<param name="db.validationTimeout" value="10"/>
-	
-	<!-- Параметры подключения к MQ -->
-	<param name="mq.url" value="failover:(tcp://activemq.bgbilling.local:61616)"/>
-	<param name="mq.user" value="bill"/>
-	<param name="mq.pswd" value="bgbilling"/>
+    <!-- Уникальное имя приложения -->
+    <param name="app.name" value="APP_NAME"/>
+    <!-- Уникальный числовой id приложения -->
+    <param name="app.id" value="APP_ID"/>
 
-	<!-- id модуля -->
-	<param name="moduleId" value="MODULE_ID"/>
-	<!-- id корневого устройства -->
-	<param name="rootDeviceId" value="ROOT_DEVICE_ID"/>
-	
-	<!-- Брать задания на обработку логов -->
-	<param name="processLogs" value="true" />
+    <!-- Параметры подключения к БД -->
+    <param name="db.driver" value="com.mysql.jdbc.Driver"/>
+    <param name="db.url" value="jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&amp;useSSL=false"/>
+    <param name="db.user" value="bill"/>
+    <param name="db.pswd" value="bgbilling"/>
+    <param name="db.validationTimeout" value="10"/>
 
-	<!-- Внутренняя переменная приложения, не изменять -->
-	<param name="commonIdentifierName" value="rootDeviceId"/>
-	
-	<!-- Параметры сохранения radius-пакетов в файлы логов -->
-	<!-- Директория, в которую сохранять radius логи -->
-	<param name="datalog.radius.dir" value="data/radius" />
-	<!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
-	<param name="datalog.radius.chunk.size" value="524288" />
-	<!-- Сжимать radius логи: 0 - не сжимать, 1 - zlib -->
-	<param name="datalog.radius.compression.type" value="1" />
-	<!-- Параметры сохранения flow-пакетов в файлы логов -->
-	<!-- Директория, в которую сохранять flow логи -->
-	<param name="datalog.flow.dir" value="data/flow" />
-	<!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
-	<param name="datalog.flow.chunk.size" value="524288" />
-	<!-- Сжимать flow логи: 0 - не сжимать, 1 - zlib -->
-	<param name="datalog.flow.compression.type" value="1" />
+    <!-- Параметры подключения к MQ -->
+    <param name="mq.url" value="failover:(tcp://activemq.bgbilling.local:61616)"/>
+    <param name="mq.user" value="bill"/>
+    <param name="mq.pswd" value="bgbilling"/>
+
+    <!-- id модуля -->
+    <param name="moduleId" value="MODULE_ID"/>
+    <!-- id корневого устройства -->
+    <param name="rootDeviceId" value="ROOT_DEVICE_ID"/>
+
+    <!-- Брать задания на обработку логов -->
+    <param name="processLogs" value="true"/>
+
+    <!-- Внутренняя переменная приложения, не изменять -->
+    <param name="commonIdentifierName" value="rootDeviceId"/>
+
+    <!-- Параметры сохранения radius-пакетов в файлы логов -->
+    <!-- Директория, в которую сохранять radius логи -->
+    <param name="datalog.radius.dir" value="data/radius"/>
+    <!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
+    <param name="datalog.radius.chunk.size" value="524288"/>
+    <!-- Сжимать radius логи: 0 - не сжимать, 1 - zlib -->
+    <param name="datalog.radius.compression.type" value="1"/>
+    <!-- Параметры сохранения flow-пакетов в файлы логов -->
+    <!-- Директория, в которую сохранять flow логи -->
+    <param name="datalog.flow.dir" value="data/flow"/>
+    <!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
+    <param name="datalog.flow.chunk.size" value="524288"/>
+    <!-- Сжимать flow логи: 0 - не сжимать, 1 - zlib -->
+    <param name="datalog.flow.compression.type" value="1"/>
 
 
-	<!-- Создание Accounting -->
-	<bean name="accounting" class="ru.bitel.bgbilling.modules.inet.accounting.Accounting"/>
+    <!-- Создание Accounting -->
+    <bean name="accounting" class="ru.bitel.bgbilling.modules.inet.accounting.Accounting"/>
 
-	<context name="radius">
-		<!-- Cоздание процессора radius-пакетов -->
-		<bean name="radiusProcessor" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusProcessor"/>
+    <context name="radius">
+        <!-- Cоздание процессора radius-пакетов -->
+        <bean name="radiusProcessor" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusProcessor"/>
 
-		<!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
-		<scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
+        <!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
+        <scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
 
-		<!-- Cоздание dataLogger, сохраняющего radius-пакеты на диск (только один экземпляр) -->
-		<bean name="radiusDataLogger" class="ru.bitel.bgbilling.modules.inet.radius.RadiusHourlyDataLogger">
-			<param name="scheduledExecutor">hrlydtlggr</param>
-		</bean>
+        <!-- Cоздание dataLogger, сохраняющего radius-пакеты на диск (только один экземпляр) -->
+        <bean name="radiusDataLogger" class="ru.bitel.bgbilling.modules.inet.radius.RadiusHourlyDataLogger">
+            <param name="scheduledExecutor">hrlydtlggr</param>
+        </bean>
 
-		<!-- Cоздание слушателя radius-пакетов на порту с передачей ему процессора и dataLogger -->
-		<bean name="radiusListener" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusListener">
-			<constructor>
-				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
-				<param name="host" value=""/>
-				<!-- Порт, на котором будет открыт сокет -->
-				<param name="port" value="1813"/>
-				<!-- Размер буфера приема слушателя -->
-				<param name="recvBufferSize">1 * 1024 * 1024</param>
-				<!-- Рекомендуемый SO_RCVBUF сокета -->
-				<param name="soRCVBUF"></param>
-				<!-- Количество потоков-обработчиков -->
-				<param name="threadCount">10</param>
-				<!-- Максимальное количество пакетов в очереди на обработку -->
-				<param name="maxQueueSize">200</param>
-				<!-- Передача процессора -->
-				<param name="processor">radiusProcessor</param>
-				<!-- Режим работы, RadiusListener.Mode.accounting -->
-				<param name="mode">RadiusListener.Mode.accounting</param>
-				<!-- Передача setup -->
-				<param name="setup">setup</param>
-				<!-- Передача dataLogger -->
-				<param name="dataLogger">radiusDataLogger</param>
-			</constructor>
-		</bean>
-	</context>
-	
-	<!-- Cоздание процессора flow-пакетов -->
-	<context name="collector">
-		<!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
-		<scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
+        <!-- Cоздание слушателя radius-пакетов на порту с передачей ему процессора и dataLogger -->
+        <bean name="radiusListener" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusListener">
+            <constructor>
+                <!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
+                <param name="host" value=""/>
+                <!-- Порт, на котором будет открыт сокет -->
+                <param name="port" value="1813"/>
+                <!-- Размер буфера приема слушателя -->
+                <param name="recvBufferSize">1 * 1024 * 1024</param>
+                <!-- Рекомендуемый SO_RCVBUF сокета -->
+                <param name="soRCVBUF"></param>
+                <!-- Количество потоков-обработчиков -->
+                <param name="threadCount">10</param>
+                <!-- Максимальное количество пакетов в очереди на обработку -->
+                <param name="maxQueueSize">200</param>
+                <!-- Передача процессора -->
+                <param name="processor">radiusProcessor</param>
+                <!-- Режим работы, RadiusListener.Mode.accounting -->
+                <param name="mode">RadiusListener.Mode.accounting</param>
+                <!-- Передача setup -->
+                <param name="setup">setup</param>
+                <!-- Передача dataLogger -->
+                <param name="dataLogger">radiusDataLogger</param>
+            </constructor>
+        </bean>
+    </context>
 
-		<!-- Cоздание dataLogger, сохраняющего flow-пакеты на диск (только один экземпляр) -->
-		<bean name="flowDataLogger" class="ru.bitel.bgbilling.modules.inet.collector.IPHourlyDataLogger">
-			<param name="scheduledExecutor">hrlydtlggr</param>
-		</bean>
+    <!-- Cоздание процессора flow-пакетов -->
+    <context name="collector">
+        <!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
+        <scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
 
-		<!-- Cоздание слушателя flow-пакетов на порту с передачей ему dataLogger -->
-		<bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlow9Listener">
-			<constructor factoryMethod="newInstance">
-				<!-- Тип слушателя, netflow, netflow9 или sflow -->
-				<param name="type" value="netflow9"/>
-				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
-				<param name="host" value=""/>
-				<!-- Порт, на котором будет открыт сокет -->
-				<param name="port" value="2001"/>
-				<!-- Размер буфера приема слушателя -->
-				<param name="recvBufferSize">4 * 1024 * 1024</param>
-				<!-- Рекомендуемый SO_RCVBUF сокета -->
-				<param name="soRCVBUF">512 * 1024</param>
-				<!-- Количество потоков-обработчиков -->
-				<param name="threadCount" value="10"/>
-				<!-- id устройств-источников, если на данном порту нужно получать пакеты только c определенных источников -->
-				<param name="agentDeviceIds" value=""/>
-				<!-- id устройств-источников, если на данном порту нужно обрабатывать пакеты только c определенных источников -->
-				<param name="processAgentDeviceIds" value=""/>
-				<!--
+        <!-- Cоздание dataLogger, сохраняющего flow-пакеты на диск (только один экземпляр) -->
+        <bean name="flowDataLogger" class="ru.bitel.bgbilling.modules.inet.collector.IPHourlyDataLogger">
+            <param name="scheduledExecutor">hrlydtlggr</param>
+        </bean>
+
+        <!-- Cоздание слушателя flow-пакетов на порту с передачей ему dataLogger -->
+        <bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlow9Listener">
+            <constructor factoryMethod="newInstance">
+                <!-- Тип слушателя, netflow, netflow9 или sflow -->
+                <param name="type" value="netflow9"/>
+                <!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
+                <param name="host" value=""/>
+                <!-- Порт, на котором будет открыт сокет -->
+                <param name="port" value="2001"/>
+                <!-- Размер буфера приема слушателя -->
+                <param name="recvBufferSize">4 * 1024 * 1024</param>
+                <!-- Рекомендуемый SO_RCVBUF сокета -->
+                <param name="soRCVBUF">512 * 1024</param>
+                <!-- Количество потоков-обработчиков -->
+                <param name="threadCount" value="10"/>
+                <!-- id устройств-источников, если на данном порту нужно получать пакеты только c определенных источников -->
+                <param name="agentDeviceIds" value=""/>
+                <!-- id устройств-источников, если на данном порту нужно обрабатывать пакеты только c определенных источников -->
+                <param name="processAgentDeviceIds" value=""/>
+                <!--
                     Фильтр flow-пакетов:
                         0 (по умолчанию) - не фильтровать,
                         1 - не сохранять и не обрабатывать пакеты, в которых нет записей с IP-адресами из IP-ресурсов,
                         2 - то же самое, что 1, но с учетом периодов IP-ресурсов.
-				-->
-				<param name="ipResourceFilter" value="2"/>
-				<!-- Передача dataLogger -->
-				<param name="dataLogger">flowDataLogger</param>
-			</constructor>
-		</bean>
+                -->
+                <param name="ipResourceFilter" value="2"/>
+                <!-- Передача dataLogger -->
+                <param name="dataLogger">flowDataLogger</param>
+            </constructor>
+        </bean>
 
-		<!-- 
-		<bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlowListener">
-			<constructor factoryMethod="newInstance">
-				<param name="type" value="netflow9"/>
-				<param name="host" value=""/>
-				<param name="port" value="9367"/>
-				<param name="recvBufferSize">4 * 1024 * 1024</param>
-				<param name="soRCVBUF">512 * 1024</param>
-				<param name="threadCount" value="8"/>
-				<param name="agentDeviceIds" value="4"/>
-				<param name="dataLogger">flowDataLogger</param>
-			</constructor>
-		</bean>
-		
-		<bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlowListener">
-			<constructor factoryMethod="newInstance">
-				<param name="type" value="netflow"/>
-				<param name="host" value=""/>
-				<param name="port" value="9368"/>
-				<param name="recvBufferSize">4 * 1024 * 1024</param>
-				<param name="soRCVBUF">512 * 1024</param>
-				<param name="threadCount" value="8"/>
-				<param name="agentDeviceIds" value="20"/>
-				<param name="dataLogger">flowDataLogger</param>
-			</constructor>
-		</bean>
-				
-		 -->
-		 
-		<!-- 
-		<bean name="snmpWorker" class="ru.bitel.bgbilling.modules.inet.accounting.InetSnmpWorker">
-			<constructor>
-				<param name="agentDeviceIds" value="" />
-				<param name="period" value="30" />
-			</constructor>
-		</bean>
-		 -->		
-		 
-		 
-		<context name="detail">
-			<!-- Cоздание обработчика flow детализации -->
-			<bean name="detailWorker" class="ru.bitel.bgbilling.modules.inet.accounting.detail.InetDetailWorker"/>
-		</context>
-	</context>
+        <!--
+        <bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlowListener">
+            <constructor factoryMethod="newInstance">
+                <param name="type" value="netflow9"/>
+                <param name="host" value=""/>
+                <param name="port" value="9367"/>
+                <param name="recvBufferSize">4 * 1024 * 1024</param>
+                <param name="soRCVBUF">512 * 1024</param>
+                <param name="threadCount" value="8"/>
+                <param name="agentDeviceIds" value="4"/>
+                <param name="dataLogger">flowDataLogger</param>
+            </constructor>
+        </bean>
+
+        <bean name="flowListener" class="ru.bitel.bgbilling.modules.inet.collector.InetFlowListener">
+            <constructor factoryMethod="newInstance">
+                <param name="type" value="netflow"/>
+                <param name="host" value=""/>
+                <param name="port" value="9368"/>
+                <param name="recvBufferSize">4 * 1024 * 1024</param>
+                <param name="soRCVBUF">512 * 1024</param>
+                <param name="threadCount" value="8"/>
+                <param name="agentDeviceIds" value="20"/>
+                <param name="dataLogger">flowDataLogger</param>
+            </constructor>
+        </bean>
+
+         -->
+
+        <!--
+        <bean name="snmpWorker" class="ru.bitel.bgbilling.modules.inet.accounting.InetSnmpWorker">
+            <constructor>
+                <param name="agentDeviceIds" value="" />
+                <param name="period" value="30" />
+            </constructor>
+        </bean>
+         -->
+
+
+        <context name="detail">
+            <!-- Cоздание обработчика flow детализации -->
+            <bean name="detailWorker" class="ru.bitel.bgbilling.modules.inet.accounting.detail.InetDetailWorker"/>
+        </context>
+    </context>
 </application>

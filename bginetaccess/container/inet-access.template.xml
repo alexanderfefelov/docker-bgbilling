@@ -1,115 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application context="access">
-	<!-- Уникальное имя приложения -->
-	<param name="app.name" value="APP_NAME"/>
-	<!-- Уникальный числовой id приложения -->
-	<param name="app.id" value="APP_ID"/>
 
-	<!-- Параметры подключения к БД -->
-	<param name="db.driver" value="com.mysql.jdbc.Driver"/>
-	<param name="db.url" value="jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&amp;useSSL=false"/>
-	<param name="db.user" value="bill"/>
-	<param name="db.pswd" value="bgbilling"/>
-	<param name="db.validationTimeout" value="10"/>
-	
-	<!-- Параметры подключения к MQ -->
-	<param name="mq.url" value="failover:(tcp://activemq.bgbilling.local:61616)"/>
-	<param name="mq.user" value="bill"/>
-	<param name="mq.pswd" value="bgbilling"/>
-	
-	<!-- id модуля -->
-	<param name="moduleId" value="MODULE_ID"/>
-	<!-- id корневого устройства -->
-	<param name="rootDeviceId" value="ROOT_DEVICE_ID"/>
+    <!-- Уникальное имя приложения -->
+    <param name="app.name" value="APP_NAME"/>
+    <!-- Уникальный числовой id приложения -->
+    <param name="app.id" value="APP_ID"/>
 
-	<!-- Внутренняя переменная приложения, не изменять -->
-	<param name="commonIdentifierName" value="rootDeviceId"/>
+    <!-- Параметры подключения к БД -->
+    <param name="db.driver" value="com.mysql.jdbc.Driver"/>
+    <param name="db.url" value="jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowUrlInLocalInfile=true&amp;zeroDateTimeBehavior=convertToNull&amp;jdbcCompliantTruncation=false&amp;queryTimeoutKillsConnection=true&amp;connectTimeout=1000&amp;useSSL=false"/>
+    <param name="db.user" value="bill"/>
+    <param name="db.pswd" value="bgbilling"/>
+    <param name="db.validationTimeout" value="10"/>
 
-	<!-- Параметры сохранения логов данных -->
-	<!-- Директория, в которую сохранять radius логи -->
-	<param name="datalog.radius.dir" value="data/radius" />
-	<!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
-	<param name="datalog.radius.chunk.size" value="262144" />
-	<!-- Сжимать radius логи: 0 - не сжимать, 1 - zlib -->
-	<param name="datalog.radius.compression.type" value="1" />
-	<!-- Директория, в которую сохранять flow логи -->
-	<param name="datalog.dhcp.dir" value="data/dhcp" />
-	<!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
-	<param name="datalog.dhcp.chunk.size" value="131072" />
-	<!-- Сжимать flow логи: 0 - не сжимать, 1 - zlib -->
-	<param name="datalog.dhcp.compression.type" value="1" />
-	
-	
-	<!-- Создание Access -->
-	<bean name="access" class="ru.bitel.bgbilling.modules.inet.access.Access" />
+    <!-- Параметры подключения к MQ -->
+    <param name="mq.url" value="failover:(tcp://activemq.bgbilling.local:61616)"/>
+    <param name="mq.user" value="bill"/>
+    <param name="mq.pswd" value="bgbilling"/>
 
-	<context name="radius">
-		<!-- Cоздание процессора radius-пакетов -->
-		<bean name="radiusProcessor" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusProcessor"/>
-		
-		<!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
-		<scheduledExecutorService name="hrlydtlggr" corePoolSize="1" />
+    <!-- id модуля -->
+    <param name="moduleId" value="MODULE_ID"/>
+    <!-- id корневого устройства -->
+    <param name="rootDeviceId" value="ROOT_DEVICE_ID"/>
 
-		<!-- Cоздание dataLogger, сохраняющего radius-пакеты на диск (только один экземпляр) -->
-		<bean name="radiusDataLogger" class="ru.bitel.bgbilling.modules.inet.radius.RadiusHourlyDataLogger">
-			<param name="scheduledExecutor">hrlydtlggr</param>
-		</bean>
+    <!-- Внутренняя переменная приложения, не изменять -->
+    <param name="commonIdentifierName" value="rootDeviceId"/>
 
-		<!-- Cоздание слушателя radius-пакетов на порту с передачей ему процессора и dataLogger -->
-		<bean name="radiusListener" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusListener">
-			<constructor>
-				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
-				<param name="host" value=""/>
-				<!-- Порт, на котором будет открыт сокет -->
-				<param name="port" value="1812"/>
-				<!-- Размер буфера приема слушателя -->
-				<param name="recvBufferSize">512 * 1024</param>
-				<!-- Рекомендуемый SO_RCVBUF сокета -->
-				<param name="soRCVBUF"></param>
-				<!-- Количество потоков-обработчиков -->
-				<param name="threadCount">10</param>
-				<!-- Максимальное количество пакетов в очереди на обработку -->
-				<param name="maxQueueSize">200</param>
-				<!-- Передача процессора -->
-				<param name="processor">radiusProcessor</param>
-				<!-- Режим работы, RadiusListener.Mode.authentication -->
-				<param name="mode">RadiusListener.Mode.authentication</param>
-				<!-- Передача dataLogger -->
-				<param name="dataLogger">radiusDataLogger</param>
-			</constructor>
-		</bean>
-	</context>
-	
-	<context name="dhcp">
-		<!-- Cоздание процессора dhcp-пакетов -->
-		<bean name="dhcpProcessor" class="ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpProcessor2"/>
-	
-		<scheduledExecutorService name="hrlydtlggr" corePoolSize="1" />
+    <!-- Параметры сохранения логов данных -->
+    <!-- Директория, в которую сохранять radius логи -->
+    <param name="datalog.radius.dir" value="data/radius"/>
+    <!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
+    <param name="datalog.radius.chunk.size" value="262144"/>
+    <!-- Сжимать radius логи: 0 - не сжимать, 1 - zlib -->
+    <param name="datalog.radius.compression.type" value="1"/>
+    <!-- Директория, в которую сохранять flow логи -->
+    <param name="datalog.dhcp.dir" value="data/dhcp"/>
+    <!-- Размер блока данных в файле лога, также размер буфера на поток слушателя -->
+    <param name="datalog.dhcp.chunk.size" value="131072"/>
+    <!-- Сжимать flow логи: 0 - не сжимать, 1 - zlib -->
+    <param name="datalog.dhcp.compression.type" value="1"/>
 
-		<!-- Cоздание dataLogger, сохраняющего dhcp-пакеты на диск  -->
-		<bean name="dhcpDataLogger" class="ru.bitel.bgbilling.modules.inet.dhcp.DhcpHourlyDataLogger">
-			<param name="scheduledExecutor">hrlydtlggr</param>
-		</bean>
-	
-		<!-- Cоздание слушателя dhcp-пакетов на порту с передачей ему процессора и dataLogger -->
-		<bean name="dhcpListener" class="ru.bitel.bgbilling.kernel.network.dhcp.DhcpListener">
-			<constructor>
-				<!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
-				<param name="host" value=""/>
-				<!-- Порт, на котором будет открыт сокет -->
-				<param name="port" value="67"/>
-				<!-- Размер буфера приема слушателя -->
-				<param name="recvBufferSize">512 * 1024</param>
-				<!-- Количество потоков-обработчиков -->
-				<param name="threadCount">10</param>
-				<!-- Максимальное количество пакетов в очереди на обработку -->
-				<param name="maxQueueSize">200</param>
-				<!-- Передача процессора -->
-				<param name="processor">dhcpProcessor</param>
-				<!-- Передача dataLogger -->
-				<param name="dataLogger">dhcpDataLogger</param>
-			</constructor>
-		</bean>
-	</context>
+
+    <!-- Создание Access -->
+    <bean name="access" class="ru.bitel.bgbilling.modules.inet.access.Access"/>
+
+    <context name="radius">
+        <!-- Cоздание процессора radius-пакетов -->
+        <bean name="radiusProcessor" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusProcessor"/>
+
+        <!-- Служебный ScheduledExecutorService, необходимый для dataLogger -->
+        <scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
+
+        <!-- Cоздание dataLogger, сохраняющего radius-пакеты на диск (только один экземпляр) -->
+        <bean name="radiusDataLogger" class="ru.bitel.bgbilling.modules.inet.radius.RadiusHourlyDataLogger">
+            <param name="scheduledExecutor">hrlydtlggr</param>
+        </bean>
+
+        <!-- Cоздание слушателя radius-пакетов на порту с передачей ему процессора и dataLogger -->
+        <bean name="radiusListener" class="ru.bitel.bgbilling.modules.inet.radius.InetRadiusListener">
+            <constructor>
+                <!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
+                <param name="host" value=""/>
+                <!-- Порт, на котором будет открыт сокет -->
+                <param name="port" value="1812"/>
+                <!-- Размер буфера приема слушателя -->
+                <param name="recvBufferSize">512 * 1024</param>
+                <!-- Рекомендуемый SO_RCVBUF сокета -->
+                <param name="soRCVBUF"></param>
+                <!-- Количество потоков-обработчиков -->
+                <param name="threadCount">10</param>
+                <!-- Максимальное количество пакетов в очереди на обработку -->
+                <param name="maxQueueSize">200</param>
+                <!-- Передача процессора -->
+                <param name="processor">radiusProcessor</param>
+                <!-- Режим работы, RadiusListener.Mode.authentication -->
+                <param name="mode">RadiusListener.Mode.authentication</param>
+                <!-- Передача dataLogger -->
+                <param name="dataLogger">radiusDataLogger</param>
+            </constructor>
+        </bean>
+    </context>
+
+    <context name="dhcp">
+        <!-- Cоздание процессора dhcp-пакетов -->
+        <bean name="dhcpProcessor" class="ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpProcessor2"/>
+
+        <scheduledExecutorService name="hrlydtlggr" corePoolSize="1"/>
+
+        <!-- Cоздание dataLogger, сохраняющего dhcp-пакеты на диск  -->
+        <bean name="dhcpDataLogger" class="ru.bitel.bgbilling.modules.inet.dhcp.DhcpHourlyDataLogger">
+            <param name="scheduledExecutor">hrlydtlggr</param>
+        </bean>
+
+        <!-- Cоздание слушателя dhcp-пакетов на порту с передачей ему процессора и dataLogger -->
+        <bean name="dhcpListener" class="ru.bitel.bgbilling.kernel.network.dhcp.DhcpListener">
+            <constructor>
+                <!-- Хост (интерфейс), на котором будет открыт сокет. Если пусто - на всех -->
+                <param name="host" value=""/>
+                <!-- Порт, на котором будет открыт сокет -->
+                <param name="port" value="67"/>
+                <!-- Размер буфера приема слушателя -->
+                <param name="recvBufferSize">512 * 1024</param>
+                <!-- Количество потоков-обработчиков -->
+                <param name="threadCount">10</param>
+                <!-- Максимальное количество пакетов в очереди на обработку -->
+                <param name="maxQueueSize">200</param>
+                <!-- Передача процессора -->
+                <param name="processor">dhcpProcessor</param>
+                <!-- Передача dataLogger -->
+                <param name="dataLogger">dhcpDataLogger</param>
+            </constructor>
+        </bean>
+    </context>
 
 </application>

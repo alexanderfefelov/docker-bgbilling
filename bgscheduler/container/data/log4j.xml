@@ -2,93 +2,93 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
-	<appender name="APPLICATION" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${log.dir.path}${log.prefix}.log" />
-		<param name="MaxFileSize" value="60MB" />
-		<param name="MaxBackupIndex" value="2" />
-		<param name="Append" value="false" />
+    <appender name="APPLICATION" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log.dir.path}${log.prefix}.log"/>
+        <param name="MaxFileSize" value="60MB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <param name="Append" value="false"/>
 
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n" />
-		</layout>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
+        </layout>
 
-		<filter class="ru.bitel.common.logging.Log4JMDCFilter">
-			<param name="key" value="nestedContext" />
-			<param name="value" value="${log.prefix}" />
-		</filter>
-	</appender>
-	
-	<appender name="MQ" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${log.dir.path}${log.prefix}.mq.log" />
-		<param name="MaxFileSize" value="100MB" />
-		<param name="MaxBackupIndex" value="2" />
-		<param name="Append" value="false" />
+        <filter class="ru.bitel.common.logging.Log4JMDCFilter">
+            <param name="key" value="nestedContext"/>
+            <param name="value" value="${log.prefix}"/>
+        </filter>
+    </appender>
 
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n" />
-		</layout>
+    <appender name="MQ" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log.dir.path}${log.prefix}.mq.log"/>
+        <param name="MaxFileSize" value="100MB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <param name="Append" value="false"/>
 
-		<filter class="ru.bitel.common.logging.Log4JMDCFilter">
-			<param name="key" value="nestedContext" />
-			<param name="value" value="mq" />
-		</filter>
-	</appender>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
+        </layout>
 
-	<appender name="SCRIPT" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${log.dir.path}${log.prefix}.script.log" />
-		<param name="MaxFileSize" value="10MB" />
-		<param name="MaxBackupIndex" value="2" />
-		<param name="Append" value="false" />
+        <filter class="ru.bitel.common.logging.Log4JMDCFilter">
+            <param name="key" value="nestedContext"/>
+            <param name="value" value="mq"/>
+        </filter>
+    </appender>
 
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n" />
-		</layout>
+    <appender name="SCRIPT" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log.dir.path}${log.prefix}.script.log"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <param name="Append" value="false"/>
 
-		<filter class="ru.bitel.common.logging.Log4JMDCFilter">
-			<param name="key" value="nestedContext" />
-			<param name="value" value="script" />
-		</filter>
-	</appender>
-	
-	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
-		<param name="Threshold" value="ERROR" />
-		<param name="File" value="${log.dir.path}${log.prefix}.error.log" />
-		<param name="MaxFileSize" value="10MB" />
-		<param name="MaxBackupIndex" value="2" />
-		<param name="Append" value="false" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
+        </layout>
 
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n" />
-		</layout>
-	</appender>
-	
-	<appender name="ASYNC" class="ru.bitel.common.logging.Log4jAsyncAppender">
-		<appender-ref ref="APPLICATION" />
-		<appender-ref ref="MQ"/>
-		<appender-ref ref="SCRIPT" />
-		<appender-ref ref="ERROR" />
-	</appender>
-	
-	<category name="org.apache.fop" additivity="false">
-		<priority value="WARN" />
-		<appender-ref ref="ASYNC"/>
-	</category>
-	
-	<category name="script" additivity="false">
-		 <priority value="INFO"/>
-		 <appender-ref ref="SCRIPT"/>
-         <appender-ref ref="ERROR"/>                                                                                                                                                                                                               
-    </category>
-    
-	<category name="server" additivity="false">
-		 <priority value="INFO"/>	                                        
-         <appender-ref ref="APPLICATION"/>                                      
-         <appender-ref ref="ERROR"/>
+        <filter class="ru.bitel.common.logging.Log4JMDCFilter">
+            <param name="key" value="nestedContext"/>
+            <param name="value" value="script"/>
+        </filter>
+    </appender>
+
+    <appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="File" value="${log.dir.path}${log.prefix}.error.log"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <param name="Append" value="false"/>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ASYNC" class="ru.bitel.common.logging.Log4jAsyncAppender">
+        <appender-ref ref="APPLICATION"/>
+        <appender-ref ref="MQ"/>
+        <appender-ref ref="SCRIPT"/>
+        <appender-ref ref="ERROR"/>
+    </appender>
+
+    <category name="org.apache.fop" additivity="false">
+        <priority value="WARN"/>
+        <appender-ref ref="ASYNC"/>
     </category>
 
-	<root>
-		<priority value="INFO" />
-		<appender-ref ref="ASYNC" />
-	</root>	
-	
+    <category name="script" additivity="false">
+        <priority value="INFO"/>
+        <appender-ref ref="SCRIPT"/>
+        <appender-ref ref="ERROR"/>
+    </category>
+
+    <category name="server" additivity="false">
+        <priority value="INFO"/>
+        <appender-ref ref="APPLICATION"/>
+        <appender-ref ref="ERROR"/>
+    </category>
+
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
 </log4j:configuration>
