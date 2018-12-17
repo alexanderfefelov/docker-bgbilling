@@ -1,7 +1,6 @@
 import java.nio.charset.Charset
 
 import better.files._
-import com.github.alexanderfefelov.bgbilling.api.action.kernel.ServiceActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
@@ -11,6 +10,10 @@ import org.joda.time.{DateTime, Seconds}
 import plugins._
 import scalaxb._
 import scalikejdbc._
+
+import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
 
 object Main extends App {
 
@@ -92,8 +95,20 @@ object Main extends App {
     for (i <- modules.indices) {
       val id = ModuleConfig.create(mid = Some(i), dt = now, title = "Default", active = 1, uid = Some(1),
         config = Some(Resource.getAsString(s"bgbilling/${modules(i)}.conf"))).id
-      ServiceActions.setModuleConfig(i, id)
+      makeConfigActive(i, id)
     }
+  }
+
+  private def makeConfigActive(i: Int, id: Int) = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+
+    class ModuleConfigCake extends ModuleConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-config-service"))
+    }
+    val moduleConfigService = new ModuleConfigCake().service
+
+    val responseFuture = moduleConfigService.setActive(i, id)
+    Await.result(responseFuture, 5.minutes)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
