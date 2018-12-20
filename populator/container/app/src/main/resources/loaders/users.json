@@ -1,6 +1,21 @@
 {
   "users": [
     {
+      "id": 5,
+      "login": "payanyway",
+      "password": "vevawavere"
+    },
+    {
+      "id": 6,
+      "login": "osmp",
+      "password": "zirigisizi"
+    },
+    {
+      "id": 7,
+      "login": "sberbank-online",
+      "password": "yemiraqecu"
+    },
+    {
       "id": 10,
       "login": "foo",
       "password": "ciyozibovo"

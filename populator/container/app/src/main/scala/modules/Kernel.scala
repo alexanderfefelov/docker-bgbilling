@@ -387,50 +387,7 @@ object Kernel {
   // Договор -> Открыть договор -> ДОГОВОР -> Приход
   //
   def payments(): Unit = {
-    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
-
-    class PaymentCake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
-      override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
-    }
-    val paymentService = new PaymentCake().service
-
-    val dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
-
-    var payment = Payment(comment = Some("Какой-то комментарий"), attributes = Map(
-      "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 100),
-      "date" ->       dr("date", now.minusMonths(2).toString(dateTimeFormat)),
-      "sum" ->        dr("sum", 100.0),
-      "summa" ->      dr("summa", 100.0),
-      "typeId" ->     dr("typeId", 1),
-      "userId" ->     dr("userId", 0)
-    ))
-    var responseFuture = paymentService.paymentUpdate(Some(payment), None)
-    Await.result(responseFuture, 15.seconds)
-
-    payment = Payment(comment = None, attributes = Map(
-      "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 100),
-      "date" ->       dr("date", now.minusMonths(3).toString(dateTimeFormat)),
-      "sum" ->        dr("sum", 70.0),
-      "summa" ->      dr("summa", 70.0),
-      "typeId" ->     dr("typeId", 2),
-      "userId" ->     dr("userId", 0)
-    ))
-    responseFuture = paymentService.paymentUpdate(Some(payment), None)
-    Await.result(responseFuture, 15.seconds)
-
-    payment = Payment(comment = None, attributes = Map(
-      "id" ->         dr("id", -1),
-      "contractId" -> dr("contractId", 100),
-      "date" ->       dr("date", now.toString(dateTimeFormat)),
-      "sum" ->        dr("sum", 10.0),
-      "summa" ->      dr("summa", 10.0),
-      "typeId" ->     dr("typeId", 1),
-      "userId" ->     dr("userId", 0)
-    ))
-    responseFuture = paymentService.paymentUpdate(Some(payment), None)
-    Await.result(responseFuture, 15.seconds)
+    Payments.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------
