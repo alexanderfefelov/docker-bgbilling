@@ -1,6 +1,5 @@
-package com.github.alexanderfefelov.bgbilling.dyn.polyglot;
+package com.github.alexanderfefelov.bgbilling.dyn.framework;
 
-import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Source;
@@ -10,8 +9,7 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PolyglotRunner
-        implements Loggable {
+public class PolyglotRunner implements Loggable {
 
     public Value runFile(PolyglotLanguage language, String filePath, long timeout,
                      boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {

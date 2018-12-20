@@ -10,7 +10,8 @@
 
 package demo;
 
-import com.github.alexanderfefelov.bgbilling.dyn.polyglot.*;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotLanguage;
+import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotRunner;
 import org.graalvm.polyglot.Value;
 
 public class PolyglotRubyDemo {

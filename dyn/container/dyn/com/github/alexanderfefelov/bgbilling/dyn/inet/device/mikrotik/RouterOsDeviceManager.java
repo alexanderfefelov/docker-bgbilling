@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.dyn.device.mikrotik;
+package com.github.alexanderfefelov.bgbilling.dyn.inet.device.mikrotik;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import me.legrange.mikrotik.ApiConnection;
@@ -16,8 +16,7 @@ import javax.net.SocketFactory;
 import java.util.List;
 import java.util.Map;
 
-public class RouterOsDeviceManager implements DeviceManager,
-        Loggable {
+public class RouterOsDeviceManager implements DeviceManager, Loggable {
 
     @Override
     public Object init(Setup setup, int i, Device<?, ?> device, DeviceType deviceType, ParameterMap config) throws Exception {

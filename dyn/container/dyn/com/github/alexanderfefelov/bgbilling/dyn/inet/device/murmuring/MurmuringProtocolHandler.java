@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.dyn.device.qinq;
+package com.github.alexanderfefelov.bgbilling.dyn.inet.device.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Utils;
@@ -7,17 +7,11 @@ import ru.bitel.bgbilling.kernel.network.radius.RadiusPacket;
 import ru.bitel.bgbilling.modules.inet.access.sa.ProtocolHandler;
 import ru.bitel.bgbilling.modules.inet.api.common.bean.InetDevice;
 import ru.bitel.bgbilling.modules.inet.api.common.bean.InetDeviceType;
-import ru.bitel.bgbilling.modules.inet.dhcp.InetDhcpProcessor;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.ParameterMap;
 import ru.bitel.common.sql.ConnectionSet;
 
-import java.nio.ByteBuffer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class QinqProtocolHandler implements ProtocolHandler,
-        Loggable, Utils {
+public class MurmuringProtocolHandler implements ProtocolHandler, Loggable, Utils {
 
     @Override
     public void init(Setup setup, int moduleId, InetDevice device, InetDeviceType deviceType, ParameterMap config) {
@@ -25,21 +19,10 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
         this.device = device;
         this.config = config;
-        vlansRegexPattern = Pattern.compile(config.get("qinq.vlansRegex", ".*s(\\d\\d\\d\\d)c(\\d\\d\\d\\d).*"));
     }
 
     @Override
     public void preprocessDhcpRequest(DhcpPacket request, DhcpPacket response) {
-        String option82Str = request.getOption((byte) 82).getValueAsString();
-        Matcher matcher = vlansRegexPattern.matcher(option82Str);
-        if (!matcher.find()) {
-            logger().warn("VLAN ids not found");
-            return;
-        }
-        byte[] spVid = matcher.group(1).getBytes();
-        byte[] vid = ByteBuffer.allocate(2).putShort(Short.parseShort(matcher.group(2))).array();
-        request.setOption(InetDhcpProcessor.AGENT_REMOTE_ID, spVid);
-        request.setOption(InetDhcpProcessor.VLAN_ID, vid);
         logger().trace("preprocessDhcpRequest: [" + device.getId() + "] " + device.toString() + ", " + removeNewLines(request.toString()));
     }
 
@@ -70,6 +53,5 @@ public class QinqProtocolHandler implements ProtocolHandler,
 
     private InetDevice device;
     private ParameterMap config;
-    private Pattern vlansRegexPattern;
 
 }

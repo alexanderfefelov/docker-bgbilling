@@ -1,4 +1,4 @@
-package com.github.alexanderfefelov.bgbilling.dyn.device.murmuring;
+package com.github.alexanderfefelov.bgbilling.dyn.inet.device.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Utils;
@@ -9,8 +9,7 @@ import ru.bitel.bgbilling.modules.inet.api.common.bean.InetDeviceType;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.ParameterMap;
 
-public class MurmuringServiceActivator implements ServiceActivator,
-        Loggable, Utils {
+public class MurmuringServiceActivator implements ServiceActivator, Loggable, Utils {
 
     @Override
     public Object init(Setup setup, int moduleId, InetDevice device, InetDeviceType deviceType, ParameterMap config) {
