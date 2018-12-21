@@ -9,16 +9,16 @@ import org.graalvm.polyglot.Value;
 
 В конфигурации ядра:
 
-           module       action           class
-              |            |               |
-            /--\       /------\ /---------------------\
+           module       action          class
+              |            |              |
+            /--\       /------\ /-------------------\
   dynaction:demo.ActionPolyglot=demo.dynaction.Python
 
 Вызов:
 
-                                                           module       action
-                                                              |            |
-                                                            /--\        /------\
+                                                           module      action
+                                                              |           |
+                                                            /--\        /----\
   GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=Python
 
 Ответ:
