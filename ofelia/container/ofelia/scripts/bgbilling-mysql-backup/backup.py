@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 
+import ConfigParser
 from datetime import datetime, timedelta
 import glob
 import os
@@ -24,9 +25,16 @@ NOW_STR_FORMAT = '%Y%m%d_%H%M%S'
 ARCHIVE_BASE_NAME_FORMAT = '{output_base_name}'
 ARCHIVE_FILE_NAME_FORMAT = '{archive_base_name}_{now_str}_{random_str}'
 ARCHIVE_COMPRESSION = ''
-KEEP_ARCHIVES = 2
+KEEP_DAYS = 2
 
 TMP_HOME = '/ofelia/tmp'
+
+
+class Config:
+    def __init__(self):
+        config_parser = ConfigParser.RawConfigParser()
+        config_parser.read(os.path.join(os.path.abspath(sys.path[0]), 'application.conf'))
+        pass
 
 
 def __base36_encode(integer):  # https://en.wikipedia.org/wiki/Base36#Python_implementation
@@ -44,9 +52,10 @@ def __base36_encode(integer):  # https://en.wikipedia.org/wiki/Base36#Python_imp
 
 
 def main():
+    config = Config()
+
     if not (os.path.isfile(MYDUMPER) and os.access(MYDUMPER, os.X_OK)):
-        print('{0} does not exist or can not be executed'.format(MYDUMPER))
-        sys.exit(1)
+        raise IOError('{0} does not exist or can not be executed'.format(MYDUMPER))
 
     if not os.path.exists(BACKUP_HOME):
             os.makedirs(BACKUP_HOME, 0700)
@@ -119,7 +128,7 @@ def main():
 
     archive_file_paths = glob.glob(os.path.join(BACKUP_HOME, '*' + archive_base_name + '*'))
     now = datetime.today()
-    threshold = timedelta(days=KEEP_ARCHIVES)
+    threshold = timedelta(days=KEEP_DAYS)
     for file_path in archive_file_paths:
         file_time = datetime.fromtimestamp(os.stat(file_path).st_mtime)
         if now - file_time > threshold:

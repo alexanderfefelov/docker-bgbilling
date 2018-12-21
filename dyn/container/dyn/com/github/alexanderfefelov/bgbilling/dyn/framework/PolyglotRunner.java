@@ -15,7 +15,7 @@ public class PolyglotRunner implements Loggable {
                      boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
         int id = hashCode();
         logger().trace(String.format("%d running file %s: %s, %d, %b, %b, %b, %b", id, language.language(), filePath, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
-        File sourceFile = new File(SCRIPT_PATH_PREFIX + filePath);
+        File sourceFile = new File(POLYGLOT_SCRIPT_PATH_PREFIX + filePath);
         try {
             Source source = Source.newBuilder(language.language(), sourceFile).build();
             Value result = run(source, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess);
@@ -64,6 +64,6 @@ public class PolyglotRunner implements Loggable {
         return context.eval(source);
     }
 
-    private static final String SCRIPT_PATH_PREFIX = "/bgbilling/polyglot/";
+    private static final String POLYGLOT_SCRIPT_PATH_PREFIX = "/bgbilling/polyglot/";
 
 }
