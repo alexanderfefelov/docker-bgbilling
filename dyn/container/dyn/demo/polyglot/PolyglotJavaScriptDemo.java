@@ -8,7 +8,7 @@
 
 */
 
-package demo;
+package demo.polyglot;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotLanguage;
 import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotRunner;
