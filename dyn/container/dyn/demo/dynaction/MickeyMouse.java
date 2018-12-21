@@ -7,6 +7,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+
+Вызов:
+
+GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=MickeyMouse
+
+*/
+
 public class MickeyMouse extends ActionBase {
 
     @Override
@@ -50,7 +58,8 @@ public class MickeyMouse extends ActionBase {
             addListItem(mickeyMouse, k, v);
         }
 
-        // Response:
+        // Ответ:
+        //   <?xml version="1.0" encoding="UTF-8"?>
         //   <data status="ok">
         //     <mickeyMouse>
         //       <item id="Italian" title="Topolino"/>
