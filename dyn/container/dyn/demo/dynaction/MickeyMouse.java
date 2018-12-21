@@ -9,9 +9,32 @@ import java.util.Map;
 
 /*
 
+В конфигурации ядра:
+
+           module        action            class
+              |             |                |
+            /--\       /---------\ /------------------------\
+  dynaction:demo.ActionMickeyMouse=demo.dynaction.MickeyMouse
+
 Вызов:
 
-GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=MickeyMouse
+                                                           module         action
+                                                              |              |
+                                                            /--\        /---------\
+  GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=MickeyMouse
+
+Ответ:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <data status="ok">
+    <mickeyMouse>
+      <item id="Italian" title="Topolino"/>
+      <item id="Russian" title="Mikki Maus"/>
+      ...
+      <item id="Rumanian" title="Miki Maus"/>
+     <item id="Greek" title="Mikki Maous/Miky Maoye"/>
+   </mickeyMouse>
+ </data>
 
 */
 
@@ -57,18 +80,6 @@ public class MickeyMouse extends ActionBase {
             String v = entry.getValue().toString();
             addListItem(mickeyMouse, k, v);
         }
-
-        // Ответ:
-        //   <?xml version="1.0" encoding="UTF-8"?>
-        //   <data status="ok">
-        //     <mickeyMouse>
-        //       <item id="Italian" title="Topolino"/>
-        //       <item id="Russian" title="Mikki Maus"/>
-        //       ...
-        //       <item id="Rumanian" title="Miki Maus"/>
-        //      <item id="Greek" title="Mikki Maous/Miky Maoye"/>
-        //    </mickeyMouse>
-        //  </data>
     }
 
 }

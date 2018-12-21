@@ -4,9 +4,29 @@ import bitel.billing.server.ActionBase;
 
 /*
 
+В конфигурации ядра:
+
+           module        action           class
+              |             |               |
+            /--\       /--------\ /-----------------------\
+  dynaction:demo.ActionCalculator=demo.dynaction.Calculator
+
 Вызов:
 
-GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=Calculator&a=2&b=40&op=add
+                                                           module         action     parameters
+                                                              |              |            |
+                                                            /--\        /--------\ /-------------\
+  GET/POST /bgbilling/executer?user=admin&pswd=admin&module=demo&action=Calculator&a=2&b=40&op=add
+
+Ответ:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <data result="42.0" status="ok"/>
+
+или
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <data errorMessage="Обратитесь к хрустальному шару" status="error"/>
 
 */
 
@@ -36,13 +56,6 @@ public class Calculator extends ActionBase {
                 rootNode.setAttribute("errorMessage", "Обратитесь к хрустальному шару");
                 break;
         }
-
-        // Ответ:
-        //   <?xml version="1.0" encoding="UTF-8"?>
-        //   <data result="42.0" status="ok"/>
-        // или
-        //   <?xml version="1.0" encoding="UTF-8"?>
-        //   <data errorMessage="Обратитесь к хрустальному шару" status="error"/>
     }
 
 }
