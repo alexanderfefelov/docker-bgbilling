@@ -2,8 +2,6 @@ package demo.dynservice;
 
 import ru.bitel.bgbilling.kernel.container.service.server.AbstractService;
 
-import javax.jws.WebService;
-
 /*
 
 В конфигурации ядра:
@@ -12,7 +10,6 @@ import javax.jws.WebService;
 
 */
 
-@WebService(targetNamespace="demoService")
 public class DemoServiceImpl extends AbstractService implements DemoService {
 
     /*
@@ -24,12 +21,23 @@ public class DemoServiceImpl extends AbstractService implements DemoService {
       {
         "method": "fortyTwo",
         "user": {
-            "user": "admin",
-            "pswd": "admin"
+          "user": "admin",
+          "pswd": "admin"
         },
         "params": {}
       }
 
+    Ответ:
+
+      {
+        "status": "ok",
+        "exception": null,
+        "message": "",
+        "tag": null,
+        "data": {
+          "return": "Forty-Two"
+        }
+      }
 
     */
     @Override
