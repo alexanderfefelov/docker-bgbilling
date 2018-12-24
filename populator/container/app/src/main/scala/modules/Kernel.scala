@@ -24,7 +24,7 @@ object Kernel {
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 16, min = 1048576, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "ru.bitel.bgbilling.kernel.task.server.Validator", moduleId = "0", comment = "Проверка базы данных биллинга на корректность", params = "email=admin@inter.net\n")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 1, min = 1, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
-      `class` = "bitel.billing.server.contract.LimitRestorer", moduleId = "0", comment = "Возвращение к исходному значению временно изменённых лимитов", params = "")
+      `class` = "bitel.billing.server.contract.LimitRestorer", moduleId = "0", comment = "Возвращение временно изменённых лимитов к исходному значению", params = "")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 1, min = 1, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "bitel.billing.server.contract.ContractStatusSetter", moduleId = "0", comment = "Изменение статусов договоров в соответствии с заданиями", params = "")
     val params =
@@ -57,10 +57,10 @@ object Kernel {
   // Сервис -> Автоматизация -> Функции глобальных событий
   //
   def eventHandlers(): Unit = {
-    val handler = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler"
-    EventScriptLink.create(title = "On Server Start", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ServerStartEvent", scriptId = 0)
-    EventScriptLink.create(title = "On Timer", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.TimerEvent", scriptId = -1)
-    EventScriptLink.create(title = "On Contract Created", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractCreatedEvent", scriptId = -1)
+    ScriptEventType.findAll().map { t =>
+      EventScriptLink.create(title = t.title, className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler", eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1)
+      EventScriptLink.create(title = t.title, className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler", eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1)
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
