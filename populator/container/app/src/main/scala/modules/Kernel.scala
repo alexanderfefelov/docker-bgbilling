@@ -59,7 +59,6 @@ object Kernel {
   def eventHandlers(): Unit = {
     ScriptEventType.findAll().map { t =>
       EventScriptLink.create(title = t.title, className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler", eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1)
-      EventScriptLink.create(title = t.title, className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler", eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1)
     }
   }
 
