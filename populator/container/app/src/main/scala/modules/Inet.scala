@@ -387,6 +387,107 @@ object Inet {
         |# Регулярное выражение для извлечения SP-VID и C-VID из DHCP Relay Agent Information Option.
         |#
         |qinq.vlansRegex=.*s(\d\d\d\d)c(\d\d\d\d).*
+        |
+        |
+        |# sa.terminal
+        |#
+        |# TerminalServiceActivator
+        |
+        |# Протокол подключения (telnet/ssh/tcp/mikrotik/shell/mikrotik-api)
+        |sa.terminal.protocol=telnet
+        |
+        |# Хост подключения (если не указан, используется значение из поля Хост/порт)
+        |sa.terminal.host=192.168.99.1
+        |
+        |# Порт подключения (если не указан, используется значение из поля Хост/порт)
+        |sa.terminal.port=23
+        |
+        |# Логин (если не указан, используется значение из поля Логин)
+        |sa.terminal.username=telnet
+        |
+        |# Пароль (если не указан, используется значение из поля Пароль)
+        |sa.terminal.password=telnet
+        |
+        |# Шаблон приглашения ввода команды (для telnet/ssh/tcp).
+        |# Для ssh можно указать regexp, если в начале и конце строки будет символ '\', например, "\(#)|(~\$)\"
+        |sa.terminal.endSequence=>
+        |
+        |# Для sa.terminal.protocol=mikrotik - хост и порт, с которых открывать соединение
+        |# sa.terminal.sourceHost=
+        |# sa.terminal.sourcePort=
+        |
+        |# Отложенное подключение. Если указано 1, то подключение происходит перед выполнением первой команды,
+        |# иначе - 0 (по умолчанию), подключение происходит в методе connect
+        |sa.terminal.lazyConnect=1
+        |
+        |INFO=contractId: ${contractId()}, servId: ${servId()}, ip: ${ip()}, ipGate: ${ipGate()}, servDeviceId: ${servDeviceId()}, iface: ${iface()}, vlan: ${vlan()}, oldState: ${oldState()}, newState: ${newState()}
+        |
+        |# Команды, выполняемые при добавлении сервиса на договор
+        |sa.terminal.serv.create.after=:log warning message="sa.terminal.serv.create.after"
+        |sa.terminal.serv.create=:log warning message="sa.terminal.serv.create: {@INFO}"
+        |sa.terminal.serv.create.before=:log warning message="sa.terminal.serv.create.before"
+        |
+        |# Команды, выполняемые при удалении сервиса с договора
+        |sa.terminal.serv.cancel.before=:log warning message="sa.terminal.serv.cancel.before"
+        |sa.terminal.serv.cancel=:log warning message="sa.terminal.serv.cancel: {@INFO}"
+        |sa.terminal.serv.cancel.after=:log warning message="sa.terminal.serv.cancel.after"
+        |
+        |# Команды, вызываемые при изменении сервиса (состояние/опции)
+        |sa.terminal.serv.modify.before=:log warning message="sa.terminal.serv.modify.before"
+        |sa.terminal.serv.modify=:log warning message="sa.terminal.serv.modify: {@INFO}"
+        |sa.terminal.serv.modify.after=:log warning message="sa.terminal.serv.modify.after"
+        |
+        |# Команды, вызываемые при включении сервиса (состояние стало "включено")
+        |sa.terminal.serv.modify.enable.before=:log warning message="sa.terminal.serv.modify.enable.before"
+        |sa.terminal.serv.modify.enable=:log warning message="sa.terminal.serv.modify.enable: {@INFO}"
+        |sa.terminal.serv.modify.enable.after=:log warning message="sa.terminal.serv.modify.enable.after"
+        |
+        |# Команды, вызываемые при отключение сервиса (состояние стало "отключено")
+        |sa.terminal.serv.modify.disable.before=:log warning message="sa.terminal.serv.modify.disable.before"
+        |sa.terminal.serv.modify.disable=:log warning message="sa.terminal.serv.modify.disable: {@INFO}"
+        |sa.terminal.serv.modify.disable.after=:log warning message="sa.terminal.serv.modify.disable.after"
+        |
+        |# Команды, вызываемые при изменении соединения (состояние/опции)
+        |sa.terminal.connection.modify.before=:log warning message="sa.terminal.connection.modify.before"
+        |sa.terminal.connection.modify=:log warning message="sa.terminal.connection.modify: {@INFO}"
+        |sa.terminal.connection.modify.after=:log warning message="sa.terminal.connection.modify.before"
+        |
+        |# Команды, вызываемые при включении соединения (состояние стало "включено")
+        |sa.terminal.connection.modify.enable.before=:log warning message="sa.terminal.connection.modify.enable.before"
+        |sa.terminal.connection.modify.enable=:log warning message="sa.terminal.connection.modify.enable: {@INFO}"
+        |sa.terminal.connection.modify.enable.after=:log warning message="sa.terminal.connection.modify.enable.after"
+        |
+        |# Команды, вызываемые при отключение соединения (состояние стало "отключено")
+        |sa.terminal.connection.modify.disable.before=:log warning message="sa.terminal.connection.modify.disable.before"
+        |sa.terminal.connection.modify.disable=:log warning message="sa.terminal.connection.modify.disable: {@INFO}"
+        |sa.terminal.connection.modify.disable.after=:log warning message="sa.terminal.connection.modify.disable.after"
+        |
+        |# Команды, вызываемые при сбросе соединения
+        |sa.terminal.connection.close.before=:log warning message="sa.terminal.connection.close.before"
+        |sa.terminal.connection.close=:log warning message="sa.terminal.connection.close: {@INFO}"
+        |sa.terminal.connection.close.after=:log warning message="sa.terminal.connection.close.after"
+        |
+        |# Команды, вызываемые при старте соединения
+        |sa.terminal.connection.onAccountingStart.before=:log warning message="sa.terminal.connection.onAccountingStart.before"
+        |sa.terminal.connection.onAccountingStart=:log warning message="sa.terminal.connection.onAccountingStart: {@INFO}"
+        |sa.terminal.connection.onAccountingStart.after=:log warning message="sa.terminal.connection.onAccountingStart.after"
+        |
+        |# Команды, вызываемые при стопе соединения
+        |sa.terminal.connection.onAccountingStop.before=:log warning message="sa.terminal.connection.onAccountingStop.before"
+        |sa.terminal.connection.onAccountingStop=:log warning message="sa.terminal.connection.onAccountingStop: {@INFO}"
+        |sa.terminal.connection.onAccountingStop.after=:log warning message="sa.terminal.connection.onAccountingStop.after"
+        |
+        |# Команды, вызываемые при включении опции ID=x (и дочерних опций по отношению к опции с ID=x) на сервисе
+        |sa.terminal.serv.inetOption.3.enable=:log warning message="sa.terminal.serv.inetOption.x.enable: {@INFO}"
+        |
+        |# Команды, вызываемые при отключении опции ID=x (и дочерних опций по отношению к опции с ID=x) на сервисе
+        |sa.terminal.serv.inetOption.3.disable=:log warning message="sa.terminal.serv.inetOption.x.disable: {@INFO}"
+        |
+        |# Команды, вызываемые при включении опции ID=x (и дочерних опций по отношению к опции с ID=x) на соединении
+        |sa.terminal.connection.inetOption.3.enable=:log warning message="sa.terminal.connection.inetOption.x.enable: {@INFO}"
+        |
+        |# Команды, вызываемые при отключении опции ID=x (и дочерних опций по отношению к опции с ID=x) на соединении
+        |sa.terminal.connection.inetOption.3.disable=:log warning message="sa.terminal.connection.inetOption.x.disable: {@INFO}"
         |""".stripMargin
     var host = "192.168.99.1"
     invDevice = InvDevice(entityAttributes = EntityAttributes(), children = Seq(), comment = Some(""), config = Some(cfg), host = Some(s"$host:8728"), uptime = None, uptimeTime = None,
