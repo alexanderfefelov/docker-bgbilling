@@ -6,7 +6,7 @@ import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.sql.ConnectionSet;
 
-public class MurmuringContractEventHandler extends EventScriptBase implements Loggable {
+public class MurmuringEventHandler extends EventScriptBase implements Loggable {
 
     @Override
     public void onEvent(Event event, Setup setup, ConnectionSet set) throws Exception {

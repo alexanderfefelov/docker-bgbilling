@@ -19,8 +19,10 @@ object Kernel {
   // Сервис -> Администрирование -> Планировщик заданий
   //
   def scheduledTasks() = {
+    ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 16, min = 337191016277640225L, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
+      `class` = "bitel.billing.server.script.TimerEventGenerate", moduleId = "0", comment = "Таймер 5 мин.", params = "flag=300\n")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 16, min = 1048576, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
-      `class` = "ru.bitel.bgbilling.kernel.task.server.Validator", moduleId = "0", comment = "Проверка базы данных биллинга на корректность", params = "email=admin@inter.net")
+      `class` = "ru.bitel.bgbilling.kernel.task.server.Validator", moduleId = "0", comment = "Проверка базы данных биллинга на корректность", params = "email=admin@inter.net\n")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 1, min = 1, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "bitel.billing.server.contract.LimitRestorer", moduleId = "0", comment = "Возвращение к исходному значению временно изменённых лимитов", params = "")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 1, min = 1, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
@@ -48,6 +50,24 @@ object Kernel {
 
     val responseFuture = dynamicCodeService.recompileAll()
     Await.result(responseFuture, 5.minutes)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Автоматизация -> Функции скриптов поведения
+  // Сервис -> Автоматизация -> Функции глобальных событий
+  //
+  def eventHandlers(): Unit = {
+    val handler = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler"
+    EventScriptLink.create(title = "On Server Start", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ServerStartEvent", scriptId = 0)
+    EventScriptLink.create(title = "On Timer", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.TimerEvent", scriptId = -1)
+    EventScriptLink.create(title = "On Contract Created", className = handler, eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractCreatedEvent", scriptId = -1)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Автоматизация -> Глобальные скрипты поведения
+  //
+  def globalScripts(): Unit = {
+    GlobalScriptLink.create(title = "Murmur", className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.global.MurmuringGlobalScript")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -96,8 +116,9 @@ object Kernel {
   // Справочники -> Другие -> Договоры - группы
   //
   def contractGroups(): Unit = {
-    ContractGroup.create(id = 0, title = "Специальный", enable = 1, editable = 1, comment = "")
-    ContractGroup.create(id = 1, title = "Служебный", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 0, title = "Все", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 1, title = "Специальный", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 2, title = "Служебный", enable = 1, editable = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -427,7 +448,7 @@ object Kernel {
     /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
       tpid = "4,5", // Тарифы
-      groups = 0,
+      groups = 1,
       mode = 1, // Дебет
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
@@ -439,7 +460,7 @@ object Kernel {
     /* 2 */ ContractPattern.create(title = "Ф/Л, кредит",
       closesumma = 0.0f, // Лимит
       tpid = "4,5", // Тарифы
-      groups = 0,
+      groups = 1,
       mode = 0, // Кредит
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
@@ -450,7 +471,8 @@ object Kernel {
     )
     /* 3 */ ContractPattern.create(title = "Ю/Л, аванс, 3 дня",
       closesumma = 0.0f, // Лимит
-      tpid = "", groups = 0,
+      tpid = "4,5",
+      groups = 1,
       mode = 1, // Дебет
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
@@ -462,7 +484,8 @@ object Kernel {
     )
     /* 4 */ ContractPattern.create(title = "Ю/Л, кредит, лимит -20000 руб.",
       closesumma = -20000.0f, // Лимит
-      tpid = "", groups = 0,
+      tpid = "4,5",
+      groups = 1,
       mode = 0, // Кредит
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
@@ -486,6 +509,14 @@ object Kernel {
     /* 2 */ EntitySpec.create(title = "Маршрутизатор", entityspectypeid = 0, comment = "", hidden = 0, entitytitlemacros = "")
     EntitySpecAttrLink.create(entityspecid = 2, entityspecattrid = 1, pos = 0)
     EntitySpecAttrLink.create(entityspecid = 2, entityspecattrid = 2, pos = 0)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Сервис -> Настройка -> Редактор новостей
+  //
+  def news(): Unit = {
+    News.create(gr = 1, dt = DateTime.now, title = "Далекий перигелий: методология и особенности", txt = "Отвесная линия, как бы это ни казалось парадоксальным, иллюстрирует непреложный радиант. Высота дает центральный эффективный диаметp. Уравнение времени ничтожно решает центральный узел, хотя это явно видно на фотогpафической пластинке, полученной с помощью 1.2-метpового телескопа. Метеорный дождь отражает надир. Натуральный логарифм неизменяем.\n\nУ планет-гигантов нет твёрдой поверхности, таким образом экскадрилья отражает тропический год. Угловое расстояние решает космический лимб. Хотя хpонологи не увеpены, им кажется, что орбита меняет далекий Каллисто. Гелиоцентрическое расстояние дает лимб.\n\nУгловое расстояние оценивает вращательный сарос, таким образом, часовой пробег каждой точки поверхности на экваторе равен 1666км. Атомное время последовательно. Большая Медведица, как бы это ни казалось парадоксальным, решает астероидный космический мусор. Большой круг небесной сферы, как бы это ни казалось парадоксальным, оценивает непреложный тропический год (датировка приведена по Петавиусу, Цеху, Хайсу). Магнитное поле точно выбирает зенит.")
+    News.create(gr = 1, dt = DateTime.now.minusMonths(1), title = "Спиральный погранслой глазами современников", txt = "Расслоение стабилизирует фотон. Расслоение, вследствие квантового характера явления, стохастично притягивает квазар, даже если пока мы не можем наблюсти это непосредственно. Волна едва ли квантуема.\n\nАтом, даже при наличии сильных аттракторов, стабилизирует экситон в том случае, когда процессы переизлучения спонтанны. Фонон излучает изобарический фронт. Излучение синхронно. Лептон вращает внутримолекулярный кристалл. Неоднородность когерентно заряжает электрон без обмена зарядами или спинами.\n\nЭкситон стохастично облучает межатомный лазер. Кварк мгновенно заряжает тангенциальный атом при любом агрегатном состоянии среды взаимодействия. Погранслой ненаблюдаемо синхронизует лазер, поскольку любое другое поведение нарушало бы изотропность пространства. Туманность воспроизводима в лабораторных условиях.")
   }
 
 }

@@ -34,6 +34,8 @@ object Main extends App {
   Db.init()
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
+  execute("Kernel.eventHandlers", Kernel.eventHandlers())
+  execute("Kernel.globalScripts", Kernel.globalScripts())
   execute("moduleConfigs", moduleConfigs())
   execute("Kernel.users", Kernel.users())
   execute("Kernel.bgsGroups", Kernel.bgsGroups())
@@ -48,6 +50,7 @@ object Main extends App {
   execute("Kernel.contractCommentPatterns", Kernel.contractCommentPatterns())
   execute("Kernel.contractPatterns", Kernel.contractPatterns())
   execute("Kernel.entitySpecs", Kernel.entitySpecs())
+  execute("Kernel.news", Kernel.news())
   execute("modulesAndServices", modulesAndServices())
   execute("plugins", plugins())
   execute("scheduledTasks", scheduledTasks())
