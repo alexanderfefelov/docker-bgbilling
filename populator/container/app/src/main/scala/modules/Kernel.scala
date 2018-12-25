@@ -19,7 +19,7 @@ object Kernel {
   // Сервис -> Администрирование -> Планировщик заданий
   //
   def scheduledTasks() = {
-    ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 16, min = 337191016277640225L, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
+    ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 0, min = 37191016277640225L, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "bitel.billing.server.script.TimerEventGenerate", moduleId = "0", comment = "Таймер 5 мин.", params = "flag=300\n")
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 16, min = 1048576, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "ru.bitel.bgbilling.kernel.task.server.Validator", moduleId = "0", comment = "Проверка базы данных биллинга на корректность", params = "email=admin@inter.net\n")

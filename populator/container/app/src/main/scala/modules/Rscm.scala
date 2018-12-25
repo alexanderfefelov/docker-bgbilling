@@ -34,7 +34,7 @@ object Rscm {
     RscmService3.create(Some("8"), Some("шт."))
     /* 9 */ DbService.create("Маршрутизатор Asus RT-AC53", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
-    RscmService3.create(Some("89"), Some("шт."))
+    RscmService3.create(Some("9"), Some("шт."))
     moduleId
   }
 
