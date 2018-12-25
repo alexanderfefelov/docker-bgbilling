@@ -35,6 +35,7 @@ object Main extends App {
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
   execute("Kernel.eventHandlers", Kernel.eventHandlers())
+  execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
   execute("Kernel.globalScripts", Kernel.globalScripts())
   execute("moduleConfigs", moduleConfigs())
   execute("Kernel.users", Kernel.users())
