@@ -151,7 +151,7 @@
     </appender>
 
     <root>
-        <priority value="INFO"/>
+        <priority value="TRACE"/>
         <appender-ref ref="ASYNC"/>
     </root>
 

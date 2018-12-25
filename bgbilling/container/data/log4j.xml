@@ -75,19 +75,19 @@
     </category>
 
     <category name="script" additivity="false">
-        <priority value="INFO"/>
+        <priority value="TRACE"/>
         <appender-ref ref="SCRIPT"/>
         <appender-ref ref="ERROR"/>
     </category>
 
     <category name="server" additivity="false">
-        <priority value="INFO"/>
+        <priority value="TRACE"/>
         <appender-ref ref="APPLICATION"/>
         <appender-ref ref="ERROR"/>
     </category>
 
     <root>
-        <priority value="INFO"/>
+        <priority value="TRACE"/>
         <appender-ref ref="ASYNC"/>
     </root>
 
