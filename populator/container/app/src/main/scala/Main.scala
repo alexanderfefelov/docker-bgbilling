@@ -68,6 +68,7 @@ object Main extends App {
   execute("Inet.servTypes", Inet.servTypes())
   execute("Inet.deviceReload", Inet.deviceReload())
   execute("Kernel.tariffs", Kernel.tariffs())
+  execute("Kernel.tariffGroups", Kernel.tariffGroups())
   execute("Kernel.contracts", Kernel.contracts())
   execute("Kernel.payments", Kernel.payments())
 

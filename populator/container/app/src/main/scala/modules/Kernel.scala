@@ -396,6 +396,15 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Группы тарифов
+  //
+  def tariffGroups(): Unit = {
+    /* 1 */ TariffGroup.create(title = "Интернет", tm = 1, df = 0, beh = 0, pos = 0)
+    TariffGroupTariff.create(tgid = 1, tpid = 1, date1 = None, date2 = None)
+    TariffGroupTariff.create(tgid = 1, tpid = 2, date1 = None, date2 = None)
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Договор -> Новый договор
   //
   def contracts(): Unit = {
