@@ -116,8 +116,10 @@ object Kernel {
   //
   def contractGroups(): Unit = {
     ContractGroup.create(id = 0, title = "Все", enable = 1, editable = 1, comment = "")
-    ContractGroup.create(id = 1, title = "Специальный", enable = 1, editable = 1, comment = "")
-    ContractGroup.create(id = 2, title = "Служебный", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 1, title = "Ф/Л", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 2, title = "Ю/Л", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 3, title = "Специальный", enable = 1, editable = 1, comment = "")
+    ContractGroup.create(id = 4, title = "Служебный", enable = 1, editable = 1, comment = "")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -456,49 +458,64 @@ object Kernel {
     /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
       tpid = "4,5", // Тарифы
-      groups = 1,
+      groups = 3,
       mode = 1, // Дебет
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "А-${Y2}-${N4}", data = Some(data.getBytes),
+      dtl = 0,
+      tgid = "1",
+      scrid = "",
+      namePattern = "А-${Y2}-${N4}",
+      data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
     /* 2 */ ContractPattern.create(title = "Ф/Л, кредит",
       closesumma = 0.0f, // Лимит
       tpid = "4,5", // Тарифы
-      groups = 1,
+      groups = 3,
       mode = 0, // Кредит
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Б-${Y2}-${N4}", data = Some(data.getBytes),
+      dtl = 0,
+      tgid = "1",
+      scrid = "",
+      namePattern = "Б-${Y2}-${N4}",
+      data = Some(data.getBytes),
       patid = 1, // Шаблон комментария
       status = 0, domainid = 1
     )
     /* 3 */ ContractPattern.create(title = "Ю/Л, аванс, 3 дня",
       closesumma = 0.0f, // Лимит
       tpid = "4,5",
-      groups = 1,
+      groups = 5,
       mode = 1, // Дебет
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
       dtl = 3, // Время жизни
-      tgid = "", scrid = "", namePattern = "В-${Y2}-${N4}", data = Some(data.getBytes),
+      tgid = "",
+      scrid = "",
+      namePattern = "В-${Y2}-${N4}",
+      data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
     /* 4 */ ContractPattern.create(title = "Ю/Л, кредит, лимит -20000 руб.",
       closesumma = -20000.0f, // Лимит
       tpid = "4,5",
-      groups = 1,
+      groups = 5,
       mode = 0, // Кредит
       pgid = 2, // Группа параметров: Юр. лицо
       pfid = 0,
       fc = 1, // Юр. лицо
-      dtl = 0, tgid = "", scrid = "", namePattern = "Г-${Y2}-${N4}", data = Some(data.getBytes),
+      dtl = 0,
+      tgid = "",
+      scrid = "",
+      namePattern = "Г-${Y2}-${N4}",
+      data = Some(data.getBytes),
       patid = 2, // Шаблон комментария
       status = 0, domainid = 3
     )
