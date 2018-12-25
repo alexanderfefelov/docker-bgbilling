@@ -8,6 +8,7 @@ RUN sed -i 's@bin\/sh@bin\/bash\nexport BGBILLING_HOME='"$BGBILLING_HOME"'@' $BG
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/bonus_$BONUS_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/card_$CARD_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/dispatch_$DISPATCH_VERSION.zip \
+  && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/helpdesk_$HELPDESK_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/inet_$INET_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/moneta_$MONETA_VERSION.zip \
   && wget --quiet --directory $BGBILLING_BOOTSTRAP $FTP_DATA_DIR/mps_$MPS_VERSION.zip \
