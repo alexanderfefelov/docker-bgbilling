@@ -73,26 +73,53 @@ object Kernel {
   // Утилиты -> SQL редактор
   //
   def sqlTemplates(): Unit = {
+    var name = "Валидация: Найти договоры, не состоящие ни в одной группе договоров"
     var sql =
-    """
-      |select
-      |  c.id, c.title, c.comment
-      |from
-      |  contract c
-      |where
-      |  c.gr = 0
-    """.stripMargin
-    SqlTemplate.create(userId = -1, title = "Валидация: Поиск договоров, не состоящих ни в одной группе договоров", text = sql)
-    sql =
-      """
+      s"""|-- $name
         |select
-        |  c.id, c.title, c.comment
+        |  c.id as cid,
+        |  c.title,
+        |  c.date1,
+        |  c.date2,
+        |  c.comment
+        |from
+        |  contract c
+        |where
+        |  c.gr = 0
+      """.stripMargin
+    SqlTemplate.create(userId = -1, title = name, text = sql)
+    name = "Валидация: Найти договоры, не состоящие в группе договоров \"Все\""
+    sql =
+      s"""-- $name
+        |select
+        |  c.id as cid,
+        |  c.title,
+        |  c.date1,
+        |  c.date2,
+        |  c.comment
         |from
         |  contract c
         |where
         |  c.gr & 1 = 0
       """.stripMargin
-    SqlTemplate.create(userId = -1, title = "Валидация: Поиск договоров, не состоящих в группе договоров \"Все\"", text = sql)
+    SqlTemplate.create(userId = -1, title = name, text = sql)
+    name = "Валидация: Найти договоры без услуг модуля npay"
+    sql =
+      s"""-- $name
+        |select
+        |  c.id as cid,
+        |  c.title,
+        |  c.date1,
+        |  c.date2,
+        |  c.comment
+        |from contract c
+        |  left join npay_service_object_2 nso on nso.cid = c.id
+        |  left join service s on s.id = nso.sid
+        |  left join module m on m.id = s.mid and m.name = 'npay'
+        |where
+        |  nso.cid is null
+      """.stripMargin
+    SqlTemplate.create(userId = -1, title = name, text = sql)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
