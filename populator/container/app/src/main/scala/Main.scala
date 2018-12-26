@@ -68,6 +68,7 @@ object Main extends App {
   execute("Inet.devices", Inet.devices())
   execute("Inet.servTypes", Inet.servTypes())
   execute("Inet.deviceReload", Inet.deviceReload())
+  execute("Kernel.tariffOptions", Kernel.tariffOptions())
   execute("Kernel.tariffs", Kernel.tariffs())
   execute("Kernel.tariffGroups", Kernel.tariffGroups())
   execute("Kernel.contracts", Kernel.contracts())
@@ -85,6 +86,18 @@ object Main extends App {
   // Модули -> ЭКЗЕМПЛЯР_МОДУЛЯ -> Конфигурация модуля
   //
   private def moduleConfigs(): Unit = {
+    def makeConfigActive(i: Int, id: Int) = {
+      import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
+
+      class ModuleConfigCake extends ModuleConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+        override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-config-service"))
+      }
+      val moduleConfigService = new ModuleConfigCake().service
+
+      val responseFuture = moduleConfigService.setActive(i, id)
+      Await.result(responseFuture, 5.minutes)
+    }
+
     val modules = Seq(
       /* 0 */ "kernel",
       /* 1 */ "inet",
@@ -102,18 +115,6 @@ object Main extends App {
         config = Some(Resource.getAsString(s"bgbilling/${modules(i)}.conf"))).id
       makeConfigActive(i, id)
     }
-  }
-
-  private def makeConfigActive(i: Int, id: Int) = {
-    import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
-
-    class ModuleConfigCake extends ModuleConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
-      override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-config-service"))
-    }
-    val moduleConfigService = new ModuleConfigCake().service
-
-    val responseFuture = moduleConfigService.setActive(i, id)
-    Await.result(responseFuture, 5.minutes)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -151,6 +152,7 @@ object Main extends App {
 
     Bonus.plugin(plugincfgService)
     Dispatch.plugin(plugincfgService)
+    HelpDesk.plugin(plugincfgService)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -162,6 +164,7 @@ object Main extends App {
     Rscm.scheduledTasks()
     Bonus.scheduledTasks()
     Dispatch.scheduledTasks()
+    HelpDesk.scheduledTasks()
   }
 
 }
