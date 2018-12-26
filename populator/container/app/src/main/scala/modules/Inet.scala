@@ -122,7 +122,7 @@ object Inet {
         |# иначе - 0 (по умолчанию), подключение происходит в методе connect
         |sa.terminal.lazyConnect=1
         |
-        |INFO=contractId: ${contractId()}, servId: ${servId()}, ip: ${ip()}, ipGate: ${ipGate()}, servDeviceId: ${servDeviceId()}, iface: ${iface()}, vlan: ${String.format('%04d', vlan())}, oldState: ${oldState()}, newState: ${newState()}
+        |INFO=contractId: ${contractId()}, servId: ${servId()}, ip: ${ip()}, ipGate: ${ipGate()}, servDeviceId: ${servDeviceId()}, iface: ${iface()}, spvid: ${param('qinq.spvid')}, vlan: ${String.format('%04d', vlan())}, oldState: ${oldState()}, newState: ${newState()}
         |
         |# Команды, выполняемые при добавлении сервиса на договор
         |sa.terminal.serv.create.before=:log warning message="sa.terminal.serv.create.before"
