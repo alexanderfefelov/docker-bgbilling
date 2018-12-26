@@ -32,6 +32,7 @@ object Kernel {
         |tids=
         |type=1
         |autocommit=false
+        |
         |""".stripMargin
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 0, min = 0, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "bitel.billing.server.script.global.bean.GlobalScriptTimer", moduleId = "0", comment = "", params = params)
@@ -86,7 +87,8 @@ object Kernel {
         |  contract c
         |where
         |  c.gr = 0
-      """.stripMargin
+        |
+        |""".stripMargin
     SqlTemplate.create(userId = -1, title = name, text = sql)
     name = "Валидация: Найти договоры, не состоящие в группе договоров \"Все\""
     sql =
@@ -101,7 +103,8 @@ object Kernel {
         |  contract c
         |where
         |  c.gr & 1 = 0
-      """.stripMargin
+        |
+        |""".stripMargin
     SqlTemplate.create(userId = -1, title = name, text = sql)
     name = "Валидация: Найти договоры без услуг модуля npay"
     sql =
@@ -118,7 +121,8 @@ object Kernel {
         |  left join module m on m.id = s.mid and m.name = 'npay'
         |where
         |  nso.cid is null
-      """.stripMargin
+        |
+        |""".stripMargin
     SqlTemplate.create(userId = -1, title = name, text = sql)
     name = "Sys Info: Показать типы событий"
     sql =
@@ -134,7 +138,8 @@ object Kernel {
         |  left join module m on m.id = et.mid
         |order by
         |  et.event_mode, et.mid, et.event_id
-      """.stripMargin
+        |
+        |""".stripMargin
     SqlTemplate.create(userId = -1, title = name, text = sql)
   }
 
@@ -520,7 +525,9 @@ object Kernel {
         |            <addInetServ enable="0" inetServTypeId="1" sessionCountLimit="0" status="0"/>
         |        </inet>
         |        <npay mid="2">
-        |            <addServices/>
+        |            <addServices>
+        |                <item sid="3"/>
+        |            </addServices>
         |        </npay>
         |        <rscm mid="3">
         |            <currentServices/>
@@ -533,6 +540,7 @@ object Kernel {
         |    </plugins>
         |    <general dtl="0" status="5"/>
         |</data>
+        |
         |""".stripMargin
     /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
