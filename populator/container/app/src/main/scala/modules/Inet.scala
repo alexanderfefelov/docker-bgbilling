@@ -423,9 +423,9 @@ object Inet {
         |INFO=contractId: ${contractId()}, servId: ${servId()}, ip: ${ip()}, ipGate: ${ipGate()}, servDeviceId: ${servDeviceId()}, iface: ${iface()}, vlan: ${vlan()}, oldState: ${oldState()}, newState: ${newState()}
         |
         |# Команды, выполняемые при добавлении сервиса на договор
-        |sa.terminal.serv.create.after=:log warning message="sa.terminal.serv.create.after"
-        |sa.terminal.serv.create=:log warning message="sa.terminal.serv.create: {@INFO}"
         |sa.terminal.serv.create.before=:log warning message="sa.terminal.serv.create.before"
+        |sa.terminal.serv.create=:log warning message="sa.terminal.serv.create: {@INFO}"
+        |sa.terminal.serv.create.after=:log warning message="sa.terminal.serv.create.after"
         |
         |# Команды, выполняемые при удалении сервиса с договора
         |sa.terminal.serv.cancel.before=:log warning message="sa.terminal.serv.cancel.before"
@@ -450,7 +450,7 @@ object Inet {
         |# Команды, вызываемые при изменении соединения (состояние/опции)
         |sa.terminal.connection.modify.before=:log warning message="sa.terminal.connection.modify.before"
         |sa.terminal.connection.modify=:log warning message="sa.terminal.connection.modify: {@INFO}"
-        |sa.terminal.connection.modify.after=:log warning message="sa.terminal.connection.modify.before"
+        |sa.terminal.connection.modify.after=:log warning message="sa.terminal.connection.modify.after"
         |
         |# Команды, вызываемые при включении соединения (состояние стало "включено")
         |sa.terminal.connection.modify.enable.before=:log warning message="sa.terminal.connection.modify.enable.before"

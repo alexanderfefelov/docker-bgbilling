@@ -120,6 +120,22 @@ object Kernel {
         |  nso.cid is null
       """.stripMargin
     SqlTemplate.create(userId = -1, title = name, text = sql)
+    name = "Sys Info: Показать типы событий"
+    sql =
+      s"""-- $name
+        |select
+        |  et.mid as module_id,
+        |  m.name as module_name,
+        |  if(et.event_mode = 0, 'global', 'contract') as event_mode,
+        |  et.event_id,
+        |  et.title as event_title
+        |from
+        |  script_event_type et
+        |  left join module m on m.id = et.mid
+        |order by
+        |  et.event_mode, et.mid, et.event_id
+      """.stripMargin
+    SqlTemplate.create(userId = -1, title = name, text = sql)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -454,7 +470,7 @@ object Kernel {
   // Справочники -> Группы тарифов
   //
   def tariffGroups(): Unit = {
-    /* 1 */ TariffGroup.create(title = "Интернет", tm = 1, df = 0, beh = 0, pos = 0)
+    /* 1 */ TariffGroup.create(title = "Интернет", tm = 1, df = 60, beh = 0, pos = 0)
     TariffGroupTariff.create(tgid = 1, tpid = 1, date1 = None, date2 = None)
     TariffGroupTariff.create(tgid = 1, tpid = 2, date1 = None, date2 = None)
   }
