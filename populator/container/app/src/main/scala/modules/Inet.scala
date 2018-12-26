@@ -63,33 +63,8 @@ object Inet {
         |значение SP-VID, извлекаемое из DHCP Relay Agent Information Option.
         |
         |""".stripMargin
-    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = "",
-      protocolhandlerclass = Some(murmuringProtocolHandler),
-      sahandlerclass = Some(murmuringServiceActivator),
-      devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = comment, source = None, deviceentityspecid = 0)
-
-    InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
-      protocolhandlerclass = Some(murmuringProtocolHandler),
-      sahandlerclass = Some(murmuringServiceActivator),
-      devicemanagerclass = None,
-      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
-
     var cfg =
       """
-        |# flow.agent.type
-        |#
-        |# Тип источника данных о трафике.
-        |#
-        |flow.agent.type=netflow9
-        |
-        |
-        |# flow.agent.link
-        |#
-        |# Связь с источником данных о трафике.
-        |#
-        |flow.agent.link={@deviceId}:-1
-        |
         |
         |# sa.terminal
         |#
@@ -190,6 +165,34 @@ object Inet {
         |
         |# Команды, вызываемые при отключении опции ID=x (и дочерних опций по отношению к опции с ID=x) на соединении
         |sa.terminal.connection.inetOption.3.disable=:log warning message="sa.terminal.connection.inetOption.x.disable: {@INFO}"
+        |
+        |""".stripMargin
+    InetDeviceType1.create(title = "SP-VLAN", configid = 0, config = cfg,
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = comment, source = None, deviceentityspecid = 0)
+
+    InetDeviceType1.create(title = "Access + Accounting", configid = 0, config = "",
+      protocolhandlerclass = Some(murmuringProtocolHandler),
+      sahandlerclass = Some(murmuringServiceActivator),
+      devicemanagerclass = None,
+      uniqueinterfaces = 0, scriptid = 0, sascript = None, eventscript = None, comment = "", source = None, deviceentityspecid = 0)
+
+    cfg =
+      """
+        |# flow.agent.type
+        |#
+        |# Тип источника данных о трафике.
+        |#
+        |flow.agent.type=netflow9
+        |
+        |
+        |# flow.agent.link
+        |#
+        |# Связь с источником данных о трафике.
+        |#
+        |flow.agent.link={@deviceId}:-1
         |
         |""".stripMargin
     var deviceTypeId = InetDeviceType1.create(title = "MikroTik CRS125-24G-1S-RM", configid = 0, config = cfg,
