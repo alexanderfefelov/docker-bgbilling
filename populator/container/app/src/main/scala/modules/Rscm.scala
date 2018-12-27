@@ -2,7 +2,9 @@ package modules
 
 import com.github.alexanderfefelov.bgbilling.api.db.repository.{RscmService3, ScheduledTasks, Service => DbService}
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel.ModuleService
+import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import org.joda.time.DateTime
+import scalaxb._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -41,9 +43,45 @@ object Rscm {
   //--------------------------------------------------------------------------------------------------------------------
   // Сервис -> Администрирование -> Планировщик заданий
   //
-  def scheduledTasks() = {
+  def scheduledTasks(): Unit = {
     ScheduledTasks.create(mm = 0, dm = 0, dw = 0, hh = 0, min = 0, prior = 1, date1 = None, date2 = None, status = 1, classId = -1,
       `class` = "ru.bitel.bgbilling.modules.rscm.server.Calculator", moduleId = "3", comment = "", params = "mid=3\n")
+  }
+
+  def transactions(): Unit = {
+    import com.github.alexanderfefelov.bgbilling.api.soap.rscm._
+
+    class RscmCake extends RSCMServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      override def baseAddress = new java.net.URI(soapServiceBaseAddress("rscm-service"))
+    }
+    val rscmService = new RscmCake().service
+
+    var rscmContractService = RscmContractService(serviceId = 4, attributes = Map(
+      "id"         -> dr("id", 0),
+      "contractId" -> dr("contractId", 100),
+      "date"       -> dr("date", "2018-09-01T00:00:00+03:00"),
+      "amount"     -> dr("amount", 1),
+      "comment"    -> dr("comment", "")
+    ))
+    var responseFuture = rscmService.updateRSCMContractService(Some(rscmContractService))
+    rscmContractService = RscmContractService(serviceId = 7, attributes = Map(
+      "id"         -> dr("id", 0),
+      "contractId" -> dr("contractId", 100),
+      "date"       -> dr("date", "2018-10-01T00:00:00+03:00"),
+      "amount"     -> dr("amount", 2),
+      "comment"    -> dr("comment", "")
+    ))
+    responseFuture = rscmService.updateRSCMContractService(Some(rscmContractService))
+    Await.result(responseFuture, 15.seconds)
+    rscmContractService = RscmContractService(serviceId = 5, attributes = Map(
+      "id"         -> dr("id", 0),
+      "contractId" -> dr("contractId", 100),
+      "date"       -> dr("date", "2018-10-01T00:00:00+03:00"),
+      "amount"     -> dr("amount", 2),
+      "comment"    -> dr("comment", "")
+    ))
+    responseFuture = rscmService.updateRSCMContractService(Some(rscmContractService))
+    Await.result(responseFuture, 15.seconds)
   }
 
 }

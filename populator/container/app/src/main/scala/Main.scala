@@ -75,6 +75,8 @@ object Main extends App {
   execute("Kernel.globalScripts", Kernel.globalScripts())
   execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
 
+  execute("Rscm.transactions", Rscm.transactions())
+
   println("Finished. Press Ctrl+C")
 
   private def alterTables(): Unit = {
