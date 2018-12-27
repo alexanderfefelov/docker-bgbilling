@@ -76,6 +76,8 @@ object Main extends App {
   execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
 
   execute("Rscm.transactions", Rscm.transactions())
+  execute("Kernel.contractStatuses", Kernel.contractStatuses())
+  execute("Kernel.contractTariffs", Kernel.contractTariffs())
 
   println("Finished. Press Ctrl+C")
 
