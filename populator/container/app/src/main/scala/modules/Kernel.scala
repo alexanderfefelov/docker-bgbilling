@@ -646,7 +646,7 @@ object Kernel {
   }
 
   def contractTariffs(): Unit = {
-    ContractActions.updateContractTariffPlan(0, 10, 2, "", new DateTime(2018, 12, 21, 16, 35), None)
+    ContractActions.updateContractTariffPlan(0, 100, 1, "", new DateTime(2018, 12, 21, 16, 35), None)
   }
 
 }
