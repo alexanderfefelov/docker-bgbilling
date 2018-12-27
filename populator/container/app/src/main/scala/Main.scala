@@ -34,9 +34,6 @@ object Main extends App {
   Db.init()
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
-  execute("Kernel.eventHandlers", Kernel.eventHandlers())
-  execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
-  execute("Kernel.globalScripts", Kernel.globalScripts())
   execute("moduleConfigs", moduleConfigs())
   execute("Kernel.users", Kernel.users())
   execute("Kernel.bgsGroups", Kernel.bgsGroups())
@@ -73,6 +70,10 @@ object Main extends App {
   execute("Kernel.tariffGroups", Kernel.tariffGroups())
   execute("Kernel.contracts", Kernel.contracts())
   execute("Kernel.payments", Kernel.payments())
+
+  execute("Kernel.eventHandlers", Kernel.eventHandlers())
+  execute("Kernel.globalScripts", Kernel.globalScripts())
+  execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
 
   println("Finished. Press Ctrl+C")
 

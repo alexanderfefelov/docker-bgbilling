@@ -16,7 +16,7 @@ object Npay {
   def moduleAndServices(moduleService: ModuleService): Int = {
     val moduleIdFuture = moduleService.moduleAdd(Some("npay"), Some("Периодические услуги"))
     val moduleId = Await.result(moduleIdFuture, 30.minutes)
-    /* 3 */ DbService.create("Абонентская плата", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
+    /* 3 */ DbService.create("Абонентская плата по тарифу", mid = moduleId, parentid = 0, datefrom = None, dateto = None,
       comment = "", description = "", lm = DateTime.now, isusing = Some(true), unit = 10000)
     moduleId
   }
