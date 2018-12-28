@@ -1,11 +1,14 @@
 package com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
+import ru.bitel.bgbilling.common.BGException;
+import ru.bitel.bgbilling.kernel.container.managed.ServerContext;
 import ru.bitel.bgbilling.kernel.contract.api.common.event.*;
 import ru.bitel.bgbilling.kernel.contract.balance.server.event.*;
 import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
+import ru.bitel.bgbilling.kernel.tariff.option.common.service.TariffOptionService;
 import ru.bitel.bgbilling.kernel.tariff.option.server.event.*;
 import ru.bitel.bgbilling.modules.rscm.server.event.*;
 import ru.bitel.bgbilling.server.util.Setup;
@@ -138,11 +141,11 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
     }
 
     private void onContractTariffDeleteEvent(ContractTariffDeleteEvent event) {
-        logger().trace("onEvent: " + event.toString());
+        logger().trace("onEvent: " + event.toString() + "; contractTariffId: " + event.getContractTariffId());
     }
 
     private void onContractTariffUpdateEvent(ContractTariffUpdateEvent event) {
-        logger().trace("onEvent: " + event.toString());
+        logger().trace("onEvent: " + event.toString() + "; isAddTariff: " + event.isAddTariff() + "; contractTariffId: " + event.getContractTariff().getId());
     }
 
     private void onContractWebLoginEvent(ContractWebLoginEvent event) {
