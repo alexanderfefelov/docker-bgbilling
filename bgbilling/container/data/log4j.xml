@@ -6,7 +6,7 @@
         <param name="File" value="${log.dir.path}${log.prefix}.log"/>
         <param name="MaxFileSize" value="60MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -22,7 +22,7 @@
         <param name="File" value="${log.dir.path}${log.prefix}.mq.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -38,7 +38,7 @@
         <param name="File" value="${log.dir.path}${log.prefix}.murmuring.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -54,7 +54,7 @@
         <param name="File" value="${log.dir.path}${log.prefix}.script.log"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -71,7 +71,7 @@
         <param name="File" value="${log.dir.path}${log.prefix}.error.log"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>

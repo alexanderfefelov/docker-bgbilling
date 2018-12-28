@@ -17,6 +17,7 @@ public class MurmuringServiceActivator implements ServiceActivator, Loggable, Ut
         try {
             NestedContext.push(LOG_CONTEXT);
             logger().trace("init: [" + device.getId() + "] " + device.toString() + " " + removeNewLines(config.toString()));
+
             this.device = device;
             this.config = config;
         } finally {

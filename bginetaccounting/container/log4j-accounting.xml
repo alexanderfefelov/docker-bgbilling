@@ -6,7 +6,7 @@
         <param name="File" value="${log.dir.path}all.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -17,7 +17,7 @@
         <param name="File" value="${log.dir.path}accounting.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -33,7 +33,7 @@
         <param name="File" value="${log.dir.path}mq.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -49,7 +49,7 @@
         <param name="File" value="${log.dir.path}murmuring.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -65,7 +65,7 @@
         <param name="File" value="${log.dir.path}script.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -82,7 +82,7 @@
         <param name="File" value="${log.dir.path}error.log"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%X{nestedContext} %d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -93,7 +93,7 @@
         <param name="File" value="${log.dir.path}radius.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -109,7 +109,7 @@
         <param name="File" value="${log.dir.path}radius-processor.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -125,7 +125,7 @@
         <param name="File" value="${log.dir.path}collector.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -141,7 +141,7 @@
         <param name="File" value="${log.dir.path}connection.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -157,7 +157,7 @@
         <param name="File" value="${log.dir.path}detail.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
@@ -169,12 +169,11 @@
         </filter>
     </appender>
 
-
     <appender name="RECALCULATE" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.dir.path}recalculate.log"/>
         <param name="MaxFileSize" value="100MB"/>
         <param name="MaxBackupIndex" value="2"/>
-        <param name="Append" value="false"/>
+        <param name="Append" value="true"/>
 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
