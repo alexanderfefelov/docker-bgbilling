@@ -1,9 +1,11 @@
 package com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
+import ru.bitel.bgbilling.kernel.contract.balance.server.event.*;
 import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
+import ru.bitel.bgbilling.modules.rscm.server.event.*;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.logging.NestedContext;
 import ru.bitel.common.sql.ConnectionSet;
@@ -15,11 +17,21 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         try {
             NestedContext.push(LOG_CONTEXT);
             switch (CLAZZ.valueOf(event.getClass().getSimpleName())) {
+
+                // ru.bitel.bgbilling.kernel.event.events
+                //
+
+                case CalculateEvent:
+                    onCalculateEvent((CalculateEvent) event);
+                    break;
                 case ContractTariffDeleteEvent:
                     onContractTariffDeleteEvent((ContractTariffDeleteEvent) event);
                     break;
                 case ContractTariffUpdateEvent:
                     onContractTariffUpdateEvent((ContractTariffUpdateEvent) event);
+                    break;
+                case ServerStartEvent:
+                    onServerStartEvent((ServerStartEvent) event);
                     break;
                 case ServiceUpdateEvent:
                     onServiceUpdateEvent((ServiceUpdateEvent) event);
@@ -30,6 +42,24 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 case ValidateTextParamEvent:
                     onValidateTextParamEvent((ValidateTextParamEvent) event);
                     break;
+
+                // ru.bitel.bgbilling.kernel.contract.balance.server.event
+                //
+
+                case PaymentEvent:
+                    onPaymentEvent((PaymentEvent) event);
+                    break;
+
+                // ru.bitel.bgbilling.modules.rscm.server.event
+                //
+
+                case RSCMContractServiceUpdateEvent:
+                    onRSCMContractServiceUpdateEvent((RSCMContractServiceUpdateEvent) event);
+                    break;
+
+                // Default
+                //
+
                 default:
                     logger().trace("onEvent (default): " + event.toString());
                     break;
@@ -41,11 +71,22 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         }
     }
 
+    // ru.bitel.bgbilling.kernel.event.events
+    //
+
+    private void onCalculateEvent(CalculateEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onContractTariffDeleteEvent(ContractTariffDeleteEvent event) {
         logger().trace("onEvent: " + event.toString());
     }
 
     private void onContractTariffUpdateEvent(ContractTariffUpdateEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onServerStartEvent(ServerStartEvent event) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -61,6 +102,20 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    // ru.bitel.bgbilling.kernel.contract.balance.server.event
+    //
+
+    private void onPaymentEvent(PaymentEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    // ru.bitel.bgbilling.modules.rscm.server.event
+    //
+
+    private void onRSCMContractServiceUpdateEvent(RSCMContractServiceUpdateEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     enum CLAZZ {
         // ru.bitel.bgbilling.kernel.event.events
         // --------------------------------------
@@ -70,7 +125,7 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // AdditionalActionEvent
         // AppsEvent
         // BeforeServiceDeleteEvent
-        // CalculateEvent
+        CalculateEvent,
         // CancelTariffEvent
         // ChangeContractLimitEvent
         // ChangeTariffByTaskEvent
@@ -104,10 +159,25 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // PersonalTariffDeleteEvent
         // PersonalTariffTreeUpdateEvent
         // PersonalTariffUpdateEvent
-        // ServerStartEvent
+        ServerStartEvent,
         ServiceUpdateEvent,
         TimerEvent,
-        ValidateTextParamEvent
+        ValidateTextParamEvent,
+
+        // ru.bitel.bgbilling.kernel.contract.balance.server.event
+        // -------------------------------------------------------
+        // ChargeEvent
+        // ContractBalanceChangedEvent
+        // ConvergenceBalanceEvent
+        // PaymentChangingEvent
+        // PaymentDeletedEvent
+        PaymentEvent,
+        // ReserveCloseEvent
+        // ReserveEvent
+
+        // ru.bitel.bgbilling.modules.rscm.server.event
+        // --------------------------------------------
+        RSCMContractServiceUpdateEvent
     }
 
     private static final String LOG_CONTEXT = "murmuring";
