@@ -31,11 +31,11 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     onValidateTextParamEvent((ValidateTextParamEvent) event);
                     break;
                 default:
-                    logger().trace("onEvent: " + event.toString());
+                    logger().trace("onEvent (default): " + event.toString());
                     break;
             }
         } catch (IllegalArgumentException iae) { // No enum constant
-            logger().trace("onEvent: " + event.toString());
+            logger().trace("onEvent (unknown): " + event.toString());
         } finally {
             NestedContext.pop();
         }
