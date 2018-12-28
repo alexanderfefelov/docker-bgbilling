@@ -34,6 +34,22 @@
         </filter>
     </appender>
 
+    <appender name="MURMURING" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${log.dir.path}${log.prefix}.murmuring.log"/>
+        <param name="MaxFileSize" value="100MB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <param name="Append" value="false"/>
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM-dd/HH:mm:ss} %5p [%t] %c{1} - %m%n"/>
+        </layout>
+
+        <filter class="ru.bitel.common.logging.Log4JMDCFilter">
+            <param name="key" value="nestedContext"/>
+            <param name="value" value="murmuring"/>
+        </filter>
+    </appender>
+
     <appender name="SCRIPT" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${log.dir.path}${log.prefix}.script.log"/>
         <param name="MaxFileSize" value="10MB"/>
@@ -65,6 +81,7 @@
     <appender name="ASYNC" class="ru.bitel.common.logging.Log4jAsyncAppender">
         <appender-ref ref="APPLICATION"/>
         <appender-ref ref="MQ"/>
+        <appender-ref ref="MURMURING"/>
         <appender-ref ref="SCRIPT"/>
         <appender-ref ref="ERROR"/>
     </appender>

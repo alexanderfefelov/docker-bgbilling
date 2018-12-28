@@ -494,9 +494,9 @@ object Kernel {
   // Справочники -> Тарифные опции
   //
   def tariffOptions(): Unit = {
-    /* 1 */ TariffOption.create(title = "Бесплатный месяц", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 0,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
+    /* 1 */ TariffOption.create(title = "Бесплатный месяц", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
     TariffOptionActivateMode.create(optionId = 1, title = "31 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 213, periodCol = 31, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
-    /* 2 */ TariffOption.create(title = "Бесплатный час", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 0,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
+    /* 2 */ TariffOption.create(title = "Бесплатный час", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
     TariffOptionActivateMode.create(optionId = 2, title = "60 минут", chargeTypeId = 12, chargeSumma = 0, periodMode = 111, periodCol = 60, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
   }
 
