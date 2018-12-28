@@ -12,8 +12,8 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
 
     @Override
     public void onEvent(Event event, Setup setup, ConnectionSet set) throws Exception {
-        NestedContext.push("murmuring");
         try {
+            NestedContext.push(LOG_CONTEXT);
             switch (CLAZZ.valueOf(event.getClass().getSimpleName())) {
                 case ContractTariffDeleteEvent:
                     onContractTariffDeleteEvent((ContractTariffDeleteEvent) event);
@@ -34,24 +34,31 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     logger().trace("onEvent: " + event.toString());
                     break;
             }
+        } catch (IllegalArgumentException iae) { // No enum constant
+            logger().trace("onEvent: " + event.toString());
         } finally {
             NestedContext.pop();
         }
     }
 
     private void onContractTariffDeleteEvent(ContractTariffDeleteEvent event) {
+        logger().trace("onEvent: " + event.toString());
     }
 
     private void onContractTariffUpdateEvent(ContractTariffUpdateEvent event) {
+        logger().trace("onEvent: " + event.toString());
     }
 
     private void onServiceUpdateEvent(ServiceUpdateEvent event) {
+        logger().trace("onEvent: " + event.toString());
     }
 
     private void onTimerEvent(TimerEvent event) {
+        logger().trace("onEvent: " + event.toString());
     }
 
     private void onValidateTextParamEvent(ValidateTextParamEvent event) {
+        logger().trace("onEvent: " + event.toString());
     }
 
     enum CLAZZ {
@@ -102,5 +109,7 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         TimerEvent,
         ValidateTextParamEvent
     }
+
+    private static final String LOG_CONTEXT = "murmuring";
 
 }
