@@ -37,7 +37,7 @@ object NaturalPersons {
           ContractActions.updateParameterType1(cid = c.id, pid = 7, value = names(1))
           ContractActions.updateParameterType1(cid = c.id, pid = 8, value = names(2)) // TODO Отчество не всегда имеется
           c.note1Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
-          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = false))
+          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
         }
       case Left(error) =>
         throw new RuntimeException(error)

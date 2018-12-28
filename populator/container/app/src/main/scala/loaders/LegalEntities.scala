@@ -35,7 +35,7 @@ object LegalEntities {
           ContractActions.updateParameterType1(cid = c.id, pid = 1, value = c.login)
           ContractActions.updateParameterType1(cid = c.id, pid = 14, value = c.name)
           c.note1Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
-          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = false))
+          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
         }
       case Left(error) =>
         throw new RuntimeException(error)

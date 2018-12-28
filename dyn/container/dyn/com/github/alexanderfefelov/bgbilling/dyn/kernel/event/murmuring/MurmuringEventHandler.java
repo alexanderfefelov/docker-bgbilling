@@ -1,10 +1,12 @@
 package com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
+import ru.bitel.bgbilling.kernel.contract.api.common.event.*;
 import ru.bitel.bgbilling.kernel.contract.balance.server.event.*;
 import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
+import ru.bitel.bgbilling.kernel.tariff.option.server.event.*;
 import ru.bitel.bgbilling.modules.rscm.server.event.*;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.logging.NestedContext;
@@ -24,11 +26,38 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 case CalculateEvent:
                     onCalculateEvent((CalculateEvent) event);
                     break;
+                case CancelTariffEvent:
+                    onCancelTariffEvent((CancelTariffEvent) event);
+                    break;
+                case ChangeContractLimitEvent:
+                    onChangeContractLimitEvent((ChangeContractLimitEvent) event);
+                    break;
+                case ChangeTariffByTaskEvent:
+                    onChangeTariffByTaskEvent((ChangeTariffByTaskEvent) event);
+                    break;
+                case ContractLimitUserLow:
+                    onContractLimitUserLow((ContractLimitUserLow) event);
+                    break;
                 case ContractTariffDeleteEvent:
                     onContractTariffDeleteEvent((ContractTariffDeleteEvent) event);
                     break;
                 case ContractTariffUpdateEvent:
                     onContractTariffUpdateEvent((ContractTariffUpdateEvent) event);
+                    break;
+                case ContractWebLoginEvent:
+                    onContractWebLoginEvent((ContractWebLoginEvent) event);
+                    break;
+                case GetChangeTariffDatesEvent:
+                    onGetChangeTariffDatesEvent((GetChangeTariffDatesEvent) event);
+                    break;
+                case GetContractCardsList:
+                    onGetContractCardsList((GetContractCardsList) event);
+                    break;
+                case GetTariffListEvent:
+                    onGetTariffListEvent((GetTariffListEvent) event);
+                    break;
+                case LimitChangedEvent:
+                    onLimitChangedEvent((LimitChangedEvent) event);
                     break;
                 case ServerStartEvent:
                     onServerStartEvent((ServerStartEvent) event);
@@ -57,6 +86,20 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     onRSCMContractServiceUpdateEvent((RSCMContractServiceUpdateEvent) event);
                     break;
 
+                // ru.bitel.bgbilling.kernel.contract.api.common.event
+                //
+
+                case ContractPasswordChangedEvent:
+                    onContractPasswordChangedEvent((ContractPasswordChangedEvent) event);
+                    break;
+
+                // ru.bitel.bgbilling.kernel.tariff.option.server.event
+                //
+
+                case TariffOptionListAvailableEvent:
+                    onTariffOptionListAvailableEvent((TariffOptionListAvailableEvent) event);
+                    break;
+
                 // Default
                 //
 
@@ -78,11 +121,47 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    private void onCancelTariffEvent(CancelTariffEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onChangeContractLimitEvent(ChangeContractLimitEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onChangeTariffByTaskEvent(ChangeTariffByTaskEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onContractLimitUserLow(ContractLimitUserLow event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onContractTariffDeleteEvent(ContractTariffDeleteEvent event) {
         logger().trace("onEvent: " + event.toString());
     }
 
     private void onContractTariffUpdateEvent(ContractTariffUpdateEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onContractWebLoginEvent(ContractWebLoginEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onGetChangeTariffDatesEvent(GetChangeTariffDatesEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onGetContractCardsList(GetContractCardsList event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onGetTariffListEvent(GetTariffListEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onLimitChangedEvent(LimitChangedEvent event) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -116,6 +195,20 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    // ru.bitel.bgbilling.kernel.contract.api.common.event
+    //
+
+    private void onContractPasswordChangedEvent(ContractPasswordChangedEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    // ru.bitel.bgbilling.kernel.tariff.option.server.event
+    //
+
+    private void onTariffOptionListAvailableEvent(TariffOptionListAvailableEvent event) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     enum CLAZZ {
         // ru.bitel.bgbilling.kernel.event.events
         // --------------------------------------
@@ -126,14 +219,14 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // AppsEvent
         // BeforeServiceDeleteEvent
         CalculateEvent,
-        // CancelTariffEvent
-        // ChangeContractLimitEvent
-        // ChangeTariffByTaskEvent
+        CancelTariffEvent,
+        ChangeContractLimitEvent,
+        ChangeTariffByTaskEvent,
         // ContractAddingSubEvent
         // ContractAddObjectEvent
         // ContractCreatedEvent
         // ContractDeleteObjectEvent
-        // ContractLimitUserLow
+        ContractLimitUserLow,
         // ContractObjectParameterBeforeUpdateEvent
         // ContractObjectParameterUpdateEvent
         // ContractParamBeforeChangeEvent
@@ -147,14 +240,14 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         ContractTariffDeleteEvent,
         ContractTariffUpdateEvent,
         // ContractUpdateObjectEvent
-        // ContractWebLoginEvent
+        ContractWebLoginEvent,
         // GetAdditionalActionListEvent
         // GetAdditionalWebActionListEvent
-        // GetChangeTariffDatesEvent
-        // GetContractCardsList
+        GetChangeTariffDatesEvent,
+        GetContractCardsList,
         // GetContractStatusChangeDatesEvent
-        // GetTariffListEvent
-        // LimitChangedEvent
+        GetTariffListEvent,
+        LimitChangedEvent,
         // OnContractWrapEvent
         // PersonalTariffDeleteEvent
         // PersonalTariffTreeUpdateEvent
@@ -177,7 +270,25 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
 
         // ru.bitel.bgbilling.modules.rscm.server.event
         // --------------------------------------------
-        RSCMContractServiceUpdateEvent
+        RSCMContractServiceUpdateEvent,
+
+        // ru.bitel.bgbilling.kernel.contract.api.common.event
+        // ---------------------------------------------------
+        // ContractGroupModifiedEvent
+        // ContractModifiedEvent
+        // ContractParameterGroupAttrModifiedEvent
+        // ContractParameterGroupModifiedEvent
+        // ContractParameterListItemModifiedEvent
+        ContractPasswordChangedEvent,
+
+        // ru.bitel.bgbilling.kernel.tariff.option.server.event
+        // ----------------------------------------------------
+        // ContractTariffOptionChangedEvent
+        // TariffOptionActivatedEvent
+        // TariffOptionBeforeActivateEvent
+        // TariffOptionDeactivatedEvent
+        // TariffOptionDeactivateEvent
+        TariffOptionListAvailableEvent
     }
 
     private static final String LOG_CONTEXT = "murmuring";
