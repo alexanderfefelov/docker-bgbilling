@@ -55,6 +55,10 @@ object Main extends App {
 
   execute("alterTables", alterTables())
 
+  execute("Kernel.eventHandlers", Kernel.eventHandlers())
+  execute("Kernel.globalScripts", Kernel.globalScripts())
+  execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
+
   execute("Inet.deviceTypes", Inet.deviceTypes())
   execute("Inet.deviceGroups", Inet.deviceGroups())
   execute("Inet.vlanResources", Inet.vlanResources())
@@ -71,10 +75,6 @@ object Main extends App {
   execute("Kernel.tariffGroups", Kernel.tariffGroups())
   execute("Kernel.contracts", Kernel.contracts())
   execute("Kernel.payments", Kernel.payments())
-
-  execute("Kernel.eventHandlers", Kernel.eventHandlers())
-  execute("Kernel.globalScripts", Kernel.globalScripts())
-  execute("Kernel.sqlTemplates", Kernel.sqlTemplates())
 
   execute("Rscm.transactions", Rscm.transactions())
   execute("Kernel.contractStatuses", Kernel.contractStatuses())
