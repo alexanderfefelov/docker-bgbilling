@@ -8,7 +8,7 @@ import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
 import ru.bitel.bgbilling.kernel.tariff.option.server.event.*;
 import ru.bitel.bgbilling.modules.rscm.server.event.*;
-import ru.bitel.bgbilling.plugins.helpdesk.server.bean.event.TopicWasUpdatedEvent;
+import ru.bitel.bgbilling.plugins.helpdesk.server.bean.event.*;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.logging.NestedContext;
 import ru.bitel.common.sql.ConnectionSet;
@@ -78,6 +78,12 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 case ContractWebLoginEvent:
                     onContractWebLoginEvent((ContractWebLoginEvent) event, setup, connectionSet);
                     break;
+                case GetAdditionalActionListEvent:
+                    onGetAdditionalActionListEvent((GetAdditionalActionListEvent) event, setup, connectionSet);
+                    break;
+                case GetAdditionalWebActionListEvent:
+                    onGetAdditionalWebActionListEvent((GetAdditionalWebActionListEvent) event, setup, connectionSet);
+                    break;
                 case GetChangeTariffDatesEvent:
                     onGetChangeTariffDatesEvent((GetChangeTariffDatesEvent) event, setup, connectionSet);
                     break;
@@ -113,8 +119,32 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     onChargeEvent((ChargeEvent) event, setup, connectionSet);
                     break;
 
+                case ContractBalanceChangedEvent:
+                    onContractBalanceChangedEvent((ContractBalanceChangedEvent) event, setup, connectionSet);
+                    break;
+
+                case ConvergenceBalanceEvent:
+                    onConvergenceBalanceEvent((ConvergenceBalanceEvent) event, setup, connectionSet);
+                    break;
+
+                case PaymentChangingEvent:
+                    onPaymentChangingEvent((PaymentChangingEvent) event, setup, connectionSet);
+                    break;
+
+                case PaymentDeletedEvent:
+                    onPaymentDeletedEvent((PaymentDeletedEvent) event, setup, connectionSet);
+                    break;
+
                 case PaymentEvent:
                     onPaymentEvent((PaymentEvent) event, setup, connectionSet);
+                    break;
+
+                case ReserveCloseEvent:
+                    onReserveCloseEvent((ReserveCloseEvent) event, setup, connectionSet);
+                    break;
+
+                case ReserveEvent:
+                    onReserveEvent((ReserveEvent) event, setup, connectionSet);
                     break;
 
                 // ru.bitel.bgbilling.modules.rscm.server.event
@@ -242,6 +272,14 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    private void onGetAdditionalActionListEvent(GetAdditionalActionListEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onGetAdditionalWebActionListEvent(GetAdditionalWebActionListEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onGetChangeTariffDatesEvent(GetChangeTariffDatesEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
@@ -285,7 +323,31 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    private void onContractBalanceChangedEvent(ContractBalanceChangedEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onConvergenceBalanceEvent(ConvergenceBalanceEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onPaymentChangingEvent(PaymentChangingEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onPaymentDeletedEvent(PaymentDeletedEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onPaymentEvent(PaymentEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onReserveCloseEvent(ReserveCloseEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onReserveEvent(ReserveEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -357,8 +419,8 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         ContractTariffUpdateEvent,
         // ContractUpdateObjectEvent
         ContractWebLoginEvent,
-        // GetAdditionalActionListEvent
-        // GetAdditionalWebActionListEvent
+        GetAdditionalActionListEvent,
+        GetAdditionalWebActionListEvent,
         GetChangeTariffDatesEvent,
         GetContractCardsList,
         GetContractStatusChangeDatesEvent,
@@ -376,13 +438,13 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // ru.bitel.bgbilling.kernel.contract.balance.server.event
         // -------------------------------------------------------
         ChargeEvent,
-        // ContractBalanceChangedEvent
-        // ConvergenceBalanceEvent
-        // PaymentChangingEvent
-        // PaymentDeletedEvent
+        ContractBalanceChangedEvent,
+        ConvergenceBalanceEvent,
+        PaymentChangingEvent,
+        PaymentDeletedEvent,
         PaymentEvent,
-        // ReserveCloseEvent
-        // ReserveEvent
+        ReserveCloseEvent,
+        ReserveEvent,
 
         // ru.bitel.bgbilling.modules.rscm.server.event
         // --------------------------------------------
