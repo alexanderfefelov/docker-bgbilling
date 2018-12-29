@@ -59,8 +59,15 @@ object Kernel {
   //
   def eventHandlers(): Unit = {
     ScriptEventType.findAll().filter(_.eventId == "17").map { t =>
-      EventScriptLink.create(title = t.title, className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler", eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1)
+      EventScriptLink.create(title = t.title,
+        className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler",
+        eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1
+      )
     }
+    EventScriptLink.create(title = """Активировать тарифную опцию "Бесплатный период: 60 минут"""",
+      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.contractTariffUpdate.ContractTariffOptionActivate_1_1",
+      eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractTariffUpdateEvent", scriptId = -1
+    )
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -334,8 +341,9 @@ object Kernel {
 
     // Интернет-1
     //
+    var title = "Интернет-1 (50 Мбит/с, первые 60 минут бесплатно)"
     var tariffIdTreeId = TariffActions.addTariffPlan(used = true)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-1", title_web = "Интернет-1", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля inet
     var moduleId = TariffActions.bgBillingModuleId("inet")
     var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
@@ -371,11 +379,14 @@ object Kernel {
     // Добавляем стоимость
     var monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&500.0%type&1")
+    // Добавляем метку
+    TariffLabelLink.create(tariffId = 1, labelId = 1)
 
     // Интернет-2
     //
+    title = "Интернет-2 (100 Мбит/с, первые 60 минут бесплатно)"
     tariffIdTreeId = TariffActions.addTariffPlan(used = true)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Интернет-2", title_web = "Интернет-2", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
+    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля inet
     moduleId = TariffActions.bgBillingModuleId("inet")
     mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
@@ -411,6 +422,8 @@ object Kernel {
     // Добавляем стоимость
     monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
     TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&1000.0%type&1")
+    // Добавляем метку
+    TariffLabelLink.create(tariffId = 2, labelId = 1)
 
     // Канал L2
     //
@@ -491,6 +504,13 @@ object Kernel {
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Справочники -> Тарифные планы -> Метки -> Р
+  //
+  def tariffLabels(): Unit = {
+    /* 1 */ TariffLabel.create(parentId = 0, title = "Бесплатный период")
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Группы тарифов
   //
   def tariffGroups(): Unit = {
@@ -503,10 +523,10 @@ object Kernel {
   // Справочники -> Тарифные опции
   //
   def tariffOptions(): Unit = {
-    /* 1 */ TariffOption.create(title = "Бесплатный месяц", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
-    TariffOptionActivateMode.create(optionId = 1, title = "31 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 213, periodCol = 31, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
-    /* 2 */ TariffOption.create(title = "Бесплатный час", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
-    TariffOptionActivateMode.create(optionId = 2, title = "60 минут", chargeTypeId = 12, chargeSumma = 0, periodMode = 111, periodCol = 60, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 1 */ TariffOption.create(title = "Бесплатный период", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
+    /* 1 */ TariffOptionActivateMode.create(optionId = 1, title = "60 минут", chargeTypeId = 12, chargeSumma = 0, periodMode = 111, periodCol = 60, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 2 */ TariffOptionActivateMode.create(optionId = 1, title = "2 недели", chargeTypeId = 12, chargeSumma = 0, periodMode = 114, periodCol = 2, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 3 */ TariffOptionActivateMode.create(optionId = 1, title = "31 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 213, periodCol = 31, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

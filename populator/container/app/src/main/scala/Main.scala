@@ -65,6 +65,7 @@ object Main extends App {
   execute("Inet.devices", Inet.devices())
   execute("Inet.servTypes", Inet.servTypes())
   execute("Inet.deviceReload", Inet.deviceReload())
+  execute("Kernel.tariffLabels", Kernel.tariffLabels())
   execute("Kernel.tariffOptions", Kernel.tariffOptions())
   execute("Kernel.tariffs", Kernel.tariffs())
   execute("Kernel.tariffGroups", Kernel.tariffGroups())
