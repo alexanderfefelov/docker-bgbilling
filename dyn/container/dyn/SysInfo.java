@@ -5,6 +5,7 @@ import ru.bitel.bgbilling.kernel.script.server.dev.GlobalScriptBase;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.sql.ConnectionSet;
 
+import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.util.*;
@@ -45,10 +46,12 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println();
     }
 
-    private void inspectRuntime() {
+    private void inspectRuntime() throws Exception {
+        InetAddress ipAddress = InetAddress.getLocalHost();
         System.out.println(String.join(NL,
                 "Runtime",
                 HR,
+                "Hostname/IP address: " + ipAddress,
                 "Available processors: " + Runtime.getRuntime().availableProcessors(),
                 "Memory free / max / total, MB: "
                         + Runtime.getRuntime().freeMemory() / MB + " / "

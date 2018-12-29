@@ -8,6 +8,7 @@ import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
 import ru.bitel.bgbilling.kernel.tariff.option.server.event.*;
 import ru.bitel.bgbilling.modules.rscm.server.event.*;
+import ru.bitel.bgbilling.plugins.helpdesk.server.bean.event.TopicWasUpdatedEvent;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.logging.NestedContext;
 import ru.bitel.common.sql.ConnectionSet;
@@ -62,6 +63,12 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 case ContractLimitUserLow:
                     onContractLimitUserLow((ContractLimitUserLow) event, setup, connectionSet);
                     break;
+                case ContractParamBeforeChangeEvent:
+                    onContractParamBeforeChangeEvent((ContractParamBeforeChangeEvent) event, setup, connectionSet);
+                    break;
+                case ContractParamChangedEvent:
+                    onContractParamChangedEvent((ContractParamChangedEvent) event, setup, connectionSet);
+                    break;
                 case ContractTariffDeleteEvent:
                     onContractTariffDeleteEvent((ContractTariffDeleteEvent) event, setup, connectionSet);
                     break;
@@ -76,6 +83,9 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     break;
                 case GetContractCardsList:
                     onGetContractCardsList((GetContractCardsList) event, setup, connectionSet);
+                    break;
+                case GetContractStatusChangeDatesEvent:
+                    onGetContractStatusChangeDatesEvent((GetContractStatusChangeDatesEvent) event, setup, connectionSet);
                     break;
                 case GetTariffListEvent:
                     onGetTariffListEvent((GetTariffListEvent) event, setup, connectionSet);
@@ -124,8 +134,23 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 // ru.bitel.bgbilling.kernel.tariff.option.server.event
                 //
 
+                case TariffOptionActivatedEvent:
+                    onTariffOptionActivatedEvent((TariffOptionActivatedEvent) event, setup, connectionSet);
+                    break;
+
+                case TariffOptionBeforeActivateEvent:
+                    onTariffOptionBeforeActivateEvent((TariffOptionBeforeActivateEvent) event, setup, connectionSet);
+                    break;
+
                 case TariffOptionListAvailableEvent:
                     onTariffOptionListAvailableEvent((TariffOptionListAvailableEvent) event, setup, connectionSet);
+                    break;
+
+                // ru.bitel.bgbilling.plugins.helpdesk.server.bean.event
+                //
+
+                case TopicWasUpdatedEvent:
+                    onTopicWasUpdatedEvent((TopicWasUpdatedEvent) event, setup, connectionSet);
                     break;
 
                 // Default
@@ -197,6 +222,14 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
+    private void onContractParamBeforeChangeEvent(ContractParamBeforeChangeEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onContractParamChangedEvent(ContractParamChangedEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onContractTariffDeleteEvent(ContractTariffDeleteEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString() + "; contractTariffId: " + event.getContractTariffId());
     }
@@ -214,6 +247,10 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
     }
 
     private void onGetContractCardsList(GetContractCardsList event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onGetContractStatusChangeDatesEvent(GetContractStatusChangeDatesEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -269,7 +306,22 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
     // ru.bitel.bgbilling.kernel.tariff.option.server.event
     //
 
+    private void onTariffOptionActivatedEvent(TariffOptionActivatedEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    private void onTariffOptionBeforeActivateEvent(TariffOptionBeforeActivateEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
     private void onTariffOptionListAvailableEvent(TariffOptionListAvailableEvent event, Setup setup, ConnectionSet connectionSet) {
+        logger().trace("onEvent: " + event.toString());
+    }
+
+    // ru.bitel.bgbilling.plugins.helpdesk.server.bean.event
+    //
+
+    private void onTopicWasUpdatedEvent(TopicWasUpdatedEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -293,8 +345,8 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         ContractLimitUserLow,
         // ContractObjectParameterBeforeUpdateEvent
         // ContractObjectParameterUpdateEvent
-        // ContractParamBeforeChangeEvent
-        // ContractParamChangedEvent
+        ContractParamBeforeChangeEvent,
+        ContractParamChangedEvent,
         // ContractServicesChangedEvent
         // ContractSetStatusLogicEvent
         // ContractStatusChangedEvent
@@ -309,7 +361,7 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // GetAdditionalWebActionListEvent
         GetChangeTariffDatesEvent,
         GetContractCardsList,
-        // GetContractStatusChangeDatesEvent
+        GetContractStatusChangeDatesEvent,
         GetTariffListEvent,
         LimitChangedEvent,
         // OnContractWrapEvent
@@ -348,11 +400,15 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         // ru.bitel.bgbilling.kernel.tariff.option.server.event
         // ----------------------------------------------------
         // ContractTariffOptionChangedEvent
-        // TariffOptionActivatedEvent
-        // TariffOptionBeforeActivateEvent
+        TariffOptionActivatedEvent,
+        TariffOptionBeforeActivateEvent,
         // TariffOptionDeactivatedEvent
         // TariffOptionDeactivateEvent
-        TariffOptionListAvailableEvent
+        TariffOptionListAvailableEvent,
+
+        // ru.bitel.bgbilling.plugins.helpdesk.server.bean.event
+        // -----------------------------------------------------
+        TopicWasUpdatedEvent
     }
 
     private static final String LOG_CONTEXT = "murmuring";
