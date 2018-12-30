@@ -10,7 +10,6 @@
 
 package demo.polyglot;
 
-import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotLanguage;
 import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotRunner;
 import org.graalvm.polyglot.Value;
 
@@ -26,7 +25,7 @@ public class PolyglotJavaScriptDemo {
         System.out.println(text);
 
         PolyglotRunner runner = new PolyglotRunner();
-        Value result = runner.runLiteralText(PolyglotLanguage.JS, text, 50000,
+        Value result = runner.runLiteralText(PolyglotRunner.Language.JS, text, 50000,
                 true, true, true, true);
 
         System.out.println(result.toString());

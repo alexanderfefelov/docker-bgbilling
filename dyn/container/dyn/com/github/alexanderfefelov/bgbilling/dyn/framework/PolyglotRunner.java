@@ -11,8 +11,8 @@ import java.util.TimerTask;
 
 public class PolyglotRunner implements Loggable {
 
-    public Value runFile(PolyglotLanguage language, String filePath, long timeout,
-                     boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
+    public Value runFile(Language language, String filePath, long timeout,
+                         boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
         int id = hashCode();
         logger().trace(String.format("%d running file %s: %s, %d, %b, %b, %b, %b", id, language.language(), filePath, timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
         File sourceFile = new File(POLYGLOT_SCRIPT_PATH_PREFIX + filePath);
@@ -27,8 +27,8 @@ public class PolyglotRunner implements Loggable {
         }
     }
 
-    public Value runLiteralText(PolyglotLanguage language, String text, long timeout,
-                     boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
+    public Value runLiteralText(Language language, String text, long timeout,
+                                boolean allowCreateThread, boolean allowHostAccess, boolean allowIO, boolean allowNativeAccess) {
         int id = hashCode();
         logger().trace(String.format("%d running text %s: %s, %d, %b, %b, %b, %b", id, language.language(), text.substring(0, 20), timeout, allowCreateThread, allowHostAccess, allowIO, allowNativeAccess));
         try {
@@ -62,6 +62,25 @@ public class PolyglotRunner implements Loggable {
         }, timeout);
 
         return context.eval(source);
+    }
+
+    public enum Language {
+
+        JS("js"),
+        PYTHON("python"),
+        RUBY("ruby"),
+        R("R");
+
+        Language(String language) {
+            this.language = language;
+        }
+
+        public String language() {
+            return language;
+        }
+
+        private String language;
+
     }
 
     private static final String POLYGLOT_SCRIPT_PATH_PREFIX = "/bgbilling/polyglot/";

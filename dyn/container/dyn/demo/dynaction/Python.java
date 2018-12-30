@@ -1,7 +1,6 @@
 package demo.dynaction;
 
 import bitel.billing.server.ActionBase;
-import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotLanguage;
 import com.github.alexanderfefelov.bgbilling.dyn.framework.PolyglotRunner;
 import org.graalvm.polyglot.Value;
 
@@ -34,7 +33,7 @@ public class Python extends ActionBase {
     public void doAction() throws Exception {
         String script = "demo/demo.py";
         PolyglotRunner runner = new PolyglotRunner();
-        Value result = runner.runFile(PolyglotLanguage.PYTHON, script, 50000,
+        Value result = runner.runFile(PolyglotRunner.Language.PYTHON, script, 50000,
                 true, true, true, true);
         setMsg(result.toString());
     }
