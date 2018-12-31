@@ -95,13 +95,13 @@ public class SysInfo extends GlobalScriptBase {
         ));
 
         System.out.println("Master connection");
-        inspectConnectiron(connectionSet.getConnection());
+        inspectConnection(connectionSet.getConnection());
         System.out.println("Slave connection");
-        inspectConnectiron(connectionSet.getSlaveConnection());
+        inspectConnection(connectionSet.getSlaveConnection());
         System.out.println();
     }
 
-    private void inspectConnectiron(Connection connection) throws Exception {
+    private void inspectConnection(Connection connection) throws Exception {
         if (connection == null) {
             System.out.println("\tNo connection found");
             return;
