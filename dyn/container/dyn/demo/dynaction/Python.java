@@ -8,10 +8,10 @@ import org.graalvm.polyglot.Value;
 
 В конфигурации ядра:
 
-           module       action          class
-              |            |              |
-            /--\       /------\ /-------------------\
-  dynaction:demo.ActionPolyglot=demo.dynaction.Python
+           module     action          class
+              |          |              |
+            /--\       /----\ /-------------------\
+  dynaction:demo.ActionPython=demo.dynaction.Python
 
 Вызов:
 
