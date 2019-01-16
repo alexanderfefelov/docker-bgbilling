@@ -217,7 +217,7 @@ object Kernel {
     //
     /*  1 */ ContractParametersPref.create(pt = 1, title = "Логин", sort = 1, script = "", flags = 5, lm = now)
     /*  2 */ ContractParametersPref.create(pt = 1, title = "Лицевой счёт", sort = 1, script = "", flags = 5, lm = now)
-    /*  3 */ ContractParametersPref.create(pt = 2, title = "Адрес подключения", sort = 1, script = "", flags = 5, lm = now)
+    /*  3 */ ContractParametersPref.create(pt = 2, title = "Адрес оказания услуги", sort = 1, script = "", flags = 5, lm = now)
     /*  4 */ ContractParametersPref.create(pt = 9, title = "Телефон", sort = 1, script = "", flags = 5, lm = now)
     /*  5 */ ContractParametersPref.create(pt = 3, title = "Email", sort = 1, script = "", flags = 5, lm = now)
 
