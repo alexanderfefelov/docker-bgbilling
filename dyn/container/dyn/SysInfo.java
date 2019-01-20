@@ -1,16 +1,22 @@
 import bitel.billing.common.VersionInfo;
+import ru.bitel.bgbilling.common.BGException;
+import ru.bitel.bgbilling.kernel.admin.plugincfg.common.PluginItem;
+import ru.bitel.bgbilling.kernel.admin.plugincfg.common.PlugincfgService;
 import ru.bitel.bgbilling.kernel.container.managed.ServerContext;
 import ru.bitel.bgbilling.kernel.module.common.bean.BGModule;
 import ru.bitel.bgbilling.kernel.module.server.ModuleCache;
 import ru.bitel.bgbilling.kernel.script.common.EventScriptService;
 import ru.bitel.bgbilling.kernel.script.common.bean.EventScriptLink;
 import ru.bitel.bgbilling.kernel.script.server.dev.GlobalScriptBase;
+import ru.bitel.bgbilling.kernel.task.common.SchedulerService;
+import ru.bitel.bgbilling.kernel.task.common.bean.LightweightTaskData;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.sql.ConnectionSet;
 
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
 import java.util.*;
 
 public class SysInfo extends GlobalScriptBase {
@@ -20,11 +26,13 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println(new Date().toString() + NL);
 
         inspectModules();
+        inspectPlugins();
         inspectRuntime();
         inspectSystemProperties();
         inspectEnvironment();
-        inspectConnectionSet(connectionSet);
+        inspectConnections(connectionSet);
         inspectEventHandlers();
+        inspectSchedulerTasks();
     }
 
     private void inspectModules() {
@@ -43,6 +51,25 @@ public class SysInfo extends GlobalScriptBase {
             VersionInfo ver = VersionInfo.getVersionInfo(module.getName());
             System.out.println(String.join(SPACE,
                     String.valueOf(module.getId()),
+                    ver.getModuleName(),
+                    ver.getVersionString()
+            ));
+        }
+        System.out.println();
+    }
+
+    private void inspectPlugins() throws BGException {
+        System.out.println(String.join(NL,
+                "Plugins",
+                HR
+        ));
+        ServerContext context = ServerContext.get();
+        PlugincfgService service = context.getService(PlugincfgService.class, 0);
+        List<PluginItem> plugins = service.getPlugins();
+        for (PluginItem plugin : plugins) {
+            VersionInfo ver = VersionInfo.getVersionInfo(plugin.getName());
+            System.out.println(String.join(SPACE,
+                    "p" + plugin.getId(),
                     ver.getModuleName(),
                     ver.getVersionString()
             ));
@@ -92,9 +119,9 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println();
     }
 
-    private void inspectConnectionSet(ConnectionSet connectionSet) throws Exception  {
+    private void inspectConnections(ConnectionSet connectionSet) throws SQLException {
         System.out.println(String.join(NL,
-                "ConnectionSet",
+                "Connections",
                 HR
         ));
 
@@ -105,7 +132,7 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println();
     }
 
-    private void inspectConnection(Connection connection) throws Exception {
+    private void inspectConnection(Connection connection) throws SQLException {
         if (connection == null) {
             System.out.println("\tNo connection found");
             return;
@@ -118,16 +145,51 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println("\tDriver: " + metaData.getDriverName() + " " + metaData.getDriverVersion());
     }
 
-    private void inspectEventHandlers() throws Exception {
+    private void inspectEventHandlers() throws BGException {
         System.out.println(String.join(NL,
                 "Event handlers",
                 HR
         ));
         ServerContext context = ServerContext.get();
-        EventScriptService eventScriptService = context.getService(EventScriptService.class, 0);
-        List<EventScriptLink> eventLinks = eventScriptService. getEventLinks();
+        EventScriptService service = context.getService(EventScriptService.class, 0);
+        List<EventScriptLink> eventLinks = service.getEventLinks();
         for (EventScriptLink eventLink : eventLinks) {
             System.out.println(eventLink.getEventKey() + ": " + eventLink.getClassName());
+        }
+        System.out.println();
+    }
+
+    private void inspectSchedulerTasks() throws BGException {
+        System.out.println(String.join(NL,
+                "Scheduler tasks",
+                HR
+        ));
+        inspectSchedulerTasks("0");
+        List<BGModule> modules = ModuleCache.getInstance().getModulesList();
+        for (BGModule module : modules) {
+            String moduleId = Integer.toString(module.getId());
+            inspectSchedulerTasks(moduleId);
+        }
+        ServerContext context = ServerContext.get();
+        PlugincfgService service = context.getService(PlugincfgService.class, 0);
+        List<PluginItem> plugins = service.getPlugins();
+        for (PluginItem plugin : plugins) {
+            inspectSchedulerTasks("p" + plugin.getId());
+        }
+        System.out.println();
+    }
+
+    private void inspectSchedulerTasks(String moduleId) throws BGException {
+        ServerContext context = ServerContext.get();
+        SchedulerService service = context.getService(SchedulerService.class, 0);
+        List<LightweightTaskData> schedulerTasks = service.getSchedulerTasks(moduleId);
+        for (LightweightTaskData schedulerTask : schedulerTasks) {
+            String data = String.join(" ",
+                    schedulerTask.getStatus() == 0 ? "-" : "+",
+                    schedulerTask.getModuleName() + " (" + moduleId + ")",
+                    schedulerTask.getClassName()
+            );
+            System.out.println(data);
         }
     }
 
