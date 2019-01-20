@@ -1,6 +1,9 @@
 import bitel.billing.common.VersionInfo;
+import ru.bitel.bgbilling.kernel.container.managed.ServerContext;
 import ru.bitel.bgbilling.kernel.module.common.bean.BGModule;
 import ru.bitel.bgbilling.kernel.module.server.ModuleCache;
+import ru.bitel.bgbilling.kernel.script.common.EventScriptService;
+import ru.bitel.bgbilling.kernel.script.common.bean.EventScriptLink;
 import ru.bitel.bgbilling.kernel.script.server.dev.GlobalScriptBase;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.sql.ConnectionSet;
@@ -21,6 +24,7 @@ public class SysInfo extends GlobalScriptBase {
         inspectSystemProperties();
         inspectEnvironment();
         inspectConnectionSet(connectionSet);
+        inspectEventHandlers();
     }
 
     private void inspectModules() {
@@ -112,6 +116,19 @@ public class SysInfo extends GlobalScriptBase {
         System.out.println("\tUsername: " + metaData.getUserName());
         System.out.println("\tProduct: " + metaData.getDatabaseProductName() + " " + metaData.getDatabaseProductVersion());
         System.out.println("\tDriver: " + metaData.getDriverName() + " " + metaData.getDriverVersion());
+    }
+
+    private void inspectEventHandlers() throws Exception {
+        System.out.println(String.join(NL,
+                "Event handlers",
+                HR
+        ));
+        ServerContext context = ServerContext.get();
+        EventScriptService eventScriptService = context.getService(EventScriptService.class, 0);
+        List<EventScriptLink> eventLinks = eventScriptService. getEventLinks();
+        for (EventScriptLink eventLink : eventLinks) {
+            System.out.println(eventLink.getEventKey() + ": " + eventLink.getClassName());
+        }
     }
 
     private final static String HR = "--------------------------------------------------";
