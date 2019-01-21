@@ -6,6 +6,7 @@ RUN curl --location --silent --show-error --output sbt-$SBT_VERSION.deb http://d
   && rm sbt-$SBT_VERSION.deb \
   && git clone https://github.com/alexanderfefelov/bgbilling-api.git \
   && cd bgbilling-api \
+  && git checkout 7.1 \
   && sbt -J-Xmx2G publishLocal \
   && cd .. \
   && rm --force --recursive bgbilling-api
