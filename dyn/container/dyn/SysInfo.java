@@ -27,12 +27,12 @@ public class SysInfo extends GlobalScriptBase {
 
         inspectModules();
         inspectPlugins();
+        inspectScheduledTasks();
+        inspectEventHandlers();
         inspectRuntime();
         inspectSystemProperties();
         inspectEnvironment();
         inspectConnections(connectionSet);
-        inspectEventHandlers();
-        inspectSchedulerTasks();
     }
 
     private void inspectModules() {
@@ -152,42 +152,51 @@ public class SysInfo extends GlobalScriptBase {
         ));
         ServerContext context = ServerContext.get();
         EventScriptService service = context.getService(EventScriptService.class, 0);
-        List<EventScriptLink> eventLinks = service.getEventLinks();
-        for (EventScriptLink eventLink : eventLinks) {
-            System.out.println(eventLink.getEventKey() + ": " + eventLink.getClassName());
+        List<EventScriptLink> handlers = service.getEventLinks();
+        for (EventScriptLink handler : handlers) {
+            System.out.println(handler.getEventKey() + ": " + handler.getClassName());
         }
         System.out.println();
     }
 
-    private void inspectSchedulerTasks() throws BGException {
+    private void inspectScheduledTasks() throws BGException {
         System.out.println(String.join(NL,
-                "Scheduler tasks",
+                "Scheduled tasks",
                 HR
         ));
-        inspectSchedulerTasks("0");
+        inspectScheduledTasks("0");
         List<BGModule> modules = ModuleCache.getInstance().getModulesList();
         for (BGModule module : modules) {
             String moduleId = Integer.toString(module.getId());
-            inspectSchedulerTasks(moduleId);
+            inspectScheduledTasks(moduleId);
         }
         ServerContext context = ServerContext.get();
         PlugincfgService service = context.getService(PlugincfgService.class, 0);
         List<PluginItem> plugins = service.getPlugins();
         for (PluginItem plugin : plugins) {
-            inspectSchedulerTasks("p" + plugin.getId());
+            inspectScheduledTasks("p" + plugin.getId());
         }
         System.out.println();
     }
 
-    private void inspectSchedulerTasks(String moduleId) throws BGException {
+    private void inspectScheduledTasks(String moduleId) throws BGException {
         ServerContext context = ServerContext.get();
         SchedulerService service = context.getService(SchedulerService.class, 0);
-        List<LightweightTaskData> schedulerTasks = service.getSchedulerTasks(moduleId);
-        for (LightweightTaskData schedulerTask : schedulerTasks) {
+        List<LightweightTaskData> tasks = service.getSchedulerTasks(moduleId);
+        for (LightweightTaskData task : tasks) {
             String data = String.join(" ",
-                    schedulerTask.getStatus() == 0 ? "-" : "+",
-                    schedulerTask.getModuleName() + " (" + moduleId + ")",
-                    schedulerTask.getClassName()
+                    task.getStatus() == 0 ? "-" : "+",
+                    moduleId,
+                    task.getModuleName(),
+                    Integer.toString(task.getPriority()),
+                    task.getClassName(),
+                    "[",
+                    Integer.toString(task.getMonth()),
+                    Integer.toString(task.getDay()),
+                    Integer.toString(task.getDayOfWeek()),
+                    Integer.toString(task.getHour()),
+                    Long.toString(task.getMin()),
+                    "]"
             );
             System.out.println(data);
         }
