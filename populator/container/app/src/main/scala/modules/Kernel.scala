@@ -313,10 +313,7 @@ object Kernel {
   // Справочники -> Другие -> Договоры - значения списков -> Значения списков
   //
   def contractParameterType7Values(): Unit = {
-    /* 1 */ ContractParameterType7Values.create(pid = 9, title = "Паспорт гражданина РФ")
-    /* 2 */ ContractParameterType7Values.create(pid = 9, title = "Удостоверение личности военнослужащего РФ")
-    /* 3 */ ContractParameterType7Values.create(pid = 9, title = "Военный билет")
-    /* 4 */ ContractParameterType7Values.create(pid = 9, title = "Временное удостоверение личности гражданина РФ")
+    loaders.ContractParameterType7Values.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------

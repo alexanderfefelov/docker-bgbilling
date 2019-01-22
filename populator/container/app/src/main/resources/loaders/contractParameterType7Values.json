@@ -1,0 +1,14 @@
+{
+  "contractParameterType7Values": [
+    {
+      "id": 1,
+      "parent": 9,
+      "title": "Паспорт гражданина РФ"
+    },
+    {
+      "id": 2,
+      "parent": 9,
+      "title": "Иностранный паспорт"
+    }
+  ]
+}
