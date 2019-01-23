@@ -15,7 +15,8 @@ package object loaders {
 
   // scalikejdbc
   //
-  ConnectionPool.singleton("jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "bill", "bgbilling")
+  ConnectionPool.singleton(url = "jdbc:mysql://master.mysql.bgbilling.local:3306/bgbilling?useUnicode=true&characterEncoding=UTF-8&useSSL=false",
+    user = "bill", password = "bgbilling")
   implicit val session = AutoSession
 
   // Joda-Time

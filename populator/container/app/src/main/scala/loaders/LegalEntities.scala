@@ -42,6 +42,4 @@ object LegalEntities {
     }
   }
 
-  sql"alter table contract auto_increment = 23456".update.apply()
-
 }
