@@ -1,10 +1,8 @@
 package loaders
 
 import better.files.Resource
-import com.github.alexanderfefelov.bgbilling.api.db.repository.AddressConfig
 import io.circe.generic.auto._
 import io.circe.parser._
-import org.joda.time.DateTime
 import scalikejdbc._
 
 object Addresses {

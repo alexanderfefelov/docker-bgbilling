@@ -21,7 +21,7 @@
       },
       "birthDateOption": "19731205",
       "birthPlaceOption": "г. Москва",
-      "serviceAddressOption":{
+      "serviceAddressOption": {
         "houseId": 10000,
         "entranceOption": 1,
         "floorOption": 1,
@@ -54,14 +54,14 @@
         "deptName": "Отделение № 4 (по Лазаревскому району) отдела УФМС России по Краснодарскому краю в г. Сочи"
       },
       "birthPlaceOption": "г. Минск",
-      "serviceAddressOption":{
+      "serviceAddressOption": {
         "houseId": 10000,
         "entranceOption": 1,
         "floorOption": 1,
         "doorOption": "5"
       },
       "legalAddressIdOption": 10000,
-      "notificationParameters": { }
+      "notificationParameters": {}
     },
     {
       "id": 102,
@@ -79,7 +79,7 @@
         "deptName": "Хустський РВ ГУ ДCНС Украина"
       },
       "birthDateOption": "19841127",
-      "notificationParameters": { }
+      "notificationParameters": {}
     },
     {
       "id": 103,
@@ -90,7 +90,7 @@
       "middleNameOption": "Ерофеевич",
       "login": "np_103",
       "password": "nerejisero",
-      "notificationParameters": { }
+      "notificationParameters": {}
     },
     {
       "id": 104,
@@ -101,7 +101,7 @@
       "middleNameOption": "Константиновна",
       "login": "np_104",
       "password": "qohunedede",
-      "notificationParameters": { }
+      "notificationParameters": {}
     },
     {
       "id": 105,
@@ -112,7 +112,7 @@
       "middleNameOption": "Алексеевна",
       "login": "np_105",
       "password": "getisojewa",
-      "notificationParameters": { }
+      "notificationParameters": {}
     },
     {
       "id": 106,
@@ -122,7 +122,7 @@
       "lastName": "Кравчук",
       "login": "np_106",
       "password": "gegijeqife",
-      "notificationParameters": { }
+      "notificationParameters": {}
     }
   ]
 }

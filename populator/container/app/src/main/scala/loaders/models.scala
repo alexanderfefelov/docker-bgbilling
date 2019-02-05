@@ -38,7 +38,13 @@ case class LegalEntity(
   login: String,
   password: String,
   note1Option: Option[String],
-  note2Option: Option[String]
+  note2Option: Option[String],
+  serviceAddressOption: Option[ServiceAddress],
+  legalAddressIdOption: Option[Int],
+  phoneOption: Option[String],
+  emailOption: Option[String],
+  notificationParameters: NotificationParameters,
+  billingAddressIdOption: Option[Int]
 )
 
 case class IdCard(

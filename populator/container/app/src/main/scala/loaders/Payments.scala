@@ -6,12 +6,11 @@ import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import io.circe.generic.auto._
 import io.circe.parser._
 import modules.dr
-import org.joda.time.DateTime
 import scalaxb.{ConfigurableDispatchHttpClientsAsync, Soap11ClientsWithAuthHeaderAsync}
 
 import scala.concurrent.Await
-import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
 
 object Payments {
 

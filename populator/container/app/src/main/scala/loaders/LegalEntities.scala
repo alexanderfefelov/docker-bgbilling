@@ -23,6 +23,15 @@ object LegalEntities {
           ContractActions.updateParameterType1(cid = le.id, pid = 14, value = le.name)
           le.note1Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
           le.note2Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
+          le.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
+          le.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 15, hid = x, pod = 0, floor = 0, flat = ""))
+          le.phoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 4, phone = x))
+          le.emailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 5, email = x))
+          le.notificationParameters.notificationPhoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 33, phone = x))
+          le.notificationParameters.notificationEmailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 34, email = x))
+          le.notificationParameters.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 35, value = x))
+          le.notificationParameters.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 36, value = x))
+          le.billingAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 22, hid = x, pod = 0, floor = 0, flat = ""))
         }
       case Left(error) =>
         throw new RuntimeException(error)
