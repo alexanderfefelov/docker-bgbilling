@@ -5,9 +5,6 @@ import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
-case class ChargeTypeData(chargeTypes: Seq[ChargeType])
-case class ChargeType(id: Int, title: String, parent: Int, kind: Int, flag: Int, payback: Boolean)
-
 object ChargeTypes {
 
   sql"alter table contract_charge_types auto_increment = 1000".update.apply()

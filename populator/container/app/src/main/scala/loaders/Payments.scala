@@ -13,9 +13,6 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 
-case class PaymentData(payments: Seq[Payment])
-case class Payment(typeId: Int, contractId: Int, date: DateTime, amount: Double, comment: String, operatorId: Int)
-
 object Payments {
 
   def load(): Unit = {

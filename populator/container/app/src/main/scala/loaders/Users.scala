@@ -5,9 +5,6 @@ import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
-case class UserData(users: Seq[User])
-case class User(id: Int, login: String, password: String)
-
 object Users {
 
   sql"alter table user auto_increment = 1000".update.apply()

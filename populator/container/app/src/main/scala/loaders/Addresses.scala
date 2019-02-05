@@ -1,15 +1,11 @@
 package loaders
 
 import better.files.Resource
+import com.github.alexanderfefelov.bgbilling.api.db.repository.AddressConfig
 import io.circe.generic.auto._
 import io.circe.parser._
+import org.joda.time.DateTime
 import scalikejdbc._
-
-case class AddressData(countries: Seq[Country])
-case class Country(id: Int, name: String, cities: Seq[City])
-case class City(id: Int, name: String, streets: Seq[Street])
-case class Street(id: Int, name: String, houses: Seq[House])
-case class House(id: Int, number: String)
 
 object Addresses {
 
@@ -31,6 +27,7 @@ object Addresses {
                 house.number match {
                   case r(y, z) => (y, z)
                     sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, pod_diapazon, pod) values (${house.id}, ${street.id}, ${toInt(y)}, $z, 0, 0, 0, "", "")""".update.apply()
+                    house.captureDateOption.map(x => AddressConfig.create(tableId = "address_id", recordId = house.id, key = "captureDate", value = x.toString))
                 }
               }
             }

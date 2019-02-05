@@ -5,9 +5,6 @@ import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
-case class PaymentTypeData(paymentTypes: Seq[PaymentType])
-case class PaymentType(id: Int, title: String, parent: Int, kind: Int, flag: Int)
-
 object PaymentTypes {
 
   sql"alter table contract_payment_types auto_increment = 1000".update.apply()

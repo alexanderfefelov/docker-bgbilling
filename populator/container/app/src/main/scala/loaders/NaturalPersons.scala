@@ -8,29 +8,6 @@ import io.circe.parser._
 import org.joda.time.DateTime
 import scalikejdbc._
 
-case class IdCard(
-  typ: Int,
-  seriesOption: Option[String],
-  no: String,
-  date: DateTime,
-  deptCodeOption: Option[String],
-  deptName: String
-)
-case class NaturalPersonData(naturalPersons: Seq[NaturalPerson])
-case class NaturalPerson(
-  id: Int,
-  contractNo: String,
-  contractDate: DateTime,
-  firstName: String,
-  lastName: String,
-  middleNameOption: Option[String],
-  login: String,
-  password: String,
-  note1Option: Option[String],
-  note2Option: Option[String],
-  idCardOption: Option[IdCard]
-)
-
 object NaturalPersons {
 
   def load(): Unit = {
@@ -56,6 +33,10 @@ object NaturalPersons {
             idCard.deptCodeOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 13, value = x))
             ContractActions.updateParameterType1(cid = np.id, pid = 14, value = idCard.deptName)
           }
+          np.birthDateOption.map(x => ContractActions.updateParameterType6(cid = np.id, pid = 16, value = x))
+          np.birthPlaceOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 17, value = x))
+          np.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
+          np.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = 15, hid = x, pod = 0, floor = 0, flat = ""))
         }
       case Left(error) =>
         throw new RuntimeException(error)

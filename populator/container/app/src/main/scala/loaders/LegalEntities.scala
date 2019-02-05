@@ -8,19 +8,6 @@ import io.circe.parser._
 import org.joda.time.DateTime
 import scalikejdbc._
 
-case class LegalEntityData(legalEntities: Seq[LegalEntity])
-case class LegalEntity(
-  id: Int,
-  contractNo: String,
-  contractDate: DateTime,
-  name: String,
-  budgetUnit: Boolean,
-  login: String,
-  password: String,
-  note1Option: Option[String],
-  note2Option: Option[String]
-)
-
 object LegalEntities {
 
   def load(): Unit = {

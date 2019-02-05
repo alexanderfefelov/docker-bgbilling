@@ -18,7 +18,16 @@
         "date": "20130329",
         "deptCodeOption": "702-009",
         "deptName": "ТОМСКИЙ РОВД ТОМСКОЙ ОБЛ."
-      }
+      },
+      "birthDateOption": "19731205",
+      "birthPlaceOption": "г. Москва",
+      "serviceAddressOption":{
+        "houseId": 10000,
+        "entranceOption": 1,
+        "floorOption": 1,
+        "doorOption": "4"
+      },
+      "legalAddressIdOption": 10000
     },
     {
       "id": 101,
@@ -35,7 +44,15 @@
         "no": "403500",
         "date": "20181211",
         "deptName": "Отделение № 4 (по Лазаревскому району) отдела УФМС России по Краснодарскому краю в г. Сочи"
-      }
+      },
+      "birthPlaceOption": "г. Минск",
+      "serviceAddressOption":{
+        "houseId": 10000,
+        "entranceOption": 1,
+        "floorOption": 1,
+        "doorOption": "5"
+      },
+      "legalAddressIdOption": 10000
     },
     {
       "id": 102,
@@ -51,7 +68,8 @@
         "no": "ВР 478920",
         "date": "20060703",
         "deptName": "Хустський РВ ГУ ДCНС Украина"
-      }
+      },
+      "birthDateOption": "19841127"
     },
     {
       "id": 103,

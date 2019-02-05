@@ -5,9 +5,6 @@ import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
-case class ContractParameterType7ValueData(contractParameterType7Values: Seq[ContractParameterType7Value])
-case class ContractParameterType7Value(id: Int, title: String, parent: Int)
-
 object ContractParameterType7Values {
 
   sql"alter table contract_parameter_type_7_values auto_increment = 1000".update.apply()

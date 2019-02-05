@@ -232,17 +232,17 @@ object Kernel {
     /* 12 */ ContractParametersPref.create(pt = 6, title = "Удостоверение личности: дата", sort = 1, script = "", flags = 1, lm = now)
     /* 13 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: код подразделения", sort = 1, script = "", flags = 1, lm = now)
     /* 14 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: название подразделения", sort = 1, script = "", flags = 1, lm = now)
-    /* 15 */ ContractParametersPref.create(pt = 1, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
+    /* 15 */ ContractParametersPref.create(pt = 2, title = "Адрес регистрации", sort = 1, script = "", flags = 5, lm = now)
     /* 16 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
     /* 17 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
 
     // Юр. лица
     //
     /* 18 */ ContractParametersPref.create(pt = 1, title = "Название", sort = 1, script = "", flags = 5, lm = now)
-    /* 19 */ ContractParametersPref.create(pt = 1, title = "Адрес юридический", sort = 5, script = "", flags = 1, lm = now)
+    /* 19 */ ContractParametersPref.create(pt = 2, title = "Адрес юридический", sort = 1, script = "", flags = 5, lm = now)
     /* 20 */ ContractParametersPref.create(pt = 5, title = "Бюджет", sort = 1, script = "", flags = 5, lm = now)
     /* 21 */ ContractParametersPref.create(pt = 1, title = "ИНН", sort = 1, script = "", flags = 5, lm = now)
-    /* 22 */ ContractParametersPref.create(pt = 1, title = "Адрес для выставления счетов", sort = 5, script = "", flags = 1, lm = now)
+    /* 22 */ ContractParametersPref.create(pt = 2, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 5, lm = now)
     /* 23 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 5, lm = now)
     /* 24 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 5, lm = now)
     /* 25 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 5, lm = now)
