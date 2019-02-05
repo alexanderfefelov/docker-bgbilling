@@ -33,16 +33,16 @@
               "id": 101,
               "name": "Верхнее ш.",
               "houses": [
-                {"id": 10100, "number": "45/1", "captureDateOption":  "20150010"}
+                {"id": 10100, "number": "45/1", "captureDateOption":  "20150110"}
               ]
             },
             {
               "id": 102,
               "name": "Студенческое ш., Олимпийский ЖК",
               "houses": [
-                {"id": 10200, "number": "1 К1", "captureDateOption":  "20150010"},
-                {"id": 10201, "number": "1 К2", "captureDateOption":  "20150010"},
-                {"id": 10202, "number": "1 К3", "captureDateOption":  "20150010"}
+                {"id": 10200, "number": "1 К1", "captureDateOption":  "20150110"},
+                {"id": 10201, "number": "1 К2", "captureDateOption":  "20150110"},
+                {"id": 10202, "number": "1 К3", "captureDateOption":  "20150110"}
               ]
             },
             {
