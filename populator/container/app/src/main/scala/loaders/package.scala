@@ -9,6 +9,8 @@ import scala.util.control.NonFatal
 
 package object loaders {
 
+  implicit def boolean2Int(b:Boolean): Int = if (b) 1 else 0
+
   // better-files
   //
   implicit val charset: Charset = Charset.forName("UTF-8")

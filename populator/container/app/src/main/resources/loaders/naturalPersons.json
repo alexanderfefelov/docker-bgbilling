@@ -27,7 +27,15 @@
         "floorOption": 1,
         "doorOption": "4"
       },
-      "legalAddressIdOption": 10000
+      "legalAddressIdOption": 10000,
+      "phoneOption": "+79002345678",
+      "emailOption": "none@inter.net",
+      "notificationParameters": {
+        "notificationPhoneOption": "+79001234567",
+        "notificationEmailOption": "none@inter.net",
+        "notifyByPhone": true,
+        "notifyByEmail": true
+      }
     },
     {
       "id": 101,
@@ -52,7 +60,8 @@
         "floorOption": 1,
         "doorOption": "5"
       },
-      "legalAddressIdOption": 10000
+      "legalAddressIdOption": 10000,
+      "notificationParameters": { }
     },
     {
       "id": 102,
@@ -69,7 +78,8 @@
         "date": "20060703",
         "deptName": "Хустський РВ ГУ ДCНС Украина"
       },
-      "birthDateOption": "19841127"
+      "birthDateOption": "19841127",
+      "notificationParameters": { }
     },
     {
       "id": 103,
@@ -79,7 +89,8 @@
       "lastName": "Шерков",
       "middleNameOption": "Ерофеевич",
       "login": "np_103",
-      "password": "nerejisero"
+      "password": "nerejisero",
+      "notificationParameters": { }
     },
     {
       "id": 104,
@@ -89,7 +100,8 @@
       "lastName": "Кобонова",
       "middleNameOption": "Константиновна",
       "login": "np_104",
-      "password": "qohunedede"
+      "password": "qohunedede",
+      "notificationParameters": { }
     },
     {
       "id": 105,
@@ -99,7 +111,8 @@
       "lastName": "Ельчукова",
       "middleNameOption": "Алексеевна",
       "login": "np_105",
-      "password": "getisojewa"
+      "password": "getisojewa",
+      "notificationParameters": { }
     },
     {
       "id": 106,
@@ -108,7 +121,8 @@
       "firstName": "Порфирий",
       "lastName": "Кравчук",
       "login": "np_106",
-      "password": "gegijeqife"
+      "password": "gegijeqife",
+      "notificationParameters": { }
     }
   ]
 }

@@ -258,6 +258,10 @@ object Kernel {
     //
     /* 33 */ ContractParametersPref.create(pt = 9, title = "Телефон для автоматических оповещений", sort = 1, script = "", flags = 7, lm = now)
     /* 34 */ ContractParametersPref.create(pt = 3, title = "Email для автоматических оповещений", sort = 1, script = "", flags = 7, lm = now)
+    /* 35 */ ContractParametersPref.create(pt = 5, title = "Атоматически оповещать: SMS", sort = 1, script = "", flags = 7, lm = now)
+    /* 36 */ ContractParametersPref.create(pt = 5, title = "Атоматически оповещать: Email", sort = 1, script = "", flags = 7, lm = now)
+
+    /* 37 */ ContractParametersPref.create(pt = 1, title = "MAC-адрес", sort = 1, script = "", flags = 5, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -21,6 +21,13 @@ case class ServiceAddress(
   doorOption: Option[String]
 )
 
+case class NotificationParameters(
+  notificationPhoneOption: Option[String],
+  notificationEmailOption: Option[String],
+  notifyByPhone: Option[Boolean],
+  notifyByEmail: Option[Boolean]
+)
+
 case class LegalEntityData(legalEntities: Seq[LegalEntity])
 case class LegalEntity(
   id: Int,
@@ -58,7 +65,10 @@ case class NaturalPerson(
   birthDateOption: Option[DateTime],
   birthPlaceOption: Option[String],
   serviceAddressOption: Option[ServiceAddress],
-  legalAddressIdOption: Option[Int]
+  legalAddressIdOption: Option[Int],
+  phoneOption: Option[String],
+  emailOption: Option[String],
+  notificationParameters: NotificationParameters
 )
 
 case class PaymentData(payments: Seq[Payment])

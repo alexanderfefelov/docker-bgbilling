@@ -37,6 +37,12 @@ object NaturalPersons {
           np.birthPlaceOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 17, value = x))
           np.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
           np.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = 15, hid = x, pod = 0, floor = 0, flat = ""))
+          np.phoneOption.map(x => ContractActions.updatePhoneInfo(cid = np.id, pid = 4, phone = x))
+          np.emailOption.map(x => ContractActions.updateEmailInfo(cid = np.id, pid = 5, email = x))
+          np.notificationParameters.notificationPhoneOption.map(x => ContractActions.updatePhoneInfo(cid = np.id, pid = 33, phone = x))
+          np.notificationParameters.notificationEmailOption.map(x => ContractActions.updateEmailInfo(cid = np.id, pid = 34, email = x))
+          np.notificationParameters.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 35, value = x))
+          np.notificationParameters.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 36, value = x))
         }
       case Left(error) =>
         throw new RuntimeException(error)
