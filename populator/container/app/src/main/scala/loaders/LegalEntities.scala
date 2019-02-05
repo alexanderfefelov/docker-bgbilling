@@ -27,15 +27,15 @@ object LegalEntities {
     val json = Resource.getAsString("loaders/legalEntities.json")
     decode[LegalEntityData](json) match {
       case Right(data) =>
-        for (c <- data.legalEntities) {
-          sql"alter table contract auto_increment = ${c.id}".update.apply()
-          ContractActions.newContract(date = c.contractDate, pattern_id = 4)
-          ContractActions.updateContractTitleAndComment(c.id, c.contractNo)
-          ContractActions.updateContractPassword(c.id, c.password)
-          ContractActions.updateParameterType1(cid = c.id, pid = 1, value = c.login)
-          ContractActions.updateParameterType1(cid = c.id, pid = 14, value = c.name)
-          c.note1Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
-          c.note2Option.map(x => ContractComment.create(cid = c.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
+        for (le <- data.legalEntities) {
+          sql"alter table contract auto_increment = ${le.id}".update.apply()
+          ContractActions.newContract(date = le.contractDate, pattern_id = 4)
+          ContractActions.updateContractTitleAndComment(le.id, le.contractNo)
+          ContractActions.updateContractPassword(le.id, le.password)
+          ContractActions.updateParameterType1(cid = le.id, pid = 1, value = le.login)
+          ContractActions.updateParameterType1(cid = le.id, pid = 14, value = le.name)
+          le.note1Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
+          le.note2Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
         }
       case Left(error) =>
         throw new RuntimeException(error)
