@@ -50,7 +50,7 @@ case class LegalEntity(
 case class IdCard(
   typ: Int,
   seriesOption: Option[String],
-  no: String,
+  num: String,
   date: DateTime,
   deptCodeOption: Option[String],
   deptName: String

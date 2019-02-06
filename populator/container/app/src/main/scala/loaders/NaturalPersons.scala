@@ -28,7 +28,7 @@ object NaturalPersons {
           np.idCardOption.map { idCard =>
             ContractActions.updateListParameter(cid = np.id, pid = 9, value = idCard.typ)
             idCard.seriesOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 10, value = x))
-            ContractActions.updateParameterType1(cid = np.id, pid = 11, value = idCard.no)
+            ContractActions.updateParameterType1(cid = np.id, pid = 11, value = idCard.num)
             ContractActions.updateParameterType6(cid = np.id, pid = 12, value = idCard.date)
             idCard.deptCodeOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 13, value = x))
             ContractActions.updateParameterType1(cid = np.id, pid = 14, value = idCard.deptName)

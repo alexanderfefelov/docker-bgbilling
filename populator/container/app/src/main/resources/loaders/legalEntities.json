@@ -33,7 +33,14 @@
       "name": "Ромашка ООО",
       "budgetUnit": false,
       "login": "le_201",
-      "password": "hamiqeqado"
+      "password": "hamiqeqado",
+      "serviceAddressOption": {
+        "houseId": 10002,
+        "entranceOption": 2,
+        "floorOption": 1,
+        "doorOption": "106"
+      },
+      "legalAddressIdOption": 10002
     },
     {
       "id": 202,
@@ -42,7 +49,15 @@
       "name": "ПромСбытЦентр ЗАО",
       "budgetUnit": false,
       "login": "le_202",
-      "password": "keviyeduwi"
+      "password": "keviyeduwi",
+      "serviceAddressOption": {
+        "houseId": 10002,
+        "entranceOption": 2,
+        "floorOption": 1,
+        "doorOption": "107"
+      },
+      "legalAddressIdOption": 30000,
+      "billingAddressIdOption": 30000
     },
     {
       "id": 203,

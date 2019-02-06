@@ -1,6 +1,7 @@
 package loaders
 
 import better.files.Resource
+import com.github.alexanderfefelov.bgbilling.api.action.kernel.AdminActions
 import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
@@ -25,7 +26,7 @@ object Addresses {
                 house.number match {
                   case r(y, z) => (y, z)
                     sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, pod_diapazon, pod) values (${house.id}, ${street.id}, ${toInt(y)}, $z, 0, 0, 0, "", "")""".update.apply()
-                    // house.captureDateOption.map(x => AddressConfig.create(tableId = "address_id", recordId = house.id, key = "captureDate", value = x.toString))
+                    house.captureDateOption.map(x => AdminActions.updateAddressExtraParams("house", house.id, "captureDate", x.toString("dd.MM.yyyy")))
                 }
               }
             }
