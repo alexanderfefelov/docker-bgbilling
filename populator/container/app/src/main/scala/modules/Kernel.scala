@@ -596,7 +596,7 @@ object Kernel {
   //
   def contractCommentPatterns(): Unit = {
     /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_6} ${param_7} ${param_8}, Л/С ${param_2}")
-    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_14}, Л/С ${param_2}")
+    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_18}, Л/С ${param_2}")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
