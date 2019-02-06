@@ -10,7 +10,7 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 * Контейнеры
 
     | Название | Описание | FQDN
-    | -------- | -------- | ----
+    |:---------|:---------|:----
     | `bgbilling-billing`         | Сервер BGBilling | `billing.bgbilling.local`
     | `bgbilling-scheduler`       | Планировщик BGBilling | `scheduler.bgbilling.local`
     | `bgbilling-access`          | Сервер BGInetAccess | `access.bgbilling.local`
@@ -37,6 +37,19 @@ docker-bgbilling -- это набор скриптов, позволяющий �
     [API BGBilling](https://bgbilling.ru/v7.1/javadoc/index.html) из кода на перечисленных языках ([примеры](dyn/container/polyglot/demo/)).
     Кроме того, на этих языках можно программировать dynaction ([пример](dyn/container/dyn/demo/dynaction/Python.java)).
 
+* Скриптинг JVM
+
+    Для скриптинга Java-приложений на стороне BGBilling доступны следующие движки:
+
+    | Название | Язык
+    |:---------|:----
+    | BeanShell Engine | BeanShell 2.0b5
+    | Graal.js | ECMAScript ECMA - 262 Edition 9
+    | Groovy Scripting Engine | Groovy 2.4.11
+    | JEXL Engine | JEXL 2.0
+    | Oracle Nashorn | ECMAScript ECMA - 262 Edition 5.1
+    | TruffleRuby | ruby 2.4.4
+ 
 * База данных
 
     Для MySQL реализована master-slave репликация. Для slave-серверов включен режим `super_read_only`.
