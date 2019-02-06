@@ -20,19 +20,35 @@ object LegalEntities {
           ContractActions.updateContractTitleAndComment(le.id, le.contractNo)
           ContractActions.updateContractPassword(le.id, le.password)
           ContractActions.updateParameterType1(cid = le.id, pid = 1, value = le.login)
-          ContractActions.updateParameterType1(cid = le.id, pid = 14, value = le.name)
+          ContractActions.updateParameterType1(cid = le.id, pid = 18, value = le.name)
           le.note1Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
           le.note2Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
           le.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
-          le.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 15, hid = x, pod = 0, floor = 0, flat = ""))
+          le.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 19, hid = x, pod = 0, floor = 0, flat = ""))
           le.billingAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 22, hid = x, pod = 0, floor = 0, flat = ""))
           le.phoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 4, phone = x))
           le.emailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 5, email = x))
-          le.notificationParametersOption.map { notificationParameters =>
-            notificationParameters.notificationPhoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 33, phone = x))
-            notificationParameters.notificationEmailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 34, email = x))
-            notificationParameters.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 35, value = x))
-            notificationParameters.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 36, value = x))
+          le.notificationOption.map { notification =>
+            notification.notificationPhoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 33, phone = x))
+            notification.notificationEmailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 34, email = x))
+            notification.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 35, value = x))
+            notification.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 36, value = x))
+          }
+          le.bankOption.map { bank =>
+            bank.bikOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 29, value = x))
+            bank.nameOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 30, value = x))
+            bank.ksOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 31, value = x))
+            bank.rsOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 32, value = x))
+          }
+          le.budgetaryOption.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 20, value = x))
+          le.codesOption.map { codes =>
+            codes.innOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 21, value = x))
+            codes.kppOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 23, value = x))
+            codes.ogrnOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 24, value = x))
+            codes.okatoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 25, value = x))
+            codes.oktmoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 26, value = x))
+            codes.okvedOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 27, value = x))
+            codes.okpoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 28, value = x))
           }
         }
       case Left(error) =>

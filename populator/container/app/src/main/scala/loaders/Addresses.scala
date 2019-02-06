@@ -25,7 +25,7 @@ object Addresses {
                 val r = """^(\d*)(.*)""".r
                 house.number match {
                   case r(y, z) => (y, z)
-                    sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, pod_diapazon, pod) values (${house.id}, ${street.id}, ${toInt(y)}, $z, 0, 0, 0, "", "")""".update.apply()
+                    sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, box_index, pod_diapazon, pod) values (${house.id}, ${street.id}, ${toInt(y)}, $z, 0, 0, 0, ${house.postalCodeOption}, "", "")""".update.apply()
                     house.captureDateOption.map(x => AdminActions.updateAddressExtraParams("house", house.id, "captureDate", x.toString("dd.MM.yyyy")))
                 }
               }

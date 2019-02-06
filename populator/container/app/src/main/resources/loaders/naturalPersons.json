@@ -30,7 +30,7 @@
       "legalAddressIdOption": 10000,
       "phoneOption": "+79002345678",
       "emailOption": "none@inter.net",
-      "notificationParametersOption": {
+      "notificationOption": {
         "notificationPhoneOption": "+79001234567",
         "notificationEmailOption": "none@inter.net",
         "notifyByPhone": true,

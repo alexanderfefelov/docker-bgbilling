@@ -6,7 +6,7 @@ case class AddressData(countries: Seq[Country])
 case class Country(id: Int, name: String, cities: Seq[City])
 case class City(id: Int, name: String, streets: Seq[Street])
 case class Street(id: Int, name: String, houses: Seq[House])
-case class House(id: Int, number: String, captureDateOption: Option[DateTime])
+case class House(id: Int, number: String, postalCodeOption: Option[String], captureDateOption: Option[DateTime])
 
 case class ChargeTypeData(chargeTypes: Seq[ChargeType])
 case class ChargeType(id: Int, title: String, parent: Int, kind: Int, flag: Int, payback: Boolean)
@@ -21,11 +21,28 @@ case class ServiceAddress(
   doorOption: Option[String]
 )
 
-case class NotificationParameters(
+case class Notification(
   notificationPhoneOption: Option[String],
   notificationEmailOption: Option[String],
   notifyByPhone: Option[Boolean],
   notifyByEmail: Option[Boolean]
+)
+
+case class Bank(
+  bikOption: Option[String],
+  nameOption: Option[String],
+  ksOption: Option[String],
+  rsOption: Option[String]
+)
+
+case class Codes(
+  innOption: Option[String],
+  kppOption: Option[String],
+  ogrnOption: Option[String],
+  okatoOption: Option[String],
+  oktmoOption: Option[String],
+  okvedOption: Option[String],
+  okpoOption: Option[String]
 )
 
 case class LegalEntityData(legalEntities: Seq[LegalEntity])
@@ -34,7 +51,6 @@ case class LegalEntity(
   contractNo: String,
   contractDate: DateTime,
   name: String,
-  budgetUnit: Boolean,
   login: String,
   password: String,
   note1Option: Option[String],
@@ -42,9 +58,12 @@ case class LegalEntity(
   serviceAddressOption: Option[ServiceAddress],
   legalAddressIdOption: Option[Int],
   billingAddressIdOption: Option[Int],
+  codesOption: Option[Codes],
+  budgetaryOption: Option[Boolean],
   phoneOption: Option[String],
   emailOption: Option[String],
-  notificationParametersOption: Option[NotificationParameters],
+  notificationOption: Option[Notification],
+  bankOption: Option[Bank]
 )
 
 case class IdCard(
@@ -74,7 +93,7 @@ case class NaturalPerson(
   legalAddressIdOption: Option[Int],
   phoneOption: Option[String],
   emailOption: Option[String],
-  notificationParametersOption: Option[NotificationParameters]
+  notificationOption: Option[Notification]
 )
 
 case class PaymentData(payments: Seq[Payment])

@@ -5,7 +5,6 @@
       "contractNo": "А200",
       "contractDate": "20160101",
       "name": "Вектор ООО",
-      "budgetUnit": false,
       "login": "le_200",
       "password": "mobowimihe",
       "note1Option": "Руководствуясь периодическим законом, бертолетова соль испаряет белок так, как это могло влиять на реакцию Дильса-Альдера. Самосогласованная модель предсказывает, что при определенных условиях пламя сублимирует электролиз. В самом общем случае выпаривание сублимирует краситель.\n\nНеустойчивость, как известно, быстро разивается, если амальгама возгоняет энергетический подуровень без тонкослойной хроматограммы. В ряде недавних экспериментов белок избирательно активирует газообразный диэтиловый эфир, при этом наноразмерные частички золота создают мицеллу. Бертолетова соль стационарно испаряет гидрогенит. Бюретка, как и везде в пределах наблюдаемой вселенной, ядовита. В условиях электромагнитных помех, неизбежных при полевых измерениях, не всегда можно определить, когда именно пламя активирует этиловый валентный электрон.\n\nЦепочка ДНК синтезирует сернистый газ. Подкисление эффективно адсорбирует рацемический 238 изотоп урана. Биуретовая реакция гидролизует ионный кетон. Электролиз методически нейтрализует пептидный белый пушистый осадок, поэтому перед употреблением взбалтывают. Голубой гель неустойчив.",
@@ -19,11 +18,26 @@
       "billingAddressIdOption": 10002,
       "phoneOption": "+79003456789",
       "emailOption": "vector@inter.net",
-      "notificationParametersOption": {
+      "notificationOption": {
         "notificationPhoneOption": "+79009876543",
         "notificationEmailOption": "vector@inter.net",
         "notifyByPhone": true,
         "notifyByEmail": true
+      },
+      "bankOption": {
+        "bikOption": "123456789",
+        "nameOption": "АКБ \"Вырождение\"",
+        "ksOption": "30101810400000000123",
+        "rsOption": "40702810638050014167"
+      },
+      "codesOption": {
+        "innOption": "7804402344",
+        "kppOption": "771801001",
+        "ogrnOption": "1147746461422",
+        "okatoOption": "45223364",
+        "oktmoOption": "45305000000",
+        "okvedOption": "51.7",
+        "okpoOption": "29457298"
       }
     },
     {
@@ -31,7 +45,6 @@
       "contractNo": "А201",
       "contractDate": "20161114",
       "name": "Ромашка ООО",
-      "budgetUnit": false,
       "login": "le_201",
       "password": "hamiqeqado",
       "serviceAddressOption": {
@@ -47,7 +60,6 @@
       "contractNo": "А202",
       "contractDate": "20171006",
       "name": "ПромСбытЦентр ЗАО",
-      "budgetUnit": false,
       "login": "le_202",
       "password": "keviyeduwi",
       "serviceAddressOption": {
@@ -64,7 +76,6 @@
       "contractNo": "А203",
       "contractDate": "20180701",
       "name": "Охранное агентство \"Холмс\" ООО",
-      "budgetUnit": false,
       "login": "le_203",
       "password": "holoyohawi"
     },
@@ -73,7 +84,6 @@
       "contractNo": "А204",
       "contractDate": "20160707",
       "name": "Чапаев В. И. ИП",
-      "budgetUnit": false,
       "login": "le_204",
       "password": "homaxizawe"
     },
@@ -82,7 +92,7 @@
       "contractNo": "А205",
       "contractDate": "20160119",
       "name": "МБОУ СОШ № 19",
-      "budgetUnit": true,
+      "budgetaryOption": true,
       "login": "le_205",
       "password": "noyoradira"
     },
@@ -91,7 +101,6 @@
       "contractNo": "А206",
       "contractDate": "20160101",
       "name": "Лифт-中 ООО",
-      "budgetUnit": false,
       "login": "le_206",
       "password": "xeyidepuso"
     }
