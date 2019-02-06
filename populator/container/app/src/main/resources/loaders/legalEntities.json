@@ -16,6 +16,7 @@
         "doorOption": "Маг. \"Афёра\""
       },
       "legalAddressIdOption": 10002,
+      "billingAddressIdOption": 10002,
       "phoneOption": "+79003456789",
       "emailOption": "vector@inter.net",
       "notificationParameters": {
@@ -23,8 +24,7 @@
         "notificationEmailOption": "vector@inter.net",
         "notifyByPhone": true,
         "notifyByEmail": true
-      },
-      "billingAddressIdOption": 10002
+      }
     },
     {
       "id": 201,
@@ -40,7 +40,8 @@
         "floorOption": 1,
         "doorOption": "106"
       },
-      "legalAddressIdOption": 10002
+      "legalAddressIdOption": 10002,
+      "notificationParameters": {}
     },
     {
       "id": 202,
@@ -57,7 +58,8 @@
         "doorOption": "107"
       },
       "legalAddressIdOption": 30000,
-      "billingAddressIdOption": 30000
+      "billingAddressIdOption": 30000,
+      "notificationParameters": {}
     },
     {
       "id": 203,
@@ -75,7 +77,8 @@
       "name": "Чапаев В. И. ИП",
       "budgetUnit": false,
       "login": "le_204",
-      "password": "homaxizawe"
+      "password": "homaxizawe",
+      "notificationParameters": {}
     },
     {
       "id": 205,
@@ -84,7 +87,8 @@
       "name": "МБОУ СОШ № 19",
       "budgetUnit": true,
       "login": "le_205",
-      "password": "noyoradira"
+      "password": "noyoradira",
+      "notificationParameters": {}
     },
     {
       "id": 206,
@@ -93,7 +97,8 @@
       "name": "Лифт-中 ООО",
       "budgetUnit": false,
       "login": "le_206",
-      "password": "xeyidepuso"
+      "password": "xeyidepuso",
+      "notificationParameters": {}
     }
   ]
 }
