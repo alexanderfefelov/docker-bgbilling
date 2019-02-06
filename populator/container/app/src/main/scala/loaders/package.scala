@@ -17,7 +17,7 @@ package object loaders {
   //
   val groovyBinding = new Binding()
   val groovyShell = new GroovyShell(groovyBinding)
-  val accountNumberGenerator = groovyShell.parse(new File("""groovy/AccountNumberGenerator.groovy"""))
+  val accountNumberGenerator = groovyShell.parse(new File("src/main/groovy/AccountNumberGenerator.groovy"))
 
   // better-files
   //
