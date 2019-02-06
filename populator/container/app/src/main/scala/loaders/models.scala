@@ -41,10 +41,10 @@ case class LegalEntity(
   note2Option: Option[String],
   serviceAddressOption: Option[ServiceAddress],
   legalAddressIdOption: Option[Int],
+  billingAddressIdOption: Option[Int],
   phoneOption: Option[String],
   emailOption: Option[String],
   notificationParametersOption: Option[NotificationParameters],
-  billingAddressIdOption: Option[Int]
 )
 
 case class IdCard(
