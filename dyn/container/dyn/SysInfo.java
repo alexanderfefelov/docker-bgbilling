@@ -13,11 +13,14 @@ import ru.bitel.bgbilling.kernel.task.common.bean.LightweightTaskData;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.sql.ConnectionSet;
 
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SysInfo extends GlobalScriptBase {
 
@@ -25,6 +28,7 @@ public class SysInfo extends GlobalScriptBase {
     public void execute(Setup setup, ConnectionSet connectionSet) throws Exception {
         System.out.println(new Date().toString() + NL);
 
+        inspectConnections(connectionSet);
         inspectModules();
         inspectPlugins();
         inspectScheduledTasks();
@@ -32,7 +36,7 @@ public class SysInfo extends GlobalScriptBase {
         inspectRuntime();
         inspectSystemProperties();
         inspectEnvironment();
-        inspectConnections(connectionSet);
+        inspectScriptEngines();
     }
 
     private void inspectModules() {
@@ -200,6 +204,21 @@ public class SysInfo extends GlobalScriptBase {
             );
             System.out.println(data);
         }
+    }
+
+    private void inspectScriptEngines() {
+        System.out.println(String.join(NL,
+                "Script engines",
+                HR
+        ));
+        ScriptEngineManager manager = new ScriptEngineManager();
+        List<ScriptEngineFactory> factories = manager.getEngineFactories();
+        for (ScriptEngineFactory factory : factories) {
+            System.out.println(factory.getEngineName());
+            System.out.println("\tLanguage: " + factory.getLanguageName() + " " + factory.getLanguageVersion());
+            System.out.println("\tNames: " + factory.getNames().stream().filter(Objects::nonNull).collect(Collectors.toList()).toString());
+        }
+        System.out.println();
     }
 
     private final static String HR = "--------------------------------------------------";
