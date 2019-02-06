@@ -43,7 +43,7 @@ case class LegalEntity(
   legalAddressIdOption: Option[Int],
   phoneOption: Option[String],
   emailOption: Option[String],
-  notificationParameters: NotificationParameters,
+  notificationParametersOption: Option[NotificationParameters],
   billingAddressIdOption: Option[Int]
 )
 
@@ -74,7 +74,7 @@ case class NaturalPerson(
   legalAddressIdOption: Option[Int],
   phoneOption: Option[String],
   emailOption: Option[String],
-  notificationParameters: NotificationParameters
+  notificationParametersOption: Option[NotificationParameters]
 )
 
 case class PaymentData(payments: Seq[Payment])
