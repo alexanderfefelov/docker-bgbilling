@@ -45,6 +45,10 @@ object NaturalPersons {
             notification.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 35, value = x))
             notification.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 36, value = x))
           }
+
+          groovyBinding.setProperty("id", np.id)
+          val accountNumber = accountNumberGenerator.run()
+          ContractActions.updateParameterType1(cid = np.id, pid = 2, value = accountNumber.toString)
         }
       case Left(error) =>
         throw new RuntimeException(error)

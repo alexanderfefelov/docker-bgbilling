@@ -50,6 +50,10 @@ object LegalEntities {
             codes.okvedOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 27, value = x))
             codes.okpoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 28, value = x))
           }
+
+          groovyBinding.setProperty("id", le.id)
+          val accountNumber = accountNumberGenerator.run()
+          ContractActions.updateParameterType1(cid = le.id, pid = 2, value = accountNumber.toString)
         }
       case Left(error) =>
         throw new RuntimeException(error)

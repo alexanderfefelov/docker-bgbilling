@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % "0.9.3",
   "io.circe" %% "circe-generic" % "0.9.3",
   "io.circe" %% "circe-parser" % "0.9.3",
+  "org.codehaus.groovy" % "groovy-all" % "2.5.5" pomOnly(),
   "com.github.alexanderfefelov" %% "bgbilling-api-action-kernel" % apiV,
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bill" % apiV,
   "com.github.alexanderfefelov" %% "bgbilling-api-db-bonus" % apiV,
