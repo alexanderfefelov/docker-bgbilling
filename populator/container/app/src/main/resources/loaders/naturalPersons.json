@@ -61,7 +61,8 @@
         "doorOption": "5"
       },
       "legalAddressIdOption": 10000,
-      "portingPriceOption": "0"
+      "portingPriceOption": "0",
+      "domainIdOption": 1
     },
     {
       "id": 102,

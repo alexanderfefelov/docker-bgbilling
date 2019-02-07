@@ -8,6 +8,10 @@ import io.circe.parser._
 import org.joda.time.DateTime
 import scalikejdbc._
 
+import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
+
 object LegalEntities {
 
   def load(): Unit = {
@@ -51,6 +55,10 @@ object LegalEntities {
             codes.okpoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 28, value = x))
           }
           ContractActions.updateParameterType1(cid = le.id, pid = 38, value = le.portingPriceOption.getOrElse("0"))
+          le.domainIdOption.map { x =>
+            val responseFuture = contractService.contractDomainUpdate(le.id, x)
+            Await.result(responseFuture, 15.seconds)
+          }
 
           groovyBinding.setProperty("id", le.id)
           val accountNumber = accountNumberGenerator.run()

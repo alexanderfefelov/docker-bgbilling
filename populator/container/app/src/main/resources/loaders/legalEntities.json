@@ -39,7 +39,8 @@
         "okvedOption": "51.7",
         "okpoOption": "29457298"
       },
-      "portingPriceOption": "10000"
+      "portingPriceOption": "10000",
+      "domainIdOption": 1
     },
     {
       "id": 201,
