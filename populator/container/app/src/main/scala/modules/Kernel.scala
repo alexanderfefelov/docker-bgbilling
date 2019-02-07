@@ -232,7 +232,7 @@ object Kernel {
     /* 12 */ ContractParametersPref.create(pt = 6, title = "Удостоверение личности: дата", sort = 1, script = "", flags = 1, lm = now)
     /* 13 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: код подразделения", sort = 1, script = "", flags = 1, lm = now)
     /* 14 */ ContractParametersPref.create(pt = 1, title = "Удостоверение личности: название подразделения", sort = 1, script = "", flags = 1, lm = now)
-    /* 15 */ ContractParametersPref.create(pt = 2, title = "Адрес регистрации", sort = 1, script = "", flags = 5, lm = now)
+    /* 15 */ ContractParametersPref.create(pt = 2, title = "Адрес регистрации", sort = 1, script = "", flags = 1, lm = now)
     /* 16 */ ContractParametersPref.create(pt = 6, title = "Дата рождения", sort = 1, script = "", flags = 1, lm = now)
     /* 17 */ ContractParametersPref.create(pt = 1, title = "Место рождения", sort = 1, script = "", flags = 1, lm = now)
 
@@ -248,7 +248,7 @@ object Kernel {
     /* 25 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 5, lm = now)
     /* 26 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 5, lm = now)
     /* 27 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 5, lm = now)
-    /* 28 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 1, lm = now)
+    /* 28 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 5, lm = now)
     /* 29 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 5, lm = now)
     /* 30 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 5, lm = now)
     /* 31 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 5, lm = now)
@@ -261,7 +261,8 @@ object Kernel {
     /* 35 */ ContractParametersPref.create(pt = 5, title = "Атоматически оповещать: SMS", sort = 1, script = "", flags = 7, lm = now)
     /* 36 */ ContractParametersPref.create(pt = 5, title = "Атоматически оповещать: Email", sort = 1, script = "", flags = 7, lm = now)
 
-    /* 37 */ ContractParametersPref.create(pt = 1, title = "MAC-адрес", sort = 1, script = "", flags = 5, lm = now)
+    /* 37 */ ContractParametersPref.create(pt = 1, title = "MAC-адрес", sort = 1, script = "", flags = 1, lm = now)
+    /* 38 */ ContractParametersPref.create(pt = 1, title = "Стоимость подключения", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -330,9 +331,7 @@ object Kernel {
   // Справочники -> Другие -> Домены
   //
   def domains(): Unit = {
-    /* 1 */ Domain.create(parentid = 0, title = "foo", comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
-    /* 2 */ Domain.create(parentid = 0, title = "bar", comment = "Quisque vitae efficitur risus")
-    /* 3 */ Domain.create(parentid = 2, title = "baz", comment = "Mauris eleifend non lorem quis sagittis")
+    loaders.Domains.load()
   }
 
   //--------------------------------------------------------------------------------------------------------------------

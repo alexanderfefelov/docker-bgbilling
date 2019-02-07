@@ -7,8 +7,6 @@ import scalikejdbc._
 
 object ContractParameterType7Values {
 
-  sql"alter table contract_parameter_type_7_values auto_increment = 1000".update.apply()
-
   def load(): Unit = {
     val json = Resource.getAsString("loaders/contractParameterType7Values.json")
     decode[ContractParameterType7ValueData](json) match {

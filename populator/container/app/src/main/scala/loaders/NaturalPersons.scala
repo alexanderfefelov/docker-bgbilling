@@ -45,6 +45,7 @@ object NaturalPersons {
             notification.notifyByPhone.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 35, value = x))
             notification.notifyByEmail.map(x => ContractActions.updateParameterType5(cid = np.id, pid = 36, value = x))
           }
+          ContractActions.updateParameterType1(cid = np.id, pid = 38, value = np.portingPriceOption.getOrElse("0"))
 
           groovyBinding.setProperty("id", np.id)
           val accountNumber = accountNumberGenerator.run()

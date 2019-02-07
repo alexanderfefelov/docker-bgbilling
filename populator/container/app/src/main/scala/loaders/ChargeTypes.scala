@@ -7,8 +7,6 @@ import scalikejdbc._
 
 object ChargeTypes {
 
-  sql"alter table contract_charge_types auto_increment = 1000".update.apply()
-
   def load(): Unit = {
     val json = Resource.getAsString("loaders/chargeTypes.json")
     decode[ChargeTypeData](json) match {

@@ -50,6 +50,7 @@ object LegalEntities {
             codes.okvedOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 27, value = x))
             codes.okpoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 28, value = x))
           }
+          ContractActions.updateParameterType1(cid = le.id, pid = 38, value = le.portingPriceOption.getOrElse("0"))
 
           groovyBinding.setProperty("id", le.id)
           val accountNumber = accountNumberGenerator.run()

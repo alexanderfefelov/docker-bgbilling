@@ -60,7 +60,8 @@
         "floorOption": 1,
         "doorOption": "5"
       },
-      "legalAddressIdOption": 10000
+      "legalAddressIdOption": 10000,
+      "portingPriceOption": "0"
     },
     {
       "id": 102,

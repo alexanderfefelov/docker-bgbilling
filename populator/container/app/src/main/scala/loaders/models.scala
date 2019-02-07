@@ -63,7 +63,8 @@ case class LegalEntity(
   phoneOption: Option[String],
   emailOption: Option[String],
   notificationOption: Option[Notification],
-  bankOption: Option[Bank]
+  bankOption: Option[Bank],
+  portingPriceOption: Option[String]
 )
 
 case class IdCard(
@@ -93,7 +94,8 @@ case class NaturalPerson(
   legalAddressIdOption: Option[Int],
   phoneOption: Option[String],
   emailOption: Option[String],
-  notificationOption: Option[Notification]
+  notificationOption: Option[Notification],
+  portingPriceOption: Option[String]
 )
 
 case class PaymentData(payments: Seq[Payment])
@@ -104,3 +106,6 @@ case class PaymentType(id: Int, title: String, parent: Int, kind: Int, flag: Int
 
 case class UserData(users: Seq[User])
 case class User(id: Int, login: String, password: String)
+
+case class DomainData(domains: Seq[Domain])
+case class Domain(id: Int, name: String, description: String)
