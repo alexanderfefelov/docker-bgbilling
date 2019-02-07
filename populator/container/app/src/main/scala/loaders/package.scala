@@ -17,7 +17,7 @@ package object loaders {
   implicit def boolean2Int(b:Boolean): Int = if (b) 1 else 0
 
   class ContractCake extends ContractServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
-    override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
+    override def baseAddress = new java.net.URI(soapServiceBaseAddress("contract-service"))
   }
   val contractService = new ContractCake().service
 
