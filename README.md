@@ -43,13 +43,13 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
     | Название | Язык
     |:---------|:----
-    | BeanShell Engine | BeanShell 2.0b5
-    | Graal.js | ECMAScript ECMA - 262 Edition 9
+    | BeanShell Engine        | BeanShell 2.0b5
+    | Graal.js                | ECMAScript ECMA - 262 Edition 9
     | Groovy Scripting Engine | Groovy 2.4.11
-    | JEXL Engine | JEXL 2.0
-    | Oracle Nashorn | ECMAScript ECMA - 262 Edition 5.1
-    | TruffleRuby | ruby 2.4.4
- 
+    | JEXL Engine             | JEXL 2.0
+    | Oracle Nashorn          | ECMAScript ECMA - 262 Edition 5.1
+    | TruffleRuby             | ruby 2.4.4
+
 * База данных
 
     Для MySQL реализована master-slave репликация. Для slave-серверов включен режим `super_read_only`.

@@ -292,6 +292,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 35)
     ContractParameterGroup.create(gid = 1, pid = 36)
     ContractParameterGroup.create(gid = 1, pid = 37)
+    ContractParameterGroup.create(gid = 1, pid = 38)
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
     ContractParameterGroup.create(gid = 2, pid = 2)
@@ -318,6 +319,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = 35)
     ContractParameterGroup.create(gid = 2, pid = 36)
     ContractParameterGroup.create(gid = 2, pid = 37)
+    ContractParameterGroup.create(gid = 2, pid = 38)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
