@@ -58,7 +58,14 @@ object Kernel {
   // Сервис -> Автоматизация -> Функции глобальных событий
   //
   def eventHandlers(): Unit = {
-    ScriptEventType.findAll().filter(_.eventId != "17").map { t =>
+    ScriptEventType.findAll().filter { x =>
+      !List(
+        "17",
+        "ru.bitel.bgbilling.kernel.event.events.ActionAfterEvent", // Deprecated
+        "ru.bitel.bgbilling.kernel.event.events.ActionBeforeEvent", // Deprecated
+        "ru.bitel.bgbilling.kernel.contract.balance.server.event.PaymentChangingEvent" // Deprecated
+      ).contains(x.eventId)
+    } map { t =>
       EventScriptLink.create(title = t.title,
         className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler",
         eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1
