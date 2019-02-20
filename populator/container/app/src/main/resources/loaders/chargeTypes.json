@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Возврат платежа",
       "parent": 0,
-      "kindId": 1,
+      "kind": 1,
       "flag": 0,
       "payback": true
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "title": "Возврат наличного платежа",
       "parent": 1,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "title": "Возврат безналичного платежа",
       "parent": 1,
-      "kindId": 1,
+      "kind": 1,
       "flag": 0,
       "payback": true
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "title": "Возврат PayAnyWay",
       "parent": 3,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -36,7 +36,7 @@
       "id": 5,
       "title": "Возврат ОСМП",
       "parent": 3,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -44,7 +44,7 @@
       "id": 6,
       "title": "Возврат Сбербанк Онлайн",
       "parent": 3,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -52,7 +52,7 @@
       "id": 7,
       "title": "Возврат на банковскую карту (офлайн)",
       "parent": 3,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -60,7 +60,7 @@
       "id": 8,
       "title": "Возврат банковского перевода",
       "parent": 3,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": true
     },
@@ -68,7 +68,7 @@
       "id": 9,
       "title": "Подключение",
       "parent": 0,
-      "kindId": 1,
+      "kind": 1,
       "flag": 0,
       "payback": false
     },
@@ -76,7 +76,7 @@
       "id": 10,
       "title": "Подключение юр. лица",
       "parent": 9,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": false
     },
@@ -84,7 +84,7 @@
       "id": 11,
       "title": "Подключение частного дома",
       "parent": 9,
-      "kindId": 0,
+      "kind": 0,
       "flag": 0,
       "payback": false
     },
@@ -92,7 +92,7 @@
       "id": 12,
       "title": "Бесплатный период",
       "parent": 0,
-      "kindId": 0,
+      "kind": 0,
       "flag": 1,
       "payback": false
     }
