@@ -26,11 +26,12 @@ object NaturalPersons {
           ContractActions.updateParameterType1(cid = np.id, pid = 1, value = np.login)
           ContractActions.updateParameterType1(cid = np.id, pid = 6, value = np.lastName)
           ContractActions.updateParameterType1(cid = np.id, pid = 7, value = np.firstName)
+          np.sexIdOption.map(x => ContractActions.updateListParameter(cid = np.id, pid = 39, value = x))
           np.middleNameOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 8, value = x))
           np.note1Option.map(x => ContractComment.create(cid = np.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
           np.note2Option.map(x => ContractComment.create(cid = np.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
           np.idCardOption.map { idCard =>
-            ContractActions.updateListParameter(cid = np.id, pid = 9, value = idCard.kind)
+            ContractActions.updateListParameter(cid = np.id, pid = 9, value = idCard.kindId)
             idCard.seriesOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = 10, value = x))
             ContractActions.updateParameterType1(cid = np.id, pid = 11, value = idCard.num)
             ContractActions.updateParameterType6(cid = np.id, pid = 12, value = idCard.date)

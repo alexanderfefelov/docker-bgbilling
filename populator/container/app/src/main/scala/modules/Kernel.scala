@@ -270,6 +270,8 @@ object Kernel {
 
     /* 37 */ ContractParametersPref.create(pt = 1, title = "MAC-адрес", sort = 1, script = "", flags = 1, lm = now)
     /* 38 */ ContractParametersPref.create(pt = 1, title = "Стоимость подключения", sort = 1, script = "", flags = 1, lm = now)
+
+    /* 39 */ ContractParametersPref.create(pt = 7, title = "Пол ", sort = 1, script = "", flags = 1, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -300,6 +302,7 @@ object Kernel {
     ContractParameterGroup.create(gid = 1, pid = 36)
     ContractParameterGroup.create(gid = 1, pid = 37)
     ContractParameterGroup.create(gid = 1, pid = 38)
+    ContractParameterGroup.create(gid = 1, pid = 39)
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
     ContractParameterGroup.create(gid = 2, pid = 1)
     ContractParameterGroup.create(gid = 2, pid = 2)

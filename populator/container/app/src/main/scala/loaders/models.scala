@@ -69,7 +69,7 @@ case class LegalEntity(
 )
 
 case class IdCard(
-  kind: Int,
+  kindId: Int,
   seriesOption: Option[String],
   num: String,
   date: DateTime,
@@ -84,6 +84,7 @@ case class NaturalPerson(
   firstName: String,
   lastName: String,
   middleNameOption: Option[String],
+  sexIdOption: Option[Int],
   login: String,
   password: String,
   note1Option: Option[String],
