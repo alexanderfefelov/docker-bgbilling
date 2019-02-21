@@ -44,7 +44,7 @@ object Main extends App {
   execute("Kernel.contractGroups", Kernel.contractGroups())
   execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes(json))
   execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes(json))
-  execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs())
+  execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs(config))
   execute("Kernel.contractParameterGroups", Kernel.contractParameterGroups())
   execute("Kernel.contractParameterType7Values", Kernel.contractParameterType7Values(json))
   execute("Kernel.domains", Kernel.domains(json))
