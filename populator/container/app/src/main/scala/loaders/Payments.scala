@@ -21,7 +21,7 @@ object Payments {
 
     val dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
 
-    decode[PaymentData](json) match {
+    decode[PaymentList](json) match {
       case Right(data) =>
         for (p <- data.payments) {
           val payment = com.github.alexanderfefelov.bgbilling.api.soap.kernel.Payment(comment = Some(p.comment), attributes = Map(

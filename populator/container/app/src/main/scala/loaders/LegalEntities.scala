@@ -14,7 +14,7 @@ import scala.concurrent.duration._
 object LegalEntities {
 
   def load(json: String): Unit = {
-    decode[LegalEntityData](json) match {
+    decode[LegalEntityList](json) match {
       case Right(data) =>
         for (le <- data.legalEntities) {
           sql"alter table contract auto_increment = ${le.id}".update.apply()

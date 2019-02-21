@@ -7,7 +7,7 @@ import scalikejdbc._
 object Domains {
 
   def load(json: String): Unit = {
-    decode[DomainData](json) match {
+    decode[DomainList](json) match {
       case Right(data) =>
         for (d <- data.domains) {
           sql"""insert into domain (id, parentid, title, comment) values (${d.id}, 0, ${d.name}, ${d.description})""".update.apply()

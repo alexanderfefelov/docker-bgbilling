@@ -2,17 +2,51 @@ package loaders
 
 import org.joda.time.DateTime
 
-case class AddressData(countries: Seq[Country])
-case class Country(id: Int, name: String, cities: Seq[City])
-case class City(id: Int, name: String, streets: Seq[Street])
-case class Street(id: Int, name: String, houses: Seq[House])
-case class House(id: Int, number: String, postalCodeOption: Option[String], captureDateOption: Option[DateTime])
+case class CountryList(countries: Seq[Country])
+case class Country(
+  id: Int,
+  name: String
+)
 
-case class ChargeTypeData(chargeTypes: Seq[ChargeType])
-case class ChargeType(id: Int, title: String, parent: Int, kind: Int, flag: Int, payback: Boolean)
+case class CityList(cities: Seq[City])
+case class City(
+  countryId: Int,
+  id: Int,
+  name: String
+)
 
-case class ContractParameterType7ValueData(contractParameterType7Values: Seq[ContractParameterType7Value])
-case class ContractParameterType7Value(id: Int, title: String, parent: Int)
+case class StreetList(streets: Seq[Street])
+case class Street(
+  cityId: Int,
+  id: Int,
+  name: String
+)
+
+case class HouseList(houses: Seq[House])
+case class House(
+  streetId: Int,
+  id: Int,
+  number: String,
+  postalCodeOption: Option[String],
+  captureDateOption: Option[DateTime]
+)
+
+case class ChargeTypeList(chargeTypes: Seq[ChargeType])
+case class ChargeType(
+  id: Int,
+  title: String,
+  parent: Int,
+  kind: Int,
+  flag: Int,
+  payback: Boolean
+)
+
+case class ContractParameterType7ValueList(contractParameterType7Values: Seq[ContractParameterType7Value])
+case class ContractParameterType7Value(
+  id: Int,
+  title: String,
+  parent: Int
+)
 
 case class ServiceAddress(
   houseId: Int,
@@ -45,7 +79,7 @@ case class Codes(
   okpoOption: Option[String]
 )
 
-case class LegalEntityData(legalEntities: Seq[LegalEntity])
+case class LegalEntityList(legalEntities: Seq[LegalEntity])
 case class LegalEntity(
   id: Int,
   contractNo: String,
@@ -76,7 +110,8 @@ case class IdCard(
   deptCodeOption: Option[String],
   deptName: String
 )
-case class NaturalPersonData(naturalPersons: Seq[NaturalPerson])
+
+case class NaturalPersonList(naturalPersons: Seq[NaturalPerson])
 case class NaturalPerson(
   id: Int,
   contractNo: String,
@@ -101,14 +136,35 @@ case class NaturalPerson(
   domainIdOption: Option[Int]
 )
 
-case class PaymentData(payments: Seq[Payment])
-case class Payment(typeId: Int, contractId: Int, date: DateTime, amount: Double, comment: String, operatorId: Int)
+case class PaymentList(payments: Seq[Payment])
+case class Payment(
+  typeId: Int,
+  contractId: Int,
+  date: DateTime,
+  amount: Double,
+  comment: String,
+  operatorId: Int
+)
 
-case class PaymentTypeData(paymentTypes: Seq[PaymentType])
-case class PaymentType(id: Int, title: String, parent: Int, kind: Int, flag: Int)
+case class PaymentTypeList(paymentTypes: Seq[PaymentType])
+case class PaymentType(
+  id: Int,
+  title: String,
+  parent: Int,
+  kind: Int,
+  flag: Int
+)
 
-case class UserData(users: Seq[User])
-case class User(id: Int, login: String, password: String)
+case class UserList(users: Seq[User])
+case class User(
+  id: Int,
+  login: String,
+  password: String
+)
 
-case class DomainData(domains: Seq[Domain])
-case class Domain(id: Int, name: String, description: String)
+case class DomainList(domains: Seq[Domain])
+case class Domain(
+  id: Int,
+  name: String,
+  description: String
+)
