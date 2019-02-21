@@ -1,14 +1,12 @@
 package loaders
 
-import better.files.Resource
 import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
 object ChargeTypes {
 
-  def load(): Unit = {
-    val json = Resource.getAsString("loaders/chargeTypes.json")
+  def load(json: String): Unit = {
     decode[ChargeTypeData](json) match {
       case Right(data) =>
         for (ct <- data.chargeTypes) {

@@ -7,6 +7,7 @@ lazy val apiV = "0.1.0-SNAPSHOT"
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.10",
   "com.github.pathikrit" %% "better-files" % "3.5.0",
+  "com.typesafe" % "config" % "1.3.3",
   "io.circe" %% "circe-core" % "0.9.3",
   "io.circe" %% "circe-generic" % "0.9.3",
   "io.circe" %% "circe-parser" % "0.9.3",

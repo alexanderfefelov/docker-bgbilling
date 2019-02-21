@@ -1,6 +1,5 @@
 package loaders
 
-import better.files.Resource
 import com.github.alexanderfefelov.bgbilling.api.action.kernel.ContractActions
 import com.github.alexanderfefelov.bgbilling.api.db.repository.ContractComment
 import io.circe.generic.auto._
@@ -14,8 +13,7 @@ import scala.concurrent.duration._
 
 object NaturalPersons {
 
-  def load(): Unit = {
-    val json = Resource.getAsString("loaders/naturalPersons.json")
+  def load(json: String): Unit = {
     decode[NaturalPersonData](json) match {
       case Right(data) =>
         for (np <- data.naturalPersons) {

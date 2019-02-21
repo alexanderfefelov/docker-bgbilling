@@ -1,14 +1,12 @@
 package loaders
 
-import better.files.Resource
 import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
 object PaymentTypes {
 
-  def load(): Unit = {
-    val json = Resource.getAsString("loaders/paymentTypes.json")
+  def load(json: String): Unit = {
     decode[PaymentTypeData](json) match {
       case Right(data) =>
         for (pt <- data.paymentTypes) {

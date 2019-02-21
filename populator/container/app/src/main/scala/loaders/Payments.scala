@@ -1,6 +1,5 @@
 package loaders
 
-import better.files.Resource
 import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
 import io.circe.generic.auto._
@@ -14,7 +13,7 @@ import scala.concurrent.duration._
 
 object Payments {
 
-  def load(): Unit = {
+  def load(json: String): Unit = {
     class PaymentCake extends PaymentServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
       override def baseAddress = new java.net.URI(soapServiceBaseAddress("payment-service"))
     }
@@ -22,7 +21,6 @@ object Payments {
 
     val dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ssZZ"
 
-    val json = Resource.getAsString("loaders/payments.json")
     decode[PaymentData](json) match {
       case Right(data) =>
         for (p <- data.payments) {

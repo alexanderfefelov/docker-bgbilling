@@ -1,6 +1,5 @@
 package loaders
 
-import better.files.Resource
 import com.github.alexanderfefelov.bgbilling.api.action.kernel.AdminActions
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -8,8 +7,7 @@ import scalikejdbc._
 
 object Addresses {
 
-  def load(): Unit = {
-    val json = Resource.getAsString("loaders/addresses.json")
+  def load(json: String): Unit = {
     decode[AddressData](json) match {
       case Right(data) =>
         for (country <- data.countries) {

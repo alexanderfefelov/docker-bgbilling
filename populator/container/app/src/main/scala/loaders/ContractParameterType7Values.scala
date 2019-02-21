@@ -1,14 +1,12 @@
 package loaders
 
-import better.files.Resource
 import io.circe.generic.auto._
 import io.circe.parser._
 import scalikejdbc._
 
 object ContractParameterType7Values {
 
-  def load(): Unit = {
-    val json = Resource.getAsString("loaders/contractParameterType7Values.json")
+  def load(json: String): Unit = {
     decode[ContractParameterType7ValueData](json) match {
       case Right(data) =>
         for (v <- data.contractParameterType7Values) {

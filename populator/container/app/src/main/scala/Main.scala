@@ -4,6 +4,7 @@ import better.files._
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
+import com.typesafe.config.{ConfigFactory, ConfigRenderOptions}
 import loaders._
 import modules._
 import org.joda.time.{DateTime, Seconds}
@@ -30,21 +31,23 @@ object Main extends App {
     System.out.println(duration)
   }
 
-
   Db.init()
+
+  val config = ConfigFactory.parseFile(new java.io.File("main/src/resources/loaders.conf"))
+  val json = config.root().render(ConfigRenderOptions.concise())
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
   execute("moduleConfigs", moduleConfigs())
-  execute("Kernel.users", Kernel.users())
+  execute("Kernel.users", Kernel.users(json))
   execute("Kernel.bgsGroups", Kernel.bgsGroups())
-  execute("Kernel.addresses", Kernel.addresses())
+  execute("Kernel.addresses", Kernel.addresses(json))
   execute("Kernel.contractGroups", Kernel.contractGroups())
-  execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes())
-  execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes())
+  execute("Kernel.contractPaymentTypes", Kernel.contractPaymentTypes(json))
+  execute("Kernel.contractChargeTypes", Kernel.contractChargeTypes(json))
   execute("Kernel.contractParametersPrefs", Kernel.contractParametersPrefs())
   execute("Kernel.contractParameterGroups", Kernel.contractParameterGroups())
-  execute("Kernel.contractParameterType7Values", Kernel.contractParameterType7Values())
-  execute("Kernel.domains", Kernel.domains())
+  execute("Kernel.contractParameterType7Values", Kernel.contractParameterType7Values(json))
+  execute("Kernel.domains", Kernel.domains(json))
   execute("Kernel.contractCommentPatterns", Kernel.contractCommentPatterns())
   execute("Kernel.contractPatterns", Kernel.contractPatterns())
   execute("Kernel.entitySpecs", Kernel.entitySpecs())
@@ -73,8 +76,8 @@ object Main extends App {
   execute("Kernel.tariffOptions", Kernel.tariffOptions())
   execute("Kernel.tariffs", Kernel.tariffs())
   execute("Kernel.tariffGroups", Kernel.tariffGroups())
-  execute("Kernel.contracts", Kernel.contracts())
-  execute("Kernel.payments", Kernel.payments())
+  execute("Kernel.contracts", Kernel.contracts(json))
+  execute("Kernel.payments", Kernel.payments(json))
 
   execute("Rscm.transactions", Rscm.transactions())
   execute("Kernel.contractStatuses", Kernel.contractStatuses())
