@@ -25,9 +25,9 @@ object LegalEntities {
           ContractActions.updateParameterType1(cid = le.id, pid = 18, value = le.name)
           le.note1Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 1", comment = x.trim, dt = DateTime.now, visibled = false))
           le.note2Option.map(x => ContractComment.create(cid = le.id, uid = 0, subject = "Заметка 2", comment = x.trim, dt = DateTime.now, visibled = true))
-          le.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
-          le.legalAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 19, hid = x, pod = 0, floor = 0, flat = ""))
-          le.billingAddressIdOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 22, hid = x, pod = 0, floor = 0, flat = ""))
+          le.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 3, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse(""), room = x.roomOption.getOrElse("")))
+          le.legalAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 19, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse(""), room = x.roomOption.getOrElse("")))
+          le.billingAddressOption.map(x => ContractActions.updateAddressInfo(cid = le.id, pid = 22, hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse(""), room = x.roomOption.getOrElse("")))
           le.phoneOption.map(x => ContractActions.updatePhoneInfo(cid = le.id, pid = 4, phone = x))
           le.emailOption.map(x => ContractActions.updateEmailInfo(cid = le.id, pid = 5, email = x))
           le.notificationOption.map { notification =>
@@ -42,7 +42,7 @@ object LegalEntities {
             bank.ksOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 31, value = x))
             bank.rsOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 32, value = x))
           }
-          le.budgetaryOption.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 20, value = x))
+          le.stateEntityOption.map(x => ContractActions.updateParameterType5(cid = le.id, pid = 20, value = x))
           le.codesOption.map { codes =>
             codes.innOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 21, value = x))
             codes.kppOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = 23, value = x))

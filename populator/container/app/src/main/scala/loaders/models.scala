@@ -48,12 +48,17 @@ case class ContractParameterType7Value(
   parent: Int
 )
 
-case class ServiceAddress(
+case class Address(
   houseId: Int,
+  doorOption: Option[String],
   entranceOption: Option[Int],
   floorOption: Option[Int],
-  doorOption: Option[String]
+  roomOption: Option[String]
 )
+
+import loaders.{Address => ServiceAddress}
+import loaders.{Address => LegalAddress}
+import loaders.{Address => BillingAddress}
 
 case class Notification(
   notificationPhoneOption: Option[String],
@@ -90,10 +95,10 @@ case class LegalEntity(
   note1Option: Option[String],
   note2Option: Option[String],
   serviceAddressOption: Option[ServiceAddress],
-  legalAddressIdOption: Option[Int],
-  billingAddressIdOption: Option[Int],
+  legalAddressOption: Option[LegalAddress],
+  billingAddressOption: Option[BillingAddress],
   codesOption: Option[Codes],
-  budgetaryOption: Option[Boolean],
+  stateEntityOption: Option[Boolean],
   phoneOption: Option[String],
   emailOption: Option[String],
   notificationOption: Option[Notification],
@@ -103,9 +108,9 @@ case class LegalEntity(
 )
 
 case class IdCard(
-  kind: Int,
+  typ: Int,
   seriesOption: Option[String],
-  num: String,
+  number: String,
   date: DateTime,
   deptCodeOption: Option[String],
   deptName: String
@@ -119,7 +124,7 @@ case class NaturalPerson(
   firstName: String,
   lastName: String,
   middleNameOption: Option[String],
-  sexIdOption: Option[Int],
+  sexOption: Option[Int],
   login: String,
   password: String,
   note1Option: Option[String],
@@ -128,7 +133,7 @@ case class NaturalPerson(
   birthDateOption: Option[DateTime],
   birthPlaceOption: Option[String],
   serviceAddressOption: Option[ServiceAddress],
-  legalAddressIdOption: Option[Int],
+  legalAddressOption: Option[LegalAddress],
   phoneOption: Option[String],
   emailOption: Option[String],
   notificationOption: Option[Notification],
