@@ -33,8 +33,7 @@ object Main extends App {
 
   val config = ConfigFactory.parseFile(new java.io.File("src/main/resources/loaders.conf")).resolve()
   val json = config.root().render(ConfigRenderOptions.concise())
-  println(json)
-/*
+
   Db.init()
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
@@ -83,7 +82,7 @@ object Main extends App {
   execute("Rscm.transactions", Rscm.transactions())
   execute("Kernel.contractStatuses", Kernel.contractStatuses())
   execute("Kernel.contractTariffs", Kernel.contractTariffs())
-*/
+
   println("Finished. Press Ctrl+C")
 
   private def alterTables(): Unit = {
