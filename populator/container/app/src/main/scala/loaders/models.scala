@@ -69,7 +69,7 @@ case class LegalEntity(
 )
 
 case class IdCard(
-  typeId: Int,
+  kind: Int,
   seriesOption: Option[String],
   num: String,
   date: DateTime,

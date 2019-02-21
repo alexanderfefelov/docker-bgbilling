@@ -4,7 +4,7 @@ import better.files._
 import com.github.alexanderfefelov.bgbilling.api.db.repository._
 import com.github.alexanderfefelov.bgbilling.api.db.util.Db
 import com.github.alexanderfefelov.bgbilling.api.soap.util.ApiSoapConfig
-import com.typesafe.config.{ConfigFactory, ConfigRenderOptions}
+import com.typesafe.config.{ConfigFactory, ConfigParseOptions, ConfigRenderOptions, ConfigSyntax}
 import loaders._
 import modules._
 import org.joda.time.{DateTime, Seconds}
@@ -31,10 +31,11 @@ object Main extends App {
     System.out.println(duration)
   }
 
-  Db.init()
-
-  val config = ConfigFactory.parseFile(new java.io.File("main/src/resources/loaders.conf"))
+  val config = ConfigFactory.parseFile(new java.io.File("src/main/resources/loaders.conf")).resolve()
   val json = config.root().render(ConfigRenderOptions.concise())
+  println(json)
+/*
+  Db.init()
 
   execute("Kernel.dynamicCodeRecompile", Kernel.dynamicCodeRecompile())
   execute("moduleConfigs", moduleConfigs())
@@ -82,7 +83,7 @@ object Main extends App {
   execute("Rscm.transactions", Rscm.transactions())
   execute("Kernel.contractStatuses", Kernel.contractStatuses())
   execute("Kernel.contractTariffs", Kernel.contractTariffs())
-
+*/
   println("Finished. Press Ctrl+C")
 
   private def alterTables(): Unit = {
