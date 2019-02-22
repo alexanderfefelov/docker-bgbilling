@@ -51,9 +51,9 @@ case class ContractParameterType7Value(
 case class Address(
   houseId: Int,
   doorOption: Option[String],
+  roomOption: Option[String],
   entranceOption: Option[Int],
-  floorOption: Option[Int],
-  roomOption: Option[String]
+  floorOption: Option[Int]
 )
 
 import loaders.{Address => ServiceAddress}

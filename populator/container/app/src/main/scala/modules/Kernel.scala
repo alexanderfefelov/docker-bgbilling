@@ -214,7 +214,7 @@ object Kernel {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - параметры
   //
-  def contractParametersPrefs(config: Config): Unit = {
+  def contractParametersPrefs(): Unit = {
     // flags:
     //   1 - история
     //   2 - правка в ЛК
@@ -272,59 +272,59 @@ object Kernel {
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Другие -> Договоры - группы параметров
   //
-  def contractParameterGroups(): Unit = {
+  def contractParameterGroups(config: Config): Unit = {
     /* 1 */ ContractParameterGroupName.create("Физ. лицо")
-    ContractParameterGroup.create(gid = 1, pid = 1)
-    ContractParameterGroup.create(gid = 1, pid = 2)
-    ContractParameterGroup.create(gid = 1, pid = 3)
-    ContractParameterGroup.create(gid = 1, pid = 4)
-    ContractParameterGroup.create(gid = 1, pid = 5)
-    ContractParameterGroup.create(gid = 1, pid = 6)
-    ContractParameterGroup.create(gid = 1, pid = 7)
-    ContractParameterGroup.create(gid = 1, pid = 8)
-    ContractParameterGroup.create(gid = 1, pid = 9)
-    ContractParameterGroup.create(gid = 1, pid = 10)
-    ContractParameterGroup.create(gid = 1, pid = 11)
-    ContractParameterGroup.create(gid = 1, pid = 12)
-    ContractParameterGroup.create(gid = 1, pid = 13)
-    ContractParameterGroup.create(gid = 1, pid = 14)
-    ContractParameterGroup.create(gid = 1, pid = 15)
-    ContractParameterGroup.create(gid = 1, pid = 16)
-    ContractParameterGroup.create(gid = 1, pid = 17)
-    ContractParameterGroup.create(gid = 1, pid = 18)
-    ContractParameterGroup.create(gid = 1, pid = 19)
-    ContractParameterGroup.create(gid = 1, pid = 20)
-    ContractParameterGroup.create(gid = 1, pid = 21)
-    ContractParameterGroup.create(gid = 1, pid = 22)
-    ContractParameterGroup.create(gid = 1, pid = 23)
-    ContractParameterGroup.create(gid = 1, pid = 24)
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_LOGIN"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ACCOUNT_NUMBER"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_SERVICE_ADDRESS"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_LEGAL_ADDRESS"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_PHONE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_EMAIL"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_NOTIFICATION_PHONE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_NOTIFICATION_EMAIL"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_NOTIFY_BY_PHONE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_NOTIFY_BY_EMAIL"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_MAC_ADDRESS"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_PORTING_PRICE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_LAST_NAME"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_FIRST_NAME"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_MIDDLE_NAME"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_SEX"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_TYPE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_SERIES"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_NUMBER"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_DATE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_DEPT_CODE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_ID_CARD_DEPT_NAME"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_BIRTH_DATE"))
+    ContractParameterGroup.create(gid = 1, pid = config.getInt("CONTRACT_PARAMETER_BIRTH_PLACE"))
     /* 2 */ ContractParameterGroupName.create("Юр. лицо")
-    ContractParameterGroup.create(gid = 2, pid = 1)
-    ContractParameterGroup.create(gid = 2, pid = 2)
-    ContractParameterGroup.create(gid = 2, pid = 3)
-    ContractParameterGroup.create(gid = 2, pid = 4)
-    ContractParameterGroup.create(gid = 2, pid = 5)
-    ContractParameterGroup.create(gid = 2, pid = 6)
-    ContractParameterGroup.create(gid = 2, pid = 7)
-    ContractParameterGroup.create(gid = 2, pid = 8)
-    ContractParameterGroup.create(gid = 2, pid = 9)
-    ContractParameterGroup.create(gid = 2, pid = 10)
-    ContractParameterGroup.create(gid = 2, pid = 11)
-    ContractParameterGroup.create(gid = 2, pid = 12)
-    ContractParameterGroup.create(gid = 2, pid = 25)
-    ContractParameterGroup.create(gid = 2, pid = 26)
-    ContractParameterGroup.create(gid = 2, pid = 27)
-    ContractParameterGroup.create(gid = 2, pid = 28)
-    ContractParameterGroup.create(gid = 2, pid = 29)
-    ContractParameterGroup.create(gid = 2, pid = 30)
-    ContractParameterGroup.create(gid = 2, pid = 31)
-    ContractParameterGroup.create(gid = 2, pid = 32)
-    ContractParameterGroup.create(gid = 2, pid = 33)
-    ContractParameterGroup.create(gid = 2, pid = 34)
-    ContractParameterGroup.create(gid = 2, pid = 35)
-    ContractParameterGroup.create(gid = 2, pid = 36)
-    ContractParameterGroup.create(gid = 2, pid = 37)
-    ContractParameterGroup.create(gid = 2, pid = 38)
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_LOGIN"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_ACCOUNT_NUMBER"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_SERVICE_ADDRESS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_LEGAL_ADDRESS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_PHONE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_EMAIL"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_NOTIFICATION_PHONE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_NOTIFICATION_EMAIL"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_NOTIFY_BY_PHONE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_NOTIFY_BY_EMAIL"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_MAC_ADDRESS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_PORTING_PRICE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_NAME"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_STATE_ENTITY"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_INN"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BILLING_ADDRESS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_KPP"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OGRN"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKATO"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKTMO"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKVED"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKPO"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_BIK"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_NAME"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_KS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_RS"))
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -585,9 +585,9 @@ object Kernel {
   //--------------------------------------------------------------------------------------------------------------------
   // Договор -> Новый договор
   //
-  def contracts(json: String): Unit = {
-    NaturalPersons.load(json)
-    LegalEntities.load(json)
+  def contracts(config: Config, json: String): Unit = {
+    NaturalPersons.load(config, json)
+    LegalEntities.load(config, json)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
