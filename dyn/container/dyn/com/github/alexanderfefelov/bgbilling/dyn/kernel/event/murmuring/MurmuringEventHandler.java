@@ -1,14 +1,18 @@
 package com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring;
 
 import com.github.alexanderfefelov.bgbilling.dyn.framework.Loggable;
-import ru.bitel.bgbilling.kernel.contract.api.common.event.*;
-import ru.bitel.bgbilling.kernel.contract.balance.server.event.*;
+import ru.bitel.bgbilling.kernel.contract.api.common.event.ContractPasswordChangedEvent;
+import ru.bitel.bgbilling.kernel.contract.balance.server.event.ChargeEvent;
+import ru.bitel.bgbilling.kernel.contract.balance.server.event.PaymentDeletedEvent;
+import ru.bitel.bgbilling.kernel.contract.balance.server.event.PaymentEvent;
 import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.event.events.*;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
-import ru.bitel.bgbilling.kernel.tariff.option.server.event.*;
-import ru.bitel.bgbilling.modules.rscm.server.event.*;
-import ru.bitel.bgbilling.plugins.helpdesk.server.bean.event.*;
+import ru.bitel.bgbilling.kernel.tariff.option.server.event.TariffOptionActivatedEvent;
+import ru.bitel.bgbilling.kernel.tariff.option.server.event.TariffOptionBeforeActivateEvent;
+import ru.bitel.bgbilling.kernel.tariff.option.server.event.TariffOptionListAvailableEvent;
+import ru.bitel.bgbilling.modules.rscm.server.event.RSCMContractServiceUpdateEvent;
+import ru.bitel.bgbilling.plugins.helpdesk.server.bean.event.TopicWasUpdatedEvent;
 import ru.bitel.bgbilling.server.util.Setup;
 import ru.bitel.common.logging.NestedContext;
 import ru.bitel.common.sql.ConnectionSet;
@@ -24,12 +28,6 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                 // ru.bitel.bgbilling.kernel.event.events
                 //
 
-                case ActionAfterEvent:
-                    onActionAfterEvent((ActionAfterEvent) event, setup, connectionSet);
-                    break;
-                case ActionBeforeEvent:
-                    onActionBeforeEvent((ActionBeforeEvent) event, setup, connectionSet);
-                    break;
                 case AdditionalActionEvent:
                     onAdditionalActionEvent((AdditionalActionEvent) event, setup, connectionSet);
                     break;
@@ -119,32 +117,12 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
                     onChargeEvent((ChargeEvent) event, setup, connectionSet);
                     break;
 
-                case ContractBalanceChangedEvent:
-                    onContractBalanceChangedEvent((ContractBalanceChangedEvent) event, setup, connectionSet);
-                    break;
-
-                case ConvergenceBalanceEvent:
-                    onConvergenceBalanceEvent((ConvergenceBalanceEvent) event, setup, connectionSet);
-                    break;
-
-                case PaymentChangingEvent:
-                    onPaymentChangingEvent((PaymentChangingEvent) event, setup, connectionSet);
-                    break;
-
                 case PaymentDeletedEvent:
                     onPaymentDeletedEvent((PaymentDeletedEvent) event, setup, connectionSet);
                     break;
 
                 case PaymentEvent:
                     onPaymentEvent((PaymentEvent) event, setup, connectionSet);
-                    break;
-
-                case ReserveCloseEvent:
-                    onReserveCloseEvent((ReserveCloseEvent) event, setup, connectionSet);
-                    break;
-
-                case ReserveEvent:
-                    onReserveEvent((ReserveEvent) event, setup, connectionSet);
                     break;
 
                 // ru.bitel.bgbilling.modules.rscm.server.event
@@ -199,14 +177,6 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
 
     // ru.bitel.bgbilling.kernel.event.events
     //
-
-    private void onActionAfterEvent(ActionAfterEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
-    private void onActionBeforeEvent(ActionBeforeEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
 
     private void onAdditionalActionEvent(AdditionalActionEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
@@ -323,31 +293,11 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
         logger().trace("onEvent: " + event.toString());
     }
 
-    private void onContractBalanceChangedEvent(ContractBalanceChangedEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
-    private void onConvergenceBalanceEvent(ConvergenceBalanceEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
-    private void onPaymentChangingEvent(PaymentChangingEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
     private void onPaymentDeletedEvent(PaymentDeletedEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
 
     private void onPaymentEvent(PaymentEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
-    private void onReserveCloseEvent(ReserveCloseEvent event, Setup setup, ConnectionSet connectionSet) {
-        logger().trace("onEvent: " + event.toString());
-    }
-
-    private void onReserveEvent(ReserveEvent event, Setup setup, ConnectionSet connectionSet) {
         logger().trace("onEvent: " + event.toString());
     }
 
@@ -388,89 +338,74 @@ public class MurmuringEventHandler extends EventScriptBase implements Loggable {
     }
 
     enum CLAZZ {
-        // ru.bitel.bgbilling.kernel.event.events
-        // --------------------------------------
-        ActionAfterEvent,
-        ActionBeforeEvent,
-        // ActionEvent
         AdditionalActionEvent,
-        // AppsEvent
         BeforeServiceDeleteEvent,
+        BillCreatedEvent,
         CalculateEvent,
         CancelTariffEvent,
+        CardPubActivateEvent,
         ChangeContractLimitEvent,
         ChangeTariffByTaskEvent,
+        ChargeEvent,
         ContractAddingSubEvent,
         ContractAddObjectEvent,
         ContractCreatedEvent,
         ContractDeleteObjectEvent,
         ContractLimitUserLow,
-        // ContractObjectParameterBeforeUpdateEvent
-        // ContractObjectParameterUpdateEvent
+        ContractNpayChangedEvent,
+        ContractObjectParameterBeforeUpdateEvent,
+        ContractObjectParameterUpdateEvent,
         ContractParamBeforeChangeEvent,
         ContractParamChangedEvent,
-        // ContractServicesChangedEvent
-        // ContractSetStatusLogicEvent
-        // ContractStatusChangedEvent
-        // ContractStatusChangedTopicEvent
-        // ContractStatusChangingEvent
-        // ContractStatusModifiedEvent
+        ContractPasswordChangedEvent,
+        ContractServicesChangedEvent,
+        ContractSetStatusLogicEvent,
+        ContractStatusChangedEvent,
+        ContractStatusChangingEvent,
         ContractTariffDeleteEvent,
         ContractTariffUpdateEvent,
-        // ContractUpdateObjectEvent
+        ContractUpdateObjectEvent,
         ContractWebLoginEvent,
+        DebetStatusManageAfterOpen,
+        DebetStatusManageOpenGetAdditionalCharge,
+        DispatchSubscriptionEvent,
         GetAdditionalActionListEvent,
         GetAdditionalWebActionListEvent,
         GetChangeTariffDatesEvent,
         GetContractCardsList,
         GetContractStatusChangeDatesEvent,
         GetTariffListEvent,
+        InetAccountingPeriodActivateEvent,
+        InetServChangingEvent,
+        InvoiceCreatedEvent,
         LimitChangedEvent,
-        // OnContractWrapEvent
-        // PersonalTariffDeleteEvent
-        // PersonalTariffTreeUpdateEvent
-        // PersonalTariffUpdateEvent
-        ServerStartEvent,
-        ServiceUpdateEvent,
-        TimerEvent,
-        ValidateTextParamEvent,
-
-        // ru.bitel.bgbilling.kernel.contract.balance.server.event
-        // -------------------------------------------------------
-        ChargeEvent,
-        ContractBalanceChangedEvent,
-        ConvergenceBalanceEvent,
-        PaymentChangingEvent,
+        MPSBeforePaymentEvent,
+        MPSBeforeRequestEvent,
+        MPSOSMPRequestEvent,
+        MPSSbrfSumEvent,
+        OnContractWrapEvent,
         PaymentDeletedEvent,
         PaymentEvent,
-        ReserveCloseEvent,
-        ReserveEvent,
-
-        // ru.bitel.bgbilling.modules.rscm.server.event
-        // --------------------------------------------
+        PersonalTariffDeleteEvent,
+        PersonalTariffTreeUpdateEvent,
+        PersonalTariffUpdateEvent,
+        ProductOfferingListEvent,
+        RadiusAccessRequestEvent,
         RSCMContractServiceUpdateEvent,
-
-        // ru.bitel.bgbilling.kernel.contract.api.common.event
-        // ---------------------------------------------------
-        // ContractGroupModifiedEvent
-        // ContractModifiedEvent
-        // ContractParameterGroupAttrModifiedEvent
-        // ContractParameterGroupModifiedEvent
-        // ContractParameterListItemModifiedEvent
-        ContractPasswordChangedEvent,
-
-        // ru.bitel.bgbilling.kernel.tariff.option.server.event
-        // ----------------------------------------------------
-        // ContractTariffOptionChangedEvent
+        ServerStartEvent,
+        ServiceUpdateEvent,
+        SubscriptionActivateEvent,
+        SubscriptionRegistrationPeriodEndEvent,
+        SubscriptionUpdateEvent,
         TariffOptionActivatedEvent,
         TariffOptionBeforeActivateEvent,
-        // TariffOptionDeactivatedEvent
-        // TariffOptionDeactivateEvent
+        TariffOptionDeactivatedEvent,
         TariffOptionListAvailableEvent,
-
-        // ru.bitel.bgbilling.plugins.helpdesk.server.bean.event
-        // -----------------------------------------------------
-        TopicWasUpdatedEvent
+        TimerEvent,
+        TopicWasUpdatedEvent,
+        TopicWillBeCreated,
+        ValidateTextParamEvent,
+        WiFiActivateEvent
     }
 
     private static final String LOG_CONTEXT = "murmuring";
