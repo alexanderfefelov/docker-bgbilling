@@ -352,115 +352,86 @@ object Kernel {
       }
     }
 
-    // Интернет-1
-    //
-    var title = "Интернет-1 (50 Мбит/с, первый день бесплатно)"
-    var tariffIdTreeId = TariffActions.addTariffPlan(used = true)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
-    // Создаем тарифное поддерево модуля inet
-    //
-    var moduleId = TariffActions.bgBillingModuleId("inet")
-    var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
-    var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
-    // Добавляем типы трафика
-    //
-    var trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
-    TariffActions.modifTariffNode_update(id = trafficTypeId, data = "trafficTypeId&0,1,2")
-    // Добавляем услугу
-    //
-    var serviceId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "serviceSet")
-    TariffActions.modifTariffNode_update(id = serviceId, data = "serviceId&1")
-    // Добавляем стоимости трафика
-    //
-    var costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "type&3%col&1%cost&0.0")
-    costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
-    // Добавляем Inet-опции
-    //
-    var inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-    TariffActions.modifTariffNode_update(id = inetOptionId, data = "inetOptionId&2")
-    inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-    TariffActions.modifTariffNode_update(id = inetOptionId, data = "inetOptionId&6")
-    // Создаем тарифное поддерево модуля npay
-    //
-    moduleId = TariffActions.bgBillingModuleId("npay")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
-    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
-    // Создаем помесячную абонентскую плату
-    //
-    var monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
-    TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
-    // Добавляем стоимость
-    //
-    var monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
-    TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&500.0%type&1")
-    // Добавляем тарифную опцию и стоимость для неё
-    //
-    var tariffOptionId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_option")
-    TariffActions.modifTariffNode_update(id = tariffOptionId, data = "add&0%mode&0%option&1")
-    var tariffOptionCostId = TariffActions.modifTariffNode_create(parent = tariffOptionId, mtree_id = mtreeId, typ = "month_cost")
-    TariffActions.modifTariffNode_update(id = tariffOptionCostId, data = "cost&0.0%type&0")
-    // Добавляем метку
-    //
-    TariffLabelLink.create(tariffId = 1, labelId = 1)
+    def createInternetPlan(title: String, price: Int, option1Id: Int, option2Id: Int, config: String = "") = {
+      val tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+      TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = s"$config", mask = "", tpused = true)
+      // Создаем тарифное поддерево модуля inet
+      //
+      var moduleId = TariffActions.bgBillingModuleId("inet")
+      var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id // ActionCreateMtree не возвращает идентификатор созданного объекта, поэтому обращаемся напрямую к БД
+      var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+      // Добавляем типы трафика
+      //
+      var trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
+      TariffActions.modifTariffNode_update(id = trafficTypeId, data = "trafficTypeId&0,1,2")
+      // Добавляем услугу
+      //
+      var serviceId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "serviceSet")
+      TariffActions.modifTariffNode_update(id = serviceId, data = "serviceId&1")
+      // Добавляем стоимости трафика
+      //
+      var costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+      TariffActions.modifTariffNode_update(id = costId, data = "type&3%col&1%cost&0.0")
+      costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
+      TariffActions.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
+      // Добавляем Inet-опции
+      //
+      var inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+      TariffActions.modifTariffNode_update(id = inetOptionId, data = s"inetOptionId&$option1Id")
+      inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+      TariffActions.modifTariffNode_update(id = inetOptionId, data = s"inetOptionId&$option2Id")
+      // Создаем тарифное поддерево модуля npay
+      //
+      moduleId = TariffActions.bgBillingModuleId("npay")
+      mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
+      rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+      // Создаем помесячную абонентскую плату
+      //
+      var monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
+      TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
+      // Добавляем период
+      //
+      var periodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "period")
+      TariffActions.modifTariffNode_update(id = periodId, data = "date1&01.07.2018%date2&30.06.2019")
+      // Добавляем стоимость
+      //
+      var monthCostId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "month_cost")
+      TariffActions.modifTariffNode_update(id = monthCostId, data = s"cost&$price%type&1")
+    }
 
-    // Интернет-2
-    //
-    title = "Интернет-2 (100 Мбит/с, первый день бесплатно)"
-    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
-    TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
-    // Создаем тарифное поддерево модуля inet
-    //
-    moduleId = TariffActions.bgBillingModuleId("inet")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
-    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
-    // Добавляем типы трафика
-    //
-    trafficTypeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "trafficType")
-    TariffActions.modifTariffNode_update(id = trafficTypeId, data = "trafficTypeId&0,1,2")
-    // Добавляем услугу
-    //
-    serviceId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "serviceSet")
-    TariffActions.modifTariffNode_update(id = serviceId, data = "serviceId&1")
-    // Добавляем стоимости трафика
-    //
-    costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "type&3%col&1%cost&0.0")
-    costId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "cost")
-    TariffActions.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
-    // Добавляем Inet-опции
-    //
-    inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-    TariffActions.modifTariffNode_update(id = inetOptionId, data = "inetOptionId&3")
-    inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-    TariffActions.modifTariffNode_update(id = inetOptionId, data = "inetOptionId&5")
-    // Создаем тарифное поддерево модуля npay
-    //
-    moduleId = TariffActions.bgBillingModuleId("npay")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
-    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
-    // Создаем помесячную абонентскую плату
-    //
-    monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
-    TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
-    // Добавляем стоимость
-    //
-    monthCostId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_cost")
-    TariffActions.modifTariffNode_update(id = monthCostId, data = "cost&1000.0%type&1")
-    // Добавляем тарифную опцию и стоимость для неё
-    //
-    tariffOptionId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_option")
-    TariffActions.modifTariffNode_update(id = tariffOptionId, data = "add&0%mode&0%option&1")
-    tariffOptionCostId = TariffActions.modifTariffNode_create(parent = tariffOptionId, mtree_id = mtreeId, typ = "month_cost")
-    TariffActions.modifTariffNode_update(id = tariffOptionCostId, data = "cost&0.0%type&0")
-    // Добавляем метку
-    //
-    TariffLabelLink.create(tariffId = 2, labelId = 1)
+    def createTvPlan(title: String, price: Int, config: String = "") = {
+      val tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+      TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = s"$config", mask = "", tpused = true)
+      // Создаем тарифное поддерево модуля npay
+      //
+      var moduleId = TariffActions.bgBillingModuleId("npay")
+      var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
+      var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+      // Создаем помесячную абонентскую плату
+      //
+      var monthModeId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "month_mode")
+      TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
+      // Добавляем период
+      //
+      var periodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "period")
+      TariffActions.modifTariffNode_update(id = periodId, data = "date1&01.07.2018%date2&30.06.2019")
+      // Добавляем стоимость
+      //
+      var monthCostId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "month_cost")
+      TariffActions.modifTariffNode_update(id = monthCostId, data = s"cost&$price%type&1")
+    }
+
+    createInternetPlan("Интернет-старт (100 Мбит/с)", 0, 3, 6, "daysValid=15")
+    createInternetPlan("Интернет-1 (50 Мбит/с)", 500, 2, 6)
+    createInternetPlan("Интернет-2 (100 Мбит/с)", 1000, 3, 5)
+
+    createTvPlan("ТВ-старт", 0, "daysValid=15")
+    createTvPlan("ТВ-1", 200)
+    createTvPlan("ТВ-2", 400)
 
     // Канал L2
     //
-    tariffIdTreeId = TariffActions.addTariffPlan(used = true)
+    var tariffIdTreeId = TariffActions.addTariffPlan(used = true)
     TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Канал L2", title_web = "Канал L2", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
 
     // Разовые услуги
@@ -469,12 +440,12 @@ object Kernel {
     TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = "Разовые услуги", title_web = "Разовые услуги", use_title_in_web = false, values = "", config = "", mask = "", tpused = true)
     // Создаем тарифное поддерево модуля rscm
     //
-    moduleId = TariffActions.bgBillingModuleId("rscm")
-    mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
-    rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
+    var moduleId = TariffActions.bgBillingModuleId("rscm")
+    var mtreeId = ModuleTariffTree.create(moduleId, tariffIdTreeId._2, 0, now.getMillis).id
+    var rootId = TariffActions.modifTariffNode_create(parent = 0, mtree_id = mtreeId, typ = "root")
     // Создаем услугу
     //
-    serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
+    var serviceId = TariffActions.modifTariffNode_create(parent = rootId, mtree_id = mtreeId, typ = "service")
     TariffActions.modifTariffNode_update(id = serviceId, data = "4")
     // Добавляем период
     //
@@ -482,7 +453,7 @@ object Kernel {
     TariffActions.modifTariffNode_update(id = periodId, data = "date1&01.07.2018%date2&30.06.2019")
     // Добавляем стоимость
     //
-    costId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "cost")
+    var costId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "cost")
     TariffActions.modifTariffNode_update(id = costId, data = "col&1%cost&100.0")
     // Создаем услугу
     //
@@ -560,7 +531,7 @@ object Kernel {
   // Справочники -> Тарифные планы -> Метки -> Р
   //
   def tariffLabels(): Unit = {
-    /* 1 */ TariffLabel.create(parentId = 0, title = "Бесплатный период")
+    /* 1 */ // TariffLabel.create(parentId = 0, title = "Бесплатный период")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -568,18 +539,21 @@ object Kernel {
   //
   def tariffGroups(): Unit = {
     /* 1 */ TariffGroup.create(title = "Интернет", tm = 1, df = 60, beh = 0, pos = 0)
-    TariffGroupTariff.create(tgid = 1, tpid = 1, date1 = None, date2 = None)
     TariffGroupTariff.create(tgid = 1, tpid = 2, date1 = None, date2 = None)
+    TariffGroupTariff.create(tgid = 1, tpid = 3, date1 = None, date2 = None)
+    /* 2 */ TariffGroup.create(title = "ТВ", tm = 1, df = 60, beh = 0, pos = 0)
+    TariffGroupTariff.create(tgid = 2, tpid = 5, date1 = None, date2 = None)
+    TariffGroupTariff.create(tgid = 2, tpid = 6, date1 = None, date2 = None)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Справочники -> Тарифные опции
   //
   def tariffOptions(): Unit = {
-    /* 1 */ TariffOption.create(title = "Бесплатный период", tariffIds = "1,2", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
-    /* 1 */ TariffOptionActivateMode.create(optionId = 1, title = "1 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 113, periodCol = 1, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
-    /* 2 */ TariffOptionActivateMode.create(optionId = 1, title = "2 недели", chargeTypeId = 12, chargeSumma = 0, periodMode = 114, periodCol = 2, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
-    /* 3 */ TariffOptionActivateMode.create(optionId = 1, title = "31 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 213, periodCol = 31, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 1 */ // TariffOption.create(title = "Бесплатный период", tariffIds = "", comment = "", description = "", date1 = None, date2 = None, depends = "", incompatible = "", deactivationMode = 0, contractGroups = 2, hideforweb = 1,hideforwebcontractgroups = 0, hideforwebcontractgroupsmode = 0)
+    /* 1 */ // TariffOptionActivateMode.create(optionId = 1, title = "1 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 113, periodCol = 1, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 2 */ // TariffOptionActivateMode.create(optionId = 1, title = "2 недели", chargeTypeId = 12, chargeSumma = 0, periodMode = 114, periodCol = 2, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
+    /* 3 */ // TariffOptionActivateMode.create(optionId = 1, title = "31 день", chargeTypeId = 12, chargeSumma = 0, periodMode = 213, periodCol = 31, date1 = None, date2 = None, deactivationMode = 0, reactivationMode = 0, deleteMode = 0, deleteChargeMode = None)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
