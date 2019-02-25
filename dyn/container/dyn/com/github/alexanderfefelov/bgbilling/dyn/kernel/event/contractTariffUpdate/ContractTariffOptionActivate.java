@@ -15,7 +15,7 @@ abstract public class ContractTariffOptionActivate extends EventScriptBase imple
     @Override
     public void onEvent(Event event, Setup setup, ConnectionSet connectionSet) throws Exception {
         ContractTariffUpdateEvent richEvent = (ContractTariffUpdateEvent) event;
-        logger().info("onContractTariffUpdateEvent: contractId: " + richEvent.getContractId() + "; tariffOptionId: " + getTariffOptionId() + "; activationModeId: " + getActivationModeId());
+        logger().info("ContractTariffOptionActivate.onEvent: contractId: " + richEvent.getContractId() + "; tariffOptionId: " + getTariffOptionId() + "; activationModeId: " + getActivationModeId());
         if (richEvent.isAddTariff()) {
             try {
                 int MODULE_ID = 0;

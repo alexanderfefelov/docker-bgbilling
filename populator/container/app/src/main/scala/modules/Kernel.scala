@@ -72,8 +72,8 @@ object Kernel {
         eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1
       )
     }
-    EventScriptLink.create(title = """Активировать тарифную опцию "Бесплатный период: 60 минут"""",
-      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.contractTariffUpdate.ContractTariffOptionActivate_1_1",
+    EventScriptLink.create(title = "Установить дату окончания периода действия тарифного плана при добавлении тарифного плана в договор",
+      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.contractTariffUpdate.ContractTariffSetDateTo",
       eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractTariffUpdateEvent", scriptId = -1
     )
   }
