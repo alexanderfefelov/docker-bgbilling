@@ -391,11 +391,11 @@ object Kernel {
       TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
       // Добавляем период
       //
-      var periodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "period")
-      TariffActions.modifTariffNode_update(id = periodId, data = "date1&01.07.2018%date2&30.06.2019")
+      var monthPeriodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_period")
+      TariffActions.modifTariffNode_update(id = monthPeriodId, data = "date1&01.07.2018%date2&30.06.2019")
       // Добавляем стоимость
       //
-      var monthCostId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "month_cost")
+      var monthCostId = TariffActions.modifTariffNode_create(parent = monthPeriodId, mtree_id = mtreeId, typ = "month_cost")
       TariffActions.modifTariffNode_update(id = monthCostId, data = s"cost&$price%type&1")
     }
 
@@ -413,11 +413,11 @@ object Kernel {
       TariffActions.modifTariffNode_update(id = monthModeId, data = "mode&month%sid&3")
       // Добавляем период
       //
-      var periodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "period")
-      TariffActions.modifTariffNode_update(id = periodId, data = "date1&01.07.2018%date2&30.06.2019")
+      var monthPeriodId = TariffActions.modifTariffNode_create(parent = monthModeId, mtree_id = mtreeId, typ = "month_period")
+      TariffActions.modifTariffNode_update(id = monthPeriodId, data = "date1&01.07.2018%date2&30.06.2019")
       // Добавляем стоимость
       //
-      var monthCostId = TariffActions.modifTariffNode_create(parent = periodId, mtree_id = mtreeId, typ = "month_cost")
+      var monthCostId = TariffActions.modifTariffNode_create(parent = monthPeriodId, mtree_id = mtreeId, typ = "month_cost")
       TariffActions.modifTariffNode_update(id = monthCostId, data = s"cost&$price%type&1")
     }
 
@@ -575,8 +575,8 @@ object Kernel {
   // Справочники -> Другие -> Договоры - шаблоны комментариев
   //
   def contractCommentPatterns(): Unit = {
-    /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_6} ${param_7} ${param_8}, Л/С ${param_2}")
-    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_18}, Л/С ${param_2}")
+    /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_13} ${param_14} ${param_15}, Л/С ${param_2}")
+    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_25}, Л/С ${param_2}")
   }
 
   //--------------------------------------------------------------------------------------------------------------------
