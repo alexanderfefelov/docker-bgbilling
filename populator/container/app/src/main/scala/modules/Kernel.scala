@@ -352,7 +352,7 @@ object Kernel {
       }
     }
 
-    def createInternetPlan(title: String, price: Int, option1Id: Int, option2Id: Int, config: String = "") = {
+    def createInternetPlan(title: String, price: Int, inetOptionIds: Seq[Int], config: String = "") = {
       val tariffIdTreeId = TariffActions.addTariffPlan(used = true)
       TariffActions.updateTariffPlan(tpid = tariffIdTreeId._1, face = 0, title = title, title_web = title, use_title_in_web = false, values = "", config = s"$config", mask = "", tpused = true)
       // Создаем тарифное поддерево модуля inet
@@ -376,10 +376,10 @@ object Kernel {
       TariffActions.modifTariffNode_update(id = costId, data = "type&6%col&1%cost&0.0")
       // Добавляем Inet-опции
       //
-      var inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-      TariffActions.modifTariffNode_update(id = inetOptionId, data = s"inetOptionId&$option1Id")
-      inetOptionId = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
-      TariffActions.modifTariffNode_update(id = inetOptionId, data = s"inetOptionId&$option2Id")
+      inetOptionIds.map { id =>
+        val x = TariffActions.modifTariffNode_create(parent = trafficTypeId, mtree_id = mtreeId, typ = "optionAdd")
+        TariffActions.modifTariffNode_update(id = x, data = s"inetOptionId&$id")
+      }
       // Создаем тарифное поддерево модуля npay
       //
       moduleId = TariffActions.bgBillingModuleId("npay")
@@ -421,13 +421,13 @@ object Kernel {
       TariffActions.modifTariffNode_update(id = monthCostId, data = s"cost&$price%type&1")
     }
 
-    createInternetPlan("Интернет-старт (100 Мбит/с)", 0, 3, 6, "daysValid=15")
-    createInternetPlan("Интернет-1 (50 Мбит/с)", 500, 2, 6)
-    createInternetPlan("Интернет-2 (100 Мбит/с)", 1000, 3, 5)
+    createInternetPlan("Интернет-старт (100 Мбит/с)", 0, List(3, 6), "daysValid=15")
+    createInternetPlan("Интернет-1 (50 Мбит/с)", 500, List(2, 6))
+    createInternetPlan("Интернет-2 (100 Мбит/с)", 1000, List(3, 5))
 
     createTvPlan("ТВ-старт", 0, "daysValid=15")
-    createTvPlan("ТВ-1", 200)
-    createTvPlan("ТВ-2", 400)
+    createTvPlan("ТВ-1", 200, "subscriptionId=42")
+    createTvPlan("ТВ-2", 400, "subscriptionId=73")
 
     // Канал L2
     //
@@ -610,14 +610,14 @@ object Kernel {
         |""".stripMargin
     /* 1 */ ContractPattern.create(title = "Ф/Л, аванс",
       closesumma = 0.0f, // Лимит
-      tpid = "4,5", // Тарифы
+      tpid = "8,9", // Тарифы
       groups = 3,
       mode = 1, // Дебет
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
       dtl = 0,
-      tgid = "1",
+      tgid = "1,2", // Группы тарифов
       scrid = "",
       namePattern = "А-${Y2}-${N4}",
       data = Some(data.getBytes),
@@ -626,14 +626,14 @@ object Kernel {
     )
     /* 2 */ ContractPattern.create(title = "Ф/Л, кредит",
       closesumma = 0.0f, // Лимит
-      tpid = "4,5", // Тарифы
+      tpid = "8,9", // Тарифы
       groups = 3,
       mode = 0, // Кредит
       pgid = 1, // Группа параметров: Физ. лицо
       pfid = 0,
       fc = 0, // Физ. лицо
       dtl = 0,
-      tgid = "1",
+      tgid = "1,2", // Группы тарифов
       scrid = "",
       namePattern = "Б-${Y2}-${N4}",
       data = Some(data.getBytes),
@@ -642,7 +642,7 @@ object Kernel {
     )
     /* 3 */ ContractPattern.create(title = "Ю/Л, аванс, 3 дня",
       closesumma = 0.0f, // Лимит
-      tpid = "4,5",
+      tpid = "8,9",
       groups = 5,
       mode = 1, // Дебет
       pgid = 2, // Группа параметров: Юр. лицо
@@ -658,7 +658,7 @@ object Kernel {
     )
     /* 4 */ ContractPattern.create(title = "Ю/Л, кредит, лимит -20000 руб.",
       closesumma = -20000.0f, // Лимит
-      tpid = "4,5",
+      tpid = "8,9",
       groups = 5,
       mode = 0, // Кредит
       pgid = 2, // Группа параметров: Юр. лицо
