@@ -425,7 +425,7 @@ object Kernel {
     createInternetPlan("Интернет-1 (50 Мбит/с)", 500, List(2, 6))
     createInternetPlan("Интернет-2 (100 Мбит/с)", 1000, List(3, 5))
 
-    createTvPlan("ТВ-старт", 0, "daysValid=15")
+    createTvPlan("ТВ-старт", 0, "daysValid=15\nsubscriptionId=13")
     createTvPlan("ТВ-1", 200, "subscriptionId=42")
     createTvPlan("ТВ-2", 400, "subscriptionId=73")
 

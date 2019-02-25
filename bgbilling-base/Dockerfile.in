@@ -7,7 +7,7 @@ ENV BGBILLING_BOOTSTRAP=$BGBILLING_HOME/bootstrap \
   DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -qq update \
-  && apt-get -qq install --yes mysql-client unzip \
+  && apt-get -qq install --yes fontconfig mysql-client unzip \
   && apt-get -qq clean \
   && wget --quiet $FTP_DATA_DIR/BGBillingServer_$BGBILLING_VERSION.zip \
   && unzip -qq BGBillingServer_$BGBILLING_VERSION.zip \
