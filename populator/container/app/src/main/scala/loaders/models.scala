@@ -105,7 +105,9 @@ case class LegalEntity(
   notificationOption: Option[Notification],
   bankOption: Option[Bank],
   portingPriceOption: Option[String],
-  domainIdOption: Option[Int]
+  domainIdOption: Option[Int],
+  chiefPositionOption: Option[String],
+  chiefNameOption: Option[String]
 )
 
 case class IdCard(

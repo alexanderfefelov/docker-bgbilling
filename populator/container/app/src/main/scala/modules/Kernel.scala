@@ -268,6 +268,8 @@ object Kernel {
     /* 37 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 5, lm = now)
     /* 38 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 5, lm = now)
     /* 39 */ ContractParametersPref.create(pt = 1, title = "Банк: Р/С", sort = 1, script = "", flags = 5, lm = now)
+    /* 40 */ ContractParametersPref.create(pt = 1, title = "Руководитель: должность", sort = 1, script = "", flags = 5, lm = now)
+    /* 41 */ ContractParametersPref.create(pt = 1, title = "Руководитель: ФИО", sort = 1, script = "", flags = 5, lm = now)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -327,6 +329,8 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_NAME"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_KS"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_RS"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_CHIEF_POSITION"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_CHIEF_NAME"))
   }
 
   //--------------------------------------------------------------------------------------------------------------------

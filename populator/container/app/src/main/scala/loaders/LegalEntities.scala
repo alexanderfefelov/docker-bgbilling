@@ -54,6 +54,8 @@ object LegalEntities {
             codes.okvedOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = config.getInt("CONTRACT_PARAMETER_OKVED"), value = x))
             codes.okpoOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = config.getInt("CONTRACT_PARAMETER_OKPO"), value = x))
           }
+          le.chiefPositionOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = config.getInt("CONTRACT_PARAMETER_CHIEF_POSITION"), value = x))
+          le.chiefNameOption.map(x => ContractActions.updateParameterType1(cid = le.id, pid = config.getInt("CONTRACT_PARAMETER_CHIEF_NAME"), value = x))
           ContractActions.updateParameterType1(cid = le.id, pid = config.getInt("CONTRACT_PARAMETER_PORTING_PRICE"), value = le.portingPriceOption.getOrElse("0"))
           le.domainIdOption.map { x =>
             val responseFuture = contractService.contractDomainUpdate(le.id, x)
