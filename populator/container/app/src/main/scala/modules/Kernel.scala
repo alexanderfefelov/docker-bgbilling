@@ -260,10 +260,10 @@ object Kernel {
     /* 29 */ ContractParametersPref.create(pt = 2, title = "Адрес для выставления счетов", sort = 1, script = "", flags = 5, lm = now)
     /* 30 */ ContractParametersPref.create(pt = 1, title = "КПП", sort = 1, script = "", flags = 5, lm = now)
     /* 31 */ ContractParametersPref.create(pt = 1, title = "ОГРН", sort = 1, script = "", flags = 5, lm = now)
-    /* 32 */ ContractParametersPref.create(pt = 1, title = "ОКАТО", sort = 1, script = "", flags = 5, lm = now)
-    /* 33 */ ContractParametersPref.create(pt = 1, title = "ОКТМО", sort = 1, script = "", flags = 5, lm = now)
-    /* 34 */ ContractParametersPref.create(pt = 1, title = "ОКВЭД", sort = 1, script = "", flags = 5, lm = now)
-    /* 35 */ ContractParametersPref.create(pt = 1, title = "ОКПО", sort = 1, script = "", flags = 5, lm = now)
+    /* 32 */ ContractParametersPref.create(pt = 1, title = "Код ОКАТО", sort = 1, script = "", flags = 5, lm = now)
+    /* 33 */ ContractParametersPref.create(pt = 1, title = "Код ОКТМО", sort = 1, script = "", flags = 5, lm = now)
+    /* 34 */ ContractParametersPref.create(pt = 1, title = "Коды ОКВЭД", sort = 1, script = "", flags = 5, lm = now)
+    /* 35 */ ContractParametersPref.create(pt = 1, title = "Код ОКПО", sort = 1, script = "", flags = 5, lm = now)
     /* 36 */ ContractParametersPref.create(pt = 1, title = "Банк: БИК", sort = 1, script = "", flags = 5, lm = now)
     /* 37 */ ContractParametersPref.create(pt = 1, title = "Банк: название", sort = 1, script = "", flags = 5, lm = now)
     /* 38 */ ContractParametersPref.create(pt = 1, title = "Банк: К/С", sort = 1, script = "", flags = 5, lm = now)
@@ -321,10 +321,10 @@ object Kernel {
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BILLING_ADDRESS"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_KPP"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OGRN"))
-    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKATO"))
-    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKTMO"))
-    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKVED"))
-    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKPO"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKATO_CODE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKTMO_CODE"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKVED_CODES"))
+    ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_OKPO_CODE"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_BIK"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_NAME"))
     ContractParameterGroup.create(gid = 2, pid = config.getInt("CONTRACT_PARAMETER_BANK_KS"))
@@ -582,7 +582,7 @@ object Kernel {
   //
   def contractCommentPatterns(): Unit = {
     /* 1 */ ContractCommentPatterns.create(title = "ФИО + Л/С", pat = "${param_13} ${param_14} ${param_15}, Л/С ${param_2}")
-    /* 2 */ ContractCommentPatterns.create(title = "Название + Л/С", pat = "${param_25}, Л/С ${param_2}")
+    /* 2 */ ContractCommentPatterns.create(title = "Краткое название + ИНН + Л/С", pat = "${param_25}, ИНН ${param_28}, Л/С ${param_2}")
   }
 
   //--------------------------------------------------------------------------------------------------------------------

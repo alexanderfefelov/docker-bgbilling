@@ -78,10 +78,10 @@ case class Codes(
   innOption: Option[String],
   kppOption: Option[String],
   ogrnOption: Option[String],
-  okatoOption: Option[String],
-  oktmoOption: Option[String],
-  okvedOption: Option[String],
-  okpoOption: Option[String]
+  okatoCodeOption: Option[String],
+  oktmoCodeOption: Option[String],
+  okvedCodesOption: Option[String],
+  okpoCodeOption: Option[String]
 )
 
 case class LegalEntityList(legalEntities: Seq[LegalEntity])
