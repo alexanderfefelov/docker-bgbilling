@@ -20,6 +20,8 @@ object Addresses {
       case Right(data) =>
         for (city <- data.cities) {
           sql"insert into address_city (id, country_id, title) values (${city.id}, ${city.countryId}, ${city.name})".update.apply()
+          city.regionOption.map(x => AdminActions.updateAddressExtraParams("city", city.id, "region", x))
+          city.areaOption.map(x => AdminActions.updateAddressExtraParams("city", city.id, "area", x))
         }
       case Left(error) =>
         throw new RuntimeException(error)
