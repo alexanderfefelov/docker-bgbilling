@@ -39,8 +39,8 @@ object NaturalPersons {
           }
           np.birthDateOption.map(x => ContractActions.updateParameterType6(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_BIRTH_DATE"), value = x))
           np.birthPlaceOption.map(x => ContractActions.updateParameterType1(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_BIRTH_PLACE"), value = x))
-          np.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_SERVICE_ADDRESS"), hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
-          np.legalAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_LEGAL_ADDRESS"), hid = x.houseId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
+          np.serviceAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_SERVICE_ADDRESS"), hid = x.buildingId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
+          np.legalAddressOption.map(x => ContractActions.updateAddressInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_LEGAL_ADDRESS"), hid = x.buildingId, pod = x.entranceOption.getOrElse(0), floor = x.floorOption.getOrElse(0), flat = x.doorOption.getOrElse("")))
           np.phoneOption.map(x => ContractActions.updatePhoneInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_PHONE"), phone = x))
           np.emailOption.map(x => ContractActions.updateEmailInfo(cid = np.id, pid = config.getInt("CONTRACT_PARAMETER_EMAIL"), email = x))
           np.notificationOption.map { notification =>

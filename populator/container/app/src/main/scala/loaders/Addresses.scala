@@ -32,14 +32,14 @@ object Addresses {
       case Left(error) =>
         throw new RuntimeException(error)
     }
-    decode[HouseList](json) match {
+    decode[BuildingList](json) match {
       case Right(data) =>
-        for (house <- data.houses) {
+        for (building <- data.buildings) {
           val r = """^(\d*)(.*)""".r
-          house.number match {
+          building.number match {
             case r(y, z) => (y, z)
-              sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, box_index, pod_diapazon, pod) values (${house.id}, ${house.streetId}, ${toInt(y)}, $z, 0, 0, 0, ${house.postalCodeOption}, "", "")""".update.apply()
-              house.captureDateOption.map(x => AdminActions.updateAddressExtraParams("house", house.id, "captureDate", x.toString("dd.MM.yyyy")))
+              sql"""insert into address_house (id, streetid, house, frac, amount, areaid, quarterid, box_index, pod_diapazon, pod) values (${building.id}, ${building.streetId}, ${toInt(y)}, $z, 0, 0, 0, ${building.postalCodeOption}, "", "")""".update.apply()
+              building.captureDateOption.map(x => AdminActions.updateAddressExtraParams("house", building.id, "captureDate", x.toString("dd.MM.yyyy")))
           }
         }
       case Left(error) =>

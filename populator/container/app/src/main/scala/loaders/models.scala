@@ -12,7 +12,9 @@ case class CityList(cities: Seq[City])
 case class City(
   countryId: Int,
   id: Int,
-  name: String
+  name: String,
+  regionOption: Option[String],
+  areaOption: Option[String]
 )
 
 case class StreetList(streets: Seq[Street])
@@ -22,8 +24,8 @@ case class Street(
   name: String
 )
 
-case class HouseList(houses: Seq[House])
-case class House(
+case class BuildingList(buildings: Seq[Building])
+case class Building(
   streetId: Int,
   id: Int,
   number: String,
@@ -49,7 +51,7 @@ case class ContractParameterType7Value(
 )
 
 case class Address(
-  houseId: Int,
+  buildingId: Int,
   doorOption: Option[String],
   roomOption: Option[String],
   entranceOption: Option[Int],
