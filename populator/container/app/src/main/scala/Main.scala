@@ -99,7 +99,7 @@ object Main extends App {
       import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
       class ConfigCake extends ConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
-        override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-config-service"))
+        override def baseAddress = new java.net.URI(soapServiceBaseAddress("config-service"))
       }
       val configService = new ConfigCake().service
 
