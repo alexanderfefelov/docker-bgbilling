@@ -98,12 +98,12 @@ object Main extends App {
     def makeConfigActive(i: Int, id: Int) = {
       import com.github.alexanderfefelov.bgbilling.api.soap.kernel._
 
-      class ModuleConfigCake extends ModuleConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
+      class ConfigCake extends ConfigServiceBindings with Soap11ClientsWithAuthHeaderAsync with ConfigurableDispatchHttpClientsAsync with ApiSoapConfig {
         override def baseAddress = new java.net.URI(soapServiceBaseAddress("module-config-service"))
       }
-      val moduleConfigService = new ModuleConfigCake().service
+      val configService = new ConfigCake().service
 
-      val responseFuture = moduleConfigService.setActive(i, id)
+      val responseFuture = configService.setActiveModuleConfig(i, id)
       Await.result(responseFuture, 5.minutes)
     }
 
