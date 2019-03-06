@@ -13,6 +13,10 @@ case class City(
   countryId: Int,
   id: Int,
   name: String,
+  kladrIdOption: Option[String],
+  fiasIdOption: Option[String],
+  geoLatOption: Option[String],
+  geoLonOption: Option[String],
   regionOption: Option[String],
   areaOption: Option[String]
 )
@@ -21,7 +25,9 @@ case class StreetList(streets: Seq[Street])
 case class Street(
   cityId: Int,
   id: Int,
-  name: String
+  name: String,
+  kladrIdOption: Option[String],
+  fiasIdOption: Option[String]
 )
 
 case class BuildingList(buildings: Seq[Building])
@@ -30,6 +36,10 @@ case class Building(
   id: Int,
   number: String,
   postalCodeOption: Option[String],
+  kladrIdOption: Option[String],
+  fiasIdOption: Option[String],
+  geoLatOption: Option[String],
+  geoLonOption: Option[String],
   captureDateOption: Option[DateTime]
 )
 
