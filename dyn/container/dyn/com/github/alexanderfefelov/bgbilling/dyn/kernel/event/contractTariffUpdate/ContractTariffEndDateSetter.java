@@ -5,7 +5,6 @@ import ru.bitel.bgbilling.common.BGException;
 import ru.bitel.bgbilling.kernel.container.managed.ServerContext;
 import ru.bitel.bgbilling.kernel.contract.api.common.bean.ContractTariff;
 import ru.bitel.bgbilling.kernel.contract.api.common.service.ContractTariffService;
-import ru.bitel.bgbilling.kernel.event.Event;
 import ru.bitel.bgbilling.kernel.event.events.ContractTariffUpdateEvent;
 import ru.bitel.bgbilling.kernel.script.server.dev.EventScriptBase;
 import ru.bitel.bgbilling.kernel.tariff.common.bean.TariffPlan;
@@ -19,18 +18,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
-public class ContractTariffSetDateTo extends EventScriptBase implements Loggable {
+public class ContractTariffEndDateSetter extends EventScriptBase<ContractTariffUpdateEvent> implements Loggable {
 
     @Override
-    public void onEvent(Event event, Setup setup, ConnectionSet connectionSet) throws Exception {
-        ContractTariffUpdateEvent richEvent = (ContractTariffUpdateEvent) event;
-        logger().info("ContractTariffSetDateTo.onEvent: contractId: " + richEvent.getContractId());
-        if (richEvent.isAddTariff()) {
+    public void onEvent(ContractTariffUpdateEvent event, Setup setup, ConnectionSet connectionSet) throws Exception {
+        logger().info("onEvent: contractId: " + event.getContractId());
+        if (event.isAddTariff()) {
             try {
                 int MODULE_ID = 0;
                 ServerContext context = ServerContext.get();
                 ContractTariffService contractTariffService = context.getService(ContractTariffService.class, MODULE_ID);
-                int contractTariffPlanId = richEvent.getContractTariff().getId();
+                int contractTariffPlanId = event.getContractTariff().getId();
                 ContractTariff contractTariff = contractTariffService.contractTariffGet(contractTariffPlanId);
                 int tariffPlanId = contractTariff.getTariffPlanId();
                 TariffService tariffService = context.getService(TariffService.class, MODULE_ID);

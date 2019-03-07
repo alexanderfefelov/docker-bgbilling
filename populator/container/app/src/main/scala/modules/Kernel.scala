@@ -59,22 +59,25 @@ object Kernel {
   // Сервис -> Автоматизация -> Функции глобальных событий
   //
   def eventHandlers(): Unit = {
-    ScriptEventType.findAll().filter { x =>
-      !List(
-        "17",
-        "ru.bitel.bgbilling.kernel.event.events.ActionAfterEvent", // Deprecated
-        "ru.bitel.bgbilling.kernel.event.events.ActionBeforeEvent", // Deprecated
-        "ru.bitel.bgbilling.kernel.contract.balance.server.event.PaymentChangingEvent" // Deprecated
-      ).contains(x.eventId)
-    } map { t =>
-      EventScriptLink.create(title = t.title,
-        className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.murmuring.MurmuringEventHandler",
-        eventKey = s"${t.mid}_${t.eventId}", scriptId = if (t.eventMode == 0) 0 else -1
+    ScriptEventType.findAll().map { t =>
+      EventScriptLink.create(
+        title = s"Обработать событие ${t.eventId} (${t.title})",
+        className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.MurmuringEventHandler",
+        eventKey = s"${t.mid}_${t.eventId}",
+        scriptId = if (t.eventMode == 0) 0 else -1
       )
     }
-    EventScriptLink.create(title = "Установить дату окончания периода действия тарифного плана при добавлении тарифного плана в договор",
-      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.contractTariffUpdate.ContractTariffSetDateTo",
-      eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractTariffUpdateEvent", scriptId = -1
+    EventScriptLink.create(
+      title = "Установить дату окончания периода действия тарифного плана при добавлении тарифного плана в договор",
+      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.contractTariffUpdate.ContractTariffEndDateSetter",
+      eventKey = "0_ru.bitel.bgbilling.kernel.event.events.ContractTariffUpdateEvent",
+      scriptId = -1
+    )
+    EventScriptLink.create(
+      title = "Обработать поступление платежа",
+      className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.payment.EnronPaymentHandler",
+      eventKey = "0_ru.bitel.bgbilling.kernel.contract.balance.server.event.PaymentEvent",
+      scriptId = -1
     )
   }
 
