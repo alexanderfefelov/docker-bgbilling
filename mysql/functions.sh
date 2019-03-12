@@ -12,7 +12,7 @@ run_master() {
       --volume $1:/var/lib/mysql \
       --publish 3306:3306 \
       alexanderfefelov/bgbilling-mysql \
-    && docker run --rm --link $1:foobar martin/wait -t $TIMEOUT
+    && docker run --rm --link $1:foobar martin/wait -p 3306 -t $TIMEOUT
 }
 
 run_slave() {
@@ -28,8 +28,8 @@ run_slave() {
       --volume $1:/var/lib/mysql \
       --publish 1000$3:3306 \
       alexanderfefelov/bgbilling-mysql \
-    && docker run --rm --link $1:foobar martin/wait -t $TIMEOUT \
+    && docker run --rm --link $1:foobar martin/wait -p 3306 -t $TIMEOUT \
     && docker exec $1 cp /read-only.cnf /etc/mysql/mysql.conf.d/ \
     && docker restart $1 \
-    && docker run --rm --link $1:foobar martin/wait -t $TIMEOUT
+    && docker run --rm --link $1:foobar martin/wait -p 3306 -t $TIMEOUT
 }
