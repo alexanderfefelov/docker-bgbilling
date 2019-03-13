@@ -50,7 +50,7 @@ public class EnronPaymentHandler extends EventScriptBase<PaymentEvent> implement
                 logger().info("Handling payment: " + jsonObject);
 
                 HttpPost request = new HttpPost("http://enron.bgbilling.local:9000/handle-payment");
-                request.addHeader(HttpHeaders.CONTENT_TYPE, "Content-type: application/json; charset=utf-8");
+                request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json; charset=utf-8");
                 request.setEntity(new StringEntity(jsonObject.toString()));
                 HttpResponse response = httpClient.execute(request);
                 logger().info("Received response: " + response.getStatusLine());
