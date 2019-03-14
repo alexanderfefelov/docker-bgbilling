@@ -18,6 +18,10 @@ then
 
     docker rm --force --volumes bgbilling-activemq
 
+    docker rm --force --volumes bgbilling-vault
+    docker volume rm bgbilling-vault-file
+    docker volume rm bgbilling-vault-log
+
     docker rm --force --volumes bgbilling-redis
 
     docker rm --force --volumes bgbilling-ofelia
