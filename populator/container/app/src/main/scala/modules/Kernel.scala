@@ -59,7 +59,11 @@ object Kernel {
   // Сервис -> Автоматизация -> Функции глобальных событий
   //
   def eventHandlers(): Unit = {
-    ScriptEventType.findAll().map { t =>
+    ScriptEventType.findAll().filter { x =>
+      !List(
+        "17"
+      ).contains(x.eventId)
+    } map { t =>
       EventScriptLink.create(
         title = s"Обработать событие ${t.eventId} (${t.title})",
         className = "com.github.alexanderfefelov.bgbilling.dyn.kernel.event.MurmuringEventHandler",
