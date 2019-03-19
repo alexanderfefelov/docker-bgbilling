@@ -4,8 +4,6 @@ read -p "All images will be removed. Are you sure? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    docker rmi alexanderfefelov/mysql-replication
-    docker rmi alexanderfefelov/graalvm-polyglot
     docker rmi alexanderfefelov/bgbilling-populator
     docker rmi alexanderfefelov/bgbilling-telegraf
     docker rmi alexanderfefelov/bgbilling-grafana
