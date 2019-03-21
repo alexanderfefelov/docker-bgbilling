@@ -8,7 +8,9 @@ then
     docker rmi alexanderfefelov/bgbilling-telegraf
     docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-ofelia
-    docker rmi alexanderfefelov/bgbilling-activemq
+    docker rmi alexanderfefelov/bgbilling-activemq-1
+    docker rmi alexanderfefelov/bgbilling-activemq-2
+    docker rmi alexanderfefelov/bgbilling-activemq-3
     docker rmi alexanderfefelov/bgbilling-mysql
     docker rmi alexanderfefelov/bgbilling-scheduler
     docker rmi alexanderfefelov/bgbilling-billing

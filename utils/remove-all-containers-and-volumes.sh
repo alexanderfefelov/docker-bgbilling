@@ -36,6 +36,10 @@ then
     docker rm --force --volumes bgbilling-mysql-master
     docker volume rm bgbilling-mysql-master
 
+    docker rm --force --volumes bgbilling-activemq-1
+    docker rm --force --volumes bgbilling-activemq-2
+    docker rm --force --volumes bgbilling-activemq-3
+
     docker rm --force --volumes bgbilling-telegraf
 
     docker rm --force --volumes bgbilling-grafana

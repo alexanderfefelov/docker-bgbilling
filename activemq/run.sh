@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-CONTAINER_NAME=bgbilling-activemq
-HOST_NAME=$CONTAINER_NAME
+[ -z "$BROKER_NAME" ] && echo BROKER_NAME is required && exit 1
+[ -z "$UI_PORT" ] && echo UI_PORT is required && exit 1
+[ -z "$STOMP_PORT" ] && echo STOMP_PORT is required && exit 1
+[ -z "$OPENWIRE_PORT" ] && echo OPENWIRE_PORT is required && exit 1
+
+CONTAINER_NAME=bgbilling-activemq-$BROKER_NAME
+HOST_NAME=$CONTAINER_NAME-$BROKER_NAME
 
 run() {
     docker run \
@@ -9,10 +14,10 @@ run() {
       --hostname $HOST_NAME \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro --volume /etc/timezone:/etc/timezone:ro \
-      --publish 61613:61613 \
-      --publish 61616:61616 \
-      --publish 8161:8161 \
-      alexanderfefelov/bgbilling-activemq \
+      --publish $STOMP_PORT:61613 \
+      --publish $OPENWIRE_PORT:61616 \
+      --publish $UI_PORT:8161 \
+      alexanderfefelov/bgbilling-activemq-$BROKER_NAME \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
 }
 
