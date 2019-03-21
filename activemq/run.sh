@@ -17,8 +17,7 @@ run() {
       --publish $STOMP_PORT:61613 \
       --publish $OPENWIRE_PORT:61616 \
       --publish $UI_PORT:8161 \
-      alexanderfefelov/bgbilling-activemq-$BROKER_NAME \
-    && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
+      alexanderfefelov/bgbilling-activemq-$BROKER_NAME
 }
 
 run \
