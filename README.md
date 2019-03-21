@@ -18,7 +18,7 @@ docker-bgbilling -- это набор скриптов, позволяющий �
     | `bgbilling-mysql-master`    | Master-сервер MySQL | `master.mysql.bgbilling.local` 
     | `bgbilling-mysql-backup`    | Slave-сервер MySQL для резервного копирования, read-only | `backup.mysql.bgbilling.local`
     | `bgbilling-mysql-slave`     | Slave-сервер MySQL для отчётов, read-only | `slave.mysql.bgbilling.local`
-    | `bgbilling-activemq`        | [Сервер ActiveMQ](activemq/README.md) | `activemq.bgbilling.local`
+    | `bgbilling-activemq-1`<br>`bgbilling-activemq-2`<br>`bgbilling-activemq-3` | [Кластер ActiveMQ](activemq/README.md) | `1.activemq.bgbilling.local`<br>`2.activemq.bgbilling.local`<br>`3.activemq.bgbilling.local`
     | `bgbilling-graphite-statsd` | Сервер Graphite и StatsD | `graphite.bgbilling.local`, `statsd.bgbilling.local`
     | `bgbilling-grafana`         | Сервер Grafana | `grafana.bgbilling.local`
     | `bgbilling-telegraf`        | Сенсор Telegraf | `telegraf.bgbilling.local`
