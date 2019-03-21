@@ -11,6 +11,7 @@ build_all() {
     && build bginetaccess \
     && build bginetaccounting \
     && build mysql \
+    && build activemq \
     && build grafana \
     && build ofelia \
     && build populator \

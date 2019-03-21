@@ -12,7 +12,7 @@ run() {
       --publish 61613:61613 \
       --publish 61616:61616 \
       --publish 8161:8161 \
-      rmohr/activemq:5.15.6-alpine \
+      alexanderfefelov/bgbilling-activemq \
     && docker run --rm --link $CONTAINER_NAME:foobar martin/wait
 }
 
