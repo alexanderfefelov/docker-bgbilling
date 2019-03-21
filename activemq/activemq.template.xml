@@ -71,15 +71,12 @@
             <managementContext createConnector="false"/>
         </managementContext>
 
-        <!--
-            Configure message persistence for the broker. The default persistence
-            mechanism is the KahaDB store (identified by the kahaDB tag).
-            For more information, see:
-
-            http://activemq.apache.org/persistence.html
-        -->
         <persistenceAdapter>
-            <kahaDB directory="${activemq.data}/kahadb"/>
+            <jdbcPersistenceAdapter dataSource="#mysql-ds" lockKeepAlivePeriod="5000">
+                <locker>
+                    <lease-database-locker lockAcquireSleepInterval="10000"/>
+                </locker>
+            </jdbcPersistenceAdapter>
         </persistenceAdapter>
 
 
@@ -123,6 +120,14 @@
         </shutdownHooks>
 
     </broker>
+
+    <bean id="mysql-ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://master.mysql.bgbilling.local/activemq?characterEncoding=utf8"/>
+        <property name="user" value="activemq"/>
+        <property name="password" value="activemq"/>
+        <property name="poolPreparedStatements" value="true"/>
+    </bean>
 
     <!--
         Enable web consoles, REST and Ajax APIs and demos
