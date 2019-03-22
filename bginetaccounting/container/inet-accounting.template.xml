@@ -14,7 +14,7 @@
     <param name="db.validationTimeout" value="10"/>
 
     <!-- Параметры подключения к MQ -->
-    <param name="mq.url" value="failover:(nio://1.activemq.bgbilling.local:61616,nio://2.activemq.bgbilling.local:61617,nio://3.activemq.bgbilling.local:61618)?socketBufferSize=1000000"/>
+    <param name="mq.url" value="failover:(nio://1.activemq.bgbilling.local:61616?socketBufferSize=1000000,nio://2.activemq.bgbilling.local:61617?socketBufferSize=1000000,nio://3.activemq.bgbilling.local:61618?socketBufferSize=1000000)"/>
     <param name="mq.user" value="bill"/>
     <param name="mq.pswd" value="bgbilling"/>
 

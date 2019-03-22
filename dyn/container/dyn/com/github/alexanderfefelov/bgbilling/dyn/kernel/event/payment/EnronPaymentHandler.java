@@ -58,7 +58,7 @@ public class EnronPaymentHandler extends EventScriptBase<PaymentEvent> implement
 
     private static final String MQ_USERNAME = "bill";
     private static final String MQ_PASSWORD = "bgbilling";
-    private static final String MQ_URL = "failover:(tcp://activemq.bgbilling.local:61616)";
+    private static final String MQ_URL = "failover:(nio://1.activemq.bgbilling.local:61616?socketBufferSize=1000000,nio://2.activemq.bgbilling.local:61617?socketBufferSize=1000000,nio://3.activemq.bgbilling.local:61618?socketBufferSize=1000000)";
     private static final String MQ_QUEUE_NAME = "bgbilling.enron.payment.created";
 
 }
