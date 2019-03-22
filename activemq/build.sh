@@ -4,6 +4,6 @@
 
 cat activemq.template.xml \
   | sed 's@BROKER_NAME@'"$BROKER_NAME"'@' \
-  > assets/activemq.xml
+  > container/activemq.xml
 
 docker build --tag alexanderfefelov/bgbilling-activemq-$BROKER_NAME .
