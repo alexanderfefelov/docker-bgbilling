@@ -9,7 +9,7 @@ run() {
       --hostname $HOST_NAME \
       --detach \
       --volume /etc/localtime:/etc/localtime:ro \
-      --volume $CONTAINER_NAME-data:/var/lib/chonograf \
+      --volume $CONTAINER_NAME-data:/var/lib/chronograf \
       --volume $CONTAINER_NAME-share:/usr/share/chronograf \
       --publish 8888:8888 \
       --env KAPACITOR_URL="http://kapacitor.bgbilling.local:9092" \
