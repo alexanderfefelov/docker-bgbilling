@@ -49,4 +49,8 @@ then
     docker rm --force --volumes bgbilling-influxdb
     docker volume rm bgbilling-influxdb-conf
     docker volume rm bgbilling-influxdb-data
+
+    docker rm --force --volumes bgbilling-kapacitor
+    docker volume rm bgbilling-kapacitor-conf
+    docker volume rm bgbilling-kapacitor-data
 fi
