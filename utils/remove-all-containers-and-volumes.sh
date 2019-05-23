@@ -41,6 +41,7 @@ then
     docker rm --force --volumes bgbilling-activemq-3
 
     docker rm --force --volumes bgbilling-telegraf
+    docker volume rm bgbilling-telegraf-conf
 
     docker rm --force --volumes bgbilling-grafana
 
