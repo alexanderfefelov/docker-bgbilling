@@ -7,6 +7,7 @@ then
     docker rmi alexanderfefelov/bgbilling-populator
     docker rmi alexanderfefelov/bgbilling-influxdb
     docker rmi alexanderfefelov/bgbilling-kapacitor
+    docker rmi alexanderfefelov/bgbilling-chronograf
     docker rmi alexanderfefelov/bgbilling-telegraf
     docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-ofelia

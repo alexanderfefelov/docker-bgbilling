@@ -21,7 +21,8 @@ build_all() {
     && build populator \
     && build telegraf \
     && build influxdb \
-    && build kapacitor
+    && build kapacitor \
+    && build chronograf
 }
 
 time build_all

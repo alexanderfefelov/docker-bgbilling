@@ -53,4 +53,8 @@ then
     docker rm --force --volumes bgbilling-kapacitor
     docker volume rm bgbilling-kapacitor-conf
     docker volume rm bgbilling-kapacitor-data
+
+    docker rm --force --volumes bgbilling-chronograf
+    docker volume rm bgbilling-chronograf-data
+    docker volume rm bgbilling-chronograf-share
 fi
