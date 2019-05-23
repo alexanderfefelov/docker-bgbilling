@@ -19,7 +19,8 @@ build_all() {
     && build grafana \
     && build ofelia \
     && build populator \
-    && build telegraf
+    && build telegraf \
+    && build influxdb
 }
 
 time build_all

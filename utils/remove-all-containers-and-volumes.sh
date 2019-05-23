@@ -45,4 +45,8 @@ then
     docker rm --force --volumes bgbilling-grafana
 
     docker rm --force --volumes bgbilling-graphite-statsd
+
+    docker rm --force --volumes bgbilling-influxdb
+    docker volume rm bgbilling-influxdb-conf
+    docker volume rm bgbilling-influxdb-data
 fi

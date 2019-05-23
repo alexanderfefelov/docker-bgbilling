@@ -5,6 +5,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     docker rmi alexanderfefelov/bgbilling-populator
+    docker rmi alexanderfefelov/bgbilling-influxdb
     docker rmi alexanderfefelov/bgbilling-telegraf
     docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-ofelia
