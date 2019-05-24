@@ -22,6 +22,9 @@ docker-bgbilling -- это набор скриптов, позволяющий �
     | `bgbilling-graphite-statsd` | Сервер Graphite и StatsD | `graphite.bgbilling.local`, `statsd.bgbilling.local`
     | `bgbilling-grafana`         | Сервер Grafana | `grafana.bgbilling.local`
     | `bgbilling-telegraf`        | Сенсор Telegraf | `telegraf.bgbilling.local`
+    | `bgbilling-influxdb`        | Сервер InfluxDB | `influxdb.bgbilling.local`
+    | `bgbilling-kapacitor`       | Сервер Kapacitor | `kapacitor.bgbilling.local`
+    | `bgbilling-chronograf`      | Сервер Chronograf | `chronograf.bgbilling.local`
     | `bgbilling-ofelia`          | Планировщик заданий Ofelia | `ofelia.bgbilling.local`
     | `bgbilling-redis`           | Сервер Redis | `redis.bgbilling.local`
     | `bgbilling-vault`           | Сервер Vault | `vault.bgbilling.local`
@@ -58,8 +61,10 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
 * Мониторинг
 
-    Сбор метрик -- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/). Хранилище метрик -- [Graphite](https://graphiteapp.org/),
-    визуализация -- [Grafana](https://grafana.com/).
+    * Сбор метрик -- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/), [Graphite](https://graphiteapp.org/), [StatsD](https://github.com/statsd/statsd)
+    * Хранилище метрик -- [InfluxDB](https://www.influxdata.com/products/influxdb-overview/), Graphite
+    * Визуализация -- [Grafana](https://grafana.com/), [Chronograf](https://www.influxdata.com/time-series-platform/chronograf/)
+    * Выявление аномалий, алертинг -- [Kapacitor](https://www.influxdata.com/time-series-platform/kapacitor/), Grafana
 
 ## Как это запустить?
 
@@ -73,6 +78,6 @@ cd docker-bgbilling/step-by-step
 ## Как это удалить?
 
 ```bash
-utils/remove-all-containers.sh
+utils/remove-all-containers-and-volumes.sh
 utils/remove-all-images.sh
 ```
