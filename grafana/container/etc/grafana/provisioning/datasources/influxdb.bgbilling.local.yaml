@@ -5,21 +5,21 @@ apiVersion: 1
 # what's available in the database
 datasources:
   # <string, required> name of the datasource. Required
-- name: graphite.bgbilling.local
+- name: influxdb.bgbilling.local
   # <string, required> datasource type. Required
-  type: graphite
+  type: influxdb
   # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
   access: proxy
   # <int> org id. will default to orgId 1 if not specified
   orgId: 1
   # <string> url
-  url: http://graphite.bgbilling.local
+  url: http://influxdb.bgbilling.local:8086
   # <string> database password, if used
   password:
   # <string> database user, if used
   user:
   # <string> database name, if used
-  database:
+  database: telegraf
   # <bool> enable/disable basic auth
   basicAuth:
   # <string> basic auth username
@@ -29,12 +29,10 @@ datasources:
   # <bool> enable/disable with credentials headers
   withCredentials:
   # <bool> mark as default datasource. Max one per org
-  isDefault: false
+  isDefault: true
   # <map> fields that will be converted to json and stored in json_data
   jsonData:
-     graphiteVersion: "1.1"
-     tlsAuth: false
-     tlsAuthWithCACert: false
+    httpMode: GET
   # <string> json object of data that will be encrypted.
   secureJsonData:
     tlsCACert: "..."
