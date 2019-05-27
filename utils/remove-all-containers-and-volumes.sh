@@ -57,6 +57,9 @@ then
     docker rm --force --volumes bgbilling-ofelia
     docker volume rm bgbilling-ofelia
 
+    docker rm --force --volumes bgbilling-portainer
+    docker volume rm bgbilling-portainer-data
+
     docker rm --force --volumes bgbilling-redis
 
     docker rm --force --volumes bgbilling-scheduler
