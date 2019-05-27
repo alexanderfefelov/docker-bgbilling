@@ -25,6 +25,9 @@ docker-bgbilling -- это набор скриптов, позволяющий �
     | `bgbilling-influxdb`        | Сервер InfluxDB | `influxdb.bgbilling.local`
     | `bgbilling-kapacitor`       | Сервер Kapacitor | `kapacitor.bgbilling.local`
     | `bgbilling-chronograf`      | Сервер Chronograf | `chronograf.bgbilling.local`
+    | `bgbilling-logstash`        | Сервер Logstash | `logstash.bgbilling.local`
+    | `bgbilling-elasticsearch`   | Сервер Elasticsearch | `elasticsearch.bgbilling.local`
+    | `bgbilling-kibana`          | Сервер Kibana | `kibana.bgbilling.local`
     | `bgbilling-ofelia`          | Планировщик заданий Ofelia | `ofelia.bgbilling.local`
     | `bgbilling-redis`           | Сервер Redis | `redis.bgbilling.local`
     | `bgbilling-vault`           | Сервер Vault | `vault.bgbilling.local`
@@ -63,7 +66,9 @@ docker-bgbilling -- это набор скриптов, позволяющий �
 
     * Сбор метрик -- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/), [Graphite](https://graphiteapp.org/), [StatsD](https://github.com/statsd/statsd)
     * Хранилище метрик -- [InfluxDB](https://www.influxdata.com/products/influxdb-overview/), Graphite
-    * Визуализация -- [Grafana](https://grafana.com/), [Chronograf](https://www.influxdata.com/time-series-platform/chronograf/)
+    * Сбор логов -- [Logstash](https://www.elastic.co/products/logstash)
+    * Хранилище логов -- [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+    * Визуализация -- [Grafana](https://grafana.com/), [Chronograf](https://www.influxdata.com/time-series-platform/chronograf/), [Kibana](https://www.elastic.co/products/kibana)
     * Выявление аномалий, алертинг -- [Kapacitor](https://www.influxdata.com/time-series-platform/kapacitor/), Grafana
 
 ## Как это запустить?
