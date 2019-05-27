@@ -24,7 +24,8 @@ build_all() {
     && build kapacitor \
     && build chronograf \
     && build elasticsearch \
-    && build logstash
+    && build logstash \
+    && build kibana
 }
 
 time build_all

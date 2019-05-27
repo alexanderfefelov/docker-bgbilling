@@ -16,6 +16,7 @@ then
     docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-influxdb
     docker rmi alexanderfefelov/bgbilling-kapacitor
+    docker rmi alexanderfefelov/bgbilling-kibana
     docker rmi alexanderfefelov/bgbilling-logstash
     docker rmi alexanderfefelov/bgbilling-mysql
     docker rmi alexanderfefelov/bgbilling-ofelia

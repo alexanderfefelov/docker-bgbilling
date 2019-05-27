@@ -1,0 +1,3 @@
+server.name: kibana.bgbilling.local
+server.host: "0"
+elasticsearch.hosts: [ "http://elasticsearch.bgbilling.local:9200" ]

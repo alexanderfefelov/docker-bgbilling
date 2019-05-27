@@ -33,6 +33,10 @@ then
     docker volume rm bgbilling-influxdb-conf
     docker volume rm bgbilling-influxdb-data
 
+    docker rm --force --volumes bgbilling-kibana
+    docker volume rm bgbilling-kibana-conf
+    docker volume rm bgbilling-kibana-data
+
     docker rm --force --volumes bgbilling-kapacitor
     docker volume rm bgbilling-kapacitor-conf
     docker volume rm bgbilling-kapacitor-data
