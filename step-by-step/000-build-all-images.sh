@@ -22,7 +22,9 @@ build_all() {
     && build telegraf \
     && build influxdb \
     && build kapacitor \
-    && build chronograf
+    && build chronograf \
+    && build elasticsearch \
+    && build logstash
 }
 
 time build_all

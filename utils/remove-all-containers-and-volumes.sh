@@ -37,6 +37,10 @@ then
     docker volume rm bgbilling-kapacitor-conf
     docker volume rm bgbilling-kapacitor-data
 
+    docker rm --force --volumes bgbilling-logstash
+    docker volume rm bgbilling-logstash-conf
+    docker volume rm bgbilling-logstash-pipeline
+
     docker rm --force --volumes bgbilling-mysql-backup
     docker volume rm bgbilling-mysql-backup
 
