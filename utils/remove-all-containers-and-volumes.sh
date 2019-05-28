@@ -21,6 +21,9 @@ then
     docker volume rm bgbilling-chronograf-data
     docker volume rm bgbilling-chronograf-share
 
+    docker rm --force --volumes bgbilling-dnsmasq
+    docker volume rm bgbilling-dnsmasq-etc
+
     docker rm --force --volumes bgbilling-elasticsearch
     docker volume rm bgbilling-elasticsearch-conf
     docker volume rm bgbilling-elasticsearch-data

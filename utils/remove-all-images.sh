@@ -12,6 +12,7 @@ then
     docker rmi alexanderfefelov/bgbilling-base
     docker rmi alexanderfefelov/bgbilling-billing
     docker rmi alexanderfefelov/bgbilling-chronograf
+    docker rmi alexanderfefelov/bgbilling-dnsmasq
     docker rmi alexanderfefelov/bgbilling-elasticsearch
     docker rmi alexanderfefelov/bgbilling-grafana
     docker rmi alexanderfefelov/bgbilling-influxdb

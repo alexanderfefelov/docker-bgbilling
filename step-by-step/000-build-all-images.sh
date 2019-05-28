@@ -14,6 +14,7 @@ build_all() {
     && build bgscheduler \
     && build bginetaccess \
     && build bginetaccounting \
+    && build dnsmasq \
     && build mysql \
     && build_activemq \
     && build grafana \
