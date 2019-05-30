@@ -1,4 +1,4 @@
-    WORK IN PROGRESS!
+    ABANDONED!
     DO NOT USE!
 
 # docker-bgbilling
